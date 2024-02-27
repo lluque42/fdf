@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/02/26 21:17:47 by lluque           ###   ########.fr        #
+#    Updated: 2024/02/27 19:46:09 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,16 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_set_element.c \
 		  lin_alg/ft_mx_get_element.c \
 		  lin_alg/ft_mx_load_file.c \
-		  lin_alg/ft_mx_set_row.c
+		  lin_alg/ft_mx_set_row.c \
+		  lin_alg/ft_mx_dup.c \
+		  lin_alg/ft_mx_smult.c \
+		  lin_alg/ft_mx_get_row.c \
+		  lin_alg/ft_mx_mult.c \
+		  lin_alg/ft_mx_get_col.c \
+		  lin_alg/ft_mx_create_id.c \
+		  lin_alg/ft_mx_create_bid.c \
+		  lin_alg/ft_mx_transpose.c \
+		  lin_alg/ft_mx_flipr.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_set_row.c                                    :+:      :+:    :+:   */
+/*   ft_mx_create_bid.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 15:09:39 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 23:38:53 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/27 17:59:53 by lluque            #+#    #+#             */
+/*   Updated: 2024/02/27 18:33:15 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lin_alg.h"
 
-int	ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row)
+t_ft_mx	*ft_mx_create_bid(int size)
 {
-	double	*dst;
+	t_ft_mx	*r;
+	int		c;
 
-	if (i > matrix->m || row->n != matrix->n)
-		return (0);
-	dst = matrix->d + i * matrix->n;
-	ft_memmove(dst, row, matrix->n * sizeof (double));
-	return (1);
+	r = ft_mx_create(size, size);
+	if (r == NULL)
+		return (NULL);
+	c = -1;
+	while (++c < size)
+		r->d[c * size + (size - c - 1)] = 1;
+	return (r);
 }

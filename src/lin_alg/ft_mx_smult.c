@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_set_row.c                                    :+:      :+:    :+:   */
+/*   ft_mx_smult.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 15:09:39 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 23:38:53 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/26 23:39:51 by lluque            #+#    #+#             */
+/*   Updated: 2024/02/26 23:43:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lin_alg.h"
 
-int	ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row)
+void	ft_mx_smult(t_ft_mx *matrix, double scalar)
 {
-	double	*dst;
+	int	i;
+	int	j;
 
-	if (i > matrix->m || row->n != matrix->n)
-		return (0);
-	dst = matrix->d + i * matrix->n;
-	ft_memmove(dst, row, matrix->n * sizeof (double));
-	return (1);
+	i = -1;
+	while (++i < matrix->m)
+	{
+		j = -1;
+		while (++j < matrix->n)
+			matrix->d[i * matrix->n + j] *= scalar;
+	}
 }

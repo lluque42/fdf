@@ -1,14 +1,22 @@
 var searchData=
 [
   ['filename_5fvalid_0',['filename_valid',['../main__utils_8h.html#aead2c11ce295882f9f38e99b2b80b9b7',1,'main_utils.h']]],
-  ['ft_5fmx_5fcreate_1',['ft_mx_create',['../lin__alg_8h.html#a668cdafd89491eb6d4c4805937038b3e',1,'lin_alg.h']]],
-  ['ft_5fmx_5fdestroy_2',['ft_mx_destroy',['../lin__alg_8h.html#a60eb05adaf8d46e1a399ed4aed276f43',1,'lin_alg.h']]],
-  ['ft_5fmx_5fget_5fcol_3',['ft_mx_get_col',['../lin__alg_8h.html#af9f270c3ec0387cd0c3f5deef98ea5be',1,'lin_alg.h']]],
-  ['ft_5fmx_5fget_5felement_4',['ft_mx_get_element',['../lin__alg_8h.html#a88e6a850a9e1757e6d9c2670cd1f2350',1,'lin_alg.h']]],
-  ['ft_5fmx_5fget_5frow_5',['ft_mx_get_row',['../lin__alg_8h.html#a37e8baabd4389b95c6726f75137dcb6c',1,'lin_alg.h']]],
-  ['ft_5fmx_5fload_5ffile_6',['ft_mx_load_file',['../lin__alg_8h.html#a0cf1f7fa69872bb971893af97d901caa',1,'lin_alg.h']]],
-  ['ft_5fmx_5fprint_7',['ft_mx_print',['../lin__alg_8h.html#a41d88fe0dbaabef395e679d37d538619',1,'lin_alg.h']]],
-  ['ft_5fmx_5fset_5fcol_8',['ft_mx_set_col',['../lin__alg_8h.html#a917a6b00bc2950685cf98ee0189cd12c',1,'lin_alg.h']]],
-  ['ft_5fmx_5fset_5felement_9',['ft_mx_set_element',['../lin__alg_8h.html#a6cecfb1ffa694ab62cebea92c8f6fde2',1,'lin_alg.h']]],
-  ['ft_5fmx_5fset_5frow_10',['ft_mx_set_row',['../lin__alg_8h.html#a0dd812ee9245b9708e8d0e25c6efd6ad',1,'lin_alg.h']]]
+  ['ft_5fmx_5fcreate_1',['ft_mx_create',['../lin__alg_8h.html#a668cdafd89491eb6d4c4805937038b3e',1,'ft_mx_create(int m, int n):&#160;lin_alg.h'],['../tesselator_8h.html#a668cdafd89491eb6d4c4805937038b3e',1,'ft_mx_create(int m, int n):&#160;tesselator.h']]],
+  ['ft_5fmx_5fcreate_5fbid_2',['ft_mx_create_bid',['../lin__alg_8h.html#a0b827337113cc7e30ea4563eeb2dfc5b',1,'ft_mx_create_bid(int size):&#160;lin_alg.h'],['../tesselator_8h.html#a0b827337113cc7e30ea4563eeb2dfc5b',1,'ft_mx_create_bid(int size):&#160;tesselator.h']]],
+  ['ft_5fmx_5fcreate_5fid_3',['ft_mx_create_id',['../lin__alg_8h.html#a120adda1fc2f033d313c575ac9753085',1,'ft_mx_create_id(int size):&#160;lin_alg.h'],['../tesselator_8h.html#a120adda1fc2f033d313c575ac9753085',1,'ft_mx_create_id(int size):&#160;tesselator.h']]],
+  ['ft_5fmx_5fdestroy_4',['ft_mx_destroy',['../lin__alg_8h.html#a60eb05adaf8d46e1a399ed4aed276f43',1,'ft_mx_destroy(t_ft_mx *matrix):&#160;lin_alg.h'],['../tesselator_8h.html#a60eb05adaf8d46e1a399ed4aed276f43',1,'ft_mx_destroy(t_ft_mx *matrix):&#160;tesselator.h']]],
+  ['ft_5fmx_5fdup_5',['ft_mx_dup',['../lin__alg_8h.html#a983f2d6f77d081f11067e51a70a8a38f',1,'ft_mx_dup(t_ft_mx *old):&#160;lin_alg.h'],['../tesselator_8h.html#a983f2d6f77d081f11067e51a70a8a38f',1,'ft_mx_dup(t_ft_mx *old):&#160;tesselator.h']]],
+  ['ft_5fmx_5fflipr_6',['ft_mx_flipr',['../lin__alg_8h.html#a8a3f3033c4449f4e5e6f62249d0c5eca',1,'ft_mx_flipr(t_ft_mx *m):&#160;lin_alg.h'],['../tesselator_8h.html#a8a3f3033c4449f4e5e6f62249d0c5eca',1,'ft_mx_flipr(t_ft_mx *m):&#160;tesselator.h']]],
+  ['ft_5fmx_5fget_5fcol_7',['ft_mx_get_col',['../lin__alg_8h.html#af9f270c3ec0387cd0c3f5deef98ea5be',1,'ft_mx_get_col(t_ft_mx *matrix, int j):&#160;lin_alg.h'],['../tesselator_8h.html#af9f270c3ec0387cd0c3f5deef98ea5be',1,'ft_mx_get_col(t_ft_mx *matrix, int j):&#160;tesselator.h']]],
+  ['ft_5fmx_5fget_5felement_8',['ft_mx_get_element',['../lin__alg_8h.html#a88e6a850a9e1757e6d9c2670cd1f2350',1,'ft_mx_get_element(t_ft_mx *matrix, int i, int j):&#160;lin_alg.h'],['../tesselator_8h.html#a88e6a850a9e1757e6d9c2670cd1f2350',1,'ft_mx_get_element(t_ft_mx *matrix, int i, int j):&#160;tesselator.h']]],
+  ['ft_5fmx_5fget_5frow_9',['ft_mx_get_row',['../tesselator_8h.html#a37e8baabd4389b95c6726f75137dcb6c',1,'ft_mx_get_row(t_ft_mx *matrix, int i):&#160;tesselator.h'],['../lin__alg_8h.html#a37e8baabd4389b95c6726f75137dcb6c',1,'ft_mx_get_row(t_ft_mx *matrix, int i):&#160;lin_alg.h']]],
+  ['ft_5fmx_5fload_5ffile_10',['ft_mx_load_file',['../lin__alg_8h.html#a0cf1f7fa69872bb971893af97d901caa',1,'ft_mx_load_file(char *filename, char separator):&#160;lin_alg.h'],['../tesselator_8h.html#a0cf1f7fa69872bb971893af97d901caa',1,'ft_mx_load_file(char *filename, char separator):&#160;tesselator.h']]],
+  ['ft_5fmx_5fmult_11',['ft_mx_mult',['../lin__alg_8h.html#ab4269e7bf09faaf4146da006885d4584',1,'ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2):&#160;lin_alg.h'],['../tesselator_8h.html#ab4269e7bf09faaf4146da006885d4584',1,'ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2):&#160;tesselator.h']]],
+  ['ft_5fmx_5fprint_12',['ft_mx_print',['../lin__alg_8h.html#a41d88fe0dbaabef395e679d37d538619',1,'ft_mx_print(t_ft_mx *matrix, char separator):&#160;lin_alg.h'],['../tesselator_8h.html#a41d88fe0dbaabef395e679d37d538619',1,'ft_mx_print(t_ft_mx *matrix, char separator):&#160;tesselator.h']]],
+  ['ft_5fmx_5frotcw_13',['ft_mx_rotcw',['../tesselator_8h.html#a7cad010c9de541c166cbc1e14dd376d3',1,'tesselator.h']]],
+  ['ft_5fmx_5fset_5fcol_14',['ft_mx_set_col',['../tesselator_8h.html#a917a6b00bc2950685cf98ee0189cd12c',1,'ft_mx_set_col(t_ft_mx *matrix, t_ft_mx *col):&#160;tesselator.h'],['../lin__alg_8h.html#a917a6b00bc2950685cf98ee0189cd12c',1,'ft_mx_set_col(t_ft_mx *matrix, t_ft_mx *col):&#160;lin_alg.h']]],
+  ['ft_5fmx_5fset_5felement_15',['ft_mx_set_element',['../lin__alg_8h.html#a6cecfb1ffa694ab62cebea92c8f6fde2',1,'ft_mx_set_element(t_ft_mx *matrix, double element, int i, int j):&#160;lin_alg.h'],['../tesselator_8h.html#a6cecfb1ffa694ab62cebea92c8f6fde2',1,'ft_mx_set_element(t_ft_mx *matrix, double element, int i, int j):&#160;tesselator.h']]],
+  ['ft_5fmx_5fset_5frow_16',['ft_mx_set_row',['../lin__alg_8h.html#a0dd812ee9245b9708e8d0e25c6efd6ad',1,'ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row):&#160;lin_alg.h'],['../tesselator_8h.html#a0dd812ee9245b9708e8d0e25c6efd6ad',1,'ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row):&#160;tesselator.h']]],
+  ['ft_5fmx_5fsmult_17',['ft_mx_smult',['../lin__alg_8h.html#a8c1ba16721b49126cd8347c9af81535e',1,'ft_mx_smult(t_ft_mx *matrix, double scalar):&#160;lin_alg.h'],['../tesselator_8h.html#a8c1ba16721b49126cd8347c9af81535e',1,'ft_mx_smult(t_ft_mx *matrix, double scalar):&#160;tesselator.h']]],
+  ['ft_5fmx_5ftranspose_18',['ft_mx_transpose',['../lin__alg_8h.html#a5f79fce6ce313a342aa3a40b0d0d8471',1,'ft_mx_transpose(t_ft_mx *m):&#160;lin_alg.h'],['../tesselator_8h.html#a5f79fce6ce313a342aa3a40b0d0d8471',1,'ft_mx_transpose(t_ft_mx *m):&#160;tesselator.h']]]
 ];

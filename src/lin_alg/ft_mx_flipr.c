@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_set_row.c                                    :+:      :+:    :+:   */
+/*   ft_mx_flipr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 15:09:39 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 23:38:53 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/27 19:45:50 by lluque            #+#    #+#             */
+/*   Updated: 2024/02/27 20:49:13 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lin_alg.h"
 
-int	ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row)
+t_ft_mx	*ft_mx_flipr(t_ft_mx *matrix)
 {
-	double	*dst;
+	t_ft_mx	*r;
+	t_ft_mx	*bid;
 
-	if (i > matrix->m || row->n != matrix->n)
-		return (0);
-	dst = matrix->d + i * matrix->n;
-	ft_memmove(dst, row, matrix->n * sizeof (double));
-	return (1);
+	bid = ft_mx_create_bid(matrix->n);
+	if (bid == NULL)
+		return (NULL);
+	r = ft_mx_mult(matrix, bid);
+	ft_mx_destroy(bid);
+	return (r);
 }

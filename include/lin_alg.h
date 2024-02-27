@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 21:26:32 by lluque           ###   ########.fr       */
+/*   Updated: 2024/02/27 20:28:24 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ t_ft_mx	*ft_mx_get_col(t_ft_mx *matrix, int j);
 void	ft_mx_print(t_ft_mx *matrix, char separator);
 
 /**
- * @brief <b>ft_mx_load_fd</b> -- TODO.
+ * @brief <b>ft_mx_load_file</b> -- TODO.
  *
  * @details TODO.
  *
@@ -254,5 +254,124 @@ void	ft_mx_print(t_ft_mx *matrix, char separator);
  * TODO.
 */
 t_ft_mx	*ft_mx_load_file(char *filename, char separator);
+
+/**
+ * @brief <b>ft_mx_dup</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_dup(t_ft_mx *old);
+
+/**
+ * @brief <b>ft_mx_smult</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	ft_mx_smult(t_ft_mx *matrix, double scalar);
+
+/**
+ * @brief <b>ft_mx_mult</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2);
+
+/**
+ * @brief <b>ft_mx_create_id</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_create_id(int size);
+
+/**
+ * @brief <b>ft_mx_create_bid</b> -- TODO backward.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_create_bid(int size);
+
+/**
+ * @brief <b>ft_mx_transpose</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_transpose(t_ft_mx *m);
+
+/**
+ * @brief <b>ft_mx_flipr</b> -- TODO Flip along the row axis (y axis).
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_flipr(t_ft_mx *m);
 
 #endif

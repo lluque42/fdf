@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_set_row.c                                    :+:      :+:    :+:   */
+/*   ft_mx_transpose.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 15:09:39 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 23:38:53 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/27 18:40:26 by lluque            #+#    #+#             */
+/*   Updated: 2024/02/27 18:53:50 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lin_alg.h"
 
-int	ft_mx_set_row(t_ft_mx *matrix, int i, t_ft_mx *row)
+t_ft_mx	*ft_mx_transpose(t_ft_mx *matrix)
 {
-	double	*dst;
+	t_ft_mx	*r;
+	int		i;
+	int		j;
 
-	if (i > matrix->m || row->n != matrix->n)
-		return (0);
-	dst = matrix->d + i * matrix->n;
-	ft_memmove(dst, row, matrix->n * sizeof (double));
-	return (1);
+	if (matrix == NULL)
+		return (NULL);
+	r = ft_mx_create(matrix->n, matrix->m);
+	if (r == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < r->m)
+	{
+		j = -1;
+		while (++j < r->n)
+			r->d[i * r->n + j] = matrix->d[j * matrix->n + i];
+	}
+	return (r);
 }
