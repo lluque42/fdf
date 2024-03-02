@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_valid.c                                       :+:      :+:    :+:   */
+/*   fdf_filename_valid.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 20:49:29 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/24 21:08:24 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/23 14:03:11 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/01 23:05:10 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "main_utils.h"
 
-int	args_valid(int argc, char **argv)
+int	fdf_filename_valid(const char *filename)
 {
-	if (argc == 2)
-	{
-		if (filename_valid(argv[1]))
-			return (1);
-	}
-	ft_printf("The argument must be a filename with a .fdf file extension\n");
-	return (0);
+	int	len;
+	int	ext_len;
+
+	len = ft_strlen(filename);
+	ext_len = ft_strlen(FILE_EXTENSION);
+	if (len < ext_len + 1)
+		return (0);
+	filename += len - ft_strlen(FILE_EXTENSION);
+	if (ft_strncmp(FILE_EXTENSION, filename, ext_len))
+		return (0);
+	return (1);
 }

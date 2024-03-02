@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 21:25:30 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/01 23:55:25 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,39 @@
 # define FILE_EXTENSION ".fdf"
 
 /**
- * @brief <b>args_valid</b> -- TODO.
+ * @brief <b>fdf_args_valid</b> -- TODO.
  *
  * @details TODO.
  *
- * @param [in] c - TODO.
+ * @param [in] argc - TODO.
  *
- * @return TODO..
+ * @param [in] argv - TODO.
+ *
+ * @return Non-zero value if correct.  
+ * A value of zero is returned if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int	args_valid(int argc, char **argv);
+int	fdf_args_valid(int argc, char **argv);
 
 /**
- * @brief <b>filename_valid</b> -- TODO.
+ * @brief <b>fdf_filename_valid</b> -- TODO.
  *
  * @details TODO.
  *
- * @param [in] c - TODO.
+ * @param [in] filename - TODO.
  *
- * @return TODO..
+ * @return Non-zero value if correct.  
+ * A value of zero is returned if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int	filename_valid(const char *filename);
+int	fdf_filename_valid(const char *filename);
 
 #endif
