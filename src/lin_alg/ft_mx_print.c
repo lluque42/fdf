@@ -6,11 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:09:46 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/26 20:51:40 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/01 13:44:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>														///////////
+//#include "libft.h"
 #include "lin_alg.h"
 
 void	ft_mx_print(t_ft_mx *matrix, char separator)
@@ -23,7 +24,7 @@ void	ft_mx_print(t_ft_mx *matrix, char separator)
 	{
 		j = -1;
 		while (++j < matrix->n)
-			ft_printf("%d%c", (int)matrix->d[i * matrix->n + j], separator);
-		ft_printf("\n");
+			printf("%f%c", matrix->d[i * matrix->n + j], separator);
+		printf("\n");
 	}
 }

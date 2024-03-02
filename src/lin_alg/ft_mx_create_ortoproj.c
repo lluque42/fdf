@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_get_col.c                                    :+:      :+:    :+:   */
+/*   ft_mx_create_ortoproj.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 14:41:15 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 00:26:34 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/27 17:59:53 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/01 12:18:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lin_alg.h"
 
-t_ft_mx	*ft_mx_get_col(t_ft_mx *matrix, int j)
+t_ft_mx	*ft_mx_create_ortoproj(void)
 {
-	t_ft_mx	*result;
-	int		i;
+	t_ft_mx	*r;
 
-	if (j >= matrix->n)
+	r = ft_mx_create_id(3);
+	if (r == NULL)
 		return (NULL);
-	result = ft_mx_create(matrix->m, 1);
-	if (result == NULL)
-		return (NULL);
-	i = -1;
-	while (++i < result->m)
-		result->d[i * result->n] = matrix->d[i * matrix->n + j];
-	return (result);
+	ft_mx_set_element(r, 0, 2, 2);
+	return (r);
 }

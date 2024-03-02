@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 23:47:23 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/27 19:34:17 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/02 14:07:19 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ double	calculate_rij(t_ft_mx *m1, t_ft_mx *m2, int i, int j)
 	return (rij);
 }
 */
-// To calculate each result element we need just the exact row of m1 and just
-// the exact colum of m2.
-// Thus, to make it a little more efficient just the row of m1 is passed...
-// TODO
 t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2)
 {
 	t_ft_mx	*r;
