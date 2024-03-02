@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['n_0',['n',['../structs__ft__mx.html#a7f110c4758eb3f6140b0f902d03b3666',1,'s_ft_mx::n()'],['../structs__ft__mx__size.html#afc5640b6538421aad64527b6e4af8110',1,'s_ft_mx_size::n()']]]
+  ['m_0',['m',['../structs__ft__mx.html#a912c32c58e2b76ccbc3189cf65b94c43',1,'s_ft_mx::m()'],['../structs__ft__mx__size.html#ae700ab547b2d680ef3b46cf2ead72668',1,'s_ft_mx_size::m()']]]
 ];
