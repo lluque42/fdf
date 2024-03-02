@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 13:17:43 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/02 15:15:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	fdf_start_gui(t_fdf_model *model)
 	mlx_put_pixel(image, W_WIDTH-10, W_HEIGHT-10, 0x0000FFFF);
 	*/
 	fdf_drw_vertexes(image, model->vertex_mx, 0xFFFFFFFF);
+
+	mlx_resize_hook(window, fdf_resizehook, window);
 
 	mlx_key_hook(window, &fdf_keyhook, window);
 

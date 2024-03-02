@@ -6,12 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 11:54:07 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 13:40:01 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/02 15:08:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lin_alg.h"
 
+// WARNING NEVER TESTED!!!!!!!!!!!!!!!
 void	ft_mx_transf_v3m(t_ft_mx *row_vectors_mx, t_ft_mx *tf_mx)
 {
 	int		row_v;

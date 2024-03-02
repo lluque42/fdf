@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/02 13:15:49 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/02 15:16:22 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,8 @@ SOURCES = fdf_main.c \
 		  drawing/fdf_scale_center.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
-		  window/fdf_start_gui.c
+		  window/fdf_start_gui.c \
+		  window/fdf_resizehook.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c

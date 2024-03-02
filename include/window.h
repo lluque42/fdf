@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 23:23:08 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/02 15:11:24 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,23 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *param);
  * TODO.
 */
 void	fdf_closehook(void *param);
+
+/**
+ * @brief <b>fdf_resizehook</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] c - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_resizehook(int32_t width, int32_t height, void *param);
 
 /**
  * @brief <b>fdf_start_gui</b> -- TODO.
