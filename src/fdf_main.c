@@ -6,51 +6,42 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/02/27 19:52:30 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/01 23:39:53 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lin_alg.h"
 #include "main_utils.h"
-#include "MLX42.h"
-#include <stdlib.h>
-
-// Supone que en param viene un mlx_t. Esto se logra al registrar este callback
-void my_keyhook(mlx_key_data_t keydata, void* param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
-	{
-		ft_printf("Hello (%p)\n", param);
-		mlx_close_window(param);
-	}
-}
-
-void	my_closehook(void *param)
-{
-	mlx_terminate(param);	
-}
-
-#define W_WIDTH 256
-#define W_HEIGHT 256
+#include "drawing.h"
+#include "window.h"
+#include "tesselator.h"
 
 int	main(int argc, char **argv)
 {
-	t_ft_mx	*matrix;
+	t_fdf_model	*model;
+	t_ft_mx		*map_mx;
 
-	if (!args_valid(argc, argv))
+	if (!fdf_args_valid(argc, argv))
 		return (1);
-	matrix = ft_mx_load_file(argv[1], VAL_SEPARATOR_FILE);
-	if (matrix == NULL)
+	ft_printf("[main] Loading file...'\n");
+	map_mx = ft_mx_load_file(argv[1], VAL_SEPARATOR_FILE);
+	if (map_mx == NULL)
+		return (ft_printf("Error while loading '%s'\n", argv[1]), 1);
+	ft_printf("[main] Tesselating map...'\n");
+	model = fdf_tesselate_map(map_mx);
+	ft_mx_destroy(map_mx);
+	if (model == NULL)
+		return (ft_printf("Error while tesselating\n"), 1);
+	ft_printf("[main] Starting GUI...'\n");
+	if (!fdf_start_gui(model))
 	{
-		ft_printf("There was a problem while loading '%s'\n", argv[1]);
-		return (1);
+		ft_printf("Error while starting the GUI\n");
+		return (fdf_destroy_model(model), 1);
 	}
-	ft_printf("\n");
-	ft_printf("The matrix read from a file...\n");
-	ft_mx_print(matrix, VAL_SEPARATOR_FILE);
-	ft_printf("\n");
-	
+	return (fdf_destroy_model(model), 0);
+}
+/*	
 	t_ft_mx	*copy;
 	copy = ft_mx_dup(matrix);
 	ft_printf("\n");
@@ -158,32 +149,4 @@ int	main(int argc, char **argv)
 	else
 		ft_mx_print(flipped3, VAL_SEPARATOR_FILE);
 	ft_printf("\n");
-	
-	return (0);
-
-	mlx_t		*window;
-	mlx_image_t	*image;
-
-	window = mlx_init(W_WIDTH, W_HEIGHT, "lluque's fdf", true);
-	//check
-	
-	image = mlx_new_image(window, W_WIDTH, W_HEIGHT);
-
-	mlx_image_to_window(window, image, 0, 0);
-
-	mlx_put_pixel(image, 128, 128, 0xFF0000FF);
-
-	mlx_key_hook(window, &my_keyhook, window);
-
-	mlx_close_hook(window, my_closehook, window);
-
-	mlx_loop(window);
-
-	//mlx_delete_image(window, image);
-	//mlx_terminate(window);
-
-	//close(fd);
-	//free(window);
-	//free(image);
-	return (0);
-}
+*/

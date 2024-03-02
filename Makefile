@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/02/27 19:46:09 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/02 13:15:49 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,8 @@ INCLUDES = $(INC_DIR)main_utils.h
 
 # List of source code file names with path relative to SRC_DIR
 SOURCES = fdf_main.c \
-		  main_utils/filename_valid.c \
-		  main_utils/args_valid.c \
+		  main_utils/fdf_filename_valid.c \
+		  main_utils/fdf_args_valid.c \
 		  lin_alg/ft_mx_create.c \
 		  lin_alg/ft_mx_destroy.c \
 		  lin_alg/ft_mx_print.c \
@@ -86,7 +86,21 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_create_id.c \
 		  lin_alg/ft_mx_create_bid.c \
 		  lin_alg/ft_mx_transpose.c \
-		  lin_alg/ft_mx_flipr.c
+		  lin_alg/ft_mx_flipr.c \
+		  lin_alg/ft_mx_create_ortoproj.c \
+		  lin_alg/ft_mx_set_col.c \
+		  lin_alg/ft_mx_transf_m3v.c \
+		  lin_alg/ft_mx_transf_v3m.c \
+		  tesselator/fdf_get_vertex_mx.c \
+		  tesselator/fdf_create_rotmx.c \
+		  tesselator/fdf_rot_xyz_deg.c \
+		  tesselator/fdf_tesselate_map.c \
+		  tesselator/fdf_destroy_model.c \
+		  drawing/fdf_drw_vertexes.c \
+		  drawing/fdf_scale_center.c \
+		  window/fdf_keyhook.c \
+		  window/fdf_closehook.c \
+		  window/fdf_start_gui.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c
