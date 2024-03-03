@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/02 15:16:22 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/03 16:21:47 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,21 +87,27 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_create_bid.c \
 		  lin_alg/ft_mx_transpose.c \
 		  lin_alg/ft_mx_flipr.c \
-		  lin_alg/ft_mx_create_ortoproj.c \
+		  lin_alg/ft_mx_create_ortoproj_mx.c \
+		  lin_alg/ft_mx_create_transl_mx.c \
+		  lin_alg/ft_mx_create_scale_mx.c \
 		  lin_alg/ft_mx_set_col.c \
 		  lin_alg/ft_mx_transf_m3v.c \
 		  lin_alg/ft_mx_transf_v3m.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_create_rotmx.c \
-		  tesselator/fdf_rot_xyz_deg.c \
 		  tesselator/fdf_tesselate_map.c \
 		  tesselator/fdf_destroy_model.c \
+		  tesselator/fdf_get_rot_mx.c \
 		  drawing/fdf_drw_vertexes.c \
 		  drawing/fdf_scale_center.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
 		  window/fdf_start_gui.c \
-		  window/fdf_resizehook.c
+		  window/fdf_resizehook.c \
+		  fdf/fdf_create_wlayout.c \
+		  fdf/fdf_destroy_wlayout.c \
+		  fdf/fdf_create_fdf.c \
+		  fdf/fdf_destroy_fdf.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c

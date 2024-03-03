@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 15:15:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/03 16:20:55 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,33 @@
 #include "tesselator.h"
 #include "drawing.h"
 #include "lin_alg.h"
-#define W_WIDTH 500
-#define W_HEIGHT 500
+#include "fdf.h"
 
-int	fdf_start_gui(t_fdf_model *model)
+int	fdf_start_gui(t_fdf *fdf)
 {
-
-	mlx_t           *window;
-	mlx_image_t     *image;
-	double i_width;
-	double i_height;
-	i_width = W_WIDTH * 1;
-	i_height = W_HEIGHT * 1;
+	t_ft_mx		*transf_mx;
+	//t_ft_mx		*temp;
+	mlx_t		*window;
+	mlx_image_t	*image;
 
 	ft_printf("\t[fdf_start_gui] Rotating model...\n");
-	if (!fdf_rot_xyz_deg(model->vertex_mx, 45, 90 - 35.264, 45))
+	
+	
+	fdf->c_rot_mx = fdf_get_rot_mx(45, 90 - 35.264, 45);
+	if (fdf->c_rot_mx == NULL)
+		return (0);
+	fdf->vs_pro_mx = ft_mx_create_ortoproj_mx();
+	if (fdf->vs_pro_mx == NULL)
+		return (0); // falta??? o destruye arriba al destruir fdf
+	// EL ORDEN IMPORTA COÑOOOOO
+	transf_mx = ft_mx_mult(fdf->vs_pro_mx, fdf->c_rot_mx);
+	if (transf_mx == NULL)
+		return (0); // falta??? o destruye arriba al destruir fdf
+	ft_mx_transf_m3v(transf_mx, fdf->model->vertex_mx);
+	//if (!get_sca_
+
+/*
+	if (!fdf_rot_xyz_deg(fdf->model->vertex_mx, 45, 90 - 35.264, 45))
 	//if (!ft_rot_xyz_deg(vertex_mx, 0, 35.264, 45))
 	//if (!ft_rot_xyz_deg(vertex_mx, 0, 0, 45))
 	//if (!ft_rot_xyz_deg(vertex_mx, 0, 0, 0))
@@ -38,13 +50,16 @@ int	fdf_start_gui(t_fdf_model *model)
 
 	t_ft_mx	*ortotransfmx;
 	
-	ortotransfmx = ft_mx_create_ortoproj();
+	ortotransfmx = ft_mx_create_ortoproj_mx();
 	if (ortotransfmx == NULL)
 	{
 		ft_printf("There was a problem while creating ortotransfmx\n");
 		return (0);		//falta
 	}
-	ft_mx_transf_m3v(ortotransfmx, model->vertex_mx);
+	ft_mx_transf_m3v(ortotransfmx, fdf->model->vertex_mx);
+*/
+
+
 	/*
 	ft_printf("\n");
 	ft_printf("The 2D vertex matrix...\n");
@@ -52,14 +67,15 @@ int	fdf_start_gui(t_fdf_model *model)
 	ft_printf("\n");
 	ft_printf("About to auto scale and center (model = %p)\n", model);
 	*/
-	fdf_scale_center(model->vertex_mx, i_width, i_height);
+	//fdf_scale_center(fdf->model->vertex_mx, fdf->wlayout->image_w, fdf->wlayout->image_h);
+	fdf_scale_center(fdf);
 	//ft_printf("About to create window\n");
-	window = mlx_init(W_WIDTH, W_HEIGHT, "lluque's fdf", true);
+	window = mlx_init(fdf->wlayout->window_w, fdf->wlayout->window_h, "lluque's fdf", true);
 	//check en todos lados, retornar 0
 
-	image = mlx_new_image(window, i_width + 10, i_height + 10);
+	image = mlx_new_image(window, fdf->wlayout->window_w, fdf->wlayout->window_h);
 
-	mlx_image_to_window(window, image, 10, 10);
+	mlx_image_to_window(window, image, fdf->wlayout->wintoimg_xoffset, fdf->wlayout->wintoimg_yoffset);
 
 	/*
 	// (0,0) rojo
@@ -71,7 +87,7 @@ int	fdf_start_gui(t_fdf_model *model)
 	// (W_WIDTH, W_HEIGHT) azul
 	mlx_put_pixel(image, W_WIDTH-10, W_HEIGHT-10, 0x0000FFFF);
 	*/
-	fdf_drw_vertexes(image, model->vertex_mx, 0xFFFFFFFF);
+	fdf_drw_vertexes(image, fdf->model->vertex_mx, 0xFFFFFFFF);
 
 	mlx_resize_hook(window, fdf_resizehook, window);
 

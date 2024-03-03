@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 15:11:24 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/02 19:11:22 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define WINDOW_H
 # include "MLX42.h"
 # include "tesselator.h"
+# include "fdf.h"
 
 /**
  * @struct s_ft_mx
@@ -139,6 +140,6 @@ void	fdf_resizehook(int32_t width, int32_t height, void *param);
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_start_gui(t_fdf_model *model);
+int		fdf_start_gui(t_fdf *fdf);
 
 #endif

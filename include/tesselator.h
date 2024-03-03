@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 13:52:07 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/03 15:53:19 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,23 @@ t_ft_mx		*fdf_create_rotmx_y(double degree);
  * TODO.
 */
 t_ft_mx		*fdf_create_rotmx_z(double degree);
+
+/**
+ * @brief <b>fdf_get_rot_mx</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] degree - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx		*fdf_get_rot_mx(double x, double y, double z);
 
 /**
  * @brief <b>fdf_vertex_mx_transf</b> -- TODO.

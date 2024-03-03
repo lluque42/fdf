@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_rot_xyz_deg.c                                  :+:      :+:    :+:   */
+/*   fdf_get_rot_mx.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:52:39 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 13:19:30 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/03 15:54:29 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "tesselator.h"
 
-static t_ft_mx	*get_rot_mx(double x, double y, double z)
+t_ft_mx	*fdf_get_rot_mx(double x, double y, double z)
 {
 	t_ft_mx	*rx;
 	t_ft_mx	*ry;
@@ -39,14 +39,4 @@ static t_ft_mx	*get_rot_mx(double x, double y, double z)
 	if (rxyz == NULL)
 		return (ft_mx_destroy(temp), ft_mx_destroy (rz), NULL);
 	return (ft_mx_destroy(temp), ft_mx_destroy (rz), rxyz);
-}
-
-int	fdf_rot_xyz_deg(t_ft_mx *vertex_mx, double x, double y, double z)
-{
-	t_ft_mx	*rot_mx;
-
-	rot_mx = get_rot_mx(x, y, z);
-	ft_mx_transf_m3v(rot_mx, vertex_mx);
-	ft_mx_destroy(rot_mx);
-	return (1);
 }

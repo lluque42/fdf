@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_create_ortoproj.c                            :+:      :+:    :+:   */
+/*   fdf_destroy_wlayout.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 17:59:53 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 12:18:16 by lluque           ###   ########.fr       */
+/*   Created: 2024/03/02 16:04:20 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/02 18:20:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lin_alg.h"
+#include <stdlib.h>
+#include "fdf.h"
 
-t_ft_mx	*ft_mx_create_ortoproj(void)
+void	fdf_destroy_wlayout(t_fdf_wlayout *wlayout)
 {
-	t_ft_mx	*r;
-
-	r = ft_mx_create_id(3);
-	if (r == NULL)
-		return (NULL);
-	ft_mx_set_element(r, 0, 2, 2);
-	return (r);
+	free(wlayout);
 }

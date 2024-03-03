@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['m_0',['m',['../structs__ft__mx.html#a912c32c58e2b76ccbc3189cf65b94c43',1,'s_ft_mx::m()'],['../structs__ft__mx__size.html#ae700ab547b2d680ef3b46cf2ead72668',1,'s_ft_mx_size::m()']]]
+  ['is_5fhidden_0',['is_hidden',['../structs__ft__edge.html#a02528142937bf7e9e2614b3f2f0f4ace',1,'s_ft_edge']]],
+  ['is_5fsqr_1',['is_sqr',['../structs__ft__mx.html#ade78798b79d4e786c0bda262121c13be',1,'s_ft_mx']]]
 ];

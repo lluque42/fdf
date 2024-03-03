@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 23:59:29 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/03 09:51:39 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define DRAWING_H
 # include "MLX42.h"
 # include "lin_alg.h"
+# include "fdf.h"
 
 /**
  * @struct s_fdf_rectangle
@@ -65,17 +66,13 @@ void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
  *
  * @details TODO.
  *
- * @param [in] vertex_mx - Vertex matrix.
- *
- * @param [in] width - Target image width in pixles.
- *
- * @param [in] height - Target image height in pixles.
+ * @param [in] fdf - The fdf struct.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-void	fdf_scale_center(t_ft_mx *vertex_mx, double width, double height);
+void	fdf_scale_center(t_fdf *fdf);
 
 #endif

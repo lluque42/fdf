@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 13:49:14 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/03 14:57:41 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,6 +465,48 @@ t_ft_mx	*ft_mx_flipr(t_ft_mx *m);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx	*ft_mx_create_ortoproj(void);
+t_ft_mx	*ft_mx_create_ortoproj_mx(void);
+
+/**
+ * @brief <b>ft_mx_create_transl_mx</b> -- Creates a translation matrix.
+ *
+ * @details TODO.
+ *
+ * @param [in] x - The translation offset for X axis.
+ *
+ * @param [in] y - The translation offset for Y axis.
+ *
+ * @param [in] z - The translation offset for Z axis.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_create_transl_mx(double x, double y, double z);
+
+/**
+ * @brief <b>ft_mx_create_scale_mx</b> -- Flip along the row axis (y axis).
+ *
+ * @details TODO.
+ *
+ * @param [in] x - The scale factor for X axis.
+ *
+ * @param [in] y - The scale factor for Y axis.
+ *
+ * @param [in] z - The scale factor for Z axis.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_mx_create_scale_mx(double x, double y, double z);
 
 #endif

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-02</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-03</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -76,15 +76,19 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;MLX42.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="lin__alg_8h_source.html">lin_alg.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fdf_8h_source.html">fdf.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for drawing.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="drawing_8h__incl.png" border="0" usemap="#ainclude_2drawing_8h" alt=""/></div>
 <map name="ainclude_2drawing_8h" id="ainclude_2drawing_8h">
-<area shape="rect" title=" " alt="" coords="27,5,164,32"/>
+<area shape="rect" title=" " alt="" coords="53,5,191,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,84,107"/>
-<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="109,80,186,107"/>
-<area shape="rect" title=" " alt="" coords="118,155,177,181"/>
+<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="174,229,251,256"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="170,80,221,107"/>
+<area shape="rect" title=" " alt="" coords="183,304,242,331"/>
+<area shape="rect" title=" " alt="" coords="160,155,231,181"/>
+<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="255,155,354,181"/>
 </map>
 </div>
 </div>
@@ -107,9 +111,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a5080a2401b35c172626a683e1218cae9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#a5080a2401b35c172626a683e1218cae9">fdf_drw_vertexes</a> (mlx_image_t *img, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v_mx, uint32_t col)</td></tr>
 <tr class="memdesc:a5080a2401b35c172626a683e1218cae9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_draw_vertexes</b> &ndash; TODO.  <a href="drawing_8h.html#a5080a2401b35c172626a683e1218cae9">More...</a><br /></td></tr>
 <tr class="separator:a5080a2401b35c172626a683e1218cae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95712d104e65d0261519e01056cae1d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#a95712d104e65d0261519e01056cae1d3">fdf_scale_center</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *vertex_mx, double width, double height)</td></tr>
-<tr class="memdesc:a95712d104e65d0261519e01056cae1d3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_scale_center</b> &ndash; TODO.  <a href="drawing_8h.html#a95712d104e65d0261519e01056cae1d3">More...</a><br /></td></tr>
-<tr class="separator:a95712d104e65d0261519e01056cae1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b67f7dd6855fce4fee513241fc5813"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#a33b67f7dd6855fce4fee513241fc5813">fdf_scale_center</a> (<a class="el" href="structs__fdf.html">t_fdf</a> *fdf)</td></tr>
+<tr class="memdesc:a33b67f7dd6855fce4fee513241fc5813"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_scale_center</b> &ndash; TODO.  <a href="drawing_8h.html#a33b67f7dd6855fce4fee513241fc5813">More...</a><br /></td></tr>
+<tr class="separator:a33b67f7dd6855fce4fee513241fc5813"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >TODO Header file for linearly-storaged matrixes (row-major order) operations. </p>
@@ -161,8 +165,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a95712d104e65d0261519e01056cae1d3" name="a95712d104e65d0261519e01056cae1d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95712d104e65d0261519e01056cae1d3">&#9670;&nbsp;</a></span>fdf_scale_center()</h2>
+<a id="a33b67f7dd6855fce4fee513241fc5813" name="a33b67f7dd6855fce4fee513241fc5813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33b67f7dd6855fce4fee513241fc5813">&#9670;&nbsp;</a></span>fdf_scale_center()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,25 +174,9 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void fdf_scale_center </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
-          <td class="paramname"><em>vertex_mx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structs__fdf.html">t_fdf</a> *&#160;</td>
+          <td class="paramname"><em>fdf</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -197,9 +185,7 @@ Functions</h2></td></tr>
 <p >TODO.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">vertex_mx</td><td>- Vertex matrix.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>- Target image width in pixles.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>- Target image height in pixles.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fdf</td><td>- The fdf struct.</td></tr>
   </table>
   </dd>
 </dl>
