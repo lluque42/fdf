@@ -1,9 +1,9 @@
 <map id="include/drawing.h" name="include/drawing.h">
-<area shape="rect" id="node1" title=" " alt="" coords="53,5,191,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,84,107"/>
-<area shape="rect" id="node3" href="$lin__alg_8h.html" title=" " alt="" coords="174,229,251,256"/>
-<area shape="rect" id="node5" href="$fdf_8h.html" title=" " alt="" coords="170,80,221,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="183,304,242,331"/>
-<area shape="rect" id="node6" title=" " alt="" coords="160,155,231,181"/>
-<area shape="rect" id="node7" href="$tesselator_8h.html" title=" " alt="" coords="255,155,354,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,143,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="35,155,113,181"/>
+<area shape="rect" id="node3" href="$lin__alg_8h.html" title=" " alt="" coords="101,229,178,256"/>
+<area shape="rect" id="node5" href="$fdf_8h.html" title=" " alt="" coords="129,80,179,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="110,304,169,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="137,155,208,181"/>
+<area shape="rect" id="node7" href="$tesselator_8h.html" title=" " alt="" coords="233,155,331,181"/>
 </map>

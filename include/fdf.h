@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 11:55:08 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 14:52:37 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,54 @@
 #ifndef FDF_H
 # define FDF_H
 # include <stdint.h>
+# include "MLX42.h"
 # include "tesselator.h"
 # define DEF_WLAYOUT_RATIO 1.05
 /**
- * @struct s_fdf
- * @brief Base for typedef <b>t_fdf</b>.
+ * @struct s_wlayout
+ * @brief Base for typedef <b>t_wlayout</b>.
  * TODO
- * @details This type is used to store a linearly-storaged (row-major order)
- * matrix of double type elements.
- * @var s_ft_mx::d
- * The elements, stored linearly using a row-major order. Element addressing
- * follows this syntax: data[i * n + j] (where i represents the row, m the
- * number of rows and j the column).
- * @var s_ft_mx::m
- * Number of rows as a positive integer value.
- * @var s_ft_mx::n
- * Number of columns as a positive integer value.
- * @var s_ft_mx::is_sqr
- * Non-zero value to quickly check if this matrix is square (m == n).
+ * @details This type is used to store the values that define the GUI's window
+ * layout.
+ * @var s_wlayout::window_w
+ * TODO.
+ * @var s_wlayout::window_h
+ * TODO.
+ * @var s_wlayout::image_w
+ * TODO.
+ * @var s_wlayout::image_h
+ * TODO.
+ * @var s_wlayout::wintoimg_xoffset
+ * TODO.
+ * @var s_wlayout::wintoimg_yoffset
+ * TODO.
+ * @var s_wlayout::drawing_w
+ * TODO.
+ * @var s_wlayout::drawing_h
+ * TODO.
+ * @var s_wlayout::imgtodrw_xoffset
+ * TODO.
+ * @var s_wlayout::imgtodrw_yoffset
+ * TODO.
+ * @var s_wlayout::window
+ * TODO.
+ * @var s_wlayout::image
+ * TODO.
 */
 typedef struct s_wlayout
 {
-	int32_t	window_w;
-	int32_t	window_h;
-	int32_t	image_w;
-	int32_t	image_h;
-	int32_t	wintoimg_xoffset;
-	int32_t	wintoimg_yoffset;
-	int32_t	drawing_w;
-	int32_t	drawing_h;
-	int32_t	imgtodrw_xoffset;
-	int32_t	imgtodrw_yoffset;
+	int32_t		window_w;
+	int32_t		window_h;
+	int32_t		image_w;
+	int32_t		image_h;
+	int32_t		wintoimg_xoffset;
+	int32_t		wintoimg_yoffset;
+	int32_t		drawing_w;
+	int32_t		drawing_h;
+	int32_t		imgtodrw_xoffset;
+	int32_t		imgtodrw_yoffset;
+	mlx_t		*window;
+	mlx_image_t	*image;
 }				t_fdf_wlayout;
 
 /**
@@ -66,6 +83,8 @@ typedef struct s_wlayout
  * Translation matrix for model-to-world space.
  * @var s_fdf::w_sca_mx
  * Scale matrix for model-to-world space.
+ * @var s_fdf::mtow_tr_mx
+ * The resulting transformation matrix for model-to-world space.
  * @var s_fdf::w
  * The 3D world view, that is, the 3D model transformed to be placed in the
  * 3D world.
@@ -75,18 +94,48 @@ typedef struct s_wlayout
  * Translation matrix for world-to-camera space.
  * @var s_fdf::c_sca_mx
  * Scale matrix for world-to-camera space.
+ * @var s_fdf::wtoc_tr_mx
+ * The resulting transformation matrix for world-to-camera space.
  * @var s_fdf::c
  * The 3D camera view, that is, the 3D world transformed from the perspective
  * of the camera.
- * @var s_fdf::vs_pro_mx
+ * @var s_fdf::s_pro_mx
  * XY-plane projection matrix.
- * @var s_fdf::vs_tra_mx
- * Translation matrix for camera-to-view screen space.
- * @var s_fdf::vs_sca_mx
- * Scale matrix for camera-to-view screen space.
+ * @var s_fdf::s_tra_mx
+ * Translation matrix for camera-to-screen view space.
+ * @var s_fdf::s_sca_mx
+ * Scale matrix for camera-to-screen view space.
+ * @var s_fdf::ctos_tr_mx
+ * The resulting transformation matrix for camera-to-screen view space.
  * @var s_fdf::s
  * The 2D screen view, that is, the 3D world as the camera sees it transformed
  * to be placed in a finite XY-plane
+ * @var s_fdf::cminx
+ * The minimum value of X of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::cminy
+ * The minimum value of Y of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::cminz
+ * The minimum value of Z of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::cmaxx
+ * The maximum value of X of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::cmaxy
+ * The maximum value of Y of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::cmaxz
+ * The maximum value of Z of camera space vertexes. Used to autofit the drawing
+ * in the screen view space.
+ * @var s_fdf::s_scale_x
+ * Current X scale for screen view space.
+ * @var s_fdf::s_scale_y
+ * Current Y scale for screen view space.
+ * @var s_fdf::s_offset_x
+ * TODO.
+ * @var s_fdf::s_offset_y
+ * TODO.
  * @var s_fdf::wlayout
  * The GUI window layout.
 */
@@ -126,9 +175,13 @@ typedef struct s_fdf
  *
  * @details TODO.
  *
- * @param [in] m - Number of rows.
+ * @param [in] drw_w - Width in pixels of the actual drawing inside the
+ * image. This and drw_h are the base base value to calculate every other
+ * dimension of the GUI's window elements.
  *
- * @param [in] n - Number of columns.
+ * @param [in] drw_h - Height in pixels of the actual drawing inside the
+ * image. This and drw_w are the base base value to calculate every other
+ * dimension of the GUI's window elements.
  *
  * @return TODO..
  * NULL if error.
@@ -145,12 +198,7 @@ t_fdf_wlayout	*fdf_create_wlayout(int32_t drw_w, int32_t drw_h);
  *
  * @details TODO.
  *
- * @param [in] m - Number of rows.
- *
- * @param [in] n - Number of columns.
- *
- * @return TODO..
- * NULL if error.
+ * @param [in] wlayout - The window layout structure to be freed.
  *
  * @warning TODO.
  *
@@ -164,9 +212,11 @@ void			fdf_destroy_wlayout(t_fdf_wlayout *wlayout);
  *
  * @details TODO.
  *
- * @param [in] m - Number of rows.
+ * @param [in] drawing_w - Width in pixels of the actual drawing inside the
+ * image.
  *
- * @param [in] n - Number of columns.
+ * @param [in] drawing_h - Height in pixels of the actual drawing inside the
+ * image.
  *
  * @return TODO..
  * NULL if error.
@@ -183,12 +233,7 @@ t_fdf			*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h);
  *
  * @details TODO.
  *
- * @param [in] m - Number of rows.
- *
- * @param [in] n - Number of columns.
- *
- * @return TODO..
- * NULL if error.
+ * @param [in] fdf - The fdf structure to be freed.
  *
  * @warning TODO.
  *

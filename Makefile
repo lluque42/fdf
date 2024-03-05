@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/05 12:04:24 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/05 12:51:38 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,8 +99,7 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_destroy_model.c \
 		  tesselator/fdf_get_rot_mx.c \
 		  drawing/fdf_drw_vertexes.c \
-		  drawing/fdf_scale_center.c \
-		  drawing/fdf_get_camera_min_max.c \
+		  drawing/fdf_get_autofit_transf_matrixes.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
 		  window/fdf_start_gui.c \

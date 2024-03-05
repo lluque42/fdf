@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 12:05:21 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 13:46:23 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,6 @@
 # include "MLX42.h"
 # include "lin_alg.h"
 # include "fdf.h"
-
-/**
- * @struct s_fdf_rectangle
- * @brief Base for typedef <b>t_fdf_rectangle</b>.
- * @details This type is used to store the coordinates of a rectangle as double
- * type values.
- * @var s_fdf_rectangle::x0
- * The x component of corner 0.
- * @var s_fdf_rectangle::y0
- * The y component of corner 0.
- * @var s_fdf_rectangle::x1
- * The x component of corner 1.
- * @var s_fdf_rectangle::y1
- * The y component of corner 1.
-*/
-typedef struct s_fdf_rectangle
-{
-	double	x0;
-	double	y0;
-	double	x1;
-	double	y1;
-}				t_fdf_rectangle;
 
 /**
  * @brief <b>ft_draw_vertexes</b> -- TODO.
@@ -62,7 +40,7 @@ typedef struct s_fdf_rectangle
 void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
 
 /**
- * @brief <b>fdf_scale_center</b> -- TODO.
+ * @brief <b>fdf_get_autofit_transf_matrixes</b> -- TODO.
  *
  * @details TODO.
  *
@@ -73,49 +51,6 @@ void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
  * @remark Implementation notes:
  * TODO.
 */
-//void	fdf_scale_center(t_fdf *fdf);
-
-/**
- * @brief <b>fdf_create_vsautofit_scale_mx</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] fdf - The fdf struct.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx	*fdf_create_vsautofit_scale_mx(t_fdf *fdf);
-
-/**
- * @brief <b>fdf_create_vsautofit_transl_mx</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] fdf - The fdf struct.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx	*fdf_create_vsautofit_transl_mx(t_fdf *fdf);
-
-
-/**
- * @brief <b>fdf_get_camera_min_max</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] fdf - The fdf struct.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void	fdf_get_camera_min_max(t_fdf *fdf);
+int		fdf_get_autofit_transf_matrixes(t_fdf *fdf);
 
 #endif

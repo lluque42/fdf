@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 10:58:12 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 13:55:29 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_fdf_model
  *
  * @details TODO.
  *
- * @param [in] model - The pointer to the model to be freed.
+ * @return TODO.
+ * NULL if error.
  *
  * @warning TODO.
  *
@@ -171,7 +172,11 @@ t_ft_mx		*fdf_create_rotmx_z(double degree);
  *
  * @details TODO.
  *
- * @param [in] degree - TODO.
+ * @param [in] x - Rotation degree along the X axis.
+ *
+ * @param [in] y - Rotation degree along the Y axis.
+ *
+ * @param [in] z - Rotation degree along the Z axis.
  *
  * @return TODO..
  * NULL if error.
