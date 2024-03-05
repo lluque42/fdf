@@ -6,78 +6,58 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:47:12 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/03 16:21:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 12:29:20 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "drawing.h"
 
-static t_fdf_rectangle	get_min_max(t_ft_mx *vertex_mx)
+void	fdf_get_screen_autoscale(t_fdf *fdf)
 {
-	t_fdf_rectangle	min_max;
-	int				i;
+	double	scale;
+	double	scale_x;
+	double	scale_y;
+	double	delta_x;
+	double	delta_y;
 
-	ft_bzero(&min_max, sizeof (t_fdf_rectangle));
-	i = 0;
-	while (i < vertex_mx->n * 3)
-	{
-		if (vertex_mx->d[i] > min_max.x1)
-			min_max.x1 = vertex_mx->d[i];
-		if (vertex_mx->d[i] < min_max.x0)
-			min_max.x0 = vertex_mx->d[i];
-		if (vertex_mx->d[i + 1] > min_max.y1)
-			min_max.y1 = vertex_mx->d[i + 1];
-		if (vertex_mx->d[i + 1] < min_max.y0)
-			min_max.y0 = vertex_mx->d[i + 1];
-		i += 3;
-	}
-	return (min_max);
+	delta_x = fabs(fdf->cmaxx - fdf->cminx);
+	delta_y = fabs(fdf->cmaxy - fdf->cminy);
+	scale_x = fdf->wlayout->drawing_w / delta_x;
+	scale_y = fdf->wlayout->drawing_h / delta_y;
+	if (scale_x < scale_y)
+		scale = scale_x;
+	else
+		scale = scale_y;
+	fdf->s_scale_x = scale;
+	fdf->s_scale_y = scale;
 }
 
-static	double get_scale(t_fdf_rectangle min_max, double w, double h)
+void	fdf_get_screen_autooffset(t_fdf *fdf)
 {
-	double			sc;
+	double	s_x;
+	double	s_y;
 
-	sc = w / fabs(min_max.x1 - min_max.x0);
-	if (sc > h / fabs(min_max.y1 - min_max.y0))
-		sc = h / fabs(min_max.y1 - min_max.y0);
-	sc *= 0.9;
-	return (sc);
+	s_x = (fdf->wlayout->drawing_w / 2) / fdf->s_scale_x;
+	s_x -= fabs(fdf->cmaxx - fdf->cminx) / 2;
+	s_x += fdf->wlayout->imgtodrw_xoffset / fdf->s_scale_x;
+	fdf->s_offset_x = s_x - fdf->cminx;
+	s_y = (fdf->wlayout->drawing_h / 2) / fdf->s_scale_y;
+	s_y -= fabs(fdf->cmaxy - fdf->cminy) / 2;
+	s_y += fdf->wlayout->imgtodrw_yoffset / fdf->s_scale_y;
+	fdf->s_offset_y = s_y - fdf->cminy;
+	fdf->s_offset_x *= fdf->s_scale_x;
+	fdf->s_offset_y *= fdf->s_scale_y;
 }
 
-static	double	get_offsetx(t_fdf_rectangle min_max, double sc, double w)
+t_ft_mx	*fdf_create_vsautofit_scale_mx(t_fdf *fdf)
 {
-	return ((w - fabs(min_max.x1 - min_max.x0) * sc) / 2 - min_max.x0 * sc);
+	fdf_get_screen_autoscale(fdf);
+	return (ft_mx_create_scale_mx(fdf->s_scale_x, fdf->s_scale_y, 0));
 }
 
-static	double	get_offsety(t_fdf_rectangle min_max, double sc, double h)
+t_ft_mx	*fdf_create_vsautofit_transl_mx(t_fdf *fdf)
 {
-	return ((h - fabs(min_max.y1 - min_max.y0) * sc) / 2 - min_max.y0 * sc);
-}
-
-void	fdf_scale_center(t_fdf *fdf)
-{
-	t_fdf_rectangle	min_max;
-	int				i;
-	double			sc;
-	double			offset_x;
-	double			offset_y;
-
-	min_max = get_min_max(fdf->model->vertex_mx);
-	sc = get_scale(min_max, fdf->wlayout->drawing_w, fdf->wlayout->drawing_h);
-	offset_x = get_offsetx(min_max, sc, fdf->wlayout->drawing_w);
-	offset_y = get_offsety(min_max, sc, fdf->wlayout->drawing_h);
-	offset_x += fdf->wlayout->imgtodrw_xoffset;
-	offset_y += fdf->wlayout->imgtodrw_yoffset;
-	
-	ft_mx_smult(fdf->model->vertex_mx, sc);
-	
-	i = 0;
-	while (i < fdf->model->vertex_mx->n * 3)
-	{
-		fdf->model->vertex_mx->d[i] = fdf->model->vertex_mx->d[i] + offset_x;
-		fdf->model->vertex_mx->d[i + 1] = fdf->model->vertex_mx->d[i + 1] + offset_y;
-		i += 3;
-	}
+	fdf_get_screen_autooffset(fdf);
+	return (ft_mx_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y, 0));
 }
