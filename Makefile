@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/03 16:21:47 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/05 03:08:31 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_smult.c \
 		  lin_alg/ft_mx_get_row.c \
 		  lin_alg/ft_mx_mult.c \
+		  lin_alg/ft_mx_mult3.c \
 		  lin_alg/ft_mx_get_col.c \
 		  lin_alg/ft_mx_create_id.c \
 		  lin_alg/ft_mx_create_bid.c \
@@ -91,11 +92,10 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_create_transl_mx.c \
 		  lin_alg/ft_mx_create_scale_mx.c \
 		  lin_alg/ft_mx_set_col.c \
-		  lin_alg/ft_mx_transf_m3v.c \
-		  lin_alg/ft_mx_transf_v3m.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_create_rotmx.c \
 		  tesselator/fdf_tesselate_map.c \
+		  tesselator/fdf_create_model.c \
 		  tesselator/fdf_destroy_model.c \
 		  tesselator/fdf_get_rot_mx.c \
 		  drawing/fdf_drw_vertexes.c \
