@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 22:30:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:10:09 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 // the world space.
 static int	fdf_setup_world(t_fdf *fdf)
 {
-	fdf->w_rot_mx = fdf_get_rot_mx(fdf->w_deg_x, fdf->w_deg_y, fdf->w_deg_z);
-	fdf->w_tra_mx = ft_mx_create_transl_mx(fdf->w_offset_x,
+	fdf->w_rot_mx = fdf_create_rot_mx(fdf->w_deg_x, fdf->w_deg_y, fdf->w_deg_z);
+	fdf->w_tra_mx = fdf_create_transl_mx(fdf->w_offset_x,
 			fdf->w_offset_y,
 			fdf->w_offset_z);
-	fdf->w_sca_mx = ft_mx_create_scale_mx(fdf->w_sca_x, fdf->w_sca_y,
+	fdf->w_sca_mx = fdf_create_scale_mx(fdf->w_sca_x, fdf->w_sca_y,
 			fdf->w_sca_z);
 	if (fdf->w_rot_mx == NULL || fdf->w_tra_mx == NULL || fdf->w_sca_mx == NULL)
 		return (0);
@@ -50,11 +50,11 @@ static int	fdf_setup_world(t_fdf *fdf)
 // space.
 static int	fdf_setup_camera(t_fdf *fdf)
 {
-	fdf->c_rot_mx = fdf_get_rot_mx(fdf->c_deg_x, fdf->c_deg_y, fdf->c_deg_z);
-	fdf->c_tra_mx = ft_mx_create_transl_mx(fdf->c_offset_x,
+	fdf->c_rot_mx = fdf_create_rot_mx(fdf->c_deg_x, fdf->c_deg_y, fdf->c_deg_z);
+	fdf->c_tra_mx = fdf_create_transl_mx(fdf->c_offset_x,
 			fdf->c_offset_y,
 			fdf->c_offset_z);
-	fdf->c_sca_mx = ft_mx_create_scale_mx(fdf->c_sca_x,
+	fdf->c_sca_mx = fdf_create_scale_mx(fdf->c_sca_x,
 			fdf->c_sca_y,
 			fdf->c_sca_z);
 	if (fdf->c_rot_mx == NULL || fdf->c_tra_mx == NULL || fdf->c_sca_mx == NULL)
@@ -77,7 +77,7 @@ static int	fdf_setup_camera(t_fdf *fdf)
 // view space.
 static int	fdf_setup_screen(t_fdf *fdf, int autofit)
 {
-	fdf->s_pro_mx = ft_mx_create_ortoproj_mx();
+	fdf->s_pro_mx = fdf_create_ortoproj_mx();
 	if (fdf->s_pro_mx == NULL)
 		return (0);
 	if (autofit)
@@ -87,9 +87,9 @@ static int	fdf_setup_screen(t_fdf *fdf, int autofit)
 	}
 	else
 	{
-		fdf->s_tra_mx = ft_mx_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y,
+		fdf->s_tra_mx = fdf_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y,
 				0);
-		fdf->s_sca_mx = ft_mx_create_scale_mx(fdf->s_sca_x, fdf->s_sca_y, 0);
+		fdf->s_sca_mx = fdf_create_scale_mx(fdf->s_sca_x, fdf->s_sca_y, 0);
 	}
 	if (fdf->s_pro_mx == NULL || fdf->s_tra_mx == NULL || fdf->s_sca_mx == NULL)
 		return (0);

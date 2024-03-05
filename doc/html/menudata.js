@@ -56,4 +56,5 @@ var menudata={children:[
 {text:"f",url:"globals.html#index_f"}]},
 {text:"Functions",url:"globals_func.html",children:[
 {text:"f",url:"globals_func.html#index_f"}]},
-{text:"Enumerations",url:"globals_enum.html"}]}]}]}
+{text:"Enumerations",url:"globals_enum.html"},
+{text:"Enumerator",url:"globals_eval.html"}]}]}]}

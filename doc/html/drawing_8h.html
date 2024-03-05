@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-05</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-06</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -82,13 +82,14 @@ Include dependency graph for drawing.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="drawing_8h__incl.png" border="0" usemap="#ainclude_2drawing_8h" alt=""/></div>
 <map name="ainclude_2drawing_8h" id="ainclude_2drawing_8h">
-<area shape="rect" title=" " alt="" coords="5,5,143,32"/>
-<area shape="rect" title=" " alt="" coords="35,155,113,181"/>
-<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="101,229,178,256"/>
-<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="129,80,179,107"/>
-<area shape="rect" title=" " alt="" coords="110,304,169,331"/>
-<area shape="rect" title=" " alt="" coords="137,155,208,181"/>
-<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="233,155,331,181"/>
+<area shape="rect" title=" " alt="" coords="55,5,192,32"/>
+<area shape="rect" title=" " alt="" coords="5,229,84,256"/>
+<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="290,229,367,256"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="98,80,149,107"/>
+<area shape="rect" title=" " alt="" coords="299,304,358,331"/>
+<area shape="rect" title=" " alt="" coords="312,155,383,181"/>
+<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="189,155,287,181"/>
+<area shape="rect" href="window_8h.html" title=" " alt="" coords="82,155,165,181"/>
 </map>
 </div>
 </div>
@@ -102,10 +103,10 @@ typedef enum <a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb7036
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ae7afaa34f78989d0712deccabb703601"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601">e_render_level</a> { <b>FROM_WORLD</b>
-, <b>FROM_CAMERA</b>
-, <b>FROM_SCREEN</b>
-, <b>FROM_IMAGE</b>
+<tr class="memitem:ae7afaa34f78989d0712deccabb703601"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601">e_render_level</a> { <a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601a6e958a838c4e76b2734f5d484fe409fc">FROM_WORLD</a>
+, <a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601ab1f90fd13452a89fbf35590f55aa051f">FROM_CAMERA</a>
+, <a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601aa02fa86d243f10434af1d22040a8a86b">FROM_SCREEN</a>
+, <a class="el" href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601a0d7eda0271f042a35f7177668e748e4d">FROM_IMAGE</a>
  }</td></tr>
 <tr class="memdesc:ae7afaa34f78989d0712deccabb703601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_render_level</b>.  <a href="drawing_8h.html#ae7afaa34f78989d0712deccabb703601">More...</a><br /></td></tr>
 <tr class="separator:ae7afaa34f78989d0712deccabb703601"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +140,16 @@ Functions</h2></td></tr>
 
 <p>Base for typedef <b>t_render_level</b>. </p>
 <p >This type is used in function fdf_render to indicate what is needed to re-calculate and redraw. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae7afaa34f78989d0712deccabb703601a6e958a838c4e76b2734f5d484fe409fc" name="ae7afaa34f78989d0712deccabb703601a6e958a838c4e76b2734f5d484fe409fc"></a>FROM_WORLD&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transormations from model to WORLD space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae7afaa34f78989d0712deccabb703601ab1f90fd13452a89fbf35590f55aa051f" name="ae7afaa34f78989d0712deccabb703601ab1f90fd13452a89fbf35590f55aa051f"></a>FROM_CAMERA&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transormations from world to CAMERA space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae7afaa34f78989d0712deccabb703601aa02fa86d243f10434af1d22040a8a86b" name="ae7afaa34f78989d0712deccabb703601aa02fa86d243f10434af1d22040a8a86b"></a>FROM_SCREEN&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transormations from camera to SCREEN view space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae7afaa34f78989d0712deccabb703601a0d7eda0271f042a35f7177668e748e4d" name="ae7afaa34f78989d0712deccabb703601a0d7eda0271f042a35f7177668e748e4d"></a>FROM_IMAGE&#160;</td><td class="fielddoc"><p >The re-calculations must begin at IMAGE (pixel-based) level. </p>
+</td></tr>
+</table>
 
 </div>
 </div>

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 03:11:23 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:01:37 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,63 +421,5 @@ t_ft_mx	*ft_mx_transpose(t_ft_mx *m);
  * TODO.
 */
 int		ft_mx_flipr(t_ft_mx *m);
-
-/**
- * @brief <b>ft_mx_create_ortoproj</b> -- Creates an transformation matrix
- * for ortographic projection to the XY-plane.
- *
- * @details Basically a 3x3 identity matrix with id22 as zero. TODO.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx	*ft_mx_create_ortoproj_mx(void);
-
-/**
- * @brief <b>ft_mx_create_transl_mx</b> -- Creates a translation matrix.
- *
- * @details TODO.
- *
- * @param [in] x - The translation offset for X axis.
- *
- * @param [in] y - The translation offset for Y axis.
- *
- * @param [in] z - The translation offset for Z axis.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx	*ft_mx_create_transl_mx(double x, double y, double z);
-
-/**
- * @brief <b>ft_mx_create_scale_mx</b> -- Flip along the row axis (y axis).
- *
- * @details TODO.
- *
- * @param [in] x - The scale factor for X axis.
- *
- * @param [in] y - The scale factor for Y axis.
- *
- * @param [in] z - The scale factor for Z axis.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx	*ft_mx_create_scale_mx(double x, double y, double z);
 
 #endif

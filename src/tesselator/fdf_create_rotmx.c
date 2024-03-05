@@ -6,14 +6,14 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:58:05 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:32:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:15:33 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "tesselator.h"
 
-t_ft_mx	*fdf_create_rotmx_x(double degree)
+static t_ft_mx	*fdf_create_rotmx_x(double degree)
 {
 	t_ft_mx	*rotmx;
 	double	pi;
@@ -33,7 +33,7 @@ t_ft_mx	*fdf_create_rotmx_x(double degree)
 	return (rotmx);
 }
 
-t_ft_mx	*fdf_create_rotmx_y(double degree)
+static t_ft_mx	*fdf_create_rotmx_y(double degree)
 {
 	t_ft_mx	*rotmx;
 	double	pi;
@@ -53,7 +53,7 @@ t_ft_mx	*fdf_create_rotmx_y(double degree)
 	return (rotmx);
 }
 
-t_ft_mx	*fdf_create_rotmx_z(double degree)
+static t_ft_mx	*fdf_create_rotmx_z(double degree)
 {
 	t_ft_mx	*rotmx;
 	double	pi;
@@ -71,4 +71,32 @@ t_ft_mx	*fdf_create_rotmx_z(double degree)
 	ft_mx_set_element(rotmx, 1, 2, 2);
 	ft_mx_set_element(rotmx, 1, 3, 3);
 	return (rotmx);
+}
+
+t_ft_mx	*fdf_create_rot_mx(double x, double y, double z)
+{
+	t_ft_mx	*rx;
+	t_ft_mx	*ry;
+	t_ft_mx	*rz;
+	t_ft_mx	*temp;
+	t_ft_mx	*rxyz;
+
+	rx = fdf_create_rotmx_x(x);
+	if (rx == NULL)
+		return (NULL);
+	ry = fdf_create_rotmx_y(y);
+	if (ry == NULL)
+		return (ft_mx_destroy(rx), NULL);
+	rz = fdf_create_rotmx_z(z);
+	if (rz == NULL)
+		return (ft_mx_destroy(ry), ft_mx_destroy(rx), NULL);
+	temp = ft_mx_mult(rx, ry);
+	ft_mx_destroy(rx);
+	ft_mx_destroy(ry);
+	if (temp == NULL)
+		return (ft_mx_destroy(rz), NULL);
+	rxyz = ft_mx_mult(temp, rz);
+	if (rxyz == NULL)
+		return (ft_mx_destroy(temp), ft_mx_destroy (rz), NULL);
+	return (ft_mx_destroy(temp), ft_mx_destroy (rz), rxyz);
 }

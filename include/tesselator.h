@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 13:55:29 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:17:06 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,79 +117,7 @@ t_fdf_model	*fdf_tesselate_map(t_ft_mx	*map_mx);
 t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
 
 /**
- * @brief <b>fdf_create_rotmx_x</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] degree - TODO.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx		*fdf_create_rotmx_x(double degree);
-
-/**
- * @brief <b>fdf_create_rotmx_y</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] degree - TODO.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx		*fdf_create_rotmx_y(double degree);
-
-/**
- * @brief <b>fdf_create_rotmx_z</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] degree - TODO.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx		*fdf_create_rotmx_z(double degree);
-
-/**
- * @brief <b>fdf_get_rot_mx</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] x - Rotation degree along the X axis.
- *
- * @param [in] y - Rotation degree along the Y axis.
- *
- * @param [in] z - Rotation degree along the Z axis.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_ft_mx		*fdf_get_rot_mx(double x, double y, double z);
-
-/**
- * @brief <b>fdf_rotate_xyz_deg</b> -- TODO.
+ * @brief <b>fdf_create_rot_mx</b> -- TODO.
  *
  * @details TODO.
  *
@@ -212,22 +140,135 @@ t_ft_mx		*fdf_get_rot_mx(double x, double y, double z);
  *  point P), the equivalent row vector must be post-multiplied by the transpose
  *  of R (i.e. wRT).
  *
- * @param [in, out] vertex_mx - TODO.
+ * @param [in] x - Rotation degree along the X axis.
  *
- * @param [in] x - Rotation degree from X axis.
+ * @param [in] y - Rotation degree along the Y axis.
  *
- * @param [in] y - Rotation degree from Y axis.
+ * @param [in] z - Rotation degree along the Z axis.
  *
- * @param [in] z - Rotation degree from Z axis.
- *
- * @return Non-zero value if correct.
- * A value of 0 is returned if error.
+ * @return TODO..
+ * NULL if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int			fdf_rot_xyz_deg(t_ft_mx *vertex_mx, double x, double y, double z);
+t_ft_mx		*fdf_create_rot_mx(double x, double y, double z);
+
+/**
+ * @brief <b>fdf_create_ortoproj</b> -- Creates an transformation matrix
+ * for ortographic projection to the XY-plane.
+ *
+ * @details Basically a 3x3 identity matrix with id22 as zero. TODO.
+ *
+ * De wiki (https://en.wikipedia.org/wiki/Rotation_matrix):
+ * R = RzRyRx
+ * These matrices produce the desired effect only if they are used to
+ * premultiply column vectors, and (since in general matrix multiplication
+ * is not commutative) only if they are applied in the specified order
+ * (see Ambiguities for more details). The order of rotation operations
+ * is from right to left; the matrix adjacent to the column vector is the
+ * first to be applied, and then the one to the left.[3]
+ * ...
+ * Pre-multiplication or post-multiplication
+ * The same point P can be represented either by a column vector v or a
+ * row vector w. Rotation matrices can either pre-multiply column vectors (Rv),
+ *  or post-multiply row vectors (wR). However, Rv produces a rotation in the
+ *  opposite direction with respect to wR. Throughout this article, rotations
+ *  produced on column vectors are described by means of a pre-multiplication.
+ *  To obtain exactly the same rotation (i.e. the same final coordinates of
+ *  point P), the equivalent row vector must be post-multiplied by the transpose
+ *  of R (i.e. wRT).
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx		*fdf_create_ortoproj_mx(void);
+
+/**
+ * @brief <b>fdf_create_transl_mx</b> -- Creates a translation matrix.
+ *
+ * @details TODO.
+ *
+ * De wiki (https://en.wikipedia.org/wiki/Rotation_matrix):
+ * R = RzRyRx
+ * These matrices produce the desired effect only if they are used to
+ * premultiply column vectors, and (since in general matrix multiplication
+ * is not commutative) only if they are applied in the specified order
+ * (see Ambiguities for more details). The order of rotation operations
+ * is from right to left; the matrix adjacent to the column vector is the
+ * first to be applied, and then the one to the left.[3]
+ * ...
+ * Pre-multiplication or post-multiplication
+ * The same point P can be represented either by a column vector v or a
+ * row vector w. Rotation matrices can either pre-multiply column vectors (Rv),
+ *  or post-multiply row vectors (wR). However, Rv produces a rotation in the
+ *  opposite direction with respect to wR. Throughout this article, rotations
+ *  produced on column vectors are described by means of a pre-multiplication.
+ *  To obtain exactly the same rotation (i.e. the same final coordinates of
+ *  point P), the equivalent row vector must be post-multiplied by the transpose
+ *  of R (i.e. wRT).
+ *
+ * @param [in] x - The translation offset for X axis.
+ *
+ * @param [in] y - The translation offset for Y axis.
+ *
+ * @param [in] z - The translation offset for Z axis.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx		*fdf_create_transl_mx(double x, double y, double z);
+
+/**
+ * @brief <b>fdf_create_scale_mx</b> -- Flip along the row axis (y axis).
+ *
+ * @details TODO.
+ *
+ * De wiki (https://en.wikipedia.org/wiki/Rotation_matrix):
+ * R = RzRyRx
+ * These matrices produce the desired effect only if they are used to
+ * premultiply column vectors, and (since in general matrix multiplication
+ * is not commutative) only if they are applied in the specified order
+ * (see Ambiguities for more details). The order of rotation operations
+ * is from right to left; the matrix adjacent to the column vector is the
+ * first to be applied, and then the one to the left.[3]
+ * ...
+ * Pre-multiplication or post-multiplication
+ * The same point P can be represented either by a column vector v or a
+ * row vector w. Rotation matrices can either pre-multiply column vectors (Rv),
+ *  or post-multiply row vectors (wR). However, Rv produces a rotation in the
+ *  opposite direction with respect to wR. Throughout this article, rotations
+ *  produced on column vectors are described by means of a pre-multiplication.
+ *  To obtain exactly the same rotation (i.e. the same final coordinates of
+ *  point P), the equivalent row vector must be post-multiplied by the transpose
+ *  of R (i.e. wRT).
+ *
+ * @param [in] x - The scale factor for X axis.
+ *
+ * @param [in] y - The scale factor for Y axis.
+ *
+ * @param [in] z - The scale factor for Z axis.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx		*fdf_create_scale_mx(double x, double y, double z);
 
 #endif

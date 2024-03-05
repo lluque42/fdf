@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_create_transl_mx.c                           :+:      :+:    :+:   */
+/*   fdf_create_ortoproj_mx.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/03 14:50:54 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:34:26 by lluque           ###   ########.fr       */
+/*   Created: 2024/02/27 17:59:53 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/06 00:00:37 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lin_alg.h"
 
-t_ft_mx	*ft_mx_create_transl_mx(double x, double y, double z)
+t_ft_mx	*fdf_create_ortoproj_mx(void)
 {
-	t_ft_mx	*translation_mx;
+	t_ft_mx	*r;
 
-	translation_mx = ft_mx_create_id(4);
-	if (translation_mx == NULL)
+	r = ft_mx_create_id(4);
+	if (r == NULL)
 		return (NULL);
-	ft_mx_set_element(translation_mx, x, 0, 3);
-	ft_mx_set_element(translation_mx, y, 1, 3);
-	ft_mx_set_element(translation_mx, z, 2, 3);
-	return (translation_mx);
+	ft_mx_set_element(r, 0, 2, 2);
+	return (r);
 }

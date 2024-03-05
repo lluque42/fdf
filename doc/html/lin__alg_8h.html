@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-05</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-06</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -90,11 +90,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="lin__alg_8h__dep__incl.png" border="0" usemap="#ainclude_2lin__alg_8hdep" alt=""/></div>
 <map name="ainclude_2lin__alg_8hdep" id="ainclude_2lin__alg_8hdep">
-<area shape="rect" title=" " alt="" coords="57,5,185,32"/>
+<area shape="rect" title=" " alt="" coords="90,5,218,32"/>
 <area shape="rect" href="drawing_8h.html" title=" " alt="" coords="5,229,143,256"/>
-<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="102,80,251,107"/>
-<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="103,155,205,181"/>
-<area shape="rect" href="window_8h.html" title=" " alt="" coords="171,229,305,256"/>
+<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="147,80,297,107"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="176,155,279,181"/>
+<area shape="rect" href="window_8h.html" title=" " alt="" coords="167,229,301,256"/>
 </map>
 </div>
 </div>
@@ -180,15 +180,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ad01e85b993ccb2b550e3784d49b77a0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#ad01e85b993ccb2b550e3784d49b77a0b">ft_mx_flipr</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *m)</td></tr>
 <tr class="memdesc:ad01e85b993ccb2b550e3784d49b77a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_flipr</b> &ndash; Flip along the row axis (y axis).  <a href="lin__alg_8h.html#ad01e85b993ccb2b550e3784d49b77a0b">More...</a><br /></td></tr>
 <tr class="separator:ad01e85b993ccb2b550e3784d49b77a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af27cd4d58aa096ae7ea2bf8884b50943"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#af27cd4d58aa096ae7ea2bf8884b50943">ft_mx_create_ortoproj_mx</a> (void)</td></tr>
-<tr class="memdesc:af27cd4d58aa096ae7ea2bf8884b50943"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_create_ortoproj</b> &ndash; Creates an transformation matrix for ortographic projection to the XY-plane.  <a href="lin__alg_8h.html#af27cd4d58aa096ae7ea2bf8884b50943">More...</a><br /></td></tr>
-<tr class="separator:af27cd4d58aa096ae7ea2bf8884b50943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c9e5409c8c70dfb42503e7013ed8d1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#a7c9e5409c8c70dfb42503e7013ed8d1a">ft_mx_create_transl_mx</a> (double x, double y, double z)</td></tr>
-<tr class="memdesc:a7c9e5409c8c70dfb42503e7013ed8d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_create_transl_mx</b> &ndash; Creates a translation matrix.  <a href="lin__alg_8h.html#a7c9e5409c8c70dfb42503e7013ed8d1a">More...</a><br /></td></tr>
-<tr class="separator:a7c9e5409c8c70dfb42503e7013ed8d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc4769838838500a1175d9cf2dcb5ffe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#adc4769838838500a1175d9cf2dcb5ffe">ft_mx_create_scale_mx</a> (double x, double y, double z)</td></tr>
-<tr class="memdesc:adc4769838838500a1175d9cf2dcb5ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_create_scale_mx</b> &ndash; Flip along the row axis (y axis).  <a href="lin__alg_8h.html#adc4769838838500a1175d9cf2dcb5ffe">More...</a><br /></td></tr>
-<tr class="separator:adc4769838838500a1175d9cf2dcb5ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for linearly-storaged matrixes (row-major order) operations. Syntaxis will follow mathematics standard: </p><pre class="fragment">i: row index, starts at 0 (NOT 1)
@@ -300,126 +291,6 @@ Intuitive C-style matrix    Linear storage (row-major order)
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>- TODO.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
-
-</div>
-</div>
-<a id="af27cd4d58aa096ae7ea2bf8884b50943" name="af27cd4d58aa096ae7ea2bf8884b50943"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af27cd4d58aa096ae7ea2bf8884b50943">&#9670;&nbsp;</a></span>ft_mx_create_ortoproj_mx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_mx_create_ortoproj_mx </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><b>ft_mx_create_ortoproj</b> &ndash; Creates an transformation matrix for ortographic projection to the XY-plane. </p>
-<p >Basically a 3x3 identity matrix with id22 as zero. TODO.</p>
-<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
-
-</div>
-</div>
-<a id="adc4769838838500a1175d9cf2dcb5ffe" name="adc4769838838500a1175d9cf2dcb5ffe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc4769838838500a1175d9cf2dcb5ffe">&#9670;&nbsp;</a></span>ft_mx_create_scale_mx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_mx_create_scale_mx </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>z</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><b>ft_mx_create_scale_mx</b> &ndash; Flip along the row axis (y axis). </p>
-<p >TODO.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>- The scale factor for X axis.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>- The scale factor for Y axis.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>- The scale factor for Z axis.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
-
-</div>
-</div>
-<a id="a7c9e5409c8c70dfb42503e7013ed8d1a" name="a7c9e5409c8c70dfb42503e7013ed8d1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c9e5409c8c70dfb42503e7013ed8d1a">&#9670;&nbsp;</a></span>ft_mx_create_transl_mx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_mx_create_transl_mx </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>z</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><b>ft_mx_create_transl_mx</b> &ndash; Creates a translation matrix. </p>
-<p >TODO.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>- The translation offset for X axis.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>- The translation offset for Y axis.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>- The translation offset for Z axis.</td></tr>
   </table>
   </dd>
 </dl>

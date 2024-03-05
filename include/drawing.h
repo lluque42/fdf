@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 16:41:40 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:21:59 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@
  * @brief Base for typedef <b>t_render_level</b>.
  * @details This type is used in function fdf_render to indicate what is needed
  * to re-calculate and redraw.
- * @var e_stack_name::A
- * Identifies stack 'a'.
- * @var e_stack_name::B
- * Identifies stack 'b'.
+ * @var e_render_level::FROM_WORLD
+ * The re-calculations must begin at transormations from model to WORLD space.
+ * @var e_render_level::FROM_CAMERA
+ * The re-calculations must begin at transormations from world to CAMERA space.
+ * @var e_render_level::FROM_SCREEN
+ * The re-calculations must begin at transormations from camera to SCREEN view
+ * space.
+ * @var e_render_level::FROM_IMAGE
+ * The re-calculations must begin at IMAGE (pixel-based) level.
 */
 typedef enum e_render_level
 {

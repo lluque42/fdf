@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:47:12 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 22:30:10 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:02:45 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	fdf_get_autofit_transf_matrixes(t_fdf *fdf)
 	fdf_get_camera_min_max(fdf);
 	fdf_get_screen_autoscale(fdf);
 	fdf_get_screen_autooffset(fdf);
-	fdf->s_sca_mx = ft_mx_create_scale_mx(fdf->s_sca_x, fdf->s_sca_y, 0);
+	fdf->s_sca_mx = fdf_create_scale_mx(fdf->s_sca_x, fdf->s_sca_y, 0);
 	if (fdf->s_sca_mx == NULL)
 		return (0);
-	fdf->s_tra_mx = ft_mx_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y, 0);
+	fdf->s_tra_mx = fdf_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y, 0);
 	if (fdf->s_tra_mx == NULL)
 		return (0);
 	return (1);

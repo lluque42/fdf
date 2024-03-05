@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mx_create_ortoproj_mx.c                         :+:      :+:    :+:   */
+/*   fdf_create_scale_mx.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 17:59:53 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:33:18 by lluque           ###   ########.fr       */
+/*   Created: 2024/03/03 14:58:04 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/06 00:00:49 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lin_alg.h"
 
-t_ft_mx	*ft_mx_create_ortoproj_mx(void)
+t_ft_mx	*fdf_create_scale_mx(double x, double y, double z)
 {
-	t_ft_mx	*r;
+	t_ft_mx	*scale_mx;
 
-	r = ft_mx_create_id(4);
-	if (r == NULL)
+	scale_mx = ft_mx_create(4, 4);
+	if (scale_mx == NULL)
 		return (NULL);
-	ft_mx_set_element(r, 0, 2, 2);
-	return (r);
+	ft_mx_set_element(scale_mx, x, 0, 0);
+	ft_mx_set_element(scale_mx, y, 1, 1);
+	ft_mx_set_element(scale_mx, z, 2, 2);
+	ft_mx_set_element(scale_mx, 1, 3, 3);
+	return (scale_mx);
 }

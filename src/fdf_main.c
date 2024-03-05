@@ -6,15 +6,15 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 15:35:43 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 23:18:50 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "window.h"
 #include "libft.h"
 #include "lin_alg.h"
 #include "main_utils.h"
 #include "drawing.h"
-#include "window.h"
 #include "fdf.h"
 #include "tesselator.h"
 #define DEF_DRW_WIDTH 500
