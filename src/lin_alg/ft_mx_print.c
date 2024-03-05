@@ -6,12 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:09:46 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/04 13:33:15 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:11:30 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>														///////////
-//#include "libft.h"
+#include <stdio.h>
 #include "lin_alg.h"
 
 void	ft_mx_print(t_ft_mx *matrix, char separator)
