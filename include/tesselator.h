@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/03 15:53:19 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 10:58:12 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,20 @@ typedef struct s_fdf_model
 	t_ft_mx		*edge_mx;
 	t_ft_mx		*triangle_mx;
 }				t_fdf_model;
+
+/**
+ * @brief <b>fdf_create_model</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] model - The pointer to the model to be freed.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_fdf_model	*fdf_create_model(void);
 
 /**
  * @brief <b>fdf_destroy_model</b> -- TODO.
@@ -168,25 +182,6 @@ t_ft_mx		*fdf_create_rotmx_z(double degree);
  * TODO.
 */
 t_ft_mx		*fdf_get_rot_mx(double x, double y, double z);
-
-/**
- * @brief <b>fdf_vertex_mx_transf</b> -- TODO.
- *
- * @details TODO.
- * Due to the rotation matrix chosen, the transformation requires: 1) the
- * vertexes to be a column-vector, and 2) the matrix must pre-multiply the
- * vertex column-vector (i.e. m * v).
- *
- * @param [in] transf_mx - TODO.
- *
- * @param [in] vertex_mx - TODO.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void		fdf_vertex_mx_transf(t_ft_mx *transf_mx, t_ft_mx *vertex_mx);
 
 /**
  * @brief <b>fdf_rotate_xyz_deg</b> -- TODO.
