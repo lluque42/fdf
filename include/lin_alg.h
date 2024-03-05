@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/03 14:57:41 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 03:11:23 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,54 +334,25 @@ void	ft_mx_smult(t_ft_mx *matrix, double scalar);
 t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2);
 
 /**
- * @brief <b>ft_mx_transf_m3v</b> -- Transform k number of 3x1 vectors (column
- * vectors) stored in a 3xk column-vectors-matrix by pre-multiplying a 3x3
- * matrix by each of the column vectors.
+ * @brief <b>ft_mx_mult3</b> -- TODO.
  *
- * @details Optimized for multiplying 3x3 matrixes by 3x1 vectors (column
- * vectors).  
- * The result overwrites the vector (the is also a column vector).  
- * This function pre-multiplies the matrix by a column vector.
- * Choosing between ft_mx_transf_m3v() and ft_mx_transf_m3v() for transforming
- * a vertex depends on the transformation matrix used.
- * THIS is the one that MUST be used with the chosen rotation matrix in my
- * fdf project.
+ * @details TODO.
  *
- * @param [in] matrix - The transformation matrix to pre-multiply the vector.
+ * @param [in] m1 - TODO.
  *
- * @param [in, out] vector - A 3x1 matrix (i.e. a column vector) to be
- * overwritten as the result of the multiplication.
+ * @param [in] m2 - TODO.
+ *
+ * @param [in] m3 - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-void	ft_mx_transf_m3v(t_ft_mx *matrix, t_ft_mx *vector);
-
-/**
- * @brief <b>ft_mx_transf_v3m</b> -- Transform k number of 1x3 vectors (row
- * vectors) stored in a kx3 row-vectors-matrix by post-multiplying a 3x3
- * matrix by each of the row vectors.
- *
- * @details Optimized for multiplying 1x3 vectors (row vectors) by 3x3
- * matrixes.  
- * The result overwrites the vector (the result is also a row vector).  
- * This function post-multiplies the matrix by a column vector.
- * Choosing between ft_mx_transf_m3v() and ft_mx_transf_m3v() for transforming
- * a vertex depends on the transformation matrix used.
- *
- * @param [in, out] vector - A 1x3 matrix (i.e. a row vector) to be
- * overwritten as the result of the multiplication.
- *
- * @param [in] matrix - The transformation matrix to pre-multiply the vector.
- *
- * @warning WARNING NEVER TESTED!!!!!!!!!!!!!!! TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void	ft_mx_transf_v3m(t_ft_mx *vector, t_ft_mx *matrix);
+t_ft_mx	*ft_mx_mult3(t_ft_mx *m1, t_ft_mx *m2, t_ft_mx *m3);
 
 /**
  * @brief <b>ft_mx_create_id</b> -- TODO.
@@ -449,7 +420,7 @@ t_ft_mx	*ft_mx_transpose(t_ft_mx *m);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx	*ft_mx_flipr(t_ft_mx *m);
+int		ft_mx_flipr(t_ft_mx *m);
 
 /**
  * @brief <b>ft_mx_create_ortoproj</b> -- Creates an transformation matrix

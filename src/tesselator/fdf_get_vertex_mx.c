@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 22:45:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 01:30:21 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,29 @@
 
 t_ft_mx	*fdf_get_vertex_mx(t_ft_mx *map_mx)
 {
-	t_ft_mx	*vertex_mx;
+	t_ft_mx	*v_mx;
 	int		i;
 	int		j;
 	int		v;
 
-	ft_printf("\t\t[fdf_get_vertex_mx] Creating vertex matrix...'\n");
-	vertex_mx = ft_mx_create(3, map_mx->m * map_mx->n);
-	if (vertex_mx == NULL)
+	v_mx = ft_mx_create(4, map_mx->m * map_mx->n);
+	if (v_mx == NULL)
 		return (NULL);
-	v = 0;
-	i = -1;
-	while (++i < map_mx->m)
+	v = -1;
+	i = 0;
+	j = 0;
+	while (++v < map_mx->m * map_mx->n)
 	{
-		j = -1;
-		while (++j < map_mx->n)
+		v_mx->d[v] = j;
+		v_mx->d[map_mx->m * map_mx->n + v] = i;
+		v_mx->d[2 * map_mx->m * map_mx->n + v] = map_mx->d[i * map_mx->n + j];
+		v_mx->d[3 * map_mx->m * map_mx->n + v] = 1;
+		if (i++ == map_mx->m)
 		{
-			vertex_mx->d[v] = j;
-			vertex_mx->d[v + 1] = i;
-			vertex_mx->d[v + 2] = map_mx->d[i * map_mx->n + j];
-			v += 3;
+			i = 0;
+			if (j++ == map_mx->n)
+				j = 0;
 		}
 	}
-	return (vertex_mx);
+	return (v_mx);
 }

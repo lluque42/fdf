@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_drw_vertexes.c                                 :+:      :+:    :+:   */
+/*   ft_mx_mult3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:36:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:37:31 by lluque           ###   ########.fr       */
+/*   Created: 2024/03/05 00:12:37 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/05 00:16:53 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "drawing.h"
+#include "lin_alg.h"
 
-void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col)
+t_ft_mx	*ft_mx_mult3(t_ft_mx *m1, t_ft_mx *m2, t_ft_mx *m3)
 {
-	int			col_v;
-	uint32_t	pix_x;
-	uint32_t	pix_y;
+	t_ft_mx     *result_mx;
+	t_ft_mx     *temp_mx;
 
-	col_v = 0;
-	while (col_v < v_mx->n)
-	{
-		pix_x = v_mx->d[col_v];
-		pix_y = v_mx->d[v_mx->n + col_v];
-		mlx_put_pixel(img, pix_x, pix_y, col);
-		col_v++;
-	}
+	temp_mx = ft_mx_mult(m1, m2);
+	if (temp_mx == NULL)
+		return (NULL);
+	result_mx = ft_mx_mult(temp_mx, m3);
+	if (result_mx == NULL)
+		return (NULL);
+	ft_mx_destroy(temp_mx);
+	return (result_mx);
 }

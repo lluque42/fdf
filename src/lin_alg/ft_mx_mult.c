@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 23:47:23 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/02 14:07:19 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 03:07:23 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,26 @@ double	calculate_rij(t_ft_mx *m1, t_ft_mx *m2, int i, int j)
 t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2)
 {
 	t_ft_mx	*r;
+	int		v;
 	int		i;
 	int		j;
-	int		k;
 	int		n;
 
-	n = m1->n;
 	if (m1->n != m2->m)
 		return (NULL);
 	r = ft_mx_create(m1->m, m2->n);
 	if (r == NULL)
 		return (NULL);
-	i = -1;
-	while (++i < r->m)
+	n = m1->n;
+	v = -1;
+	while (++v < m2->n)
 	{
-		j = -1;
-		while (++j < r->n)
+		i = -1;
+		while (++i < n)
 		{
-			k = -1;
-			while (++k < n)
-				r->d[i * r->n + j] += m1->d[i * n + k] * m2->d[k * n + j];
+			j = -1;
+			while (++j < n)
+				r->d[i * r->n + v] += m1->d[i * n + j] * m2->d[j * m2->n + v];
 		}
 	}
 	return (r);
