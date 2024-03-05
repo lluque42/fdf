@@ -52,6 +52,8 @@ var menudata={children:[
 {text:"File List",url:"files.html"},
 {text:"Globals",url:"globals.html",children:[
 {text:"All",url:"globals.html",children:[
+{text:"e",url:"globals.html#index_e"},
 {text:"f",url:"globals.html#index_f"}]},
 {text:"Functions",url:"globals_func.html",children:[
-{text:"f",url:"globals_func.html#index_f"}]}]}]}]}
+{text:"f",url:"globals_func.html#index_f"}]},
+{text:"Enumerations",url:"globals_enum.html"}]}]}]}

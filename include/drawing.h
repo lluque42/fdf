@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 13:46:23 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 16:41:40 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@
 # include "MLX42.h"
 # include "lin_alg.h"
 # include "fdf.h"
+
+/**
+ * @enum e_render_level
+ * @brief Base for typedef <b>t_render_level</b>.
+ * @details This type is used in function fdf_render to indicate what is needed
+ * to re-calculate and redraw.
+ * @var e_stack_name::A
+ * Identifies stack 'a'.
+ * @var e_stack_name::B
+ * Identifies stack 'b'.
+*/
+typedef enum e_render_level
+{
+	FROM_WORLD,
+	FROM_CAMERA,
+	FROM_SCREEN,
+	FROM_IMAGE
+}	t_render_level;
 
 /**
  * @brief <b>ft_draw_vertexes</b> -- TODO.
@@ -46,11 +64,33 @@ void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
  *
  * @param [in] fdf - The fdf struct.
  *
+ * @return Non-zero value if correct.
+ * Value of 0 if error.
+ *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
 int		fdf_get_autofit_transf_matrixes(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_render</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in, out] fdf - The fdf struct.
+ *
+ * @param [in] render_level - The level from which phase to start the rendering.
+ *
+ * @return Non-zero value if correct.
+ * Value of 0 if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+int		fdf_render(t_fdf *fdf, t_render_level render_level);
 
 #endif
