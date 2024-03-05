@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 14:52:37 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 22:44:11 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,30 @@ typedef struct s_wlayout
  * Translation matrix for model-to-world space.
  * @var s_fdf::w_sca_mx
  * Scale matrix for model-to-world space.
+ * @var s_fdf::w_deg_x
+ * Rotation degree along X axis when transforming into world space.
+ * @var s_fdf::w_deg_y 
+ * Rotation degree along Y axis when transforming into world space.
+ * @var s_fdf::w_deg_z
+ * Rotation degree along Z axis when transforming into world space.
+ * @var s_fdf::w_offset_x
+ * Translation offset for X axis (TODO before/after scaling) when transforming
+ * into world space.
+ * @var s_fdf::w_offset_y
+ * Translation offset for Y axis (TODO before/after scaling) when transforming
+ * into world space.
+ * @var s_fdf::w_offset_z
+ * Translation offset for Z axis (TODO before/after scaling) when transforming
+ * into world space.
+ * @var s_fdf::w_sca_x
+ * Scale factor for X axis (TODO before/after translating) when transforming
+ * into world space.
+ * @var s_fdf::w_sca_y
+ * Scale factor for Y axis (TODO before/after translating) when transforming
+ * into world space.
+ * @var s_fdf::w_sca_z
+ * Scale factor for Z axis (TODO before/after translating) when transforming
+ * into world space.
  * @var s_fdf::mtow_tr_mx
  * The resulting transformation matrix for model-to-world space.
  * @var s_fdf::w
@@ -94,6 +118,30 @@ typedef struct s_wlayout
  * Translation matrix for world-to-camera space.
  * @var s_fdf::c_sca_mx
  * Scale matrix for world-to-camera space.
+ * @var s_fdf::c_deg_x
+ * Rotation degree along X axis when transforming into camera space.
+ * @var s_fdf::c_deg_y 
+ * Rotation degree along Y axis when transforming into camera space.
+ * @var s_fdf::c_deg_z
+ * Rotation degree along Z axis when transforming into camera space.
+ * @var s_fdf::c_offset_x
+ * Translation offset for X axis (TODO before/after scaling) when transforming
+ * into camera space.
+ * @var s_fdf::c_offset_y
+ * Translation offset for Y axis (TODO before/after scaling) when transforming
+ * into camera space.
+ * @var s_fdf::c_offset_z
+ * Translation offset for Z axis (TODO before/after scaling) when transforming
+ * into camera space.
+ * @var s_fdf::c_sca_x
+ * Scale factor for X axis (TODO before/after translating) when transforming
+ * into camera space.
+ * @var s_fdf::c_sca_y
+ * Scale factor for Y axis (TODO before/after translating) when transforming
+ * into camera space.
+ * @var s_fdf::c_sca_z
+ * Scale factor for Z axis (TODO before/after translating) when transforming
+ * into camera space.
  * @var s_fdf::wtoc_tr_mx
  * The resulting transformation matrix for world-to-camera space.
  * @var s_fdf::c
@@ -128,9 +176,9 @@ typedef struct s_wlayout
  * @var s_fdf::cmaxz
  * The maximum value of Z of camera space vertexes. Used to autofit the drawing
  * in the screen view space.
- * @var s_fdf::s_scale_x
+ * @var s_fdf::s_sca_x
  * Current X scale for screen view space.
- * @var s_fdf::s_scale_y
+ * @var s_fdf::s_sca_y
  * Current Y scale for screen view space.
  * @var s_fdf::s_offset_x
  * TODO.
@@ -145,11 +193,29 @@ typedef struct s_fdf
 	t_ft_mx			*w_rot_mx;
 	t_ft_mx			*w_tra_mx;
 	t_ft_mx			*w_sca_mx;
+	double			w_deg_x;
+	double			w_deg_y;
+	double			w_deg_z;
+	double			w_offset_x;
+	double			w_offset_y;
+	double			w_offset_z;
+	double			w_sca_x;
+	double			w_sca_y;
+	double			w_sca_z;
 	t_ft_mx			*mtow_tr_mx;
 	t_fdf_model		*w;
 	t_ft_mx			*c_rot_mx;
 	t_ft_mx			*c_tra_mx;
 	t_ft_mx			*c_sca_mx;
+	double			c_deg_x;
+	double			c_deg_y;
+	double			c_deg_z;
+	double			c_offset_x;
+	double			c_offset_y;
+	double			c_offset_z;
+	double			c_sca_x;
+	double			c_sca_y;
+	double			c_sca_z;
 	t_ft_mx			*wtoc_tr_mx;
 	t_fdf_model		*c;
 	t_ft_mx			*s_pro_mx;
@@ -163,8 +229,8 @@ typedef struct s_fdf
 	double			cmaxy;
 	double			cmaxz;
 	t_fdf_model		*s;
-	double			s_scale_x;
-	double			s_scale_y;
+	double			s_sca_x;
+	double			s_sca_y;
 	double			s_offset_x;
 	double			s_offset_y;
 	t_fdf_wlayout	*wlayout;

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 16:38:58 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/05 22:30:45 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@
 // the world space.
 static int	fdf_setup_world(t_fdf *fdf)
 {
-	fdf->w_rot_mx = ft_mx_create_id(4);
-	fdf->w_tra_mx = ft_mx_create_id(4);
-	fdf->w_sca_mx = ft_mx_create_id(4);
+	fdf->w_rot_mx = fdf_get_rot_mx(fdf->w_deg_x, fdf->w_deg_y, fdf->w_deg_z);
+	fdf->w_tra_mx = ft_mx_create_transl_mx(fdf->w_offset_x,
+			fdf->w_offset_y,
+			fdf->w_offset_z);
+	fdf->w_sca_mx = ft_mx_create_scale_mx(fdf->w_sca_x, fdf->w_sca_y,
+			fdf->w_sca_z);
+	if (fdf->w_rot_mx == NULL || fdf->w_tra_mx == NULL || fdf->w_sca_mx == NULL)
+		return (0);
 	fdf->mtow_tr_mx = ft_mx_mult3(fdf->w_rot_mx, fdf->w_sca_mx, fdf->w_tra_mx);
 	if (fdf->mtow_tr_mx == NULL)
 		return (0);
@@ -43,15 +48,17 @@ static int	fdf_setup_world(t_fdf *fdf)
 // or scaling at the camera level.
 // To put it briefly: this function transforms the world space into the camera
 // space.
-//fdf->c_rot_mx = fdf_get_rot_mx(35.264, 45, 0);
-//fdf->c_rot_mx = fdf_get_rot_mx(0, 0, 0);
 static int	fdf_setup_camera(t_fdf *fdf)
 {
-	fdf->c_rot_mx = fdf_get_rot_mx(45, 90 - 35.264, 45);
-	if (fdf->c_rot_mx == NULL)
+	fdf->c_rot_mx = fdf_get_rot_mx(fdf->c_deg_x, fdf->c_deg_y, fdf->c_deg_z);
+	fdf->c_tra_mx = ft_mx_create_transl_mx(fdf->c_offset_x,
+			fdf->c_offset_y,
+			fdf->c_offset_z);
+	fdf->c_sca_mx = ft_mx_create_scale_mx(fdf->c_sca_x,
+			fdf->c_sca_y,
+			fdf->c_sca_z);
+	if (fdf->c_rot_mx == NULL || fdf->c_tra_mx == NULL || fdf->c_sca_mx == NULL)
 		return (0);
-	fdf->c_tra_mx = ft_mx_create_id(4);
-	fdf->c_sca_mx = ft_mx_create_id(4);
 	fdf->wtoc_tr_mx = ft_mx_mult3(fdf->c_rot_mx, fdf->c_sca_mx, fdf->c_tra_mx);
 	if (fdf->wtoc_tr_mx == NULL)
 		return (0);
@@ -78,6 +85,14 @@ static int	fdf_setup_screen(t_fdf *fdf, int autofit)
 		if (!fdf_get_autofit_transf_matrixes(fdf))
 			return (0);
 	}
+	else
+	{
+		fdf->s_tra_mx = ft_mx_create_transl_mx(fdf->s_offset_x, fdf->s_offset_y,
+				0);
+		fdf->s_sca_mx = ft_mx_create_scale_mx(fdf->s_sca_x, fdf->s_sca_y, 0);
+	}
+	if (fdf->s_pro_mx == NULL || fdf->s_tra_mx == NULL || fdf->s_sca_mx == NULL)
+		return (0);
 	fdf->ctos_tr_mx = ft_mx_mult3(fdf->s_pro_mx, fdf->s_tra_mx, fdf->s_sca_mx);
 	if (fdf->ctos_tr_mx == NULL)
 		return (0);
