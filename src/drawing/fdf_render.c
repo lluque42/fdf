@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:10:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 01:44:22 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ static int	fdf_setup_screen(t_fdf *fdf, int autofit)
 	if (fdf->s == NULL)
 		return (0);
 	fdf->s->vertex_mx = ft_mx_mult(fdf->ctos_tr_mx, fdf->c->vertex_mx);
-	fdf_drw_vertexes(fdf->wlayout->image, fdf->s->vertex_mx, 0xFFFFFFFF);
 	return (1);
 }
 
@@ -113,7 +112,18 @@ static int	fdf_setup_screen(t_fdf *fdf, int autofit)
 // To put it briefly: TODO.
 static int	fdf_setup_image(t_fdf *fdf)
 {
-	ft_printf("Image = %p\n", fdf->wlayout->image);
+	if (fdf->wlayout->image != NULL)
+		mlx_delete_image(fdf->wlayout->window, fdf->wlayout->image);
+	fdf->wlayout->image = mlx_new_image(fdf->wlayout->window,
+			fdf->wlayout->window_w,
+			fdf->wlayout->window_h);
+	if (fdf->wlayout->image == NULL)
+		return (mlx_terminate(fdf->wlayout->window), 0);
+	mlx_image_to_window(fdf->wlayout->window,
+		fdf->wlayout->image,
+		fdf->wlayout->wintoimg_xoffset,
+		fdf->wlayout->wintoimg_yoffset);
+	fdf_drw_vertexes(fdf->wlayout->image, fdf->s->vertex_mx, 0xFFFFFFFF);
 	return (1);
 }
 

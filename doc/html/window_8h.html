@@ -118,12 +118,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memItemLeft" align="right" valign="top"><a id="a7d15f11cad4afb91c5d7cc8a82ce1a65" name="a7d15f11cad4afb91c5d7cc8a82ce1a65"></a>
-typedef struct <a class="el" href="structs__fdf__wlayout.html">s_fdf_wlayout</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_wlayout</b></td></tr>
-<tr class="separator:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868706e9ed9b2d10a02c8388c671ed87"><td class="memItemLeft" align="right" valign="top"><a id="a868706e9ed9b2d10a02c8388c671ed87" name="a868706e9ed9b2d10a02c8388c671ed87"></a>
 typedef struct <a class="el" href="structs__fdf.html">s_fdf</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf</b></td></tr>
 <tr class="separator:a868706e9ed9b2d10a02c8388c671ed87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memItemLeft" align="right" valign="top"><a id="a7d15f11cad4afb91c5d7cc8a82ce1a65" name="a7d15f11cad4afb91c5d7cc8a82ce1a65"></a>
+typedef struct <a class="el" href="structs__fdf__wlayout.html">s_fdf_wlayout</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_wlayout</b></td></tr>
+<tr class="separator:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -133,6 +133,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a913898b46bee5e48f7d8da91a9e57342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="window_8h.html#a913898b46bee5e48f7d8da91a9e57342">fdf_destroy_wlayout</a> (<a class="el" href="structs__fdf__wlayout.html">t_fdf_wlayout</a> *wlayout)</td></tr>
 <tr class="memdesc:a913898b46bee5e48f7d8da91a9e57342"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_destroy_wlayout</b> &ndash; TODO.  <a href="window_8h.html#a913898b46bee5e48f7d8da91a9e57342">More...</a><br /></td></tr>
 <tr class="separator:a913898b46bee5e48f7d8da91a9e57342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92531f2d659f457d251772d1112ee907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="window_8h.html#a92531f2d659f457d251772d1112ee907">fdf_recalc_wlayout</a> (<a class="el" href="structs__fdf.html">t_fdf</a> *fdf, int32_t win_w, int32_t win_h)</td></tr>
+<tr class="memdesc:a92531f2d659f457d251772d1112ee907"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_recalc_wlayout</b> &ndash; TODO.  <a href="window_8h.html#a92531f2d659f457d251772d1112ee907">More...</a><br /></td></tr>
+<tr class="separator:a92531f2d659f457d251772d1112ee907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213a8c91866bd9eca03a0a69e9c848b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="window_8h.html#a213a8c91866bd9eca03a0a69e9c848b8">fdf_keyhook</a> (mlx_key_data_t keydata, void *fdf)</td></tr>
 <tr class="memdesc:a213a8c91866bd9eca03a0a69e9c848b8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_keyhook</b> &ndash; TODO.  <a href="window_8h.html#a213a8c91866bd9eca03a0a69e9c848b8">More...</a><br /></td></tr>
 <tr class="separator:a213a8c91866bd9eca03a0a69e9c848b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,8 +211,8 @@ Functions</h2></td></tr>
 <p >TODO.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">drw_w</td><td>- Width in pixels of the actual drawing inside the image. This and drw_h are the base base value to calculate every other dimension of the GUI's window elements.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">drw_h</td><td>- Height in pixels of the actual drawing inside the image. This and drw_w are the base base value to calculate every other dimension of the GUI's window elements.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">drw_w</td><td>- Width in pixels of the actual drawing inside the image. This and drw_h are the base base value to calculate every other dimension of the GUI's window elements when initializing.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">drw_h</td><td>- Height in pixels of the actual drawing inside the image. This and drw_w are the base base value to calculate every other dimension of the GUI's window elements when initializing.</td></tr>
   </table>
   </dd>
 </dl>
@@ -280,6 +283,53 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">fdf</td><td>- The fdf structure.</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">keydata</td><td>- The data regarding the key event</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="a92531f2d659f457d251772d1112ee907" name="a92531f2d659f457d251772d1112ee907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92531f2d659f457d251772d1112ee907">&#9670;&nbsp;</a></span>fdf_recalc_wlayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fdf_recalc_wlayout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__fdf.html">t_fdf</a> *&#160;</td>
+          <td class="paramname"><em>fdf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>win_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>win_h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_recalc_wlayout</b> &ndash; TODO. </p>
+<p >TODO.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">fdf</td><td>- The fdf structure.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">win_w</td><td>- Width in pixels of the GUI window as reported from the resize hook.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">win_h</td><td>- Height in pixels of the GUI window as reported from the resize hook.</td></tr>
   </table>
   </dd>
 </dl>

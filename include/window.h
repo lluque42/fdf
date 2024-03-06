@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:39:26 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 00:59:19 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 //# include "tesselator.h"
 # include "fdf.h"
 # define DEF_WLAYOUT_RATIO 1.05
+
+// Forward declaration, something like a prototype for typedef.
+// Needed because both fdf.h and window.h have structs typedefs with member
+// types defined in the other file.
+typedef struct s_fdf	t_fdf;
 
 /**
  * @struct s_fdf_wlayout
@@ -76,11 +81,11 @@ typedef struct s_fdf_wlayout
  *
  * @param [in] drw_w - Width in pixels of the actual drawing inside the
  * image. This and drw_h are the base base value to calculate every other
- * dimension of the GUI's window elements.
+ * dimension of the GUI's window elements when initializing.
  *
  * @param [in] drw_h - Height in pixels of the actual drawing inside the
  * image. This and drw_w are the base base value to calculate every other
- * dimension of the GUI's window elements.
+ * dimension of the GUI's window elements when initializing.
  *
  * @return TODO..
  * NULL if error.
@@ -105,6 +110,26 @@ t_fdf_wlayout	*fdf_create_wlayout(int32_t drw_w, int32_t drw_h);
  * TODO.
 */
 void			fdf_destroy_wlayout(t_fdf_wlayout *wlayout);
+
+/**
+ * @brief <b>fdf_recalc_wlayout</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @param [in] win_w - Width in pixels of the GUI window as reported from the
+ * resize hook.
+ *
+ * @param [in] win_h - Height in pixels of the GUI window as reported from the
+ * resize hook.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_recalc_wlayout(t_fdf *fdf, int32_t win_w, int32_t win_h);
 
 /**
  * @brief <b>fdf_keyhook</b> -- TODO.
@@ -153,11 +178,6 @@ void			fdf_closehook(void *fdf);
  * TODO.
 */
 void			fdf_resizehook(int32_t width, int32_t height, void *fdf);
-
-// Forward declaration, something like a prototype for typedef.
-// Needed because both fdf.h and window.h have structs typedefs with member
-// types defined in the other file.
-typedef struct s_fdf	t_fdf;
 
 /**
  * @brief <b>fdf_start_gui</b> -- TODO.

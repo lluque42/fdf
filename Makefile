@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/06 00:11:32 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/06 01:00:28 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SOURCES = fdf_main.c \
 		  window/fdf_resizehook.c \
 		  window/fdf_create_wlayout.c \
 		  window/fdf_destroy_wlayout.c \
+		  window/fdf_recalc_wlayout.c \
 		  fdf/fdf_create_fdf.c \
 		  fdf/fdf_destroy_fdf.c
 
