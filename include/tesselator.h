@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:17:06 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 17:51:20 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,42 @@
 # include "lin_alg.h"
 
 /**
- * @struct s_ft_edge
- * @brief Base for typedef <b>t_ft_edge</b>.
+ * @struct s_fdf_edge
+ * @brief Base for typedef <b>t_fdf_edge</b>.
  * @details This type is used to store an edge, defined as two indexes to the
  * starting and ending vertexes as stored in a vertex matrix
- * @var s_ft_edge::start
+ * @var s_fdf_edge::start
  * The index of the starting vertex stored in a vertex matrix.
- * @var s_ft_edge::end
+ * @var s_fdf_edge::end
  * The index of the ending vertex stored in a vertex matrix.
- * @var s_ft_edge::is_hidden
+ * @var s_fdf_edge::is_hidden
  * A non-zero value to signal that this edge must not be drawn.
 */
-typedef struct s_ft_edge
+typedef struct s_fdf_edge
 {
 	int	start;
 	int	end;
 	int	is_hidden;
-}				t_ft_edge;
+}				t_fdf_edge;
+
+/**
+ * @struct s_fdf_triangle
+ * @brief Base for typedef <b>t_fdf_triangle</b>.
+ * @details This type is used to store a triangle, defined as three indexes to
+ * vertexes as stored in a vertex matrix
+ * @var s_fdf_triangle::v1
+ * The vertex 1 of the triangle.
+ * @var s_fdf_triangle::v2
+ * The vertex 2 of the triangle.
+ * @var s_fdf_triangle::v3
+ * The vertex 3 of the triangle.
+*/
+typedef struct s_fdf_triangle
+{
+	int	v1;
+	int	v2;
+	int	v3;
+}				t_fdf_triangle;
 
 /**
  * @struct s_fdf_model
@@ -44,13 +63,22 @@ typedef struct s_ft_edge
  * @details This type is used to store a 3D model.
  * @var s_fdf_model::vertex_mx
  * The vertex matrix.
- * TODO
+ * @var s_fdf_model::edge
+ * Array of edges.
+ * @var s_fdf_model::edges
+ * Number of edges in model->edge array.
+ * @var s_fdf_model::triangle
+ * Array of triangles.
+ * @var s_fdf_model::triangles
+ * Number of edges in model->edge array.
 */
 typedef struct s_fdf_model
 {
-	t_ft_mx		*vertex_mx;
-	t_ft_mx		*edge_mx;
-	t_ft_mx		*triangle_mx;
+	t_ft_mx			*vertex_mx;
+	t_fdf_edge		*edge;
+	int				edges;
+	t_fdf_triangle	*triangle;
+	int				triangles;
 }				t_fdf_model;
 
 /**
@@ -112,9 +140,53 @@ t_fdf_model	*fdf_tesselate_map(t_ft_mx	*map_mx);
  * @warning TODO.
  *
  * @remark Implementation notes:
+ * The vertex_mx is a col-vector matrix where each column represents a
+ * xyzw vertex (each row, from top to bottom, has one of these components).
+ * The order in which the vertex matrix is filled (which vertex is first
+ * included as a column, then the second...) is the following: the first vertex
+ * corresponds to the map_mx->d[0] (which is row 0, column 0 from the addressing
+ * style map_mx->d[i * map_mx-n + j]). Then i (i.e. 'y') is increased while j 
+ * (i.e. 'x' remains at 0)... In conclusion: map_mx is walked through by
+ * increasing the row (i.e. increasing the vertex's 'y' coordinate).
  * TODO.
 */
 t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
+
+/**
+ * @brief <b>fdf_get_edge_mx</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] map_mx - TODO.
+ *
+ * @param [in] model - The pointer to the model.
+ *
+ * @return Non-zero value if correct.
+ * Value of 0 if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * This goes through each element of map_mx, which is a vertex.
+ * For each element it tries to add 3 edges to neighbors elements: right, 
+ * down, and diagonal down-right. The later is set as hidden.
+ *
+ * The iteration depends on the order in which fdf_get_vertex_mx() walks through
+ * map_mx while adding the vertexes in vertex_mx: rows (i.e. 'i') increases
+ * first.
+ *
+ * The number of edges comes from adding up:
+ *      + For every row (except for the last row) and for every element in that
+ *      row (except the last element in row), 3 new edges are formed (down, 
+ *      right, and down-right).
+ *      + Same as above, mutatis mutandi, to form only one down-left edge per
+ *      vertex.
+ *      + The last element in every row only forms 1 edge to down neighbor,
+ *      except for the last element of the last row which forms NO new edge.
+ *      + Every element in last row only forms 1 edge to right neighbor, except
+ *      for the last element in this last row which forms NO new edge.
+*/
+int			fdf_get_edge_mx(t_ft_mx *map_mx, t_fdf_model *model);
 
 /**
  * @brief <b>fdf_create_rot_mx</b> -- TODO.

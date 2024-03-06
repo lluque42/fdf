@@ -78,8 +78,10 @@ Collaboration diagram for s_fdf_model:</div>
 <div class="dyncontent">
 <div class="center"><img src="structs__fdf__model__coll__graph.png" border="0" usemap="#as__fdf__model_coll__map" alt="Collaboration graph"/></div>
 <map name="as__fdf__model_coll__map" id="as__fdf__model_coll__map">
-<area shape="rect" title="Base for typedef t_fdf_model." alt="" coords="5,124,108,151"/>
-<area shape="rect" href="structs__ft__mx.html" title="Base for typedef t_ft_mx." alt="" coords="20,5,93,32"/>
+<area shape="rect" title="Base for typedef t_fdf_model." alt="" coords="99,95,201,121"/>
+<area shape="rect" href="structs__ft__mx.html" title="Base for typedef t_ft_mx." alt="" coords="5,5,79,32"/>
+<area shape="rect" href="structs__fdf__edge.html" title="Base for typedef t_fdf_edge." alt="" coords="103,5,197,32"/>
+<area shape="rect" href="structs__fdf__triangle.html" title="Base for typedef t_fdf_triangle." alt="" coords="221,5,332,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -87,17 +89,79 @@ Collaboration diagram for s_fdf_model:</div>
 Data Fields</h2></td></tr>
 <tr class="memitem:a0ab73975b3a794d59cb7d9232f19cd6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__model.html#a0ab73975b3a794d59cb7d9232f19cd6c">vertex_mx</a></td></tr>
 <tr class="separator:a0ab73975b3a794d59cb7d9232f19cd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a498499af71d549dfea47d73a08932537"><td class="memItemLeft" align="right" valign="top"><a id="a498499af71d549dfea47d73a08932537" name="a498499af71d549dfea47d73a08932537"></a>
-<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>edge_mx</b></td></tr>
-<tr class="separator:a498499af71d549dfea47d73a08932537"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9378debd92792801a43513256f1a854f"><td class="memItemLeft" align="right" valign="top"><a id="a9378debd92792801a43513256f1a854f" name="a9378debd92792801a43513256f1a854f"></a>
-<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>triangle_mx</b></td></tr>
-<tr class="separator:a9378debd92792801a43513256f1a854f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38432f29ed599f4a50b179163ee49f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__edge.html">t_fdf_edge</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__model.html#a3f38432f29ed599f4a50b179163ee49f">edge</a></td></tr>
+<tr class="separator:a3f38432f29ed599f4a50b179163ee49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142dfc41fcbb33be28f2f84233218109"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__model.html#a142dfc41fcbb33be28f2f84233218109">edges</a></td></tr>
+<tr class="separator:a142dfc41fcbb33be28f2f84233218109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05e5198d165998e1368668dc8d25ec83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__triangle.html">t_fdf_triangle</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__model.html#a05e5198d165998e1368668dc8d25ec83">triangle</a></td></tr>
+<tr class="separator:a05e5198d165998e1368668dc8d25ec83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae50401a34c6f266ccf4dc1afb1f2571d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__model.html#ae50401a34c6f266ccf4dc1afb1f2571d">triangles</a></td></tr>
+<tr class="separator:ae50401a34c6f266ccf4dc1afb1f2571d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Base for typedef <b>t_fdf_model</b>. </p>
 <p >This type is used to store a 3D model. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a3f38432f29ed599f4a50b179163ee49f" name="a3f38432f29ed599f4a50b179163ee49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f38432f29ed599f4a50b179163ee49f">&#9670;&nbsp;</a></span>edge</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf_model::edge</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Array of edges. </p>
+
+</div>
+</div>
+<a id="a142dfc41fcbb33be28f2f84233218109" name="a142dfc41fcbb33be28f2f84233218109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a142dfc41fcbb33be28f2f84233218109">&#9670;&nbsp;</a></span>edges</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf_model::edges</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Number of edges in model-&gt;edge array. </p>
+
+</div>
+</div>
+<a id="a05e5198d165998e1368668dc8d25ec83" name="a05e5198d165998e1368668dc8d25ec83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05e5198d165998e1368668dc8d25ec83">&#9670;&nbsp;</a></span>triangle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf_model::triangle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Array of triangles. </p>
+
+</div>
+</div>
+<a id="ae50401a34c6f266ccf4dc1afb1f2571d" name="ae50401a34c6f266ccf4dc1afb1f2571d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae50401a34c6f266ccf4dc1afb1f2571d">&#9670;&nbsp;</a></span>triangles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf_model::triangles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Number of edges in model-&gt;edge array. </p>
+
+</div>
+</div>
 <a id="a0ab73975b3a794d59cb7d9232f19cd6c" name="a0ab73975b3a794d59cb7d9232f19cd6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ab73975b3a794d59cb7d9232f19cd6c">&#9670;&nbsp;</a></span>vertex_mx</h2>
 
@@ -109,7 +173,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >The vertex matrix. TODO </p>
+<p >The vertex matrix. </p>
 
 </div>
 </div>

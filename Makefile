@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/06 01:00:28 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/06 11:49:45 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_flipr.c \
 		  lin_alg/ft_mx_set_col.c \
 		  tesselator/fdf_get_vertex_mx.c \
+		  tesselator/fdf_get_edge_mx.c \
 		  tesselator/fdf_create_rotmx.c \
 		  tesselator/fdf_tesselate_map.c \
 		  tesselator/fdf_create_model.c \

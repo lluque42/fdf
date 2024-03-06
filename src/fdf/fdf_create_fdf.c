@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:06:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 22:27:07 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:02:04 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,21 @@ static void	init_mtow_settings(t_fdf *fdf)
 	fdf->w_sca_z = 1;
 }
 
-//35.264, 45, 0
-//45, 90 - 35.264, 45
+/*
+	fdf->c_deg_x = 0;
+	fdf->c_deg_y = 0;
+	fdf->c_deg_z = 0;
+
+	fdf->c_deg_x = 35.264;
+	fdf->c_deg_y = 45;
+	fdf->c_deg_z = 0;
+
+	fdf->c_deg_x = 45;
+	fdf->c_deg_y = 90 - 35.264;
+	fdf->c_deg_z = 45;
+ */
 static void	init_wtoc_settings(t_fdf *fdf)
 {
-	/*
-	fdf->c_degree_x = 0;
-	fdf->c_degree_y = 0;
-	fdf->c_degree_z = 0;
-	*//*
-	fdf->c_degree_x = 35.264;
-	fdf->c_degree_y = 45;
-	fdf->c_degree_z = 0;
-	*/
 	fdf->c_deg_x = 45;
 	fdf->c_deg_y = 90 - 35.264;
 	fdf->c_deg_z = 45;

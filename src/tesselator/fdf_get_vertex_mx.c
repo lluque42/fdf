@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:30:21 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:35:36 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_ft_mx	*fdf_get_vertex_mx(t_ft_mx *map_mx)
 		v_mx->d[map_mx->m * map_mx->n + v] = i;
 		v_mx->d[2 * map_mx->m * map_mx->n + v] = map_mx->d[i * map_mx->n + j];
 		v_mx->d[3 * map_mx->m * map_mx->n + v] = 1;
-		if (i++ == map_mx->m)
+		if (++i == map_mx->m)
 		{
 			i = 0;
-			if (j++ == map_mx->n)
+			if (++j == map_mx->n)
 				j = 0;
 		}
 	}
