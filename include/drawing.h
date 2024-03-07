@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 01:04:34 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/07 20:33:51 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,31 @@
 # include "MLX42.h"
 # include "lin_alg.h"
 # include "fdf.h"
+
+/**
+ * @struct s_fdf_line
+ * @brief Base for typedef <b>t_ft_mx_size</b>.
+ * @details This type is used to store a size (int x int).
+ * @var s_fdf_line::m
+ * The slope of the line.
+ * @var s_fdf_line::b
+ * The y coordinate value when the associated rect intersects the y axis.
+ * @var s_fdf_line::first_x
+ * The minimum x coordinate value from where the drawing of the line
+ * should start.
+ * @var s_fdf_line::last_x
+ * The maximum x coordinate value from where the drawing of the line
+ * should stop.
+*/
+typedef struct s_fdf_line
+{
+	double		m;
+	double		b;
+	uint32_t	first_x;
+	uint32_t	last_x;
+	int			m_is_infinite;
+	double		vertical_line_x;
+}				t_fdf_line;
 
 /**
  * @enum e_render_level
@@ -61,6 +86,21 @@ typedef enum e_render_level
  * TODO.
 */
 void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
+//											Cambiar como el fdf_drw_edges/////////////
+
+/**
+ * @brief <b>ft_draw_edges</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] fdf - The fdf struct.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+int		fdf_drw_edges(t_fdf *fdf);
 
 /**
  * @brief <b>fdf_get_autofit_transf_matrixes</b> -- TODO.

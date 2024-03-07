@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:37:29 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/07 16:34:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct s_fdf
 	double			s_sca_y;
 	double			s_offset_x;
 	double			s_offset_y;
+	uint8_t			*img_data;
 	t_fdf_wlayout	*wlayout;
 }				t_fdf;
 

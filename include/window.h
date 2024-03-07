@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:59:19 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/07 21:56:09 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,24 @@ void			fdf_closehook(void *fdf);
  * TODO.
 */
 void			fdf_resizehook(int32_t width, int32_t height, void *fdf);
+
+/**
+ * @brief <b>fdf_generichook</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @param [in] width - The new width in pixels.
+ *
+ * @param [in] height - The new height in pixels.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_generichook(void *fdf);
 
 /**
  * @brief <b>fdf_start_gui</b> -- TODO.
