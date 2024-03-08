@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 12:24:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 14:54:09 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int	fdf_render(t_fdf *fdf, t_render_level render_level)
 	if (render_level <= FROM_IMAGE)
 		if (!fdf_setup_image(fdf))
 			return (0);
+	fdf->render_needed = 0;
 	return (1);
 }
 /*

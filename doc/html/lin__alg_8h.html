@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-06</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-08</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -90,11 +90,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="lin__alg_8h__dep__incl.png" border="0" usemap="#ainclude_2lin__alg_8hdep" alt=""/></div>
 <map name="ainclude_2lin__alg_8hdep" id="ainclude_2lin__alg_8hdep">
-<area shape="rect" title=" " alt="" coords="90,5,218,32"/>
+<area shape="rect" title=" " alt="" coords="82,5,210,32"/>
 <area shape="rect" href="drawing_8h.html" title=" " alt="" coords="5,229,143,256"/>
-<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="147,80,297,107"/>
-<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="176,155,279,181"/>
-<area shape="rect" href="window_8h.html" title=" " alt="" coords="167,229,301,256"/>
+<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="158,80,307,107"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="197,155,300,181"/>
+<area shape="rect" href="fdf__features_8h.html" title=" " alt="" coords="167,229,331,256"/>
+<area shape="rect" href="window_8h.html" title=" " alt="" coords="355,229,489,256"/>
 </map>
 </div>
 </div>
@@ -180,6 +181,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad01e85b993ccb2b550e3784d49b77a0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#ad01e85b993ccb2b550e3784d49b77a0b">ft_mx_flipr</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *m)</td></tr>
 <tr class="memdesc:ad01e85b993ccb2b550e3784d49b77a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_flipr</b> &ndash; Flip along the row axis (y axis).  <a href="lin__alg_8h.html#ad01e85b993ccb2b550e3784d49b77a0b">More...</a><br /></td></tr>
 <tr class="separator:ad01e85b993ccb2b550e3784d49b77a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3490cdcef049ee2e47617048388caf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#ad3490cdcef049ee2e47617048388caf7">ft_mx_flipc</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *m)</td></tr>
+<tr class="memdesc:ad3490cdcef049ee2e47617048388caf7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_flipc</b> &ndash; Flip along the column axis (x axis).  <a href="lin__alg_8h.html#ad3490cdcef049ee2e47617048388caf7">More...</a><br /></td></tr>
+<tr class="separator:ad3490cdcef049ee2e47617048388caf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for linearly-storaged matrixes (row-major order) operations. Syntaxis will follow mathematics standard: </p><pre class="fragment">i: row index, starts at 0 (NOT 1)
@@ -359,6 +363,36 @@ Intuitive C-style matrix    Linear storage (row-major order)
 
 </div>
 </div>
+<a id="ad3490cdcef049ee2e47617048388caf7" name="ad3490cdcef049ee2e47617048388caf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3490cdcef049ee2e47617048388caf7">&#9670;&nbsp;</a></span>ft_mx_flipc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ft_mx_flipc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>ft_mx_flipc</b> &ndash; Flip along the column axis (x axis). </p>
+<p >TODO.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>- The matrix to be flipped.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The result of pre-multiplying a backward-identity matrix to the matrix to be flipped. </dd></dl>
+
+</div>
+</div>
 <a id="ad01e85b993ccb2b550e3784d49b77a0b" name="ad01e85b993ccb2b550e3784d49b77a0b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad01e85b993ccb2b550e3784d49b77a0b">&#9670;&nbsp;</a></span>ft_mx_flipr()</h2>
 
@@ -385,7 +419,7 @@ Intuitive C-style matrix    Linear storage (row-major order)
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The result of post-multiplying a backward-identity matrix to the matrix to be flipped. </dd></dl>
 
 </div>
 </div>

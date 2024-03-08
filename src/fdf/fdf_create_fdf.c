@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:06:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 12:36:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 14:54:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ static void	init_wtoc_settings(t_fdf *fdf)
 	fdf->c_sca_z = 1;
 }
 
+static void	init_ctos_settings(t_fdf *fdf)
+{
+	fdf->autofit = 1;
+}
+
 t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h)
 {
 	t_fdf	*fdf;
@@ -51,5 +56,7 @@ t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h)
 		return (fdf_destroy_fdf(fdf), NULL);
 	init_mtow_settings(fdf);
 	init_wtoc_settings(fdf);
+	init_ctos_settings(fdf);
+	fdf->render_needed = 1;
 	return (fdf);
 }

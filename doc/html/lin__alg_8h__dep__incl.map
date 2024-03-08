@@ -1,7 +1,8 @@
 <map id="include/lin_alg.h" name="include/lin_alg.h">
-<area shape="rect" id="node1" title=" " alt="" coords="90,5,218,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="82,5,210,32"/>
 <area shape="rect" id="node2" href="$drawing_8h.html" title=" " alt="" coords="5,229,143,256"/>
-<area shape="rect" id="node3" href="$tesselator_8h.html" title=" " alt="" coords="147,80,297,107"/>
-<area shape="rect" id="node4" href="$fdf_8h.html" title=" " alt="" coords="176,155,279,181"/>
-<area shape="rect" id="node5" href="$window_8h.html" title=" " alt="" coords="167,229,301,256"/>
+<area shape="rect" id="node3" href="$tesselator_8h.html" title=" " alt="" coords="158,80,307,107"/>
+<area shape="rect" id="node4" href="$fdf_8h.html" title=" " alt="" coords="197,155,300,181"/>
+<area shape="rect" id="node5" href="$fdf__features_8h.html" title=" " alt="" coords="167,229,331,256"/>
+<area shape="rect" id="node6" href="$window_8h.html" title=" " alt="" coords="355,229,489,256"/>
 </map>

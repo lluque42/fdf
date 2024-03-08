@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 16:34:16 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:54:45 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,12 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
  * TODO.
  * @var s_fdf::wlayout
  * The GUI window layout.
+ * @var s_fdf::render_needed
+ * Flag to signal the need to compute a drawing renderization.
+ * @var s_fdf::autofit
+ * When 1: Every renderization will draw an auto-scaled and centered drawing; 
+ * user's zoom (scale) and translation request will be ignored; but user
+ * rotations will still be available.
 */
 typedef struct s_fdf
 {
@@ -192,8 +198,9 @@ typedef struct s_fdf
 	double			s_sca_y;
 	double			s_offset_x;
 	double			s_offset_y;
-	uint8_t			*img_data;
 	t_fdf_wlayout	*wlayout;
+	int				autofit;
+	int				render_needed;
 }				t_fdf;
 
 /**

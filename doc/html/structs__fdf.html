@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-06</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-08</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -179,11 +179,30 @@ Data Fields</h2></td></tr>
 <tr class="separator:a8459aa216d187979d8233065b5fc0714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4887bd43393d45ff5cb987076f47502a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__wlayout.html">t_fdf_wlayout</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf.html#a4887bd43393d45ff5cb987076f47502a">wlayout</a></td></tr>
 <tr class="separator:a4887bd43393d45ff5cb987076f47502a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e0ea1458ce37385def59e6227c481d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf.html#a72e0ea1458ce37385def59e6227c481d">autofit</a></td></tr>
+<tr class="separator:a72e0ea1458ce37385def59e6227c481d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6729d2f50c4f257a761fbea1c67e183a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf.html#a6729d2f50c4f257a761fbea1c67e183a">render_needed</a></td></tr>
+<tr class="separator:a6729d2f50c4f257a761fbea1c67e183a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Base for typedef <b>t_fdf</b>. TODO. </p>
 <p >TODO. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a72e0ea1458ce37385def59e6227c481d" name="a72e0ea1458ce37385def59e6227c481d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e0ea1458ce37385def59e6227c481d">&#9670;&nbsp;</a></span>autofit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf::autofit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >When 1: Every renderization will draw an auto-scaled and centered drawing; user's zoom (scale) and translation request will be ignored; but user rotations will still be available. </p>
+
+</div>
+</div>
 <a id="ae84b2a0a8faf19e7c4ecf18d056ba4cc" name="ae84b2a0a8faf19e7c4ecf18d056ba4cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae84b2a0a8faf19e7c4ecf18d056ba4cc">&#9670;&nbsp;</a></span>c</h2>
 
@@ -511,6 +530,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >The resulting transformation matrix for model-to-world space. </p>
+
+</div>
+</div>
+<a id="a6729d2f50c4f257a761fbea1c67e183a" name="a6729d2f50c4f257a761fbea1c67e183a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6729d2f50c4f257a761fbea1c67e183a">&#9670;&nbsp;</a></span>render_needed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf::render_needed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Flag to signal the need to compute a drawing renderization. </p>
 
 </div>
 </div>

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 12:13:35 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:19:45 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@
  * @var s_fdf_line::last_x
  * The maximum x coordinate value from where the drawing of the line
  * should stop.
+ * @var s_fdf_line::m_is_infinite
+ * If 1 the line must be a vertical one, so it must be drawn swapping Y values
+ * for the same X value (member vertical_line_x). The first_x and last_x members
+ * are then used for the range for Y values.
+ * @var s_fdf_line::vertical_line_x
+ * If member m_is_infinite == 1, then this member is the X pixel component for
+ * a vertical line.
 */
 typedef struct s_fdf_line
 {

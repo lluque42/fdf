@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/08 12:13:54 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/08 18:26:46 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,8 +110,16 @@ SOURCES = fdf_main.c \
 		  window/fdf_create_wlayout.c \
 		  window/fdf_destroy_wlayout.c \
 		  window/fdf_recalc_wlayout.c \
+		  window/fdf_rotation_keys_down.c \
+		  window/fdf_translation_keys_down.c \
+		  window/fdf_zoom_keys_down.c \
 		  fdf/fdf_create_fdf.c \
-		  fdf/fdf_destroy_fdf.c
+		  fdf/fdf_destroy_fdf.c \
+		  features/fdf_exit_program.c \
+		  features/fdf_rotate_step.c \
+		  features/fdf_translate_step.c \
+		  features/fdf_scale_step.c \
+		  features/fdf_toggle_autofit.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c

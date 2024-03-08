@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 21:56:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:47:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,10 +186,6 @@ void			fdf_resizehook(int32_t width, int32_t height, void *fdf);
  *
  * @param [in, out] fdf - The fdf structure.
  *
- * @param [in] width - The new width in pixels.
- *
- * @param [in] height - The new height in pixels.
- *
  * @warning TODO.
  *
  * @remark Implementation notes:
@@ -213,5 +209,53 @@ void			fdf_generichook(void *fdf);
  * TODO.
 */
 int				fdf_start_gui(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_zoom_keys_down</b> -- Detects a zooming user request.
+ *
+ * @details Evaluates pressing of specific function keys to call the apropiate
+ * feature function to handle the event and to request re-rendering back to the
+ * window's loop.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_zoom_keys_down(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_translation_keys_down</b> -- Detects a zooming user request.
+ *
+ * @details Evaluates pressing of specific function keys to call the apropiate
+ * feature function to handle the event and to request re-rendering back to the
+ * window's loop.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_translation_keys_down(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_rotation_keys_down</b> -- Detects a zooming user request.
+ *
+ * @details Evaluates pressing of specific function keys to call the apropiate
+ * feature function to handle the event and to request re-rendering back to the
+ * window's loop.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_rotation_keys_down(t_fdf *fdf);
 
 #endif
