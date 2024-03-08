@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 20:33:51 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:13:35 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,6 @@ typedef enum e_render_level
 	FROM_SCREEN,
 	FROM_IMAGE
 }	t_render_level;
-
-/**
- * @brief <b>ft_draw_vertexes</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] img - TODO.
- *
- * @param [in] v_mx - Vertex matrix.
- *
- * @param [in] col - Color (32 bits RGB).
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void	fdf_drw_vertexes(mlx_image_t *img, t_ft_mx *v_mx, uint32_t col);
-//											Cambiar como el fdf_drw_edges/////////////
 
 /**
  * @brief <b>ft_draw_edges</b> -- TODO.

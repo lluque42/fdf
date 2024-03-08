@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 17:06:16 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:24:09 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,8 @@ static int	fdf_setup_image(t_fdf *fdf)
 		fdf->wlayout->image,
 		fdf->wlayout->wintoimg_xoffset,
 		fdf->wlayout->wintoimg_yoffset);
-	fdf_drw_vertexes(fdf->wlayout->image, fdf->s->vertex_mx, 0xFFFFFFFF);
-	if(!fdf_drw_edges(fdf))
+	if (!fdf_drw_edges(fdf))
 		return (0);
-	//fdf->wlayout->image->pixels = fdf->img_data;
 	return (1);
 }
 
