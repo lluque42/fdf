@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 01:17:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:38:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,5 @@ t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 			return (free(line), ft_mx_destroy(matrix), close(fd), NULL);
 		free(line);
 	}
-	if (!ft_mx_flipr(matrix))
-		return (NULL);
 	return (close(fd), matrix);
 }

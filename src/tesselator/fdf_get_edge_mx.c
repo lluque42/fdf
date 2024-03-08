@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 22:48:27 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:01:46 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ static void	print_edges(t_ft_mx *map_mx, t_fdf_model *model)
 	ft_printf("\n");
 	while (++e < model->edges)
 	{
-		ft_printf("Edge %3d goes from ", e);
+		ft_printf("\tEdge %3d goes from ", e);
 		ft_printf("vertex %3d to ", model->edge[e].start);
 		x = (int)ft_mx_get_element(model->vertex_mx, 0, model->edge[e].start);
 		y = (int)ft_mx_get_element(model->vertex_mx, 1, model->edge[e].start);
@@ -191,7 +191,31 @@ static void	print_edges(t_ft_mx *map_mx, t_fdf_model *model)
 		ft_printf("\n");
 	}
 }
-
+*/
+/*	
+	int	e;
+	int	x;
+	int	y;
+	int z;
+	e = model->edges;
+	ft_printf("Edge %d is formed to DOWN neighbor and is %shidden\n",
+		model->edges, model->edge[model->edges].is_hidden ? "" : "NOT ");
+	ft_printf("\tEdge %3d goes from ", e);
+	ft_printf("vertex %3d to ", model->edge[e].start);
+	x = (int)ft_mx_get_element(model->vertex_mx, 0, model->edge[e].start);
+	y = (int)ft_mx_get_element(model->vertex_mx, 1, model->edge[e].start);
+	z = (int)ft_mx_get_element(model->vertex_mx, 2, model->edge[e].start);
+	ft_printf("(%d, %d, %d) ", x, y, z); 
+	ft_printf("vertex %3d ", model->edge[e].end);
+	x = (int)ft_mx_get_element(model->vertex_mx, 0, model->edge[e].end);
+	y = (int)ft_mx_get_element(model->vertex_mx, 1, model->edge[e].end);
+	z = (int)ft_mx_get_element(model->vertex_mx, 2, model->edge[e].end);
+	ft_printf("(%d, %d, %d)", x, y, z);
+	if (model->edge[e].is_hidden)
+		ft_printf(" (hidden)");
+	ft_printf("\n");
+*/
+/*
 // The number of edges comes from adding up:
 // 		+ For every row (except for the last row) and for every element in that
 // 		row (except the last element in row), 3 new edges are formed (down, 
