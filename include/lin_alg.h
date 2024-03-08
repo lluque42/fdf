@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:01:37 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/07 23:15:57 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,8 +418,27 @@ t_ft_mx	*ft_mx_transpose(t_ft_mx *m);
  * @warning TODO.
  *
  * @remark Implementation notes:
- * TODO.
+ * The result of post-multiplying a backward-identity matrix to the matrix to 
+ * be flipped.
 */
 int		ft_mx_flipr(t_ft_mx *m);
+
+/**
+ * @brief <b>ft_mx_flipc</b> -- Flip along the column axis (x axis).
+ *
+ * @details TODO.
+ *
+ * @param [in] m - The matrix to be flipped.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * The result of pre-multiplying a backward-identity matrix to the matrix to 
+ * be flipped.
+*/
+int		ft_mx_flipc(t_ft_mx *m);
 
 #endif
