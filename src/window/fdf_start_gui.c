@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 22:00:23 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:37:07 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	fdf_start_gui(t_fdf *fdf)
 	if (!fdf_render(fdf, FROM_WORLD))
 		return (mlx_terminate(fdf->wlayout->window), 0);
 	mlx_loop(fdf->wlayout->window);
+	ft_printf("[fdf_start_gui] Sale del loop\n");
 	mlx_terminate(fdf->wlayout->window);
+	ft_printf("[fdf_start_gui] Hizo el terminate\n");
 	return (1);
 }

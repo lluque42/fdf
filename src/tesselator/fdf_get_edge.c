@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_get_edge_mx.c                                  :+:      :+:    :+:   */
+/*   fdf_get_edge.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 12:01:46 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:21:39 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ static void	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_model *model)
 //		except for the last element of the last row which forms NO new edge.
 //		+ Every element in last row only forms 1 edge to right neighbor, except
 //		for the last element in this last row which forms NO new edge.
-int	fdf_get_edge_mx(t_ft_mx *map_mx, t_fdf_model *model)
+int	fdf_get_edge(t_ft_mx *map_mx, t_fdf_model *model)
 {
 	int	i;
 	int	j;

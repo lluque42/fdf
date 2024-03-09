@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 17:51:20 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:26:46 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,78 @@ typedef struct s_fdf_model
 	int				triangles;
 }				t_fdf_model;
 
+
+
+
+/**
+ * @struct s_fdf_object
+ * @brief Base for typedef <b>t_fdf_object</b>.
+ * @details This type is used to store a 3D object.
+ * @var s_fdf_model::vertex_mx
+ * The vertex matrix.
+ * @var s_fdf_model::edge
+ * Array of edges.
+ * @var s_fdf_model::edges
+ * Number of edges in model->edge array.
+ * @var s_fdf_model::triangle
+ * Array of triangles.
+ * @var s_fdf_model::triangles
+ * Number of edges in model->edge array.
+*/
+typedef struct s_fdf_object
+{
+	t_ft_mx			*model_mx;
+	double			m2w_rot_par[3];
+	double			m2w_tra_par[3];
+	double			m2w_sca_par[3];
+	t_ft_mx			*world_mx;
+	double			w2c_rot_par[3];
+	double			w2c_tra_par[3];
+	double			w2c_sca_par[3];
+	t_ft_mx			*camera_mx;
+	double			c2s_rot_par[3];
+	double			c2s_tra_par[3];
+	double			c2s_sca_par[3];
+	t_ft_mx			*screen_mx;
+	t_fdf_edge		*edge;
+	int				edges;
+	t_fdf_triangle	*triangle;
+	int				triangles;
+}				t_fdf_object;
+
+
+
+/**
+ * @brief <b>fdf_create_object</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @return TODO.
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_fdf_object	*fdf_create_object(void);
+
+/**
+ * @brief <b>fdf_destroy_object</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] object - The pointer to the object to be freed.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void		fdf_destroy_object(t_fdf_object *object);
+
+
+
 /**
  * @brief <b>fdf_create_model</b> -- TODO.
  *
@@ -153,7 +225,7 @@ t_fdf_model	*fdf_tesselate_map(t_ft_mx	*map_mx);
 t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
 
 /**
- * @brief <b>fdf_get_edge_mx</b> -- TODO.
+ * @brief <b>fdf_get_edge</b> -- TODO.
  *
  * @details TODO.
  *
@@ -186,7 +258,7 @@ t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
  *      + Every element in last row only forms 1 edge to right neighbor, except
  *      for the last element in this last row which forms NO new edge.
 */
-int			fdf_get_edge_mx(t_ft_mx *map_mx, t_fdf_model *model);
+int			fdf_get_edge(t_ft_mx *map_mx, t_fdf_model *model);
 
 /**
  * @brief <b>fdf_create_rot_mx</b> -- TODO.

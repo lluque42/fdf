@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:54:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:24:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
 */
 typedef struct s_fdf
 {
+	t_fdf_object	*object;
 	t_fdf_model		*m;
 	t_ft_mx			*w_rot_mx;
 	t_ft_mx			*w_tra_mx;

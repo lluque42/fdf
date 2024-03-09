@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:07:42 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 12:56:26 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:15:57 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	fdf_destroy_fdf(t_fdf *fdf)
 {
+	fdf_destroy_object(fdf->object);
 	fdf_destroy_model(fdf->m);
 	fdf_destroy_model(fdf->w);
 	fdf_destroy_model(fdf->c);

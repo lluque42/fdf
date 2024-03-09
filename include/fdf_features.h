@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:44:59 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:31:50 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@
  *
  * @param [in, out] fdf - The fdf structure.
  *
- * @return A non-zero value if correct.
- * A value of zero if error.
- *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_exit_program(t_fdf *fdf);
+void	fdf_exit_program(t_fdf *fdf);
 
 /**
  * @brief <b>fdf_toggle_autofit</b> -- TODO.

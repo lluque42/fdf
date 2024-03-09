@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 23:18:50 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:39:08 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error while starting the GUI\n");
 		return (fdf_destroy_fdf(fdf), 1);
 	}
+	ft_printf("[main] Vuelta al main...'\n");
 	return (fdf_destroy_fdf(fdf), 0);
 }
