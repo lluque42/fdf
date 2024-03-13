@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 21:39:08 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/09 22:09:55 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(int argc, char **argv)
 	if (fdf == NULL)
 		return (ft_printf("Error creating fdf\n"), ft_mx_destroy(map_mx), 1);
 	ft_printf("[main] Tesselating map...'\n");
-	fdf->m = fdf_tesselate_map(map_mx);
+	fdf->object = fdf_tesselate_map(map_mx);
 	ft_mx_destroy(map_mx);
-	if (fdf->m == NULL)
+	if (fdf->object == NULL)
 		return (ft_printf("Error while tesselating\n"), 1);
 	ft_printf("[main] Starting GUI...'\n");
 	if (!fdf_start_gui(fdf))

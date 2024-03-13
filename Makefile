@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/09 21:27:47 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/13 22:50:32 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,15 +94,14 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_get_edge.c \
 		  tesselator/fdf_create_rotmx.c \
 		  tesselator/fdf_tesselate_map.c \
-		  tesselator/fdf_create_model.c \
 		  tesselator/fdf_create_object.c \
-		  tesselator/fdf_destroy_model.c \
 		  tesselator/fdf_destroy_object.c \
 		  tesselator/fdf_create_ortoproj_mx.c \
 		  tesselator/fdf_create_transl_mx.c \
 		  tesselator/fdf_create_scale_mx.c \
+		  tesselator/fdf_print_edges.c \
 		  drawing/fdf_drw_edges.c \
-		  drawing/fdf_get_autofit_transf_matrixes.c \
+		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_render.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \

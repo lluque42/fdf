@@ -6,12 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 13:08:33 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/13 22:43:10 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "drawing.h"
 
 /**
@@ -66,10 +65,10 @@ t_fdf_line	*fdf_create_line(t_fdf *fdf, int start, int end)
 	line = ft_calloc(1, sizeof (t_fdf_line));
 	if (line == NULL)
 		return (NULL);
-	start_x = fdf->s->vertex_mx->d[start];
-	start_y = fdf->s->vertex_mx->d[fdf->s->vertex_mx->n + start];
-	end_x = fdf->s->vertex_mx->d[end];
-	end_y = fdf->s->vertex_mx->d[fdf->s->vertex_mx->n + end];
+	start_x = fdf->object->screen_mx->d[start];
+	start_y = fdf->object->screen_mx->d[fdf->object->screen_mx->n + start];
+	end_x = fdf->object->screen_mx->d[end];
+	end_y = fdf->object->screen_mx->d[fdf->object->screen_mx->n + end];
 	if ((int)(end_x - start_x) == 0)
 		return (fdf_vertical_line(start_y, end_y, start_x, line));
 	line->m = (double)(end_y - start_y) / (double)(end_x - start_x);
@@ -114,17 +113,14 @@ int	fdf_drw_edges(t_fdf *fdf)
 	int			e;
 	t_fdf_line	*line;
 
-	// Por ahora...
-	fdf->s->edge = fdf->m->edge;
-	fdf->s->edges = fdf->m->edges;
-	fdf->s->triangle = fdf->m->triangle;
-	fdf->s->triangles = fdf->m->triangles;
 	e = -1;
-	while (++e < fdf->s->edges)
+	while (++e < fdf->object->edges)
 	{
-		if (fdf->s->edge[e].is_hidden)
+		if (fdf->object->edge[e].is_hidden)
 			continue ;
-		line = fdf_create_line(fdf, fdf->s->edge[e].start, fdf->s->edge[e].end);
+		line = fdf_create_line(fdf,
+				fdf->object->edge[e].start,
+				fdf->object->edge[e].end);
 		if (line == NULL)
 			return (0);
 		fdf_draw_line(fdf, line);
@@ -132,3 +128,22 @@ int	fdf_drw_edges(t_fdf *fdf)
 	free(line);
 	return (1);
 }
+	/*
+	ft_printf("[fdf_drw_edges] The edges from world\n");
+	fdf_print_edges(NULL, fdf->object, fdf->object->world_mx);
+	ft_printf("[fdf_drw_edges] The edges from camera\n");
+	fdf_print_edges(NULL, fdf->object, fdf->object->camera_mx);
+	ft_printf("[fdf_drw_edges] The edges from screen\n");
+	fdf_print_edges(NULL, fdf->object, fdf->object->screen_mx);
+	*/
+	// Por ahora...
+		/*
+		printf("[fdf_drw_edges] Drawing line %d, m = %f, b = %f, first_x = %d, last_x = %d, m_is_infinite = %d, vertical_line_x = %f\n",
+			e,
+			line->m,
+			line->b,
+			line->first_x,
+			line->last_x,
+			line->m_is_infinite,
+			line->vertical_line_x);
+	*/

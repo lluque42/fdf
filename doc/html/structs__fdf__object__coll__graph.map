@@ -1,0 +1,6 @@
+<map id="s_fdf_object" name="s_fdf_object">
+<area shape="rect" id="node1" title="Base for typedef t_fdf_object." alt="" coords="103,139,205,165"/>
+<area shape="rect" id="node2" href="$structs__ft__mx.html" title="Base for typedef t_ft_mx." alt="" coords="5,5,79,32"/>
+<area shape="rect" id="node3" href="$structs__fdf__edge.html" title="Base for typedef t_fdf_edge." alt="" coords="107,5,201,32"/>
+<area shape="rect" id="node4" href="$structs__fdf__triangle.html" title="Base for typedef t_fdf_triangle." alt="" coords="225,5,336,32"/>
+</map>

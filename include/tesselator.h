@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/09 21:26:46 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:02:42 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,46 +58,56 @@ typedef struct s_fdf_triangle
 }				t_fdf_triangle;
 
 /**
- * @struct s_fdf_model
- * @brief Base for typedef <b>t_fdf_model</b>.
- * @details This type is used to store a 3D model.
- * @var s_fdf_model::vertex_mx
- * The vertex matrix.
- * @var s_fdf_model::edge
- * Array of edges.
- * @var s_fdf_model::edges
- * Number of edges in model->edge array.
- * @var s_fdf_model::triangle
- * Array of triangles.
- * @var s_fdf_model::triangles
- * Number of edges in model->edge array.
-*/
-typedef struct s_fdf_model
-{
-	t_ft_mx			*vertex_mx;
-	t_fdf_edge		*edge;
-	int				edges;
-	t_fdf_triangle	*triangle;
-	int				triangles;
-}				t_fdf_model;
-
-
-
-
-/**
  * @struct s_fdf_object
  * @brief Base for typedef <b>t_fdf_object</b>.
- * @details This type is used to store a 3D object.
- * @var s_fdf_model::vertex_mx
- * The vertex matrix.
- * @var s_fdf_model::edge
+ * @details This type is used to store a 3D object. That is: its vertex matrix
+ * for each of the spaces (model, world, camera, and screen); its edges; and
+ * its triangles. This type also contains the auxiliary parameters for vertex
+ * transformations to go from one space to the next such as rotations,
+ * translations, scaling, and 2D projection.
+ * @var s_fdf_object::model_mx
+ * The vertex matrix at model space.
+ * @var s_fdf_object::world_mx
+ * The vertex matrix at world sapce.
+ * @var s_fdf_object::camera_mx
+ * The vertex matrix at camera space.
+ * @var s_fdf_object::screen_mx
+ * The vertex matrix at screen space.
+ * @var s_fdf_object::edge
  * Array of edges.
- * @var s_fdf_model::edges
- * Number of edges in model->edge array.
- * @var s_fdf_model::triangle
+ * @var s_fdf_object::edges
+ * Number of edges in object->edge array.
+ * @var s_fdf_object::triangle
  * Array of triangles.
- * @var s_fdf_model::triangles
- * Number of edges in model->edge array.
+ * @var s_fdf_object::triangles
+ * Number of edges in object->edge array.
+ * @var s_fdf_object::m2w_rot_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * rotation transformation from model to world space.
+ * @var s_fdf_object::m2w_tra_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * translation transformation from model to world space.
+ * @var s_fdf_object::m2w_sca_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * scale transformation from world to camera space.
+ * @var s_fdf_object::w2c_rot_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * rotation transformation from world to camera space.
+ * @var s_fdf_object::w2c_tra_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * translation transformation from world to camera space.
+ * @var s_fdf_object::w2c_sca_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * scale transformation from model world to camera space.
+ * @var s_fdf_object::c2s_rot_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * rotation transformation from camera to screen space.
+ * @var s_fdf_object::c2s_tra_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * translation transformation from camera to screen space.
+ * @var s_fdf_object::c2s_sca_par
+ * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
+ * scale transformation from camera to screen space.
 */
 typedef struct s_fdf_object
 {
@@ -119,8 +129,6 @@ typedef struct s_fdf_object
 	t_fdf_triangle	*triangle;
 	int				triangles;
 }				t_fdf_object;
-
-
 
 /**
  * @brief <b>fdf_create_object</b> -- TODO.
@@ -149,38 +157,7 @@ t_fdf_object	*fdf_create_object(void);
  * @remark Implementation notes:
  * TODO.
 */
-void		fdf_destroy_object(t_fdf_object *object);
-
-
-
-/**
- * @brief <b>fdf_create_model</b> -- TODO.
- *
- * @details TODO.
- *
- * @return TODO.
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-t_fdf_model	*fdf_create_model(void);
-
-/**
- * @brief <b>fdf_destroy_model</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] model - The pointer to the model to be freed.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void		fdf_destroy_model(t_fdf_model *model);
+void			fdf_destroy_object(t_fdf_object *object);
 
 /**
  * @brief <b>fdf_tesselate_map</b> -- TODO.
@@ -197,7 +174,7 @@ void		fdf_destroy_model(t_fdf_model *model);
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf_model	*fdf_tesselate_map(t_ft_mx	*map_mx);
+t_fdf_object	*fdf_tesselate_map(t_ft_mx	*map_mx);
 
 /**
  * @brief <b>fdf_get_vertex_mx</b> -- TODO.
@@ -222,7 +199,7 @@ t_fdf_model	*fdf_tesselate_map(t_ft_mx	*map_mx);
  * increasing the row (i.e. increasing the vertex's 'y' coordinate).
  * TODO.
 */
-t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
+t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
 
 /**
  * @brief <b>fdf_get_edge</b> -- TODO.
@@ -231,7 +208,7 @@ t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
  *
  * @param [in] map_mx - TODO.
  *
- * @param [in] model - The pointer to the model.
+ * @param [in] object - The pointer to the 3D object.
  *
  * @return Non-zero value if correct.
  * Value of 0 if error.
@@ -258,7 +235,7 @@ t_ft_mx		*fdf_get_vertex_mx(t_ft_mx *map_mx);
  *      + Every element in last row only forms 1 edge to right neighbor, except
  *      for the last element in this last row which forms NO new edge.
 */
-int			fdf_get_edge(t_ft_mx *map_mx, t_fdf_model *model);
+int				fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object);
 
 /**
  * @brief <b>fdf_create_rot_mx</b> -- TODO.
@@ -298,7 +275,7 @@ int			fdf_get_edge(t_ft_mx *map_mx, t_fdf_model *model);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx		*fdf_create_rot_mx(double x, double y, double z);
+t_ft_mx			*fdf_create_rot_mx(double x, double y, double z);
 
 /**
  * @brief <b>fdf_create_ortoproj</b> -- Creates an transformation matrix
@@ -333,7 +310,7 @@ t_ft_mx		*fdf_create_rot_mx(double x, double y, double z);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx		*fdf_create_ortoproj_mx(void);
+t_ft_mx			*fdf_create_ortoproj_mx(void);
 
 /**
  * @brief <b>fdf_create_transl_mx</b> -- Creates a translation matrix.
@@ -373,7 +350,7 @@ t_ft_mx		*fdf_create_ortoproj_mx(void);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx		*fdf_create_transl_mx(double x, double y, double z);
+t_ft_mx			*fdf_create_transl_mx(double x, double y, double z);
 
 /**
  * @brief <b>fdf_create_scale_mx</b> -- Flip along the row axis (y axis).
@@ -413,6 +390,28 @@ t_ft_mx		*fdf_create_transl_mx(double x, double y, double z);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx		*fdf_create_scale_mx(double x, double y, double z);
+t_ft_mx			*fdf_create_scale_mx(double x, double y, double z);
+
+/**
+ * @brief <b>fdf_print_edges</b> -- TODO.
+ *
+ * @details For debuggin purposes ONLY. This function prints the map_mx
+ * (optional), one of its space vertex matrix (model, world, camera...), and the
+ * list of edges in reference to the given space vertex matrix.
+ *
+ * @param [in] map_mx - Optional, can be NULL.
+ *
+ * @param [in] object - The object from which to print the data.
+ *
+ * @param [in] v_mx - The specific space vertex matrix of the object to print.
+ * 
+ * @warning For debuggin purposes ONLY.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_print_edges(t_ft_mx *map_mx,
+					t_fdf_object *object,
+					t_ft_mx *v_mx);
 
 #endif

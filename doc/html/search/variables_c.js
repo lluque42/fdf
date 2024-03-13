@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['triangle_0',['triangle',['../structs__fdf__model.html#a05e5198d165998e1368668dc8d25ec83',1,'s_fdf_model']]],
-  ['triangles_1',['triangles',['../structs__fdf__model.html#ae50401a34c6f266ccf4dc1afb1f2571d',1,'s_fdf_model']]]
+  ['screen_5fmx_0',['screen_mx',['../structs__fdf__object.html#a1ccb6839fe81bb5b1dcdda2ccf884051',1,'s_fdf_object']]],
+  ['start_1',['start',['../structs__fdf__edge.html#a6e887e334609f4308343c47e16568191',1,'s_fdf_edge']]]
 ];

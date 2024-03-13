@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 19:19:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/13 22:50:59 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,18 @@ typedef enum e_render_level
 int		fdf_drw_edges(t_fdf *fdf);
 
 /**
- * @brief <b>fdf_get_autofit_transf_matrixes</b> -- TODO.
+ * @brief <b>fdf_get_autofit_transf_par</b> -- TODO.
  *
  * @details TODO.
  *
  * @param [in] fdf - The fdf struct.
- *
- * @return Non-zero value if correct.
- * Value of 0 if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_get_autofit_transf_matrixes(t_fdf *fdf);
+void	fdf_get_autofit_transf_par(t_fdf *fdf);
 
 /**
  * @brief <b>fdf_render</b> -- TODO.
