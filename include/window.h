@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:47:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/14 14:39:38 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ typedef struct s_fdf	t_fdf;
  * TODO.
  * @var s_fdf_wlayout::wintoimg_yoffset
  * TODO.
- * @var s_fdf_wlayout::drawing_w
- * TODO.
- * @var s_fdf_wlayout::drawing_h
- * TODO.
- * @var s_fdf_wlayout::imgtodrw_xoffset
- * TODO.
- * @var s_fdf_wlayout::imgtodrw_yoffset
- * TODO.
  * @var s_fdf_wlayout::window
  * TODO.
  * @var s_fdf_wlayout::image
@@ -66,10 +58,6 @@ typedef struct s_fdf_wlayout
 	int32_t		image_h;
 	int32_t		wintoimg_xoffset;
 	int32_t		wintoimg_yoffset;
-	int32_t		drawing_w;
-	int32_t		drawing_h;
-	int32_t		imgtodrw_xoffset;
-	int32_t		imgtodrw_yoffset;
 	mlx_t		*window;
 	mlx_image_t	*image;
 }				t_fdf_wlayout;

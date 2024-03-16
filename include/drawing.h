@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 22:50:59 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:29:18 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,28 +81,38 @@ typedef enum e_render_level
  *
  * @details TODO.
  *
- * @param [in] fdf - The fdf struct.
+ * @param [in] image - The image on which to draw the line.
+ *
+ * @param [in] object - The 3D object whose edges will be drawn.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_drw_edges(t_fdf *fdf);
+int		fdf_drw_edges(mlx_image_t *image, t_fdf_object *object);
 
 /**
  * @brief <b>fdf_get_autofit_transf_par</b> -- TODO.
  *
  * @details TODO.
  *
- * @param [in] fdf - The fdf struct.
+ * @param [in] img_w - The width of the target image on which to
+ * render the object.
+ *
+ * @param [in] img_h - The height of the target image on which to
+ * render the object.
+ *
+ * @param [in] object - The 3D object to be render.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-void	fdf_get_autofit_transf_par(t_fdf *fdf);
+void	fdf_get_autofit_transf_par(uint32_t img_w,
+			uint32_t img_h,
+			t_fdf_object *object);
 
 /**
  * @brief <b>fdf_render</b> -- TODO.

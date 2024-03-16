@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 22:54:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:36:00 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@
 // the rotation, translation or scaling at the model level.
 // To put it briefly: this function transforms the model space to place it into
 // the world space.
-static int	fdf_setup_world(t_fdf *fdf)
+static int	fdf_setup_world(t_fdf_object *obj)
 {
 	t_ft_mx			*rot_mx;
 	t_ft_mx			*sca_mx;
 	t_ft_mx			*tra_mx;
 	t_ft_mx			*transf_mx;
-	t_fdf_object	*obj;
 
-	obj = fdf->object;
 	rot_mx = fdf_create_rot_mx(obj->m2w_rot_par[0],
 			obj->m2w_rot_par[1],
 			obj->m2w_rot_par[2]);
@@ -57,15 +55,13 @@ static int	fdf_setup_world(t_fdf *fdf)
 // or scaling at the camera level.
 // To put it briefly: this function transforms the world space into the camera
 // space.
-static int	fdf_setup_camera(t_fdf *fdf)
+static int	fdf_setup_camera(t_fdf_object *obj)
 {
 	t_ft_mx			*rot_mx;
 	t_ft_mx			*sca_mx;
 	t_ft_mx			*tra_mx;
 	t_ft_mx			*transf_mx;
-	t_fdf_object	*obj;
 
-	obj = fdf->object;
 	rot_mx = fdf_create_rot_mx(obj->w2c_rot_par[0],
 			obj->w2c_rot_par[1],
 			obj->w2c_rot_par[2]);
@@ -92,18 +88,19 @@ static int	fdf_setup_camera(t_fdf *fdf)
 // or scaling at the screen view level (such as resizing the GUI's window).
 // To put it briefly: this function transforms the camera space into the screen
 // view space.
-static int	fdf_setup_screen(t_fdf *fdf)
+static int	fdf_setup_screen(uint32_t img_w,
+		uint32_t img_h,
+		t_fdf_object *obj,
+		int autofit)
 {
 	t_ft_mx			*pro_mx;
 	t_ft_mx			*sca_mx;
 	t_ft_mx			*tra_mx;
 	t_ft_mx			*transf_mx;
-	t_fdf_object	*obj;
 
-	obj = fdf->object;
 	pro_mx = fdf_create_ortoproj_mx();
-	if (fdf->autofit)
-		fdf_get_autofit_transf_par(fdf);
+	if (autofit)
+		fdf_get_autofit_transf_par(img_w, img_h, obj);
 	sca_mx = fdf_create_scale_mx(obj->c2s_sca_par[0],
 			obj->c2s_sca_par[1],
 			obj->c2s_sca_par[2]);
@@ -128,20 +125,12 @@ static int	fdf_setup_screen(t_fdf *fdf)
 // This function only manipulates the collection of pixels stored in the image,
 // which is required if some event affects the color of the pixels.
 // To put it briefly: TODO.
-static int	fdf_setup_image(t_fdf *fdf)
+static int	fdf_setup_image(mlx_image_t *image, t_fdf_object *object)
 {
-	if (fdf->wlayout->image != NULL)
-		mlx_delete_image(fdf->wlayout->window, fdf->wlayout->image);
-	fdf->wlayout->image = mlx_new_image(fdf->wlayout->window,
-			fdf->wlayout->window_w,
-			fdf->wlayout->window_h);
-	if (fdf->wlayout->image == NULL)
-		return (mlx_terminate(fdf->wlayout->window), 0);
-	mlx_image_to_window(fdf->wlayout->window,
-		fdf->wlayout->image,
-		fdf->wlayout->wintoimg_xoffset,
-		fdf->wlayout->wintoimg_yoffset);
-	if (!fdf_drw_edges(fdf))
+	ft_memset(image->pixels,
+		0,
+		image->width * image->height * sizeof (int32_t));
+	if (!fdf_drw_edges(image, object))
 		return (0);
 	return (1);
 }
@@ -150,16 +139,19 @@ int	fdf_render(t_fdf *fdf, t_render_level render_level)
 {
 	ft_printf("[fdf_render] Rendering...\n");
 	if (render_level <= FROM_WORLD)
-		if (!fdf_setup_world(fdf))
+		if (!fdf_setup_world(fdf->object))
 			return (0);
 	if (render_level <= FROM_CAMERA)
-		if (!fdf_setup_camera(fdf))
+		if (!fdf_setup_camera(fdf->object))
 			return (0);
 	if (render_level <= FROM_SCREEN)
-		if (!fdf_setup_screen(fdf))
+		if (!fdf_setup_screen(fdf->wlayout->image->width,
+				fdf->wlayout->image->height,
+				fdf->object,
+				fdf->autofit))
 			return (0);
 	if (render_level <= FROM_IMAGE)
-		if (!fdf_setup_image(fdf))
+		if (!fdf_setup_image(fdf->wlayout->image, fdf->object))
 			return (0);
 	fdf->render_needed = 0;
 	return (1);
