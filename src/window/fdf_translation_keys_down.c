@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:56:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:36:16 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:59:59 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	fdf_user_translate(t_fdf *fdf)
 	if (mlx_is_key_down(fdf->wlayout->window, MLX_KEY_H))
 		tra_step_z--;
 	fdf_translate_step(fdf, tra_step_x, tra_step_y, tra_step_z);
-	fdf->render_needed = 1;
 }
 
 void	fdf_translation_keys_down(t_fdf *fdf)

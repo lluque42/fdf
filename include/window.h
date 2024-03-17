@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/14 14:39:38 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:10:02 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #ifndef WINDOW_H
 # define WINDOW_H
 # include "MLX42.h"
-//# include "tesselator.h"
 # include "fdf.h"
 # define DEF_WLAYOUT_RATIO 1.05
 
@@ -98,26 +97,6 @@ t_fdf_wlayout	*fdf_create_wlayout(int32_t drw_w, int32_t drw_h);
  * TODO.
 */
 void			fdf_destroy_wlayout(t_fdf_wlayout *wlayout);
-
-/**
- * @brief <b>fdf_recalc_wlayout</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in, out] fdf - The fdf structure.
- *
- * @param [in] win_w - Width in pixels of the GUI window as reported from the
- * resize hook.
- *
- * @param [in] win_h - Height in pixels of the GUI window as reported from the
- * resize hook.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void			fdf_recalc_wlayout(t_fdf *fdf, int32_t win_w, int32_t win_h);
 
 /**
  * @brief <b>fdf_keyhook</b> -- TODO.

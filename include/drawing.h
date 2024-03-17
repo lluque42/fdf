@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/16 12:29:18 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:07:34 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@
 
 #ifndef DRAWING_H
 # define DRAWING_H
+# include <stdio.h>														////////////
+# include <math.h>
 # include "MLX42.h"
 # include "lin_alg.h"
 # include "fdf.h"
+
+// Forward declaration, something like a prototype for typedef.
+// Needed because both fdf.h and window.h have structs typedefs with member
+// types defined in the other file.
+typedef struct s_fdf	t_fdf; 
 
 /**
  * @struct s_fdf_line
@@ -47,34 +54,11 @@ typedef struct s_fdf_line
 {
 	double		m;
 	double		b;
-	uint32_t	first_x;
-	uint32_t	last_x;
+	double		first_x;
+	double		last_x;
 	int			m_is_infinite;
 	double		vertical_line_x;
 }				t_fdf_line;
-
-/**
- * @enum e_render_level
- * @brief Base for typedef <b>t_render_level</b>.
- * @details This type is used in function fdf_render to indicate what is needed
- * to re-calculate and redraw.
- * @var e_render_level::FROM_WORLD
- * The re-calculations must begin at transformations from model to WORLD space.
- * @var e_render_level::FROM_CAMERA
- * The re-calculations must begin at transformations from world to CAMERA space.
- * @var e_render_level::FROM_SCREEN
- * The re-calculations must begin at transformations from camera to SCREEN view
- * space.
- * @var e_render_level::FROM_IMAGE
- * The re-calculations must begin at IMAGE (pixel-based) level.
-*/
-typedef enum e_render_level
-{
-	FROM_WORLD,
-	FROM_CAMERA,
-	FROM_SCREEN,
-	FROM_IMAGE
-}	t_render_level;
 
 /**
  * @brief <b>ft_draw_edges</b> -- TODO.
@@ -121,8 +105,6 @@ void	fdf_get_autofit_transf_par(uint32_t img_w,
  *
  * @param [in, out] fdf - The fdf struct.
  *
- * @param [in] render_level - The level from which phase to start the rendering.
- *
  * @return Non-zero value if correct.
  * Value of 0 if error.
  *
@@ -131,6 +113,28 @@ void	fdf_get_autofit_transf_par(uint32_t img_w,
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_render(t_fdf *fdf, t_render_level render_level);
+int		fdf_render(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_get_vertex_min_max</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] vertex_mx - The vertex matrix to analyze.
+ *
+ * @param [out] min - The size 3 array of double type to store the minimum
+ * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
+ * is no need to initialize this array before calling the function.
+ *
+ * @param [out] max - The size 3 array of double type to store the maximum
+ * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
+ * is no need to initialize this array before calling the function.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_get_vertex_min_max(t_ft_mx *vertex_mx, double *min, double *max);
 
 #endif

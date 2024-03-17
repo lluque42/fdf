@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/16 12:36:00 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:36:31 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,11 @@ static int	fdf_setup_screen(uint32_t img_w,
 	return (1);
 }
 
-// TODO. Review when it's clear what I want from this...					//////
-// TODO may be fdf_drw_vertexes() should be placed here instead...
 // This function requires the view screen space (i.e. the image) to be already
 // loaded in fdf.
 // This function only manipulates the collection of pixels stored in the image,
 // which is required if some event affects the color of the pixels.
-// To put it briefly: TODO.
+// To put it briefly: Here the pixels are drawn on the image.
 static int	fdf_setup_image(mlx_image_t *image, t_fdf_object *object)
 {
 	ft_memset(image->pixels,
@@ -135,27 +133,43 @@ static int	fdf_setup_image(mlx_image_t *image, t_fdf_object *object)
 	return (1);
 }
 
-int	fdf_render(t_fdf *fdf, t_render_level render_level)
+int	fdf_render(t_fdf *fdf)
 {
-	ft_printf("[fdf_render] Rendering...\n");
-	if (render_level <= FROM_WORLD)
+	if (fdf->render_request != NO_RENDER)
+		ft_printf("[fdf_render] Rendering from %d\n", fdf->render_request);
+	if (fdf->render_request <= FROM_WORLD)
 		if (!fdf_setup_world(fdf->object))
 			return (0);
-	if (render_level <= FROM_CAMERA)
+	if (fdf->render_request <= FROM_CAMERA)
 		if (!fdf_setup_camera(fdf->object))
 			return (0);
-	if (render_level <= FROM_SCREEN)
+	if (fdf->render_request <= FROM_SCREEN)
 		if (!fdf_setup_screen(fdf->wlayout->image->width,
 				fdf->wlayout->image->height,
 				fdf->object,
 				fdf->autofit))
 			return (0);
-	if (render_level <= FROM_IMAGE)
+	if (fdf->render_request <= FROM_IMAGE)
 		if (!fdf_setup_image(fdf->wlayout->image, fdf->object))
 			return (0);
-	fdf->render_needed = 0;
+	fdf->render_request = NO_RENDER;
 	return (1);
 }
+/*	
+
+	double		smin[3];
+	double		smax[3];
+	fdf_get_vertex_min_max(obj->screen_mx, smin, smax);
+	printf("[fdf_setup_screen] Min and max for screen space:\n");
+	printf("Min X = %f\n", smin[0]);
+	printf("Min Y = %f\n", smin[1]);
+	printf("Min Z = %f\n", smin[2]);
+	printf("Max X = %f\n", smax[0]);
+	printf("Max Y = %f\n", smax[1]);
+	printf("Max Z = %f\n", smax[2]);
+
+
+*/	
 /*
 ft_printf("[fdf_render] The model space vertex matrix");
 ft_printf("(%dx%d)...\n", fdf->m->vertex_mx->m, fdf->m->vertex_mx->n);

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-16</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-17</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -70,6 +70,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">fdf.h File Reference</div></div>
 </div><!--header-->
@@ -117,9 +118,26 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memItemLeft" align="right" valign="top"><a id="a7d15f11cad4afb91c5d7cc8a82ce1a65" name="a7d15f11cad4afb91c5d7cc8a82ce1a65"></a>
 typedef struct <a class="el" href="structs__fdf__wlayout.html">s_fdf_wlayout</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_wlayout</b></td></tr>
 <tr class="separator:a7d15f11cad4afb91c5d7cc8a82ce1a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c301921f84b5157dde968ba57aa2548"><td class="memItemLeft" align="right" valign="top"><a id="a8c301921f84b5157dde968ba57aa2548" name="a8c301921f84b5157dde968ba57aa2548"></a>
+typedef enum <a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500">e_render_request</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_render_request</b></td></tr>
+<tr class="separator:a8c301921f84b5157dde968ba57aa2548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868706e9ed9b2d10a02c8388c671ed87"><td class="memItemLeft" align="right" valign="top"><a id="a868706e9ed9b2d10a02c8388c671ed87" name="a868706e9ed9b2d10a02c8388c671ed87"></a>
 typedef struct <a class="el" href="structs__fdf.html">s_fdf</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf</b></td></tr>
 <tr class="separator:a868706e9ed9b2d10a02c8388c671ed87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a9d6d031b0828a841d3d9d9117270f500"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500">e_render_request</a> { <br />
+&#160;&#160;<a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a105b1225c48a5fc1d61525d909bd7406">FROM_WORLD</a>
+, <a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500aa3fb6b8d26e8622fe4e4deaef7f30507">FROM_CAMERA</a>
+, <a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a4e7ab77bc3130e72a88d8de7fc7127e0">FROM_SCREEN</a>
+, <a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a92ddbc8bce4695d9febb4e9fd82a5114">FROM_IMAGE</a>
+, <br />
+&#160;&#160;<a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a3c172df4fc66f9d9c42dc43fcfad28fb">NO_RENDER</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a9d6d031b0828a841d3d9d9117270f500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_render_request</b>.  <a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500">More...</a><br /></td></tr>
+<tr class="separator:a9d6d031b0828a841d3d9d9117270f500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -132,7 +150,37 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for defining the structures with pointers to every piece of data needed to create the GUI and handle the rendering of the 3D model into the application window. TODO </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a9d6d031b0828a841d3d9d9117270f500" name="a9d6d031b0828a841d3d9d9117270f500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d6d031b0828a841d3d9d9117270f500">&#9670;&nbsp;</a></span>e_render_request</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500">e_render_request</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base for typedef <b>t_render_request</b>. </p>
+<p >This type is used in function fdf_render to indicate what is needed to re-calculate and redraw. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9d6d031b0828a841d3d9d9117270f500a105b1225c48a5fc1d61525d909bd7406" name="a9d6d031b0828a841d3d9d9117270f500a105b1225c48a5fc1d61525d909bd7406"></a>FROM_WORLD&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transformations from model to WORLD space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d6d031b0828a841d3d9d9117270f500aa3fb6b8d26e8622fe4e4deaef7f30507" name="a9d6d031b0828a841d3d9d9117270f500aa3fb6b8d26e8622fe4e4deaef7f30507"></a>FROM_CAMERA&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transformations from world to CAMERA space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d6d031b0828a841d3d9d9117270f500a4e7ab77bc3130e72a88d8de7fc7127e0" name="a9d6d031b0828a841d3d9d9117270f500a4e7ab77bc3130e72a88d8de7fc7127e0"></a>FROM_SCREEN&#160;</td><td class="fielddoc"><p >The re-calculations must begin at transformations from camera to SCREEN view space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d6d031b0828a841d3d9d9117270f500a92ddbc8bce4695d9febb4e9fd82a5114" name="a9d6d031b0828a841d3d9d9117270f500a92ddbc8bce4695d9febb4e9fd82a5114"></a>FROM_IMAGE&#160;</td><td class="fielddoc"><p >The re-calculations must begin at IMAGE (pixel-based) level. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d6d031b0828a841d3d9d9117270f500a3c172df4fc66f9d9c42dc43fcfad28fb" name="a9d6d031b0828a841d3d9d9117270f500a3c172df4fc66f9d9c42dc43fcfad28fb"></a>NO_RENDER&#160;</td><td class="fielddoc"><p >There is no need to render. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a7bf3901b0f8a1370b796d846a7d4c54e" name="a7bf3901b0f8a1370b796d846a7d4c54e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7bf3901b0f8a1370b796d846a7d4c54e">&#9670;&nbsp;</a></span>fdf_create_fdf()</h2>
 

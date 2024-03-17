@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:06:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 22:56:31 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:53:32 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h)
 	fdf->wlayout = fdf_create_wlayout(drawing_w, drawing_h);
 	if (fdf->wlayout == NULL)
 		return (fdf_destroy_fdf(fdf), NULL);
-	fdf->render_needed = 1;
+	fdf->render_request = FROM_WORLD;
 	fdf->autofit = 1;
 	return (fdf);
 }

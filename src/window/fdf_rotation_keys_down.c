@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:56:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:32:24 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:59:42 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	fdf_user_rotate(t_fdf *fdf)
 	if (mlx_is_key_down(fdf->wlayout->window, MLX_KEY_D))
 		rot_step_z--;
 	fdf_rotate_step(fdf, rot_step_x, rot_step_y, rot_step_z);
-	fdf->render_needed = 1;
 }
 
 void	fdf_rotation_keys_down(t_fdf *fdf)

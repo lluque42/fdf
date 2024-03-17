@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:47:12 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/16 12:27:24 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 20:10:39 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,7 @@
 #include <limits.h>
 #include "drawing.h"
 
-// For some reason norminette does not allows including <float.h> which
-// I need to get DBL_MAX and DBL_MIN. So I had to use long type limits
-// included in the "allowed" header limits.h.
-static void	fdf_init_min_max(double *cmin, double *cmax)
-{
-	cmin[0] = LONG_MAX;
-	cmin[1] = LONG_MAX;
-	cmin[2] = LONG_MAX;
-	cmax[0] = LONG_MIN;
-	cmax[1] = LONG_MIN;
-	cmax[2] = LONG_MIN;
-}
-
-static void	fdf_get_camera_min_max(t_fdf_object *object,
-		double *cmin,
-		double *cmax)
-{
-	int	v;
-	int	n;
-
-	n = object->camera_mx->n;
-	v = 0;
-	fdf_init_min_max(cmin, cmax);
-	while (v < n)
-	{
-		if (object->camera_mx->d[v] > cmax[0])
-			cmax[0] = object->camera_mx->d[v];
-		if (object->camera_mx->d[v] < cmin[0])
-			cmin[0] = object->camera_mx->d[v];
-		if (object->camera_mx->d[n + v] > cmax[1])
-			cmax[1] = object->camera_mx->d[n + v];
-		if (object->camera_mx->d[n + v] < cmin[1])
-			cmin[1] = object->camera_mx->d[n + v];
-		if (object->camera_mx->d[2 * n + v] > cmax[2])
-			cmax[2] = object->camera_mx->d[2 * n + v];
-		if (object->camera_mx->d[2 * n + v] < cmin[2])
-			cmin[2] = object->camera_mx->d[2 * n + v];
-		v++;
-	}
-}
-
-static void	fdf_get_screen_autoscale(uint32_t *img_wh,
+static void	fdf_get_screen_autoscale(double *img_wh,
 		t_fdf_object *object,
 		double *cmin,
 		double *cmax)
@@ -79,7 +38,7 @@ static void	fdf_get_screen_autoscale(uint32_t *img_wh,
 	object->c2s_sca_par[2] = 1;
 }
 
-static void	fdf_get_screen_autooffset(uint32_t *img_wh,
+static void	fdf_get_screen_autooffset(double *img_wh,
 		t_fdf_object *object,
 		double *cmin,
 		double *cmax)
@@ -103,11 +62,11 @@ void	fdf_get_autofit_transf_par(uint32_t img_w,
 {
 	double		cmin[3];
 	double		cmax[3];
-	uint32_t	img_wh[2];
+	double		img_wh[2];
 
-	img_wh[0] = img_w;
-	img_wh[1] = img_h;
-	fdf_get_camera_min_max(object, cmin, cmax);
+	img_wh[0] = img_w - 1;
+	img_wh[1] = img_h - 1;
+	fdf_get_vertex_min_max(object->camera_mx, cmin, cmax);
 	fdf_get_screen_autoscale(img_wh, object, cmin, cmax);
 	fdf_get_screen_autooffset(img_wh, object, cmin, cmax);
 }

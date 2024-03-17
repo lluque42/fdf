@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 14:49:42 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:02:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,32 @@
 typedef struct s_fdf_wlayout	t_fdf_wlayout;
 
 /**
+ * @enum e_render_request
+ * @brief Base for typedef <b>t_render_request</b>.
+ * @details This type is used in function fdf_render to indicate what is needed
+ * to re-calculate and redraw.
+ * @var e_render_request::FROM_WORLD
+ * The re-calculations must begin at transformations from model to WORLD space.
+ * @var e_render_request::FROM_CAMERA
+ * The re-calculations must begin at transformations from world to CAMERA space.
+ * @var e_render_request::FROM_SCREEN
+ * The re-calculations must begin at transformations from camera to SCREEN view
+ * space.
+ * @var e_render_request::FROM_IMAGE
+ * The re-calculations must begin at IMAGE (pixel-based) level.
+ * @var e_render_request::NO_RENDER
+ * There is no need to render.
+*/
+typedef enum e_render_request
+{
+	FROM_WORLD,
+	FROM_CAMERA,
+	FROM_SCREEN,
+	FROM_IMAGE,
+	NO_RENDER
+}	t_render_request;
+
+/**
  * @struct s_fdf
  * @brief Base for typedef <b>t_fdf</b>.
  * TODO
@@ -38,8 +64,8 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
  * The current 3D object to render.
  * @var s_fdf::wlayout
  * The GUI window layout.
- * @var s_fdf::render_needed
- * Flag to signal the need to compute a drawing renderization.
+ * @var s_fdf::render_request
+ * Enum to signal the need and depth of renderization.
  * @var s_fdf::autofit
  * When 1: Every renderization will draw an auto-scaled and centered drawing; 
  * user's zoom (scale) and translation request will be ignored while set;
@@ -47,10 +73,10 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
 */
 typedef struct s_fdf
 {
-	t_fdf_object	*object;
-	t_fdf_wlayout	*wlayout;
-	int				autofit;
-	int				render_needed;
+	t_fdf_object		*object;
+	t_fdf_wlayout		*wlayout;
+	int					autofit;
+	t_render_request	render_request;
 }				t_fdf;
 
 /**

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:52:45 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:46:00 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:18:36 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	fdf_toggle_autofit(t_fdf *fdf)
 	{
 		fdf->autofit = 1;
 		ft_printf("Autofit enabled\n");
-		fdf->render_needed = 1;
+		if (fdf->render_request > FROM_SCREEN)
+			fdf->render_request = FROM_SCREEN;
 	}
 }

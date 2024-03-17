@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:56:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:32:10 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:00:53 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	fdf_user_zoom(t_fdf *fdf)
 		sca_step_z--;
 	}
 	fdf_scale_step(fdf, sca_step_x, sca_step_y, sca_step_z);
-	fdf->render_needed = 1;
 }
 
 void	fdf_zoom_keys_down(t_fdf *fdf)

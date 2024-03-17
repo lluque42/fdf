@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/14 21:59:36 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 20:01:35 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	fdf_start_gui(t_fdf *fdf)
 		fdf->wlayout->image,
 		fdf->wlayout->wintoimg_xoffset,
 		fdf->wlayout->wintoimg_yoffset);
-	if (!fdf_render(fdf, FROM_WORLD))
-		return (mlx_terminate(fdf->wlayout->window), 0);
+	fdf->render_request = FROM_WORLD;
+	fdf->render_request = FROM_WORLD;
 	mlx_loop(fdf->wlayout->window);
 	mlx_terminate(fdf->wlayout->window);
 	return (1);

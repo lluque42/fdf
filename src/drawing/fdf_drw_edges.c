@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/14 14:27:51 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 20:11:33 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ static t_fdf_line	*fdf_create_line(t_fdf_object *object, int start, int end)
 	start_y = object->screen_mx->d[object->screen_mx->n + start];
 	end_x = object->screen_mx->d[end];
 	end_y = object->screen_mx->d[object->screen_mx->n + end];
-	if ((int)(end_x - start_x) == 0)
+	if (end_x - start_x == 0)
 		return (fdf_vertical_line(start_y, end_y, start_x, line));
-	line->m = (double)(end_y - start_y) / (double)(end_x - start_x);
-	line->b = (double)end_y - line->m * (double)end_x;
+	line->m = (end_y - start_y) / (end_x - start_x);
+	line->b = end_y - line->m * end_x;
 	line->first_x = start_x;
 	line->last_x = end_x;
 	if (start_x > end_x)
@@ -85,26 +85,32 @@ static t_fdf_line	*fdf_create_line(t_fdf_object *object, int start, int end)
 
 static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 {
-	uint32_t	pixel_x;
-	uint32_t	pixel_y;
+	double	pixel_x;
+	double	pixel_y;
+	double	stop;
+	double	vertical_line_x;
 
+	stop = line->last_x;
 	if (!line->m_is_infinite)
 	{
-		pixel_x = line->first_x - 1;
-		while (++pixel_x <= line->last_x)
+		pixel_x = line->first_x;
+		while (pixel_x < stop)
 		{
-			pixel_y = (int)(pixel_x * line->m + line->b);
-			if (pixel_y > (uint32_t)image->height)
-				pixel_y = image->height;
-			mlx_put_pixel(image, pixel_x, pixel_y, 0xFFFFFFFF);
+			pixel_y = round(pixel_x * line->m + line->b);
+			mlx_put_pixel(image, round(pixel_x), pixel_y, 0xFFFFFFFF);
+			pixel_x++;
 		}
 		return ;
 	}
-	pixel_y = line->first_x - 1;
-	while (++pixel_y <= line->last_x)
+	pixel_y = line->first_x;
+	vertical_line_x = round(line->vertical_line_x);
+	while (pixel_y < stop)
+	{
 		mlx_put_pixel(image,
-			line->vertical_line_x,
-			pixel_y, 0xFFFFFFFF);
+			vertical_line_x,
+			round(pixel_y), 0xFFFFFFFF);
+		pixel_y++;
+	}
 	return ;
 }
 
@@ -138,12 +144,12 @@ int	fdf_drw_edges(mlx_image_t *image, t_fdf_object *object)
 	*/
 	// Por ahora...
 		/*
-		printf("[fdf_drw_edges] Drawing line %d, m = %f, b = %f, first_x = %d, last_x = %d, m_is_infinite = %d, vertical_line_x = %f\n",
-			e,
-			line->m,
-			line->b,
-			line->first_x,
-			line->last_x,
-			line->m_is_infinite,
-			line->vertical_line_x);
+	printf("[fdf_drw_edges] Drawing line %d, m = %f, b = %f, first_x = %f, last_x = %f, m_is_infinite = %d, vertical_line_x = %f\n",
+		e,
+		line->m,
+		line->b,
+		line->first_x,
+		line->last_x,
+		line->m_is_infinite,
+		line->vertical_line_x);
 	*/

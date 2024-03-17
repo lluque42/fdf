@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 21:31:50 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:09:07 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,23 @@ void	fdf_translate_step(t_fdf *fdf, int step_x, int step_y, int step_z);
  * TODO.
 */
 void	fdf_scale_step(t_fdf *fdf, int step_x, int step_y, int step_z);
+
+/**
+ * @brief <b>fdf_window_resize</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @param [in] width - The new width of the window.
+ *
+ * @param [in] height - The new height of the window.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_window_resize(t_fdf *fdf, int32_t width, int32_t height);
 
 #endif

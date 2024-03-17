@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/13 22:50:32 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/17 20:52:36 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,13 @@ endif
 EXT_LIBS = -ldl -lglfw -pthread -lm
 
 # List of header file names that, if modified, should force recompiling
-INCLUDES = $(INC_DIR)main_utils.h
+INCLUDES = $(INC_DIR)main_utils.h \
+		   $(INC_DIR)tesselator.h \
+		   $(INC_DIR)drawing.h \
+		   $(INC_DIR)window.h \
+		   $(INC_DIR)fdf_features.h \
+		   $(INC_DIR)fdf.h \
+		   $(INC_DIR)lin_alg.h
 
 # List of source code file names with path relative to SRC_DIR
 SOURCES = fdf_main.c \
@@ -102,6 +108,7 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_print_edges.c \
 		  drawing/fdf_drw_edges.c \
 		  drawing/fdf_get_autofit_transf_par.c \
+		  drawing/fdf_get_vertex_min_max.c \
 		  drawing/fdf_render.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
@@ -110,13 +117,13 @@ SOURCES = fdf_main.c \
 		  window/fdf_resizehook.c \
 		  window/fdf_create_wlayout.c \
 		  window/fdf_destroy_wlayout.c \
-		  window/fdf_recalc_wlayout.c \
 		  window/fdf_rotation_keys_down.c \
 		  window/fdf_translation_keys_down.c \
 		  window/fdf_zoom_keys_down.c \
 		  fdf/fdf_create_fdf.c \
 		  fdf/fdf_destroy_fdf.c \
 		  features/fdf_exit_program.c \
+		  features/fdf_window_resize.c \
 		  features/fdf_rotate_step.c \
 		  features/fdf_translate_step.c \
 		  features/fdf_scale_step.c \
@@ -303,10 +310,10 @@ fclean:clean
 	@echo "                          --- Fcleaning ---"
 	@echo
 	rm -rf $(BIN_DIR)
-	make fclean --directory=$(LIBFT_DIR)
 	@echo
 	@echo ----------------------------------------------------------------------
 
+#	make fclean --directory=$(LIBFT_DIR)									CREO QUE ES LO JUSTO
 # Rebuild rule: deletes objects files and all outputs, then compiles again
 re: fclean all
 

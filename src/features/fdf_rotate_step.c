@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:12:44 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 13:51:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:17:54 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,6 @@ void	fdf_rotate_step(t_fdf *fdf, int step_x, int step_y, int step_z)
 		(int)fdf->object->w2c_rot_par[0],
 		(int)fdf->object->w2c_rot_par[1],
 		(int)fdf->object->w2c_rot_par[2]);
+	if (fdf->render_request > FROM_CAMERA)
+		fdf->render_request = FROM_CAMERA;
 }

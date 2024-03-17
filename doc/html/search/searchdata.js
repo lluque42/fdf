@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "f",
   4: "abcdefilmnorstvw",
   5: "e",
-  6: "f",
+  6: "fn",
   7: "4"
 };
 

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:56:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 18:27:15 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:19:54 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	fdf_generichook(void *f)
 	fdf_rotation_keys_down(fdf);
 	fdf_translation_keys_down(fdf);
 	fdf_zoom_keys_down(fdf);
-	if (fdf->render_needed)
-	{
-		if (!fdf_render(fdf, FROM_CAMERA))
-			fdf_exit_program(fdf);
-	}
+	if (!fdf_render(fdf))
+		fdf_exit_program(fdf);
 }
