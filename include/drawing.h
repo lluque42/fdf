@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 21:07:34 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/18 00:26:22 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,31 @@ typedef struct s_fdf	t_fdf;
 /**
  * @struct s_fdf_line
  * @brief Base for typedef <b>t_ft_mx_size</b>.
- * @details This type is used to store a size (int x int).
+ * @details This type is used to store the properties of a line defined as
+ * f(i) = i * m + b. Where i could be X or Y and f(i) Y or X.
  * @var s_fdf_line::m
  * The slope of the line.
  * @var s_fdf_line::b
- * The y coordinate value when the associated rect intersects the y axis.
- * @var s_fdf_line::first_x
- * The minimum x coordinate value from where the drawing of the line
+ * The f(i) value where the associated rect intersects the f(i) axis.
+ * @var s_fdf_line::first_i
+ * The minimum i coordinate value from where the drawing of the line
  * should start.
- * @var s_fdf_line::last_x
- * The maximum x coordinate value from where the drawing of the line
+ * @var s_fdf_line::last_i
+ * The maximum i coordinate value from where the drawing of the line
  * should stop.
- * @var s_fdf_line::m_is_infinite
- * If 1 the line must be a vertical one, so it must be drawn swapping Y values
- * for the same X value (member vertical_line_x). The first_x and last_x members
- * are then used for the range for Y values.
- * @var s_fdf_line::vertical_line_x
- * If member m_is_infinite == 1, then this member is the X pixel component for
- * a vertical line.
+ * @var s_fdf_line::i_is_x
+ * If 1 the line is a y = f(x) function and must be drawn iterating X
+ * from first_i to last_i.  
+ * If 0 the line is a x = f(y) function and must be drawn iterating Y
+ * from first_i to last_i.
 */
 typedef struct s_fdf_line
 {
 	double		m;
 	double		b;
-	double		first_x;
-	double		last_x;
-	int			m_is_infinite;
-	double		vertical_line_x;
+	double		first_i;
+	double		last_i;
+	int			i_is_x;
 }				t_fdf_line;
 
 /**

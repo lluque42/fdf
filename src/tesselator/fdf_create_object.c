@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:07:59 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 13:38:51 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/17 23:40:06 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static void	init_m2w_settings(t_fdf_object *object)
 	object->m2w_sca_par[2] = 1;
 }
 
+//(256, 172, 89)
+/*
+object->w2c_rot_par[0] = 256;
+object->w2c_rot_par[1] = 172;
+object->w2c_rot_par[2] = 89;
+*/
 static void	init_w2c_settings(t_fdf_object *object)
 {
 	object->w2c_rot_par[0] = 90 - 35.264;

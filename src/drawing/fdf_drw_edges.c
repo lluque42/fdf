@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 20:11:33 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/18 00:07:38 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,52 +34,43 @@
  * 		b = y - m * x;
  * 		b = end_y - m * end_x;
  */
-// In this case the start_x and end_x are used to hold the range of the
-// y component.
-static t_fdf_line	*fdf_vertical_line(double start_y,
-		double end_y,
-		double x,
-		t_fdf_line *line)
+static void	fdf_swap_doubles(double *a, double *b)
 {
-	line->m_is_infinite = 1;
-	line->first_x = start_y;
-	line->last_x = end_y;
-	line->vertical_line_x = x;
-	if (start_y > end_y)
-	{
-		line->first_x = end_y;
-		line->last_x = start_y;
-	}
-	return (line);
+	double	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
-//start and end arguments are vertexes indexes in the model's vertex_mx
-static t_fdf_line	*fdf_create_line(t_fdf_object *object, int start, int end)
+static t_fdf_line	*fdf_create_line(double start_x,
+		double start_y,
+		double end_x,
+		double end_y)
 {
 	t_fdf_line	*line;
-	double		start_x;
-	double		start_y;
-	double		end_x;
-	double		end_y;
 
 	line = ft_calloc(1, sizeof (t_fdf_line));
 	if (line == NULL)
 		return (NULL);
-	start_x = object->screen_mx->d[start];
-	start_y = object->screen_mx->d[object->screen_mx->n + start];
-	end_x = object->screen_mx->d[end];
-	end_y = object->screen_mx->d[object->screen_mx->n + end];
-	if (end_x - start_x == 0)
-		return (fdf_vertical_line(start_y, end_y, start_x, line));
 	line->m = (end_y - start_y) / (end_x - start_x);
-	line->b = end_y - line->m * end_x;
-	line->first_x = start_x;
-	line->last_x = end_x;
-	if (start_x > end_x)
+	if (fabs(line->m) <= 1)
 	{
-		line->first_x = end_x;
-		line->last_x = start_x;
+		line->b = end_y - line->m * end_x;
+		line->first_i = start_x;
+		line->last_i = end_x;
+		line->i_is_x = 1;
 	}
+	else
+	{
+		line->m = (end_x - start_x) / (end_y - start_y);
+		line->b = end_x - line->m * end_y;
+		line->first_i = start_y;
+		line->last_i = end_y;
+		line->i_is_x = 0;
+	}
+	if (line->first_i > line->last_i)
+		fdf_swap_doubles(&line->first_i, &line->last_i);
 	return (line);
 }
 
@@ -88,45 +79,46 @@ static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 	double	pixel_x;
 	double	pixel_y;
 	double	stop;
-	double	vertical_line_x;
 
-	stop = line->last_x;
-	if (!line->m_is_infinite)
+	stop = line->last_i;
+	if (line->i_is_x)
 	{
-		pixel_x = line->first_x;
+		pixel_x = line->first_i;
 		while (pixel_x < stop)
 		{
 			pixel_y = round(pixel_x * line->m + line->b);
 			mlx_put_pixel(image, round(pixel_x), pixel_y, 0xFFFFFFFF);
 			pixel_x++;
 		}
-		return ;
 	}
-	pixel_y = line->first_x;
-	vertical_line_x = round(line->vertical_line_x);
-	while (pixel_y < stop)
+	else
 	{
-		mlx_put_pixel(image,
-			vertical_line_x,
-			round(pixel_y), 0xFFFFFFFF);
-		pixel_y++;
+		pixel_y = line->first_i;
+		while (pixel_y < stop)
+		{
+			pixel_x = round(pixel_y * line->m + line->b);
+			mlx_put_pixel(image, pixel_x, round(pixel_y), 0xFFFFFFFF);
+			pixel_y++;
+		}
 	}
-	return ;
 }
 
 int	fdf_drw_edges(mlx_image_t *image, t_fdf_object *object)
 {
 	int			e;
 	t_fdf_line	*line;
+	t_ft_mx		*s_mx;
 
+	s_mx = object->screen_mx;
 	e = -1;
 	while (++e < object->edges)
 	{
 		if (object->edge[e].is_hidden)
 			continue ;
-		line = fdf_create_line(object,
-				object->edge[e].start,
-				object->edge[e].end);
+		line = fdf_create_line(s_mx->d[object->edge[e].start],
+				s_mx->d[object->screen_mx->n + object->edge[e].start],
+				s_mx->d[object->edge[e].end],
+				s_mx->d[object->screen_mx->n + object->edge[e].end]);
 		if (line == NULL)
 			return (0);
 		fdf_draw_line(image, line);

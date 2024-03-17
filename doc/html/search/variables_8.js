@@ -4,6 +4,5 @@ var searchData=
   ['m2w_5frot_5fpar_1',['m2w_rot_par',['../structs__fdf__object.html#a7f31835a9f70e6e5fe36f6ff7b685692',1,'s_fdf_object']]],
   ['m2w_5fsca_5fpar_2',['m2w_sca_par',['../structs__fdf__object.html#afdf4641c13aedf5dd176bb3e017fef26',1,'s_fdf_object']]],
   ['m2w_5ftra_5fpar_3',['m2w_tra_par',['../structs__fdf__object.html#ad635a54e4150d67711d823e3248e54ba',1,'s_fdf_object']]],
-  ['m_5fis_5finfinite_4',['m_is_infinite',['../structs__fdf__line.html#affa69fa132219545e5d2a7448c2fb099',1,'s_fdf_line']]],
-  ['model_5fmx_5',['model_mx',['../structs__fdf__object.html#a33c908497fa207a3dc79bd6845df188c',1,'s_fdf_object']]]
+  ['model_5fmx_4',['model_mx',['../structs__fdf__object.html#a33c908497fa207a3dc79bd6845df188c',1,'s_fdf_object']]]
 ];
