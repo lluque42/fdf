@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/18 00:07:38 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/18 09:37:08 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,47 @@ static t_fdf_line	*fdf_create_line(double start_x,
 	return (line);
 }
 
+static void	fdf_line_abscissa_clipping(mlx_image_t *image, t_fdf_line *line)
+{
+	if (line->i_is_x)
+	{
+		if (line->last_i >= image->width)
+			line->last_i = image->width - 1;
+		if (line->first_i < 0)
+			line->first_i = 0;
+	}
+	else
+	{
+		if (line->last_i >= image->height)
+			line->last_i = image->height - 1;
+		if (line->first_i < 0)
+			line->first_i = 0;
+	}
+}
+
 static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 {
 	double	pixel_x;
 	double	pixel_y;
-	double	stop;
 
-	stop = line->last_i;
-	if (line->i_is_x)
+	fdf_line_abscissa_clipping(image, line);
+	while (line->first_i < line->last_i)
 	{
-		pixel_x = line->first_i;
-		while (pixel_x < stop)
+		if (line->i_is_x)
+			pixel_y = round(line->first_i * line->m + line->b);
+		else
+			pixel_x = round(line->first_i * line->m + line->b);
+		if ((line->i_is_x && (pixel_y < 0 || pixel_y >= image->height))
+			|| (!line->i_is_x && (pixel_x < 0 || pixel_x >= image->width)))
 		{
-			pixel_y = round(pixel_x * line->m + line->b);
-			mlx_put_pixel(image, round(pixel_x), pixel_y, 0xFFFFFFFF);
-			pixel_x++;
+			line->first_i++;
+			continue ;
 		}
-	}
-	else
-	{
-		pixel_y = line->first_i;
-		while (pixel_y < stop)
-		{
-			pixel_x = round(pixel_y * line->m + line->b);
-			mlx_put_pixel(image, pixel_x, round(pixel_y), 0xFFFFFFFF);
-			pixel_y++;
-		}
+		if (line->i_is_x)
+			mlx_put_pixel(image, round(line->first_i), pixel_y, 0xFFFFFFFF);
+		else
+			mlx_put_pixel(image, pixel_x, round(line->first_i), 0xFFFFFFFF);
+		line->first_i++;
 	}
 }
 
