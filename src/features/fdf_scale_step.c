@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:32:30 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 15:18:07 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/18 10:08:43 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	fdf_scale_step(t_fdf *fdf, int step_x, int step_y, int step_z)
 {
-	ft_printf("[DUMMY %p]New scale: (%d, %d, %d)\n",
-		fdf,
-		step_x,
-		step_y,
-		step_z);
+	fdf->object->w2c_sca_par[0] += SCA_STEP * step_x;
+	fdf->object->w2c_sca_par[1] += SCA_STEP * step_y;
+	fdf->object->w2c_sca_par[2] += SCA_STEP * step_z;
+	ft_printf("New scale: (%d, %d, %d)\n",
+		(int)fdf->object->w2c_sca_par[0],
+		(int)fdf->object->w2c_sca_par[1],
+		(int)fdf->object->w2c_sca_par[2]);
 	if (fdf->render_request > FROM_CAMERA)
 		fdf->render_request = FROM_CAMERA;
-	// DUMMY so far															////////
 }
