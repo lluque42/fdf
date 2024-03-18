@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 14:41:55 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:53:50 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,14 @@ static void	edge2right_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // (element ij in the map_mx) from which to form the edge.
 // If a down-right neighbor doesn't exist, this function does nothing.
 // The main goal is to calculate neighbor_v based on i and j.
-// Visibility is set ONLY if the height of both vertexes is different.
+// Visibility is set ONLY if this diagonal edge does not lie on the plane
+// defined by this vertex and its (involved) neighbors.
 static void	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
+	int	right_neighbor_v;
+	int	down_neighbor_v;
 	int	n;
 
 	if (j + 1 >= map_mx->n || i + 1 >= map_mx->m)
@@ -78,11 +81,17 @@ static void	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	n = map_mx->n;
 	this_v = i * n + j;
 	neighbor_v = (i + 1) * n + j + 1;
+	right_neighbor_v = (i + 1) * n + j;
+	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	object->edge[object->edges].is_hidden = 1;
-	if (map_mx->d[this_v] != map_mx->d[neighbor_v])
-		object->edge[object->edges].is_hidden = 0;
+	object->edge[object->edges].is_hidden = 0;
+	if ((map_mx->d[this_v] == map_mx->d[down_neighbor_v]
+			&& map_mx->d[right_neighbor_v] == map_mx->d[neighbor_v])
+		|| (map_mx->d[this_v] == map_mx->d[right_neighbor_v]
+			&& map_mx->d[down_neighbor_v] == map_mx->d[neighbor_v])
+		|| map_mx->d[this_v] == map_mx->d[neighbor_v])
+		object->edge[object->edges].is_hidden = 1;
 	object->edges++;
 }
 
@@ -91,11 +100,14 @@ static void	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // (element ij in the map_mx) from which to form the edge.
 // If a down-left neighbor doesn't exist, this function does nothing.
 // The main goal is to calculate neighbor_v based on i and j.
-// Visibility is set ONLY if the height of both vertexes is different.
+// Visibility is set ONLY if this diagonal edge does not lie on the plane
+// defined by this vertex and its (involved) neighbors.
 static void	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
+	int	left_neighbor_v;
+	int	down_neighbor_v;
 	int	n;
 
 	if (j + 1 >= map_mx->n || i - 1 < 0)
@@ -103,11 +115,17 @@ static void	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	n = map_mx->n;
 	this_v = i * n + j;
 	neighbor_v = (i - 1) * n + j + 1;
+	left_neighbor_v = (i - 1) * n + j;
+	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	object->edge[object->edges].is_hidden = 1;
-	if (map_mx->d[this_v] != map_mx->d[neighbor_v])
-		object->edge[object->edges].is_hidden = 0;
+	object->edge[object->edges].is_hidden = 0;
+	if ((map_mx->d[this_v] == map_mx->d[down_neighbor_v]
+			&& map_mx->d[left_neighbor_v] == map_mx->d[neighbor_v])
+		|| (map_mx->d[this_v] == map_mx->d[left_neighbor_v]
+			&& map_mx->d[down_neighbor_v] == map_mx->d[neighbor_v])
+		|| map_mx->d[this_v] == map_mx->d[neighbor_v])
+		object->edge[object->edges].is_hidden = 1;
 	object->edges++;
 }
 
