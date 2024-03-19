@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/18 09:37:08 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:56:41 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,22 @@ static void	fdf_line_abscissa_clipping(mlx_image_t *image, t_fdf_line *line)
 {
 	if (line->i_is_x)
 	{
-		if (line->last_i >= image->width)
+		if (round(line->last_i) >= image->width)
 			line->last_i = image->width - 1;
-		if (line->first_i < 0)
+		if (round(line->first_i) < 0)
 			line->first_i = 0;
 	}
 	else
 	{
-		if (line->last_i >= image->height)
+		if (round(line->last_i) >= image->height)
 			line->last_i = image->height - 1;
-		if (line->first_i < 0)
+		if (round(line->first_i) < 0)
 			line->first_i = 0;
 	}
 }
 
+// This function performs clipping on the ordinate just before mlx_put_pixel.
+// The abscissa is clipped in fdf_line_abscissa_clipping().
 static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 {
 	double	pixel_x;
@@ -110,9 +112,9 @@ static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 			line->first_i++;
 			continue ;
 		}
-		if (line->i_is_x)
+		if (line->i_is_x && pixel_y < image->height)
 			mlx_put_pixel(image, round(line->first_i), pixel_y, 0xFFFFFFFF);
-		else
+		if (!line->i_is_x && pixel_x < image->width)
 			mlx_put_pixel(image, pixel_x, round(line->first_i), 0xFFFFFFFF);
 		line->first_i++;
 	}
@@ -141,6 +143,41 @@ int	fdf_drw_edges(mlx_image_t *image, t_fdf_object *object)
 	free(line);
 	return (1);
 }
+/*
+static void fdf_out_of_boundary_pixel(mlx_image_t *image, t_fdf_line *line)
+{
+		if (line->i_is_x)
+		{
+			if (round(line->first_i) >= image->width
+					|| round(line->first_i) < 0
+					|| pixel_y >= image->height
+					|| pixel_y < 0)
+			{
+				printf("[fdf_draw_line] WARNING! PIXEL OUT OF RANGE\n");
+				printf("\t i is x!!!\n");
+				printf("\timage->width = %d\n", image->width);
+				printf("\tround(line->first_i) = %f\n", round(line->first_i));
+				printf("\timage->height = %d\n", image->height);
+				printf("\tpixel_y = %f\n", pixel_y);
+			}
+		}
+		else
+		{
+			if (pixel_x >= image->width
+					|| pixel_x < 0
+					|| round(line->first_i) >= image->height
+					|| round(line->first_i) < 0)
+			{
+				printf("[fdf_draw_line] WARNING! PIXEL OUT OF RANGE\n");
+				printf("\t i is y!!!\n");
+				printf("\timage->width = %d\n", image->width);
+				printf("\tpixel_x = %f\n", pixel_x);
+				printf("\timage->height = %d\n", image->height);
+				printf("\tround(line->first_i) = %f\n", round(line->first_i));
+			}
+		}
+}
+*/
 	/*
 	ft_printf("[fdf_drw_edges] The edges from world\n");
 	fdf_print_edges(NULL, fdf->object, fdf->object->world_mx);
