@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/07 23:15:57 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/19 16:05:55 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,5 +440,74 @@ int		ft_mx_flipr(t_ft_mx *m);
  * be flipped.
 */
 int		ft_mx_flipc(t_ft_mx *m);
+
+/**
+ * @brief <b>ft_vx_create</b> -- Creates a xyzw vertex as a column vector
+ * matrix.
+ *
+ * @details Takes 4 double type values corresponding to a xyzw vertex to create
+ * and initialize a column vector matrix.
+ *
+ * @param [in] x - The X coordinate value.
+ *
+ * @param [in] y - The Y coordinate value.
+ *
+ * @param [in] z - The Z coordinate value.
+ *
+ * @param [in] w - The W value.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_vx_create(double x, double y, double z, double w);
+
+/**
+ * @brief <b>ft_vx_xproduct</b> -- Calculates the cross product of two xyzw
+ * vertexes passed as column vector matrixes.
+ *
+ * @details Takes two matrixes which must be  column vectors with 4 rows
+ * (to allow for xyzw vertexes calculations) and returns the result of their
+ * cross product as a new column vector of 4 rows.
+ *
+ * @param [in] b - A column vector matrix representing a xyzw vertex.
+ *
+ * @param [in] c - A column vector matrix representing a xyzw vertex.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_vx_xproduct(t_ft_mx *b, t_ft_mx *c);
+
+/**
+ * @brief <b>ft_vx_substract</b> -- Calculates the substraction of two xyzw
+ * vertexes passed as column vector matrixes.
+ *
+ * @details Takes two matrixes which must be  column vectors with 4 rows
+ * (to allow for xyzw vertexes calculations) and returns the result of their
+ * substraction (b - c).
+ *
+ * @param [in] b - A column vector matrix representing a xyzw vertex.
+ *
+ * @param [in] c - A column vector matrix representing a xyzw vertex.
+ *
+ * @return b - c. TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_ft_mx	*ft_vx_substract(t_ft_mx *b, t_ft_mx *c);
 
 #endif

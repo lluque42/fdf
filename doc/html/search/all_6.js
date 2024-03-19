@@ -59,5 +59,8 @@ var searchData=
   ['ft_5fmx_5fset_5felement_56',['ft_mx_set_element',['../lin__alg_8h.html#aa44f2f277af5b0f812d910e08ea872c9',1,'lin_alg.h']]],
   ['ft_5fmx_5fset_5frow_57',['ft_mx_set_row',['../lin__alg_8h.html#a0dd812ee9245b9708e8d0e25c6efd6ad',1,'lin_alg.h']]],
   ['ft_5fmx_5fsmult_58',['ft_mx_smult',['../lin__alg_8h.html#a8c1ba16721b49126cd8347c9af81535e',1,'lin_alg.h']]],
-  ['ft_5fmx_5ftranspose_59',['ft_mx_transpose',['../lin__alg_8h.html#a5f79fce6ce313a342aa3a40b0d0d8471',1,'lin_alg.h']]]
+  ['ft_5fmx_5ftranspose_59',['ft_mx_transpose',['../lin__alg_8h.html#a5f79fce6ce313a342aa3a40b0d0d8471',1,'lin_alg.h']]],
+  ['ft_5fvx_5fcreate_60',['ft_vx_create',['../lin__alg_8h.html#ac017cc02ca5cf33f8b51041873cb7383',1,'lin_alg.h']]],
+  ['ft_5fvx_5fsubstract_61',['ft_vx_substract',['../lin__alg_8h.html#a9bd0de6d7b6ae8db13d4cd772771fd16',1,'lin_alg.h']]],
+  ['ft_5fvx_5fxproduct_62',['ft_vx_xproduct',['../lin__alg_8h.html#a6ac9d2c4201d16ea0a0adce280952c16',1,'lin_alg.h']]]
 ];

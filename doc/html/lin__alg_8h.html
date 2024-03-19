@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-18</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-19</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -184,6 +184,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ad3490cdcef049ee2e47617048388caf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#ad3490cdcef049ee2e47617048388caf7">ft_mx_flipc</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *m)</td></tr>
 <tr class="memdesc:ad3490cdcef049ee2e47617048388caf7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_flipc</b> &ndash; Flip along the column axis (x axis).  <a href="lin__alg_8h.html#ad3490cdcef049ee2e47617048388caf7">More...</a><br /></td></tr>
 <tr class="separator:ad3490cdcef049ee2e47617048388caf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac017cc02ca5cf33f8b51041873cb7383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#ac017cc02ca5cf33f8b51041873cb7383">ft_vx_create</a> (double x, double y, double z, double w)</td></tr>
+<tr class="memdesc:ac017cc02ca5cf33f8b51041873cb7383"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_vx_create</b> &ndash; Creates a xyzw vertex as a column vector matrix.  <a href="lin__alg_8h.html#ac017cc02ca5cf33f8b51041873cb7383">More...</a><br /></td></tr>
+<tr class="separator:ac017cc02ca5cf33f8b51041873cb7383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac9d2c4201d16ea0a0adce280952c16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#a6ac9d2c4201d16ea0a0adce280952c16">ft_vx_xproduct</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *b, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *c)</td></tr>
+<tr class="memdesc:a6ac9d2c4201d16ea0a0adce280952c16"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_vx_xproduct</b> &ndash; Calculates the cross product of two xyzw vertexes passed as column vector matrixes.  <a href="lin__alg_8h.html#a6ac9d2c4201d16ea0a0adce280952c16">More...</a><br /></td></tr>
+<tr class="separator:a6ac9d2c4201d16ea0a0adce280952c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd0de6d7b6ae8db13d4cd772771fd16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#a9bd0de6d7b6ae8db13d4cd772771fd16">ft_vx_substract</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *b, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *c)</td></tr>
+<tr class="memdesc:a9bd0de6d7b6ae8db13d4cd772771fd16"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_vx_substract</b> &ndash; Calculates the substraction of two xyzw vertexes passed as column vector matrixes.  <a href="lin__alg_8h.html#a9bd0de6d7b6ae8db13d4cd772771fd16">More...</a><br /></td></tr>
+<tr class="separator:a9bd0de6d7b6ae8db13d4cd772771fd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for linearly-storaged matrixes (row-major order) operations. Syntaxis will follow mathematics standard: </p><pre class="fragment">i: row index, starts at 0 (NOT 1)
@@ -934,6 +943,143 @@ Intuitive C-style matrix    Linear storage (row-major order)
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>- The matrix to be transposed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="ac017cc02ca5cf33f8b51041873cb7383" name="ac017cc02ca5cf33f8b51041873cb7383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac017cc02ca5cf33f8b51041873cb7383">&#9670;&nbsp;</a></span>ft_vx_create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_vx_create </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>ft_vx_create</b> &ndash; Creates a xyzw vertex as a column vector matrix. </p>
+<p >Takes 4 double type values corresponding to a xyzw vertex to create and initialize a column vector matrix.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>- The X coordinate value.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>- The Y coordinate value.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>- The Z coordinate value.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">w</td><td>- The W value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="a9bd0de6d7b6ae8db13d4cd772771fd16" name="a9bd0de6d7b6ae8db13d4cd772771fd16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd0de6d7b6ae8db13d4cd772771fd16">&#9670;&nbsp;</a></span>ft_vx_substract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_vx_substract </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>ft_vx_substract</b> &ndash; Calculates the substraction of two xyzw vertexes passed as column vector matrixes. </p>
+<p >Takes two matrixes which must be column vectors with 4 rows (to allow for xyzw vertexes calculations) and returns the result of their substraction (b - c).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>- A column vector matrix representing a xyzw vertex.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>- A column vector matrix representing a xyzw vertex.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>b - c. TODO.. NULL if error.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="a6ac9d2c4201d16ea0a0adce280952c16" name="a6ac9d2c4201d16ea0a0adce280952c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac9d2c4201d16ea0a0adce280952c16">&#9670;&nbsp;</a></span>ft_vx_xproduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> * ft_vx_xproduct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>ft_vx_xproduct</b> &ndash; Calculates the cross product of two xyzw vertexes passed as column vector matrixes. </p>
+<p >Takes two matrixes which must be column vectors with 4 rows (to allow for xyzw vertexes calculations) and returns the result of their cross product as a new column vector of 4 rows.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>- A column vector matrix representing a xyzw vertex.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>- A column vector matrix representing a xyzw vertex.</td></tr>
   </table>
   </dd>
 </dl>
