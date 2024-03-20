@@ -1,13 +1,6 @@
 var searchData=
 [
-  ['w2c_5frot_5fpar_0',['w2c_rot_par',['../structs__fdf__object.html#afa791e9138a037405bcac450bfc5bfdb',1,'s_fdf_object']]],
-  ['w2c_5fsca_5fpar_1',['w2c_sca_par',['../structs__fdf__object.html#a91b6c39400d1c1e92f8388ed8f99a301',1,'s_fdf_object']]],
-  ['w2c_5ftra_5fpar_2',['w2c_tra_par',['../structs__fdf__object.html#a6d9ccb96a02116fcd659b1d7f51d9b9e',1,'s_fdf_object']]],
-  ['window_3',['window',['../structs__fdf__wlayout.html#a9fb3185f061f549c7e21c286564949cc',1,'s_fdf_wlayout']]],
-  ['window_5fh_4',['window_h',['../structs__fdf__wlayout.html#afd88b83a661a2ff45eefb6ef4dd05c5a',1,'s_fdf_wlayout']]],
-  ['window_5fw_5',['window_w',['../structs__fdf__wlayout.html#a36198a60996f3b8a3386935516939be4',1,'s_fdf_wlayout']]],
-  ['wintoimg_5fxoffset_6',['wintoimg_xoffset',['../structs__fdf__wlayout.html#ae04143a9eb46d4bddfb4bfe8f96ac739',1,'s_fdf_wlayout']]],
-  ['wintoimg_5fyoffset_7',['wintoimg_yoffset',['../structs__fdf__wlayout.html#a40c081a8d80af5942f12856f58238c14',1,'s_fdf_wlayout']]],
-  ['wlayout_8',['wlayout',['../structs__fdf.html#a4887bd43393d45ff5cb987076f47502a',1,'s_fdf']]],
-  ['world_5fmx_9',['world_mx',['../structs__fdf__object.html#a6236c475712df59898eae4648305ff11',1,'s_fdf_object']]]
+  ['v1_0',['v1',['../structs__fdf__triangle.html#aaf992e1e93fabaa9f7c3965e89d24413',1,'s_fdf_triangle']]],
+  ['v2_1',['v2',['../structs__fdf__triangle.html#a8cb324b6ac6da6a29c20cd59e7ce0a48',1,'s_fdf_triangle']]],
+  ['v3_2',['v3',['../structs__fdf__triangle.html#af9390697ae7a817b5630a8db35199015',1,'s_fdf_triangle']]]
 ];

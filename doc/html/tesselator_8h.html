@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-19</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-20</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -105,6 +105,9 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__edge.html">s_fdf_edge</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_fdf_edge</b>.  <a href="structs__fdf__edge.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__plane.html">s_fdf_plane</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_fdf_plane</b>.  <a href="structs__fdf__plane.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__triangle.html">s_fdf_triangle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_fdf_triangle</b>.  <a href="structs__fdf__triangle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +120,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aa7435e7fdd0901f09232d37e5e01a750"><td class="memItemLeft" align="right" valign="top"><a id="aa7435e7fdd0901f09232d37e5e01a750" name="aa7435e7fdd0901f09232d37e5e01a750"></a>
 typedef struct <a class="el" href="structs__fdf__edge.html">s_fdf_edge</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_edge</b></td></tr>
 <tr class="separator:aa7435e7fdd0901f09232d37e5e01a750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7687b788508ce4fcaa0abeea2da02e57"><td class="memItemLeft" align="right" valign="top"><a id="a7687b788508ce4fcaa0abeea2da02e57" name="a7687b788508ce4fcaa0abeea2da02e57"></a>
+typedef struct <a class="el" href="structs__fdf__plane.html">s_fdf_plane</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_plane</b></td></tr>
+<tr class="separator:a7687b788508ce4fcaa0abeea2da02e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ea23ae635082919dfa713081755ae7f"><td class="memItemLeft" align="right" valign="top"><a id="a8ea23ae635082919dfa713081755ae7f" name="a8ea23ae635082919dfa713081755ae7f"></a>
 typedef struct <a class="el" href="structs__fdf__triangle.html">s_fdf_triangle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_triangle</b></td></tr>
 <tr class="separator:a8ea23ae635082919dfa713081755ae7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,6 +162,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aec66f34a8ebb02eaa97625530b488683"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#aec66f34a8ebb02eaa97625530b488683">fdf_print_edges</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *map_mx, <a class="el" href="structs__fdf__object.html">t_fdf_object</a> *object, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v_mx)</td></tr>
 <tr class="memdesc:aec66f34a8ebb02eaa97625530b488683"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_print_edges</b> &ndash; TODO.  <a href="tesselator_8h.html#aec66f34a8ebb02eaa97625530b488683">More...</a><br /></td></tr>
 <tr class="separator:aec66f34a8ebb02eaa97625530b488683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c0265c2471985c6324087e6d58402a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#ab1c0265c2471985c6324087e6d58402a">fdf_create_plane</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *a, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *b, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *c)</td></tr>
+<tr class="memdesc:ab1c0265c2471985c6324087e6d58402a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_create_plane</b> &ndash; Creates a plane from 3 vertexes.  <a href="tesselator_8h.html#ab1c0265c2471985c6324087e6d58402a">More...</a><br /></td></tr>
+<tr class="separator:ab1c0265c2471985c6324087e6d58402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ab6a89925154d4f48faf720e845d96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#a97ab6a89925154d4f48faf720e845d96">fdf_is_in_plane</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v, <a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *plane)</td></tr>
+<tr class="memdesc:a97ab6a89925154d4f48faf720e845d96"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane.  <a href="tesselator_8h.html#a97ab6a89925154d4f48faf720e845d96">More...</a><br /></td></tr>
+<tr class="separator:a97ab6a89925154d4f48faf720e845d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >TODO </p>
@@ -203,6 +215,55 @@ Functions</h2></td></tr>
 <p><b>fdf_create_ortoproj</b> &ndash; Creates an transformation matrix for ortographic projection to the XY-plane. </p>
 <p >Basically a 3x3 identity matrix with id22 as zero. TODO.</p>
 <p >De wiki (<a href="https://en.wikipedia.org/wiki/Rotation_matrix">https://en.wikipedia.org/wiki/Rotation_matrix</a>): R = RzRyRx These matrices produce the desired effect only if they are used to premultiply column vectors, and (since in general matrix multiplication is not commutative) only if they are applied in the specified order (see Ambiguities for more details). The order of rotation operations is from right to left; the matrix adjacent to the column vector is the first to be applied, and then the one to the left.[3] ... Pre-multiplication or post-multiplication The same point P can be represented either by a column vector v or a row vector w. Rotation matrices can either pre-multiply column vectors (Rv), or post-multiply row vectors (wR). However, Rv produces a rotation in the opposite direction with respect to wR. Throughout this article, rotations produced on column vectors are described by means of a pre-multiplication. To obtain exactly the same rotation (i.e. the same final coordinates of point P), the equivalent row vector must be post-multiplied by the transpose of R (i.e. wRT).</p>
+<dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="ab1c0265c2471985c6324087e6d58402a" name="ab1c0265c2471985c6324087e6d58402a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1c0265c2471985c6324087e6d58402a">&#9670;&nbsp;</a></span>fdf_create_plane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> * fdf_create_plane </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_create_plane</b> &ndash; Creates a plane from 3 vertexes. </p>
+<p >TODO.</p>
+<p ><a href="https://math.stackexchange.com/questions/2686606/">https://math.stackexchange.com/questions/2686606/</a> equation-of-a-plane-passing-through-3-points</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>- One of the vertexes that belongs to the plane as a column vector.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>- One of the vertexes that belongs to the plane as a column vector.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>- One of the vertexes that belongs to the plane as a column vector.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
@@ -460,6 +521,48 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>TODO.. NULL if error.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The vertex_mx is a col-vector matrix where each column represents a xyzw vertex (each row, from top to bottom, has one of these components). The order in which the vertex matrix is filled (which vertex is first included as a column, then the second...) is the following: the first vertex corresponds to the map_mx-&gt;d[0] (which is row 0, column 0 from the addressing style map_mx-&gt;d[i * map_mx-n + j]). Then i (i.e. 'y') is increased while j (i.e. 'x' remains at 0)... In conclusion: map_mx is walked through by increasing the row (i.e. increasing the vertex's 'y' coordinate). TODO. </dd></dl>
+
+</div>
+</div>
+<a id="a97ab6a89925154d4f48faf720e845d96" name="a97ab6a89925154d4f48faf720e845d96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ab6a89925154d4f48faf720e845d96">&#9670;&nbsp;</a></span>fdf_is_in_plane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdf_is_in_plane </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *&#160;</td>
+          <td class="paramname"><em>plane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane. </p>
+<p >TODO.</p>
+<p ><a href="https://math.stackexchange.com/questions/2686606/">https://math.stackexchange.com/questions/2686606/</a> equation-of-a-plane-passing-through-3-points</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">v</td><td>- The vertex (as a column vector matrix) to evaluate in the plane equation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">plane</td><td>- The parameters of the plane equation to use for evaluation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value if point v belongs to plane. A zero if v does not belong to the plane.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
 
 </div>
 </div>

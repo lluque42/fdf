@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/17 20:52:36 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/19 17:14:49 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,9 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_mx_flipr.c \
 		  lin_alg/ft_mx_flipc.c \
 		  lin_alg/ft_mx_set_col.c \
+		  lin_alg/ft_vx_xproduct.c \
+		  lin_alg/ft_vx_create.c \
+		  lin_alg/ft_vx_substract.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_get_edge.c \
 		  tesselator/fdf_create_rotmx.c \
@@ -106,6 +109,8 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_create_transl_mx.c \
 		  tesselator/fdf_create_scale_mx.c \
 		  tesselator/fdf_print_edges.c \
+		  tesselator/fdf_create_plane.c \
+		  tesselator/fdf_is_in_plane.c \
 		  drawing/fdf_drw_edges.c \
 		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_get_vertex_min_max.c \

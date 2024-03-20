@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 15:02:42 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/19 17:16:53 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ typedef struct s_fdf_edge
 	int	end;
 	int	is_hidden;
 }				t_fdf_edge;
+
+/**
+ * @struct s_fdf_plane
+ * @brief Base for typedef <b>t_fdf_plane</b>.
+ * @details This type is used to store the definition of a plane as:  
+ *     a * x + b * y + c * z + k = 0
+ * @var s_fdf_plane::a
+ * The factor to multiply the X coordinate in the plane equation.
+ * @var s_fdf_plane::b
+ * The factor to multiply the Y coordinate in the plane equation.
+ * @var s_fdf_plane::c
+ * The factor to multiply the Z coordinate in the plane equation.
+ * @var s_fdf_plane::k
+ * The k additive factor in the plane equation.
+*/
+typedef struct s_fdf_plane
+{
+	double	a;
+	double	b;
+	double	c;
+	double	k;
+}				t_fdf_plane;
 
 /**
  * @struct s_fdf_triangle
@@ -413,5 +435,56 @@ t_ft_mx			*fdf_create_scale_mx(double x, double y, double z);
 void			fdf_print_edges(t_ft_mx *map_mx,
 					t_fdf_object *object,
 					t_ft_mx *v_mx);
+
+/**
+ * @brief <b>fdf_create_plane</b> -- Creates a plane from 3 vertexes.
+ *
+ * @details TODO.
+ *
+ * https://math.stackexchange.com/questions/2686606/
+ * equation-of-a-plane-passing-through-3-points
+ *
+ * @param [in] a - One of the vertexes that belongs to the plane as a
+ * column vector.
+ *
+ * @param [in] b - One of the vertexes that belongs to the plane as a
+ * column vector.
+ *
+ * @param [in] c - One of the vertexes that belongs to the plane as a
+ * column vector.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+t_fdf_plane		*fdf_create_plane(t_ft_mx *a, t_ft_mx *b, t_ft_mx *c);
+
+/**
+ * @brief <b>fdf_is_in_plane</b> -- Evaluates if a vertex belongs to a plane.
+ *
+ * @details TODO.
+ *
+ * https://math.stackexchange.com/questions/2686606/
+ * equation-of-a-plane-passing-through-3-points
+ *
+ * @param [in] v - The vertex (as a column vector matrix) to evaluate in the
+ * plane equation.
+ *
+ * @param [in] plane - The parameters of the plane equation to use
+ * for evaluation.
+ *
+ * @return Non-zero value if point v belongs to plane.
+ * A zero if v does not belong to the plane.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+int				fdf_is_in_plane(t_ft_mx *v, t_fdf_plane *plane);
 
 #endif
