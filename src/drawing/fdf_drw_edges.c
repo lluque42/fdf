@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/19 11:56:41 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:52:14 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,9 @@ static void fdf_out_of_boundary_pixel(mlx_image_t *image, t_fdf_line *line)
 	*/
 	// Por ahora...
 		/*
-	printf("[fdf_drw_edges] Drawing line %d, m = %f, b = %f, first_x = %f, last_x = %f, m_is_infinite = %d, vertical_line_x = %f\n",
+	printf("[fdf_drw_edges] Drawing line %d, 
+		m = %f, b = %f, first_x = %f, last_x = %f,
+		m_is_infinite = %d, vertical_line_x = %f\n",
 		e,
 		line->m,
 		line->b,

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/18 00:26:22 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:50:45 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 #ifndef DRAWING_H
 # define DRAWING_H
-# include <stdio.h>														////////////
 # include <math.h>
 # include "MLX42.h"
 # include "lin_alg.h"
@@ -30,8 +29,8 @@ typedef struct s_fdf	t_fdf;
 
 /**
  * @struct s_fdf_line
- * @brief Base for typedef <b>t_ft_mx_size</b>.
- * @details This type is used to store the properties of a line defined as
+ * @brief Base for typedef <b>t_ft_mx_line</b>.
+ * @details This type is used to store the parameters of a line defined as
  * f(i) = i * m + b. Where i could be X or Y and f(i) Y or X.
  * @var s_fdf_line::m
  * The slope of the line.

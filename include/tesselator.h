@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 12:49:18 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:27:06 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -685,5 +685,33 @@ int				fdf_getz_3drect_fromx(double *z, t_fdf_3drect *rect, double x);
  * how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points
 */
 int				fdf_getz_3drect_fromy(double *z, t_fdf_3drect *rect, double y);
+
+/**
+ * @brief <b>fdf_set_edge_visibility</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] this_edge - TODO.
+ *
+ * @param [in, out] obj - The object being tesselated.
+ *
+ * @param [in] ort_v1 - TODO.
+ *
+ * @param [in] ort_v2 - TODO.
+ *
+ * @return Non-zero value if OK.
+ * A zero value if error.
+ *
+ * @warning This should be a static auxiliary funcion to fdf_get_edge(), but
+ * due to 42's norm constraints I had to put it as a publicly accessible
+ * function. TODO.
+ *
+ * @remark Implementation notes:  
+ * TODO.
+*/
+int				fdf_set_edge_visibility(int this_edge,
+					t_fdf_object *obj,
+					int ort_v1,
+					int ort_v2);
 
 #endif

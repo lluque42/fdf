@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 14:38:35 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:47:47 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,31 @@ int	main(int argc, char **argv)
 	ft_printf("[main] Vuelta al main...'\n");
 	return (fdf_destroy_fdf(fdf), 0);
 }
+/*
+// Some old tests for auxiliary functions
+	t_ft_mx	*a;
+	t_ft_mx	*b;
+	t_ft_mx	*c;
+	t_ft_mx	*d;
+	t_ft_mx	*e;
+	t_fdf_plane	*plane;
+
+	b = ft_vx_create(1, 2, 3, 0);
+	c = ft_vx_create(3, 4, 5, 0);
+	a = ft_vx_xproduct(b, c);
+	d = ft_vx_substract(b, c);
+	ft_printf("Vertex b is:\n");
+	ft_mx_print(b, ' ');
+	ft_printf("Vertex c is:\n");
+	ft_mx_print(c, ' ');
+	ft_printf("Vertex a (b x c) is:\n");
+	ft_mx_print(a, ' ');
+	ft_printf("Vertex d (b - c) is:\n");
+	ft_mx_print(d, ' ');
+	e = ft_vx_create(1, -2, -7, 0);
+	plane = fdf_create_plane(b, c, e);
+	ft_printf("Vertex b is in plane: %d\n", fdf_point_is_in_plane(b, plane));
+	ft_printf("Vertex c is in plane: %d\n", fdf_point_is_in_plane(c, plane));
+	ft_printf("Vertex e is in plane: %d\n", fdf_point_is_in_plane(e, plane));
+	ft_printf("Vertex a is in plane: %d\n", fdf_point_is_in_plane(a, plane));
+*/
