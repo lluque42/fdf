@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/19 17:16:53 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:49:18 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,81 @@ typedef struct s_fdf_edge
 	int	end;
 	int	is_hidden;
 }				t_fdf_edge;
+
+/**
+ * @struct s_fdf_3drect
+ * @brief Base for typedef <b>t_ft_mx_3drect</b>.
+ * @details This type is used to store the parameters of a 3D rect defined as  
+ *     (x - x1) / tx        = (y - y1) / ty        = (z - z1) / tz  
+ *     (x - x1) / (x2 - x1) = (y - y1) / (y2 - y1) = (z - z1) / (z2 -z1)  
+ * Where x1, x2, y1, y2, z1, z2 are constants derived from two points that
+ * belong to the rect.  
+ * Notice that if tx, ty, or tz are 0, problems arise due to divisions by zero
+ * when trying to solve the equation from a x, y, or z value respectively.
+ * The rect's parallelism to the plane formed by two axis (which implies
+ * the rect's perpendicularity to the remaining axis) is informed by the zero
+ * value of tx, ty, and tz parameters. By the way, a rect can not be parallel
+ * to the three axis planes (i.e. perpendicular to the three axis) at the same
+ * time.  
+ * For example:  
+ * If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0
+ * (tx = rect->x2 - rect->x1), it is impossible to obtain the Z value from
+ * an X value. This is because for a given X value there is no unique (actually
+ * infinite) Z values that checks the rect equation.
+ * If possible (tx != 0), then if it is perpendicular to Z axis (i.e. parallel
+ * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
+ * rect->parallel_to_xy_at_z and is independent from the value of passed x.  
+ * In the rest of cases the z value is calculated from:  
+ *     z = ((x - x1) / tx ) * tz) + z1  
+ * The fdf_create_3drect() function calculates the auxiliary members of this
+ * struct: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz,
+ * parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y.
+ * @var s_fdf_3drect::x1
+ * Parameter.
+ * @var s_fdf_3drect::x2
+ * Parameter.
+ * @var s_fdf_3drect::y1
+ * Parameter.
+ * @var s_fdf_3drect::y2
+ * Parameter.
+ * @var s_fdf_3drect::z1
+ * Parameter.
+ * @var s_fdf_3drect::z2
+ * Parameter.
+ * @var s_fdf_3drect::parallel_to_xy
+ * Auxiliary member to signal that the rect is parallel to XY plane (i.e
+ * perpendicular to Z axis)
+ * @var s_fdf_3drect::parallel_to_yz
+ * Auxiliary member to signal that the rect is parallel to YZ plane (i.e
+ * perpendicular to X axis)
+ * @var s_fdf_3drect::parallel_to_xz
+ * Auxiliary member to signal that the rect is parallel to XZ plane (i.e
+ * perpendicular to Y axis)
+ * @var s_fdf_3drect::parallel_to_xy_at_z
+ * Auxiliary member to store the invariant Z value if this rect is parallel to
+ * XY plane (i.e perpendicular to Z axis, hence, z remains constant)
+ * @var s_fdf_3drect::parallel_to_yz_at_x
+ * Auxiliary member to store the invariant X value if this rect is parallel to
+ * YZ plane (i.e perpendicular to X axis, hence, x remains constant)
+ * @var s_fdf_3drect::parallel_to_xz_at_y
+ * Auxiliary member to store the invariant Y value if this rect is parallel to
+ * XZ plane (i.e perpendicular to Y axis, hence, y remains constant)
+*/
+typedef struct s_fdf_3drect
+{
+	double	x1;
+	double	x2;
+	double	y1;
+	double	y2;
+	double	z1;
+	double	z2;
+	int		parallel_to_xy;
+	double	parallel_to_xy_at_z;
+	int		parallel_to_yz;
+	double	parallel_to_yz_at_x;
+	int		parallel_to_xz;
+	double	parallel_to_xz_at_y;
+}				t_fdf_3drect;
 
 /**
  * @struct s_fdf_plane
@@ -464,7 +539,8 @@ void			fdf_print_edges(t_ft_mx *map_mx,
 t_fdf_plane		*fdf_create_plane(t_ft_mx *a, t_ft_mx *b, t_ft_mx *c);
 
 /**
- * @brief <b>fdf_is_in_plane</b> -- Evaluates if a vertex belongs to a plane.
+ * @brief <b>fdf_point_is_in_plane</b> -- Evaluates if a vertex belongs to a
+ * plane.
  *
  * @details TODO.
  *
@@ -485,6 +561,129 @@ t_fdf_plane		*fdf_create_plane(t_ft_mx *a, t_ft_mx *b, t_ft_mx *c);
  * @remark Implementation notes:
  * TODO.
 */
-int				fdf_is_in_plane(t_ft_mx *v, t_fdf_plane *plane);
+int				fdf_point_is_in_plane(t_ft_mx *v, t_fdf_plane *plane);
+
+/**
+ * @brief <b>fdf_create_3drect</b> -- Creates 3D rect equation parameter struct
+ * from two 3D points.
+ *
+ * @details 
+ * TODO If the rect is perpendicular to X axis (i.e. parallel to YZ),
+ * that is tx = 0 (tx = rect->x2 - rect->x1), it is impossible to obtain
+ * the Z value from a X value. This is because for a given X value there is
+ * no unique (actually infinite) Z value that checks the rect equation.
+ * If this is the case, NULL is returned.  
+ * Otherwise (tx != 0), if it is perpendicular to Z axis (i.e. parallel
+ * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
+ * rect->parallel_to_xy_at_z and is independent from the value of passed x.  
+ * In the rest of cases the z value is calculated from:  
+ *     z = ((x - x1) / tx ) * tz) + z1  
+ *TODO
+ * @param [in] v1 - The first vertex (as a column vector matrix) that belongs
+ * to the rect whose equation parameters will be calculated.
+ *
+ * @param [in] v2 - The second vertex (as a column vector matrix) that belongs
+ * to the rect whose equation parameters will be calculated.
+ *
+ * @return Pointer to the struct that stores the parameters of the rect equation
+ * to which the both vertexes belong.  
+ * NULL if giving the two passed points it is impossible a rect that goes
+ * through both.
+ *
+ * @warning Caller must free the returned pointer. TODO.
+ *
+ * @remark Implementation notes:
+ * The fdf_create_3drect() function already calculates the auxiliary members of
+ * the 3drect struct that report parallelism/perpendicularity with
+ * axis/axis-planes. This members are used for legibilty: parallel_to_xy,
+ * parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz,
+ * and parallel_to_xz_at_y.
+ * https://www.geeksforgeeks.org/equation-of-a-line-in-3d/
+ * https://math.stackexchange.com/questions/4496965/
+ * how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points
+*/
+t_fdf_3drect	*fdf_create_3drect(t_ft_mx *v1, t_ft_mx *v2);
+
+/**
+ * @brief <b>fdf_getz_3drect_fromx</b> -- Gets Z value from rect equation given
+ * the X value.
+ *
+ * @details If the rect is perpendicular to X axis (i.e. parallel to YZ),
+ * that is tx = 0 (tx = rect->x2 - rect->x1), it is impossible to obtain
+ * the Z value from a X value. This is because for a given X value there is
+ * no unique (actually infinite) Z value that checks the rect equation.
+ * If this is the case, NULL is returned.  
+ * Otherwise (tx != 0), if it is perpendicular to Z axis (i.e. parallel
+ * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
+ * rect->parallel_to_xy_at_z and is independent from the value of passed x.  
+ * In the rest of cases the z value is calculated from:  
+ *     z = ((x - x1) / tx ) * tz) + z1  
+ *
+ * @param [out] z - The pointer to a double to store the z value if possible.
+ *
+ * @param [in] rect - The struct with the parameters of the 3D rect equation.
+ *
+ * @param [in] x - The value of the X coordinate.
+ *
+ * @return Non-zero value if pointer to the Z value is valid.
+ * A zero value if impossible to return Z coordinate value from an X coordinate
+ * value.  
+ * In this case rect->parallel_to_xy and rect->parallel_to_xy_at_z must
+ * be checked.
+ *
+ * @warning Caller must free the returned pointer. TODO.
+ *
+ * @remark Implementation notes:
+ * The fdf_create_3drect() function already calculates the auxiliary members of
+ * the 3drect struct that report parallelism/perpendicularity with
+ * axis/axis-planes. This members are used for legibilty: parallel_to_xy,
+ * parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz,
+ * and parallel_to_xz_at_y.
+ * https://www.geeksforgeeks.org/equation-of-a-line-in-3d/
+ * https://math.stackexchange.com/questions/4496965/
+ * how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points
+*/
+int				fdf_getz_3drect_fromx(double *z, t_fdf_3drect *rect, double x);
+
+/**
+ * @brief <b>fdf_getz_3drect_fromy</b> -- Gets Z value from rect equation given
+ * the Y value.
+ *
+ * @details If the rect is perpendicular to Y axis (i.e. parallel to XZ),
+ * that is ty = 0 (ty = rect->y2 - rect->y1), it is impossible to obtain
+ * the Z value from a Y value. This is because for a given Y value there is
+ * no unique (actually infinite) Z value that checks the rect equation.
+ * If this is the case, NULL is returned.  
+ * Otherwise (ty != 0), if it is perpendicular to Z axis (i.e. parallel
+ * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
+ * rect->parallel_to_xy_at_z and is independent from the value of passed y.  
+ * In the rest of cases the z value is calculated from:  
+ *     z = ((y - y1) / ty ) * tz) + z1  
+ *
+ * @param [out] z - The pointer to a double to store the z value if possible.
+ *
+ * @param [in] rect - The struct with the parameters of the 3D rect equation.
+ *
+ * @param [in] y - The value of the Y coordinate.
+ *
+ * @return Non-zero value if pointer to the Z value is valid.
+ * A zero value if impossible to return Z coordinate value from an Y coordinate
+ * value.  
+ * In this case rect->parallel_to_xy and rect->parallel_to_xy_at_z must
+ * be checked.
+ *
+ * @warning Caller must free the returned pointer. TODO.
+ *
+ * @remark Implementation notes:
+ * The fdf_create_3drect() function already calculates the auxiliary members of
+ * the 3drect struct that report parallelism/perpendicularity with
+ * axis/axis-planes. This members are used for legibilty: parallel_to_xy,
+ * parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz,
+ * and parallel_to_xz_at_y.
+ * https://www.geeksforgeeks.org/equation-of-a-line-in-3d/
+ * https://math.stackexchange.com/questions/4496965/
+ * how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points
+*/
+int				fdf_getz_3drect_fromy(double *z, t_fdf_3drect *rect, double y);
 
 #endif

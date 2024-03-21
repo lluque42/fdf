@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-20</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-21</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -105,6 +105,9 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__edge.html">s_fdf_edge</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_fdf_edge</b>.  <a href="structs__fdf__edge.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__3drect.html">s_fdf_3drect</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_ft_mx_3drect</b>.  <a href="structs__fdf__3drect.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__plane.html">s_fdf_plane</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_fdf_plane</b>.  <a href="structs__fdf__plane.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +123,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aa7435e7fdd0901f09232d37e5e01a750"><td class="memItemLeft" align="right" valign="top"><a id="aa7435e7fdd0901f09232d37e5e01a750" name="aa7435e7fdd0901f09232d37e5e01a750"></a>
 typedef struct <a class="el" href="structs__fdf__edge.html">s_fdf_edge</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_edge</b></td></tr>
 <tr class="separator:aa7435e7fdd0901f09232d37e5e01a750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbdb2ef0749edfd37949fff654b5a64"><td class="memItemLeft" align="right" valign="top"><a id="adbbdb2ef0749edfd37949fff654b5a64" name="adbbdb2ef0749edfd37949fff654b5a64"></a>
+typedef struct <a class="el" href="structs__fdf__3drect.html">s_fdf_3drect</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_3drect</b></td></tr>
+<tr class="separator:adbbdb2ef0749edfd37949fff654b5a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7687b788508ce4fcaa0abeea2da02e57"><td class="memItemLeft" align="right" valign="top"><a id="a7687b788508ce4fcaa0abeea2da02e57" name="a7687b788508ce4fcaa0abeea2da02e57"></a>
 typedef struct <a class="el" href="structs__fdf__plane.html">s_fdf_plane</a>&#160;</td><td class="memItemRight" valign="bottom"><b>t_fdf_plane</b></td></tr>
 <tr class="separator:a7687b788508ce4fcaa0abeea2da02e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,13 +171,67 @@ Functions</h2></td></tr>
 <tr class="memitem:ab1c0265c2471985c6324087e6d58402a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#ab1c0265c2471985c6324087e6d58402a">fdf_create_plane</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *a, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *b, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *c)</td></tr>
 <tr class="memdesc:ab1c0265c2471985c6324087e6d58402a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_create_plane</b> &ndash; Creates a plane from 3 vertexes.  <a href="tesselator_8h.html#ab1c0265c2471985c6324087e6d58402a">More...</a><br /></td></tr>
 <tr class="separator:ab1c0265c2471985c6324087e6d58402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97ab6a89925154d4f48faf720e845d96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#a97ab6a89925154d4f48faf720e845d96">fdf_is_in_plane</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v, <a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *plane)</td></tr>
-<tr class="memdesc:a97ab6a89925154d4f48faf720e845d96"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane.  <a href="tesselator_8h.html#a97ab6a89925154d4f48faf720e845d96">More...</a><br /></td></tr>
-<tr class="separator:a97ab6a89925154d4f48faf720e845d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac74a326976603645afba8d25fb60a9f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#ac74a326976603645afba8d25fb60a9f0">fdf_point_is_in_plane</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v, <a class="el" href="structs__fdf__plane.html">t_fdf_plane</a> *plane)</td></tr>
+<tr class="memdesc:ac74a326976603645afba8d25fb60a9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_point_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane.  <a href="tesselator_8h.html#ac74a326976603645afba8d25fb60a9f0">More...</a><br /></td></tr>
+<tr class="separator:ac74a326976603645afba8d25fb60a9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3f6cbe5f770040ff43f3e19b6d3824"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824">fdf_create_3drect</a> (<a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v1, <a class="el" href="structs__ft__mx.html">t_ft_mx</a> *v2)</td></tr>
+<tr class="memdesc:a1a3f6cbe5f770040ff43f3e19b6d3824"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_create_3drect</b> &ndash; Creates 3D rect equation parameter struct from two 3D points.  <a href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824">More...</a><br /></td></tr>
+<tr class="separator:a1a3f6cbe5f770040ff43f3e19b6d3824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeef7f4fd0fc237394eec0d965e0eb2ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#aeef7f4fd0fc237394eec0d965e0eb2ef">fdf_getz_3drect_fromx</a> (double *z, <a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> *rect, double x)</td></tr>
+<tr class="memdesc:aeef7f4fd0fc237394eec0d965e0eb2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_getz_3drect_fromx</b> &ndash; Gets Z value from rect equation given the X value.  <a href="tesselator_8h.html#aeef7f4fd0fc237394eec0d965e0eb2ef">More...</a><br /></td></tr>
+<tr class="separator:aeef7f4fd0fc237394eec0d965e0eb2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88985cd392160c4890b9edad07f96a31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tesselator_8h.html#a88985cd392160c4890b9edad07f96a31">fdf_getz_3drect_fromy</a> (double *z, <a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> *rect, double y)</td></tr>
+<tr class="memdesc:a88985cd392160c4890b9edad07f96a31"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_getz_3drect_fromy</b> &ndash; Gets Z value from rect equation given the Y value.  <a href="tesselator_8h.html#a88985cd392160c4890b9edad07f96a31">More...</a><br /></td></tr>
+<tr class="separator:a88985cd392160c4890b9edad07f96a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >TODO </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a1a3f6cbe5f770040ff43f3e19b6d3824" name="a1a3f6cbe5f770040ff43f3e19b6d3824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a3f6cbe5f770040ff43f3e19b6d3824">&#9670;&nbsp;</a></span>fdf_create_3drect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> * fdf_create_3drect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_create_3drect</b> &ndash; Creates 3D rect equation parameter struct from two 3D points. </p>
+<p >TODO If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0 (tx = rect-&gt;x2 - rect-&gt;x1), it is impossible to obtain the Z value from a X value. This is because for a given X value there is no unique (actually infinite) Z value that checks the rect equation. If this is the case, NULL is returned. <br  />
+ Otherwise (tx != 0), if it is perpendicular to Z axis (i.e. parallel to XY), that is tz = 0 (tz = rect-&gt;z2 - rect-&gt;z1), the solution is already in rect-&gt;parallel_to_xy_at_z and is independent from the value of passed x. <br  />
+ In the rest of cases the z value is calculated from: <br  />
+ z = ((x - x1) / tx ) * tz) + z1 <br  />
+ TODO </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">v1</td><td>- The first vertex (as a column vector matrix) that belongs to the rect whose equation parameters will be calculated.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">v2</td><td>- The second vertex (as a column vector matrix) that belongs to the rect whose equation parameters will be calculated.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the struct that stores the parameters of the rect equation to which the both vertexes belong. <br  />
+ NULL if giving the two passed points it is impossible a rect that goes through both.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Caller must free the returned pointer. TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The <a class="el" href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824" title="fdf_create_3drect – Creates 3D rect equation parameter struct from two 3D points.">fdf_create_3drect()</a> function already calculates the auxiliary members of the 3drect struct that report parallelism/perpendicularity with axis/axis-planes. This members are used for legibilty: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y. <a href="https://www.geeksforgeeks.org/equation-of-a-line-in-3d/">https://www.geeksforgeeks.org/equation-of-a-line-in-3d/</a> <a href="https://math.stackexchange.com/questions/4496965/">https://math.stackexchange.com/questions/4496965/</a> how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points </dd></dl>
+
+</div>
+</div>
 <a id="a4cce7b36332786b3f849e58c506d0ca8" name="a4cce7b36332786b3f849e58c506d0ca8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cce7b36332786b3f849e58c506d0ca8">&#9670;&nbsp;</a></span>fdf_create_object()</h2>
 
@@ -524,14 +584,120 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a97ab6a89925154d4f48faf720e845d96" name="a97ab6a89925154d4f48faf720e845d96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97ab6a89925154d4f48faf720e845d96">&#9670;&nbsp;</a></span>fdf_is_in_plane()</h2>
+<a id="aeef7f4fd0fc237394eec0d965e0eb2ef" name="aeef7f4fd0fc237394eec0d965e0eb2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeef7f4fd0fc237394eec0d965e0eb2ef">&#9670;&nbsp;</a></span>fdf_getz_3drect_fromx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int fdf_is_in_plane </td>
+          <td class="memname">int fdf_getz_3drect_fromx </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> *&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_getz_3drect_fromx</b> &ndash; Gets Z value from rect equation given the X value. </p>
+<p >If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0 (tx = rect-&gt;x2 - rect-&gt;x1), it is impossible to obtain the Z value from a X value. This is because for a given X value there is no unique (actually infinite) Z value that checks the rect equation. If this is the case, NULL is returned. <br  />
+ Otherwise (tx != 0), if it is perpendicular to Z axis (i.e. parallel to XY), that is tz = 0 (tz = rect-&gt;z2 - rect-&gt;z1), the solution is already in rect-&gt;parallel_to_xy_at_z and is independent from the value of passed x. <br  />
+ In the rest of cases the z value is calculated from: <br  />
+ z = ((x - x1) / tx ) * tz) + z1 <br  />
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">z</td><td>- The pointer to a double to store the z value if possible.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rect</td><td>- The struct with the parameters of the 3D rect equation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>- The value of the X coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value if pointer to the Z value is valid. A zero value if impossible to return Z coordinate value from an X coordinate value. <br  />
+ In this case rect-&gt;parallel_to_xy and rect-&gt;parallel_to_xy_at_z must be checked.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Caller must free the returned pointer. TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The <a class="el" href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824" title="fdf_create_3drect – Creates 3D rect equation parameter struct from two 3D points.">fdf_create_3drect()</a> function already calculates the auxiliary members of the 3drect struct that report parallelism/perpendicularity with axis/axis-planes. This members are used for legibilty: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y. <a href="https://www.geeksforgeeks.org/equation-of-a-line-in-3d/">https://www.geeksforgeeks.org/equation-of-a-line-in-3d/</a> <a href="https://math.stackexchange.com/questions/4496965/">https://math.stackexchange.com/questions/4496965/</a> how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points </dd></dl>
+
+</div>
+</div>
+<a id="a88985cd392160c4890b9edad07f96a31" name="a88985cd392160c4890b9edad07f96a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88985cd392160c4890b9edad07f96a31">&#9670;&nbsp;</a></span>fdf_getz_3drect_fromy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdf_getz_3drect_fromy </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structs__fdf__3drect.html">t_fdf_3drect</a> *&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_getz_3drect_fromy</b> &ndash; Gets Z value from rect equation given the Y value. </p>
+<p >If the rect is perpendicular to Y axis (i.e. parallel to XZ), that is ty = 0 (ty = rect-&gt;y2 - rect-&gt;y1), it is impossible to obtain the Z value from a Y value. This is because for a given Y value there is no unique (actually infinite) Z value that checks the rect equation. If this is the case, NULL is returned. <br  />
+ Otherwise (ty != 0), if it is perpendicular to Z axis (i.e. parallel to XY), that is tz = 0 (tz = rect-&gt;z2 - rect-&gt;z1), the solution is already in rect-&gt;parallel_to_xy_at_z and is independent from the value of passed y. <br  />
+ In the rest of cases the z value is calculated from: <br  />
+ z = ((y - y1) / ty ) * tz) + z1 <br  />
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">z</td><td>- The pointer to a double to store the z value if possible.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rect</td><td>- The struct with the parameters of the 3D rect equation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>- The value of the Y coordinate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value if pointer to the Z value is valid. A zero value if impossible to return Z coordinate value from an Y coordinate value. <br  />
+ In this case rect-&gt;parallel_to_xy and rect-&gt;parallel_to_xy_at_z must be checked.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Caller must free the returned pointer. TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: The <a class="el" href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824" title="fdf_create_3drect – Creates 3D rect equation parameter struct from two 3D points.">fdf_create_3drect()</a> function already calculates the auxiliary members of the 3drect struct that report parallelism/perpendicularity with axis/axis-planes. This members are used for legibilty: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y. <a href="https://www.geeksforgeeks.org/equation-of-a-line-in-3d/">https://www.geeksforgeeks.org/equation-of-a-line-in-3d/</a> <a href="https://math.stackexchange.com/questions/4496965/">https://math.stackexchange.com/questions/4496965/</a> how-to-find-the-equation-of-a-3d-straight-line-when-given-two-points </dd></dl>
+
+</div>
+</div>
+<a id="ac74a326976603645afba8d25fb60a9f0" name="ac74a326976603645afba8d25fb60a9f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac74a326976603645afba8d25fb60a9f0">&#9670;&nbsp;</a></span>fdf_point_is_in_plane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdf_point_is_in_plane </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structs__ft__mx.html">t_ft_mx</a> *&#160;</td>
           <td class="paramname"><em>v</em>, </td>
@@ -550,7 +716,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><b>fdf_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane. </p>
+<p><b>fdf_point_is_in_plane</b> &ndash; Evaluates if a vertex belongs to a plane. </p>
 <p >TODO.</p>
 <p ><a href="https://math.stackexchange.com/questions/2686606/">https://math.stackexchange.com/questions/2686606/</a> equation-of-a-plane-passing-through-3-points</p>
 <dl class="params"><dt>Parameters</dt><dd>

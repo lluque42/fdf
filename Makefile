@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/19 17:14:49 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/21 12:35:43 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,9 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_create_scale_mx.c \
 		  tesselator/fdf_print_edges.c \
 		  tesselator/fdf_create_plane.c \
-		  tesselator/fdf_is_in_plane.c \
+		  tesselator/fdf_point_is_in_plane.c \
+		  tesselator/fdf_create_3drect.c \
+		  tesselator/fdf_getz_3drect.c \
 		  drawing/fdf_drw_edges.c \
 		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_get_vertex_min_max.c \
