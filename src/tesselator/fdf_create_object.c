@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:07:59 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 23:40:06 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:24:13 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	init_c2s_settings(t_fdf_object *object)
 	object->c2s_sca_par[2] = 1;
 }
 
-t_fdf_object	*fdf_create_object(void)
+t_fdf_object	*fdf_create_object(t_ft_mx *map_mx)
 {
 	t_fdf_object	*object;
 
@@ -67,5 +67,7 @@ t_fdf_object	*fdf_create_object(void)
 	init_m2w_settings(object);
 	init_w2c_settings(object);
 	init_c2s_settings(object);
+	object->map_mx = map_mx;
+	object->tesselation_type = PLANE_TESSELATION;
 	return (object);
 }

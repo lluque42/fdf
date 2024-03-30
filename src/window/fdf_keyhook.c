@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:06:57 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 14:58:03 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:34:05 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *f)
 		fdf_exit_program(fdf);
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 		fdf_toggle_autofit(fdf);
+	if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)
+		fdf_toggle_tesselation(fdf);
 }

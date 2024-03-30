@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_destroy_object.c                               :+:      :+:    :+:   */
+/*   fdf_destroy_nv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 21:11:42 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/26 11:56:56 by lluque           ###   ########.fr       */
+/*   Created: 2024/03/27 11:43:59 by lluque            #+#    #+#             */
+/*   Updated: 2024/03/27 11:49:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "tesselator.h"
 
-void	fdf_destroy_object(t_fdf_object *object)
+void	fdf_destroy_nv(t_fdf_nv *nv)
 {
-	ft_mx_destroy(object->map_mx);
-	ft_mx_destroy(object->model_mx);
-	ft_mx_destroy(object->world_mx);
-	ft_mx_destroy(object->camera_mx);
-	ft_mx_destroy(object->screen_mx);
-	free(object->edge);
-	free(object->triangle);
+	ft_mx_destroy(nv->diag_start);
+	ft_mx_destroy(nv->diag_end);
+	ft_mx_destroy(nv->ort1);
+	ft_mx_destroy(nv->ort2);
+	free(nv);
 }

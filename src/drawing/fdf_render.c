@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:53:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/27 09:57:43 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,11 @@ static int	fdf_setup_image(mlx_image_t *image, t_fdf_object *object)
 
 int	fdf_render(t_fdf *fdf)
 {
+	if (fdf->render_request <= FROM_MODEL)
+	{
+		if (!fdf_tesselate_map(fdf->object))
+			return (0);
+	}
 	if (fdf->render_request <= FROM_WORLD)
 		if (!fdf_setup_world(fdf->object))
 			return (0);

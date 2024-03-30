@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/21 13:21:16 by lluque           ###   ########.fr        #
+#    Updated: 2024/03/27 11:49:32 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,10 @@ SOURCES = fdf_main.c \
 		  tesselator/fdf_point_is_in_plane.c \
 		  tesselator/fdf_create_3drect.c \
 		  tesselator/fdf_getz_3drect.c \
+		  tesselator/fdf_get_vertex_mx_sph.c \
+		  tesselator/fdf_get_vertex_mx_cyl.c \
+		  tesselator/fdf_create_nv.c \
+		  tesselator/fdf_destroy_nv.c \
 		  drawing/fdf_drw_edges.c \
 		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_get_vertex_min_max.c \
@@ -135,7 +139,8 @@ SOURCES = fdf_main.c \
 		  features/fdf_rotate_step.c \
 		  features/fdf_translate_step.c \
 		  features/fdf_scale_step.c \
-		  features/fdf_toggle_autofit.c
+		  features/fdf_toggle_autofit.c \
+		  features/fdf_toggle_tesselation.c
 
 # List of BONUS source code file names with path relative to SRC_DIR
 BONUS_SOURCES = ch_main.c

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:27:06 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/27 16:24:37 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,29 @@
 #ifndef TESSELATOR_H
 # define TESSELATOR_H
 # include "lin_alg.h"
+
+/**
+ * @enum e_tesselation_type
+ * @brief Base for typedef <b>t_tesselation_type</b>.
+ * @details This type is used in function fdf_tesselate_map() to indicate how
+ * the map_mx matrix parsed from file must be transformed into a 3D object.
+ * @var e_tesselation_type::PLANE_TESSELATION
+ * Indicates that the X, Y and altitud values derived from the map_mx matrix
+ * defines a horizontal XY plane with map's altitudes varying the Z values.
+ * @var e_tesselation_type::SPHERICAL_TESSELATION
+ * Indicates that the X, Y and altitud values derived from the map_mx matrix
+ * defines a sphere with map's altitudes varying its radius from a base_radius.
+ * @var e_tesselation_type::CYLINDRICAL_TESSELATION
+ * Indicates that the X, Y and altitud values derived from the map_mx matrix
+ * defines a cylinder along Z axis with map's altitudes varying its radius from
+ * a base_radius.
+*/
+typedef enum e_tesselation_type
+{
+	PLANE_TESSELATION,
+	SPHERICAL_TESSELATION,
+	CYLINDRICAL_TESSELATION
+}	t_tesselation_type;
 
 /**
  * @struct s_fdf_edge
@@ -39,6 +62,48 @@ typedef struct s_fdf_edge
 }				t_fdf_edge;
 
 /**
+ * @struct s_fdf_nv
+ * @brief Base for typedef <b>t_fdf_nv</b>.
+ * @details This type is used to store the four xyzw vertexes (as column-vectors
+ * matrixes) from which the three edges are defined from every point of an
+ * altitude map matrix (i.e. edge to right/left neighbor, edge to down neighbor,
+ * edge to down-left/down-right neighbor) that is analyzed from the top-left
+ * corner (row 0 and column 0) to the bottom righ corner.  
+ * This type is used in functions that evaluate the convenience of setting each
+ * of the diagonal edges in this per-four-vertexes-analysis as hidden.  
+ * A diagonal edge is defined as the one that connect to a non-orthogonal
+ * neighbor.  
+ * A non-orthogonal neighbor is one that has both different X and Y (column,
+ * row) coordinates.   
+ * In brief: A diagonal edge (candidate to be hidden) is the edge from the
+ * starting vertex to the end vertex (which is the former's down-left OR
+ * down-right neighbor) in that local scope of analyzing the relationship of
+ * four neighboring vertexes: two orthogonal, and two non-orthogonal.
+ * @var s_fdf_nv::diag_start
+ * The reference vertex from which three edges form when going through an
+ * altitude map matrix from its top-left corner (row 0 and column 0) to its
+ * bottom righ corner.
+ * @var s_fdf_nv::diag_end
+ * The diagonal vertex to diag_start. The edge that goes from diag_start to
+ * diag_end is a candidate to be hidden (not to be drawn).
+ * @var s_fdf_nv::ort1
+ * One of the orthogonal neighbors to diag_start. It could be any of its down
+ * neighbor or either its left OR right neighbor. It doesn't matter which one
+ * for the purposes to which this structure type is used.
+ * @var s_fdf_nv::ort2
+ * One of the orthogonal neighbors to diag_start. It could be any of its down
+ * neighbor or either its left OR right neighbor. It doesn't matter which one
+ * for the purposes to which this structure type is used.
+*/
+typedef struct s_fdf_nv
+{
+	t_ft_mx	*diag_start;
+	t_ft_mx	*diag_end;
+	t_ft_mx	*ort1;
+	t_ft_mx	*ort2;
+}				t_fdf_nv;
+
+/**
  * @struct s_fdf_3drect
  * @brief Base for typedef <b>t_ft_mx_3drect</b>.
  * @details This type is used to store the parameters of a 3D rect defined as  
@@ -52,7 +117,7 @@ typedef struct s_fdf_edge
  * the rect's perpendicularity to the remaining axis) is informed by the zero
  * value of tx, ty, and tz parameters. By the way, a rect can not be parallel
  * to the three axis planes (i.e. perpendicular to the three axis) at the same
- * time.  
+ * time, such case results in a NULL when creating the rect.  
  * For example:  
  * If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0
  * (tx = rect->x2 - rect->x1), it is impossible to obtain the Z value from
@@ -162,6 +227,12 @@ typedef struct s_fdf_triangle
  * its triangles. This type also contains the auxiliary parameters for vertex
  * transformations to go from one space to the next such as rotations,
  * translations, scaling, and 2D projection.
+ * @var s_fdf_object::map_mx
+ * The matrix with the raw data (altitude values at each row, column coordinate)
+ * from which the tesselation is done.
+ * @var s_fdf_object::tesselation_type
+ * The tesselation type that shoul be used to interpret the altitud data when
+ * creating the 3D object (plane, spherical, cylindrical, etc.).
  * @var s_fdf_object::model_mx
  * The vertex matrix at model space.
  * @var s_fdf_object::world_mx
@@ -208,23 +279,25 @@ typedef struct s_fdf_triangle
 */
 typedef struct s_fdf_object
 {
-	t_ft_mx			*model_mx;
-	double			m2w_rot_par[3];
-	double			m2w_tra_par[3];
-	double			m2w_sca_par[3];
-	t_ft_mx			*world_mx;
-	double			w2c_rot_par[3];
-	double			w2c_tra_par[3];
-	double			w2c_sca_par[3];
-	t_ft_mx			*camera_mx;
-	double			c2s_rot_par[3];
-	double			c2s_tra_par[3];
-	double			c2s_sca_par[3];
-	t_ft_mx			*screen_mx;
-	t_fdf_edge		*edge;
-	int				edges;
-	t_fdf_triangle	*triangle;
-	int				triangles;
+	t_ft_mx				*map_mx;
+	t_tesselation_type	tesselation_type;
+	t_ft_mx				*model_mx;
+	double				m2w_rot_par[3];
+	double				m2w_tra_par[3];
+	double				m2w_sca_par[3];
+	t_ft_mx				*world_mx;
+	double				w2c_rot_par[3];
+	double				w2c_tra_par[3];
+	double				w2c_sca_par[3];
+	t_ft_mx				*camera_mx;
+	double				c2s_rot_par[3];
+	double				c2s_tra_par[3];
+	double				c2s_sca_par[3];
+	t_ft_mx				*screen_mx;
+	t_fdf_edge			*edge;
+	int					edges;
+	t_fdf_triangle		*triangle;
+	int					triangles;
 }				t_fdf_object;
 
 /**
@@ -232,6 +305,10 @@ typedef struct s_fdf_object
  *
  * @details TODO.
  *
+ * @param [in] map_mx
+ * The matrix with the raw data (altitude values at each row, column coordinate)
+ * from which the tesselation is done.
+ * 
  * @return TODO.
  * NULL if error.
  *
@@ -240,7 +317,7 @@ typedef struct s_fdf_object
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf_object	*fdf_create_object(void);
+t_fdf_object	*fdf_create_object(t_ft_mx *map_mx);
 
 /**
  * @brief <b>fdf_destroy_object</b> -- TODO.
@@ -261,42 +338,17 @@ void			fdf_destroy_object(t_fdf_object *object);
  *
  * @details TODO.
  *
- * @param [in] map_mx - TODO.
+ * @param [in] object - TODO.
  *
  * @return TODO.
- * NULL if error.
+ * Zero value if error.
  *
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf_object	*fdf_tesselate_map(t_ft_mx	*map_mx);
-
-/**
- * @brief <b>fdf_get_vertex_mx</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] map_mx - TODO.
- *
- * @return TODO..
- * NULL if error.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * The vertex_mx is a col-vector matrix where each column represents a
- * xyzw vertex (each row, from top to bottom, has one of these components).
- * The order in which the vertex matrix is filled (which vertex is first
- * included as a column, then the second...) is the following: the first vertex
- * corresponds to the map_mx->d[0] (which is row 0, column 0 from the addressing
- * style map_mx->d[i * map_mx-n + j]). Then i (i.e. 'y') is increased while j 
- * (i.e. 'x' remains at 0)... In conclusion: map_mx is walked through by
- * increasing the row (i.e. increasing the vertex's 'y' coordinate).
- * TODO.
-*/
-t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
+int				fdf_tesselate_map(t_fdf_object *object);
 
 /**
  * @brief <b>fdf_get_edge</b> -- TODO.
@@ -595,7 +647,7 @@ int				fdf_point_is_in_plane(t_ft_mx *v, t_fdf_plane *plane);
  * @remark Implementation notes:
  * The fdf_create_3drect() function already calculates the auxiliary members of
  * the 3drect struct that report parallelism/perpendicularity with
- * axis/axis-planes. This members are used for legibilty: parallel_to_xy,
+ * 2-axis-planes/axis. This members are used for legibilty: parallel_to_xy,
  * parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz,
  * and parallel_to_xz_at_y.
  * https://www.geeksforgeeks.org/equation-of-a-line-in-3d/
@@ -616,7 +668,10 @@ t_fdf_3drect	*fdf_create_3drect(t_ft_mx *v1, t_ft_mx *v2);
  * Otherwise (tx != 0), if it is perpendicular to Z axis (i.e. parallel
  * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
  * rect->parallel_to_xy_at_z and is independent from the value of passed x.  
- * In the rest of cases the z value is calculated from:  
+ * 
+ * TODO review code's special case and re-write this...
+ *
+ * For the rest of cases the z value is calculated from:  
  *     z = ((x - x1) / tx ) * tz) + z1  
  *
  * @param [out] z - The pointer to a double to store the z value if possible.
@@ -657,7 +712,10 @@ int				fdf_getz_3drect_fromx(double *z, t_fdf_3drect *rect, double x);
  * Otherwise (ty != 0), if it is perpendicular to Z axis (i.e. parallel
  * to XY), that is tz = 0 (tz = rect->z2 - rect->z1), the solution is already in
  * rect->parallel_to_xy_at_z and is independent from the value of passed y.  
- * In the rest of cases the z value is calculated from:  
+ * 
+ * TODO review code's special case and re-write this...
+ *
+ * For the rest of cases the z value is calculated from:  
  *     z = ((y - y1) / ty ) * tz) + z1  
  *
  * @param [out] z - The pointer to a double to store the z value if possible.
@@ -689,7 +747,7 @@ int				fdf_getz_3drect_fromy(double *z, t_fdf_3drect *rect, double y);
 /**
  * @brief <b>fdf_set_edge_visibility</b> -- TODO.
  *
- * @details TODO.
+ * @details TODO comments inside the function's definition file TODO.
  *
  * @param [in] this_edge - TODO.
  *
@@ -713,5 +771,39 @@ int				fdf_set_edge_visibility(int this_edge,
 					t_fdf_object *obj,
 					int ort_v1,
 					int ort_v2);
+
+/**
+ * @brief <b>fdf_get_vertex_mx</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] map_mx - TODO.
+ *
+ * @return TODO..
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * The vertex_mx is a col-vector matrix where each column represents a
+ * xyzw vertex (each row, from top to bottom, has one of these components).
+ * The order in which the vertex matrix is filled (which vertex is first
+ * included as a column, then the second...) is the following: the first vertex
+ * corresponds to the map_mx->d[0] (which is row 0, column 0 from the addressing
+ * style map_mx->d[i * map_mx-n + j]). Then i (i.e. 'y') is increased while j 
+ * (i.e. 'x' remains at 0)... In conclusion: map_mx is walked through by
+ * increasing the row (i.e. increasing the vertex's 'y' coordinate).
+ * TODO.
+*/
+t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
+
+t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
+t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *map_mx, double r, double h);
+
+void			fdf_destroy_nv(t_fdf_nv *nv);
+t_fdf_nv		*fdf_create_nv(t_ft_mx *diag_start,
+					t_ft_mx *diag_end,
+					t_ft_mx *ort1,
+					t_ft_mx *ort2);
 
 #endif

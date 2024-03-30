@@ -6,17 +6,96 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:21:46 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/27 16:24:05 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>															///////
 #include <stdlib.h>
 #include <math.h>
 #include "tesselator.h"
 
+#define ERROR_TESTING_VISIBILITY 0
+#define DONE_TESTING_VISIBILITY 1
+#define KEEP_TESTING_VISIBILITY 2
+
+// By default this edge is visible (not hidden). Then this function evaluates
+// if this edge MUST be DEFINITIVELY hidden because of the following reasons:
+//     The four points belong to the same plane.
+//         OR
+//     This diagonal edge belongs to the XY plane.
+// If this edge passes these tests, then it is tested (also by plane analysis)
+// against the competitor diagonal. This test can have any of these two
+// consequences:
+//     The competitor diagonal edge IS DEFINITIVELY HIDDEN, so this edge
+//     is already the winner and MUST BE VISIBLE.
+//         OR
+//     It is INCONCLUSIVE whether the competitior diagonal is visible or not,
+//     so a rect analysis is needed to have a definite verdict: KEEP TESTING
+//     outside this function, this edge remains visible (not hidden) unless
+//     proven otherwise.
+static int	fdf_plane_analysis(t_fdf_nv *nv, int *is_hidden)
+{
+	t_fdf_plane	*plane;
+
+	*is_hidden = 0;
+	plane = fdf_create_plane(nv->ort1, nv->ort2, nv->diag_start);
+	if (plane == NULL)
+		return (ERROR_TESTING_VISIBILITY);
+	if (fdf_point_is_in_plane(nv->diag_end, plane)
+		|| nv->diag_start->d[2] == nv->diag_end->d[2])
+	{
+		*is_hidden = 1;
+		return (free(plane), DONE_TESTING_VISIBILITY);
+	}
+	free(plane);
+	plane = fdf_create_plane(nv->diag_end, nv->diag_start, nv->ort1);
+	if (plane == NULL)
+		return (ERROR_TESTING_VISIBILITY);
+	if (fdf_point_is_in_plane(nv->ort2, plane)
+		|| nv->ort1->d[2] == nv->ort2->d[2])
+		return (free(plane), DONE_TESTING_VISIBILITY);
+	return (free(plane), KEEP_TESTING_VISIBILITY);
+}
+
+// When this function is called, it has already been tested with plane analysis
+// but the results are inconclusive. This diagonal edge remains visible by
+// default and it is this function task to definitively keep it that way or to
+// hide this edge.
+// Inconclusive plane analysis sets the following scenario that must be solved
+// by this function:
+//     Both this diagonal edge and its competitor diagonal edge may be visible
+//     but ONLY ONE can. The winner (the one that gets to be visible) must
+//     be the edge that, at the center of the XY square defined by the four
+//     points of the nv struct, has a greater altitude (Z value).
+// Since everything should be consistent and due to function length limitations
+// imposed by the freaking 42 Norm, only one coordinate is evaluated and error
+// checking is omitted when obtaining the Z value. The X coordinate was
+// arbitrarily chosen to obtain the Z value.  
+// On the other hand, the comparison of altitudes excludes equality because
+// that would equire both diagonals to be on the same plane, which was
+// already discarded outside of this function.
+static int	fdf_rect_analysis(t_fdf_nv *nv, int *is_hidden)
+{
+	t_fdf_3drect	*this;
+	t_fdf_3drect	*other;
+	double			mid_x;
+	double			z_this;
+	double			z_other;
+
+	this = fdf_create_3drect(nv->diag_start, nv->diag_end);
+	other = fdf_create_3drect(nv->ort1, nv->ort2);
+	if (this == NULL || other == NULL)
+		return (free(this), free(other), ERROR_TESTING_VISIBILITY);
+	mid_x = nv->diag_start->d[0];
+	mid_x += (nv->diag_end->d[0] - nv->diag_start->d[0]) / 2;
+	fdf_getz_3drect_fromx(&z_this, this, mid_x);
+	fdf_getz_3drect_fromx(&z_other, other, mid_x);
+	if (z_this < z_other)
+		*is_hidden = 1;
+	return (free(this), free(other), DONE_TESTING_VISIBILITY);
+}
+
 //OBSOLETE
-//
 //
 //
 // Arguments edgex refer to indexes in object's edge arVray.
@@ -32,10 +111,9 @@
 //
 //
 //OBSOLETE
-
-
-
-
+//
+//
+//
 // The argument this_edge refer to the index of object's edge array that
 // points to the edge being evaluated.
 // The arguments ort_vX refer to indexes in object's vertex matrix that point
@@ -59,192 +137,28 @@
 // If this diagonal edge has a greater slope than the other diagonal edge.
 // Since this will...
 //
+//OBSOLETE
 int	fdf_set_edge_visibility(int this_edge,
 				t_fdf_object *obj,
 				int ort_v1,
-				int ort_v2) 
+				int ort_v2)
 {
-	t_ft_mx		*v1;
-	t_ft_mx		*v2;
-	t_ft_mx		*v_start;
-	t_fdf_plane	*plane;
-	t_ft_mx		*v_diag;
-	
-	printf("\t[set_edge_visibility] Starting...\n");
-	v1 = ft_mx_get_col(obj->model_mx, ort_v1);
-	v2 = ft_mx_get_col(obj->model_mx, ort_v2);
-	v_start = ft_mx_get_col(obj->model_mx, obj->edge[this_edge].start);
-	v_diag = ft_mx_get_col(obj->model_mx, obj->edge[this_edge].end);
-	if (v1 == NULL || v2 == NULL || v_start == NULL || v_diag == NULL)
-		return (free(v1), free(v2), free(v_start), free(v_diag), 0);
-	printf("\t\t\tv_start_x = %f\n", v_start->d[0]);
-	printf("\t\t\tv_start_y = %f\n", v_start->d[1]);
-	printf("\t\t\tv_start_z = %f\n", v_start->d[2]);
-	printf("\t\t\tv_diag_x = %f\n", v_diag->d[0]);
-	printf("\t\t\tv_diag_y = %f\n", v_diag->d[1]);
-	printf("\t\t\tv_diag_z = %f\n", v_diag->d[2]);
-	printf("\t\t\tv1_x = %f\n", v1->d[0]);
-	printf("\t\t\tv1_y = %f\n", v1->d[1]);
-	printf("\t\t\tv1_z = %f\n", v1->d[2]);
-	printf("\t\t\tv2_x = %f\n", v2->d[0]);
-	printf("\t\t\tv2_y = %f\n", v2->d[1]);
-	printf("\t\t\tv2_z = %f\n", v2->d[2]);
-	plane = fdf_create_plane(v1, v2, v_start);
-	if (plane == NULL)
-		return (free(v1), free(v2), free(v_start), free(v_diag), 0);
-	obj->edge[this_edge].is_hidden = 0;
-	if (fdf_point_is_in_plane(v_diag, plane))
-	{
-		obj->edge[this_edge].is_hidden = 1;
-		printf("\t\tHIDDEN (v_diag in same plane)\n");
-		return (1);
-	}
-	
-	// Posiblemente no haga falta esta prueba...
-	if (v_start->d[2] == v_diag->d[2])
-	{
-		obj->edge[this_edge].is_hidden = 1;
-		printf("\t\tHIDDEN (not in same plane BUT v_diag and v_start have same altitude)\n");
-		return (1);
-	}
-	//mientras
-	//return (1);
-	
-	// At this point the only possibility for hiding this edge is that its
-	// competition (the other diagonal) will be visible and at their "XY
-	// intersection" the later has a greater altitude.
-	//
-	// But first we must discard that the competition could actually be visible.
-	free(plane);
-	plane = fdf_create_plane(v_diag, v_start, v1);
-	if (plane == NULL)
-		return (free(v1), free(v2), free(v_start), free(v_diag), 0);
-	if (fdf_point_is_in_plane(v2, plane))
-	{
-		printf("\t\tCool, the other diagonal is discarded because it won't be visible (same plane)\n");
-		return (1);
-	}
-	else
-	{
-		printf("\t\tCompetition passed same plane test and could be drawable\n");
-	}
+	t_fdf_nv	*nv;
+	int			verdict;
 
-	// Posiblemente no haga falta esta prueba...
-	if (v1->d[2] == v2->d[2])
-	{
-		printf("\t\tCool, the other diagonal is discarded because it won't be visible (same altitude)\n");
-		return (1);
-	}
-	
-
-
-	t_fdf_3drect	*this;
-	t_fdf_3drect	*other;
-	double			x_this;
-	double			y_this;
-	double			x_other;
-	double			y_other;
-	double			z_this;
-	double			z_other;
-
-	this = fdf_create_3drect(v_start, v_diag);
-	if (this == NULL)
+	nv = fdf_create_nv(ft_mx_get_col(obj->model_mx, obj->edge[this_edge].start),
+			ft_mx_get_col(obj->model_mx, obj->edge[this_edge].end),
+			ft_mx_get_col(obj->model_mx, ort_v1),
+			ft_mx_get_col(obj->model_mx, ort_v2));
+	if (nv == NULL)
 		return (0);
-	other = fdf_create_3drect(v1, v2);
-	if (other == NULL)
-		return (0);
-	x_this = v_start->d[0] + (v_diag->d[0] - v_start->d[0]) / 2;
-	y_this = v_start->d[1] + (v_diag->d[1] - v_start->d[1]) / 2;
-	
-	printf("\t[set_edge_visibility] For this:\n");
-	printf("\t\tfirst_x = %f\n", v_start->d[0]);
-	printf("\t\tsecond_x = %f\n", v_diag->d[0]);
-	printf("\t\t\tx = %f\n", x_this);
-	printf("\t\tfirst_y = %f\n", v_start->d[1]);
-	printf("\t\tsecond_y = %f\n", v_diag->d[1]);
-	printf("\t\t\ty = %f\n", y_this);
-	printf("\t\tfirst_z = %f\n", v_start->d[2]);
-	printf("\t\tsecond_z = %f\n", v_diag->d[2]);
-	
-	if (this->parallel_to_xy)
-		z_this = this->parallel_to_xy_at_z;
-	else
-	{
-		if (!fdf_getz_3drect_fromx(&z_this, this, x_this))
-		{
-			if (!fdf_getz_3drect_fromy(&z_this, this, y_this))
-			{
-				printf("\t[set_edge_visibility] Z (this) is still NULL!!!!????\n");
-				obj->edge[this_edge].is_hidden = 1;
-				printf("\t\tHIDDEN (not same plane nor altitude BUT perpendicular to Z!!!???\n");
-				return (1);
-			}
-		}
-	}
-	printf("\t\tz_this = %f\n", z_this);
-
-
-
-	x_other = v1->d[0] + (v2->d[0] - v1->d[0]) / 2;
-	y_other = v1->d[1] + (v2->d[1] - v1->d[1]) / 2;
-	
-	printf("\t[set_edge_visibility] For other:\n");
-	printf("\t\tfirst_x = %f\n", v1->d[0]);
-	printf("\t\tsecond_x = %f\n", v2->d[0]);
-	printf("\t\t\tx = %f\n", x_other);
-	printf("\t\tfirst_y = %f\n", v1->d[1]);
-	printf("\t\tsecond_y = %f\n", v2->d[1]);
-	printf("\t\t\ty = %f\n", y_other);
-	printf("\t\tfirst_z = %f\n", v1->d[2]);
-	printf("\t\tsecond_z = %f\n", v2->d[2]);
-	
-	if (other->parallel_to_xy)
-		z_other = other->parallel_to_xy_at_z;
-	else
-	{
-		if (!fdf_getz_3drect_fromx(&z_other, other, x_other))
-		{
-			if (!fdf_getz_3drect_fromy(&z_other, other, y_other))
-			{
-				printf("\t[set_edge_visibility] Z (other) is still NULL!!!!????\n");
-				printf("\t\tHIDDEN (not same plane nor altitude BUT perpendicular to Z!!!???\n");
-				obj->edge[this_edge].is_hidden = 1;
-				return (1);
-			}
-		}
-	}
-	printf("\t\t\tz_other = %f\n", z_other);
-	
-	if (z_this < z_other)
-	{
-		obj->edge[this_edge].is_hidden = 1;
-		printf("\t\tHIDDEN (not same plane nor altitude nor perpendicular to Z BUT this Z is smaller than its competition)\n");
-		return (1);
-	}
-
-
-	
-	/*
-	else
-	{
-		double	this_m;
-		double	the_other_m;
-
-		this_m = (v_start->d[2] - v_diag->d[2]) / (v_start->d[0] - v_diag->d[0]);
-		the_other_m = (v1->d[2] - v2->d[2]) / (v1->d[0] - v2->d[0]);
-		// Problemas: signo. div por 0
-		if (fabs(this_m)  < fabs(the_other_m))
-			obj->edge[this_edge].is_hidden = 1;
-	}
-*/
-		/*	
-		if (v_start->d[2] < v1->d[2]
-			|| v_start->d[2] < v2->d[2]
-			|| v_diag->d[2] < v1->d[2]
-			|| v_diag->d[2] < v2->d[2])
-			obj->edge[this_edge].is_hidden = 1;
-		*/
-//	obj->edge[this_edge].is_hidden = fdf_is_in_plane(vdiag, plane)
-//		|| (!fdf_is_in_plane(vdiag, plane) && v3->d[2] == vdiag->d[2]);
-	return (free(plane), free(v1), free(v2), free(v_start), free(v_diag), 1);
+	verdict = fdf_plane_analysis(nv, &obj->edge[this_edge].is_hidden);
+	if (verdict == ERROR_TESTING_VISIBILITY)
+		return (fdf_destroy_nv(nv), 0);
+	if (verdict == DONE_TESTING_VISIBILITY)
+		return (fdf_destroy_nv(nv), 1);
+	verdict = fdf_rect_analysis(nv, &obj->edge[this_edge].is_hidden);
+	if (verdict == ERROR_TESTING_VISIBILITY)
+		return (fdf_destroy_nv(nv), 0);
+	return (fdf_destroy_nv(nv), 1);
 }

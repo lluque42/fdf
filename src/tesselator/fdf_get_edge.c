@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:43:56 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/27 10:06:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	ft_printf("\n[edge2dr_neig] Evaluating DOWN_RIGHT neighbor visibility\n");
 	if (!fdf_set_edge_visibility(object->edges,
 			object,
 			right_neighbor_v,
@@ -120,7 +119,6 @@ static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	ft_printf("\n[edge2dl_neig] Evaluating DOWN_LEFT neighbor visibility...\n");
 	if (!fdf_set_edge_visibility(object->edges,
 			object,
 			left_neighbor_v,
@@ -154,8 +152,8 @@ int	fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object)
 	int	j;
 	int	edges;
 
-	edges = (map_mx->m - 1) * (map_mx->n - 1) * 4
-		+ (map_mx->m - 1)
+	object->edges = 0;
+	edges = (map_mx->m - 1) * (map_mx->n - 1) * 4 + (map_mx->m - 1)
 		+ (map_mx->n - 1);
 	object->edge = malloc(sizeof (t_fdf_edge) * edges);
 	if (object->edge == NULL)

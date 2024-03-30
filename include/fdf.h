@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 21:02:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/03/26 13:14:26 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
  * @brief Base for typedef <b>t_render_request</b>.
  * @details This type is used in function fdf_render to indicate what is needed
  * to re-calculate and redraw.
+ * @var e_render_request::FROM_MODEL
+ * The re-calculations must begin at the tesselation of the data from the map_mx
+ * to MODEL space.
  * @var e_render_request::FROM_WORLD
  * The re-calculations must begin at transformations from model to WORLD space.
  * @var e_render_request::FROM_CAMERA
@@ -48,6 +51,7 @@ typedef struct s_fdf_wlayout	t_fdf_wlayout;
 */
 typedef enum e_render_request
 {
+	FROM_MODEL,
 	FROM_WORLD,
 	FROM_CAMERA,
 	FROM_SCREEN,
@@ -90,6 +94,9 @@ typedef struct s_fdf
  * @param [in] drawing_h - Height in pixels of the actual drawing inside the
  * image.
  *
+ * @param [in] map_mx - The map to create the 3D object from.
+ * image.
+ *
  * @return TODO..
  * NULL if error.
  *
@@ -98,7 +105,9 @@ typedef struct s_fdf
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf			*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h);
+t_fdf			*fdf_create_fdf(int32_t drawing_w,
+					int32_t drawing_h,
+					t_ft_mx *map_mx);
 
 /**
  * @brief <b>fdf_destroy_fdf</b> -- TODO.
