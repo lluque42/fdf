@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 10:03:34 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:26:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_sph_z(int j, int i, t_ft_mx *map_mx, double base_radius)
 {
-	int		z;
-	int		r;
+	double	z;
+	double	r;
 	double	step_a;
 	double	pi;
 
@@ -38,8 +38,8 @@ static double	fdf_get_sph_z(int j, int i, t_ft_mx *map_mx, double base_radius)
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_sph_x(int j, int i, t_ft_mx *map_mx, double base_radius)
 {
-	int		x;
-	int		r;
+	double	x;
+	double	r;
 	double	step_a;
 	double	step_b;
 	double	pi;
@@ -57,8 +57,8 @@ static double	fdf_get_sph_x(int j, int i, t_ft_mx *map_mx, double base_radius)
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_sph_y(int j, int i, t_ft_mx *map_mx, double base_radius)
 {
-	int		y;
-	int		r;
+	double	y;
+	double	r;
 	double	step_a;
 	double	step_b;
 	double	pi;

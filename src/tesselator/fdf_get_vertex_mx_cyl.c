@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 10:04:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:27:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_cyl_z(int i, t_ft_mx *map_mx, double cyl_h)
 {
-	int		z;
+	double	z;
 	double	step_a;
 
 	step_a = cyl_h / (map_mx->m - 1);
@@ -34,8 +34,8 @@ static double	fdf_get_cyl_z(int i, t_ft_mx *map_mx, double cyl_h)
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_cyl_x(int j, int i, t_ft_mx *map_mx, double base_radius)
 {
-	int		x;
-	int		r;
+	double	x;
+	double	r;
 	double	step_b;
 	double	pi;
 
@@ -51,8 +51,8 @@ static double	fdf_get_cyl_x(int j, int i, t_ft_mx *map_mx, double base_radius)
 // The later naming is confusing but... freaking 42's norm limitations...
 static double	fdf_get_cyl_y(int j, int i, t_ft_mx *map_mx, double base_radius)
 {
-	int		y;
-	int		r;
+	double	y;
+	double	r;
 	double	step_b;
 	double	pi;
 
