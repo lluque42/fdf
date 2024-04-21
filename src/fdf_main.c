@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/26 14:24:39 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 23:46:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "main_utils.h"
 #include "drawing.h"
 #include "tesselator.h"
-#define DEF_DRW_WIDTH 500
-#define DEF_DRW_HEIGHT 500
 
 int	main(int argc, char **argv)
 {

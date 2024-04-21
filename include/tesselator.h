@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 16:24:37 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:16:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #ifndef TESSELATOR_H
 # define TESSELATOR_H
 # include "lin_alg.h"
+
+/**
+ * @def RADIUS_RATE
+ * TODO.
+ */
+# define RADIUS_RATE 3
 
 /**
  * @enum e_tesselation_type
@@ -41,6 +47,11 @@ typedef enum e_tesselation_type
 	SPHERICAL_TESSELATION,
 	CYLINDRICAL_TESSELATION
 }	t_tesselation_type;
+/**
+ * @typedef t_tesselation_type
+ * Based on the @link e_tesselation_type @endlink enum to indicate
+ * the tesselation type.
+ */
 
 /**
  * @struct s_fdf_edge
@@ -60,6 +71,11 @@ typedef struct s_fdf_edge
 	int	end;
 	int	is_hidden;
 }				t_fdf_edge;
+/**
+ * @typedef t_fdf_edge
+ * Based on the @link s_fdf_edge @endlink struct that stores the indexes ofa
+ * vertex matrix that correspond to and edge as well as its desired visibility.
+ */
 
 /**
  * @struct s_fdf_nv
@@ -102,6 +118,10 @@ typedef struct s_fdf_nv
 	t_ft_mx	*ort1;
 	t_ft_mx	*ort2;
 }				t_fdf_nv;
+/**
+ * @typedef t_fdf_nv
+ * Based on the @link s_fdf_nv @endlink struct TODO.
+ */
 
 /**
  * @struct s_fdf_3drect
@@ -177,6 +197,10 @@ typedef struct s_fdf_3drect
 	int		parallel_to_xz;
 	double	parallel_to_xz_at_y;
 }				t_fdf_3drect;
+/**
+ * @typedef t_fdf_3drect
+ * Based on the @link s_fdf_3drect @endlink struct TODO.
+ */
 
 /**
  * @struct s_fdf_plane
@@ -199,6 +223,10 @@ typedef struct s_fdf_plane
 	double	c;
 	double	k;
 }				t_fdf_plane;
+/**
+ * @typedef t_fdf_plane
+ * Based on the @link s_fdf_plane @endlink struct TODO.
+ */
 
 /**
  * @struct s_fdf_triangle
@@ -218,6 +246,10 @@ typedef struct s_fdf_triangle
 	int	v2;
 	int	v3;
 }				t_fdf_triangle;
+/**
+ * @typedef t_fdf_triangle
+ * Based on the @link s_fdf_triangle @endlink struct TODO.
+ */
 
 /**
  * @struct s_fdf_object
@@ -276,29 +308,65 @@ typedef struct s_fdf_triangle
  * @var s_fdf_object::c2s_sca_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * scale transformation from camera to screen space.
+ * @var s_fdf_object::map_min
+ * A double array for minimum value for each coordinate at map space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::map_max
+ * A double array for maximum value for each coordinate at map space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::m_min
+ * A double array for minimum value for each coordinate at model space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::m_max
+ * A double array for maximum value for each coordinate at model space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::w_min
+ * A double array for minimum value for each coordinate at world space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::w_max
+ * A double array for maximum value for each coordinate at world space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::c_min
+ * A double array for minimum value for each coordinate at camera space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
+ * @var s_fdf_object::c_max
+ * A double array for maximum value for each coordinate at camera space
+ * (X, Y, and Z (indexes 0, 1 and 2 respectively)).
 */
 typedef struct s_fdf_object
 {
 	t_ft_mx				*map_mx;
+	double				map_min[3];
+	double				map_max[3];
 	t_tesselation_type	tesselation_type;
 	t_ft_mx				*model_mx;
 	double				m2w_rot_par[3];
 	double				m2w_tra_par[3];
 	double				m2w_sca_par[3];
+	double				m_min[3];
+	double				m_max[3];
 	t_ft_mx				*world_mx;
 	double				w2c_rot_par[3];
 	double				w2c_tra_par[3];
 	double				w2c_sca_par[3];
+	double				w_min[3];
+	double				w_max[3];
 	t_ft_mx				*camera_mx;
 	double				c2s_rot_par[3];
 	double				c2s_tra_par[3];
 	double				c2s_sca_par[3];
+	double				c_min[3];
+	double				c_max[3];
 	t_ft_mx				*screen_mx;
 	t_fdf_edge			*edge;
 	int					edges;
 	t_fdf_triangle		*triangle;
 	int					triangles;
 }				t_fdf_object;
+/**
+ * @typedef t_fdf_object
+ * Based on the @link s_fdf_object @endlink struct TODO.
+ */
 
 /**
  * @brief <b>fdf_create_object</b> -- TODO.
@@ -773,13 +841,19 @@ int				fdf_set_edge_visibility(int this_edge,
 					int ort_v2);
 
 /**
- * @brief <b>fdf_get_vertex_mx</b> -- TODO.
+ * @brief <b>fdf_get_vertex_mx</b> -- Converts an altitude map matrix to a
+ * planar vertex matrix.
  *
- * @details TODO.
+ * @details Takes a matrix that represents altitude samples at equidistant
+ * normalized X (colum number) and Y (row number) coordinates and returns
+ * another matrix in which every column represents a col-vector with the values
+ * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
+ * maintains the planar correspondence of the source map matrix to the surface
+ * it refers to.
  *
- * @param [in] map_mx - TODO.
+ * @param [in] map_mx - The altitude map matrix.
  *
- * @return TODO..
+ * @return The vertex matrix if OK.
  * NULL if error.
  *
  * @warning TODO.
@@ -797,13 +871,129 @@ int				fdf_set_edge_visibility(int this_edge,
 */
 t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
 
+/**
+ * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix to a
+ * spherical vertex matrix.
+ *
+ * @details Takes a matrix that represents altitude samples at equidistant
+ * normalized X (colum number) and Y (row number) coordinates and returns
+ * another matrix in which every column represents a col-vector with the values
+ * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
+ * turns the planar correspondence of the source map matrix to the surface
+ * it refers to into a spherical representation.
+ *
+ * @param [in] map_mx - The altitude map matrix.
+ *
+ * @param [in] r - The sphere base radius that will be modulated by the
+ * altitude values from the map matrix.
+ *
+ * @return The vertex matrix if OK.
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+ */
 t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
+
+/**
+ * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix to a
+ * cylindrical vertex matrix.
+ *
+ * @details Takes a matrix that represents altitude samples at equidistant
+ * normalized X (colum number) and Y (row number) coordinates and returns
+ * another matrix in which every column represents a col-vector with the values
+ * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
+ * turns the planar correspondence of the source map matrix to the surface
+ * it refers to into a cylindrical representation.
+ *
+ * @param [in] map_mx - The altitude map matrix.
+ *
+ * @param [in] r - The cylinder base radius that will be modulated by the
+ * altitude values from the map matrix.
+ *
+ * @param [in] h - The cylinder height.
+ *
+ * @return The vertex matrix if OK.
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+ */
 t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *map_mx, double r, double h);
 
-void			fdf_destroy_nv(t_fdf_nv *nv);
+/**
+ * @brief <b>fdf_create_nv</b> -- Creates a neighboring vertexes struct.
+ *
+ * @details Creates a neighboring vertexes struct by allocating memory for
+ * it.
+ *
+ * @param [in] diag_start - The vertex as a column-vector matrix from which
+ * the diagonal being analyzed starts.
+ *
+ * @param [in] diag_end - The vertex as a column-vector matrix to which
+ * the diagonal being analyzed ends.
+ *
+ * @param [in] ort1 - One of the orthogonal neighbor vertexes (as a 
+ * column-vector matrix) to the diag_start vertex. It could be its down
+ * neighbor or either the left or right neighbor.
+ *
+ * @param [in] ort2 - The other orthogonal neighbor vertexes (as a 
+ * column-vector matrix) to the diag_start vertex. It could be its down
+ * neighbor or either the left or right neighbor.
+ *
+ * @return The neighboring vertexes structure.
+ * NULL if error.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
 t_fdf_nv		*fdf_create_nv(t_ft_mx *diag_start,
 					t_ft_mx *diag_end,
 					t_ft_mx *ort1,
 					t_ft_mx *ort2);
+
+/**
+ * @brief <b>fdf_destroy_nv</b> -- Destroys a neighboring vertexes struct.
+ *
+ * @details Destroys a neighboring vertexes struct by de-allocating memory.
+ *
+ * @param [in] nv - The neihgbor vertexes structure pointer to be de-allocated.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_destroy_nv(t_fdf_nv *nv);
+
+/**
+ * @brief <b>fdf_get_vertex_min_max</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @param [in] vertex_mx - The vertex matrix to analyze.
+ *
+ * @param [out] min - The size 3 array of double type to store the minimum
+ * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
+ * is no need to initialize this array before calling the function.
+ *
+ * @param [out] max - The size 3 array of double type to store the maximum
+ * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
+ * is no need to initialize this array before calling the function.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void			fdf_get_vertex_min_max(t_ft_mx *vertex_mx,
+					double *min,
+					double *max);
 
 #endif

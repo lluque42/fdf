@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-03-21</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-04-21</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -107,7 +107,7 @@ Data Fields</h2></td></tr>
  (x - x1) / tx = (y - y1) / ty = (z - z1) / tz <br  />
  (x - x1) / (x2 - x1) = (y - y1) / (y2 - y1) = (z - z1) / (z2 -z1) <br  />
  Where x1, x2, y1, y2, z1, z2 are constants derived from two points that belong to the rect. <br  />
- Notice that if tx, ty, or tz are 0, problems arise due to divisions by zero when trying to solve the equation from a x, y, or z value respectively. The rect's parallelism to the plane formed by two axis (which implies the rect's perpendicularity to the remaining axis) is informed by the zero value of tx, ty, and tz parameters. By the way, a rect can not be parallel to the three axis planes (i.e. perpendicular to the three axis) at the same time. <br  />
+ Notice that if tx, ty, or tz are 0, problems arise due to divisions by zero when trying to solve the equation from a x, y, or z value respectively. The rect's parallelism to the plane formed by two axis (which implies the rect's perpendicularity to the remaining axis) is informed by the zero value of tx, ty, and tz parameters. By the way, a rect can not be parallel to the three axis planes (i.e. perpendicular to the three axis) at the same time, such case results in a NULL when creating the rect. <br  />
  For example: <br  />
  If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0 (tx = rect-&gt;x2 - rect-&gt;x1), it is impossible to obtain the Z value from an X value. This is because for a given X value there is no unique (actually infinite) Z values that checks the rect equation. If possible (tx != 0), then if it is perpendicular to Z axis (i.e. parallel to XY), that is tz = 0 (tz = rect-&gt;z2 - rect-&gt;z1), the solution is already in rect-&gt;parallel_to_xy_at_z and is independent from the value of passed x. <br  />
  In the rest of cases the z value is calculated from: <br  />

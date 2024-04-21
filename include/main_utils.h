@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 23:55:25 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:18:40 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 
 #ifndef MAIN_UTILS_H
 # define MAIN_UTILS_H
+
+/**
+ * @def FILE_EXTENSION
+ * The altitude map file required extension.
+ */
 # define FILE_EXTENSION ".fdf"
 
 /**

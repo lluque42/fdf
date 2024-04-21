@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:50:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 23:40:17 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "fdf.h"
 
 // Forward declaration, something like a prototype for typedef.
-// Needed because both fdf.h and window.h have structs typedefs with member
-// types defined in the other file.
+// Needed because both fdf.h and drawing.h have structs typedefs with member
+// types defined in the other file or functions refering those types..
 typedef struct s_fdf	t_fdf; 
 
 /**
@@ -56,6 +56,10 @@ typedef struct s_fdf_line
 	double		last_i;
 	int			i_is_x;
 }				t_fdf_line;
+/**
+ * @typedef t_fdf_line
+ * Based on the @link s_fdf_line @endlink struct.
+ */
 
 /**
  * @brief <b>ft_draw_edges</b> -- TODO.
@@ -111,27 +115,5 @@ void	fdf_get_autofit_transf_par(uint32_t img_w,
  * TODO.
 */
 int		fdf_render(t_fdf *fdf);
-
-/**
- * @brief <b>fdf_get_vertex_min_max</b> -- TODO.
- *
- * @details TODO.
- *
- * @param [in] vertex_mx - The vertex matrix to analyze.
- *
- * @param [out] min - The size 3 array of double type to store the minimum
- * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
- * is no need to initialize this array before calling the function.
- *
- * @param [out] max - The size 3 array of double type to store the maximum
- * values found for each axis (0:X: 1:Y; 2:Z) in the vertex matrix. There
- * is no need to initialize this array before calling the function.
- *
- * @warning TODO.
- *
- * @remark Implementation notes:
- * TODO.
-*/
-void	fdf_get_vertex_min_max(t_ft_mx *vertex_mx, double *min, double *max);
 
 #endif

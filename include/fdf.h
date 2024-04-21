@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/26 13:14:26 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 23:40:04 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "MLX42.h"
 # include "tesselator.h"
 # include "window.h"
+//# include "drawing.h"
 
 // Forward declaration, something like a prototype for typedef.
 // Needed because both fdf.h and window.h have structs typedefs with member
@@ -58,6 +59,10 @@ typedef enum e_render_request
 	FROM_IMAGE,
 	NO_RENDER
 }	t_render_request;
+/**
+ * @typedef t_render_request
+ * Based on the @link e_render_request @endlink enum.
+ */
 
 /**
  * @struct s_fdf
@@ -82,6 +87,10 @@ typedef struct s_fdf
 	int					autofit;
 	t_render_request	render_request;
 }				t_fdf;
+/**
+ * @typedef t_fdf
+ * Based on the @link s_fdf @endlink struct.
+ */
 
 /**
  * @brief <b>fdf_create_fdf</b> -- TODO.

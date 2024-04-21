@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/26 14:34:26 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 21:59:46 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,26 @@
 #ifndef FDF_FEATURES_H
 # define FDF_FEATURES_H
 # include "fdf.h"
+
+/**
+ * @def DEG_STEP
+ * The step used to increase/decrease the current X/Y/Z rotation degree on
+ * user's demand.
+ */
 # define DEG_STEP 1
+
+/**
+ * @def TRA_STEP
+ * The step used to increase/decrease the current X/Y/Z translation on
+ * user's demand.
+ */
 # define TRA_STEP 1
+
+/**
+ * @def SCA_STEP
+ * The step used to increase/decrease the current X/Y/Z scale on
+ * user's demand.
+ */
 # define SCA_STEP 1
 
 /**
@@ -147,6 +165,19 @@ void	fdf_scale_step(t_fdf *fdf, int step_x, int step_y, int step_z);
 */
 void	fdf_window_resize(t_fdf *fdf, int32_t width, int32_t height);
 
+/**
+ * @brief <b>fdf_toggle_tesselation</b> -- Toggles the map's tesselation type.
+ *
+ * @details Changes the 3D object tesselation type from its current type to
+ * the next available in a circular fashion.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
 void	fdf_toggle_tesselation(t_fdf *fdf);
 
 #endif

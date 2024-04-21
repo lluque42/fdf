@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/19 16:05:55 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 22:14:14 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 #ifndef LIN_ALG_H
 # define LIN_ALG_H
 # include "libft.h"
+
+/**
+ * @def VAL_SEPARATOR_FILE
+ * ASCII value for the expected char separator between column values on
+ * source altitude map file.
+ */
 # define VAL_SEPARATOR_FILE 32
 
 /**
@@ -69,6 +75,10 @@ typedef struct s_ft_mx
 	int		n;
 	int		is_sqr;
 }				t_ft_mx;
+/**
+ * @typedef t_ft_mx
+ * Based on the @link s_ft_mx @endlink struct.
+ */
 
 /**
  * @struct s_ft_mx_size
@@ -84,6 +94,10 @@ typedef struct s_ft_mx_size
 	int		m;
 	int		n;
 }				t_ft_mx_size;
+/**
+ * @typedef t_ft_mx_size
+ * Based on the @link s_ft_mx_size @endlink struct.
+ */
 
 /**
  * @brief <b>ft_mx_create</b> -- TODO.

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 21:10:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/04/04 23:22:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,28 @@
 # define WINDOW_H
 # include "MLX42.h"
 # include "fdf.h"
+
+/**
+ * @def DEF_DRW_WIDTH
+ * The default drawing width at startup. This also determines the GUI's window
+ * width through @link DEF_WLAYOUT_RATIO @endlink.
+ */
+# define DEF_DRW_WIDTH 500
+
+/**
+ * @def DEF_DRW_HEIGHT
+ * The default drawing height at startup. This also determines the GUI's window
+ * height through @link DEF_WLAYOUT_RATIO @endlink.
+ */
+# define DEF_DRW_HEIGHT 500
+
+/**
+ * @def DEF_WLAYOUT_RATIO
+ * The ratio to calculate the starting GUI's window size from
+ * @link DEF_DRW_WIDTH @endlink and @link DEF_DRW_HEIGHT @endlink. After a
+ * window resize, the inverse operation is done: the new window size
+ * detemines the drawing's width and height using this constant.
+ */
 # define DEF_WLAYOUT_RATIO 1.05
 
 // Forward declaration, something like a prototype for typedef.
@@ -60,6 +82,10 @@ typedef struct s_fdf_wlayout
 	mlx_t		*window;
 	mlx_image_t	*image;
 }				t_fdf_wlayout;
+/**
+ * @typedef t_fdf_wlayout
+ * Based on the @link s_fdf_wlayout @endlink struct.
+ */
 
 /**
  * @brief <b>fdf_create_wlayout</b> -- TODO.
