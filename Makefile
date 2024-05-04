@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/03/27 11:49:32 by lluque           ###   ########.fr        #
+#    Updated: 2024/04/25 11:46:09 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,17 @@ BIN_DIR = ./bin/
 OBJ_DIR = ./obj/
 LIBFT_DIR = ./lib/libft/
 MLX42_DIR = ./lib/MLX42/
+LIBFT_BIN_DIR = $(LIBFT_DIR)bin/
+MLX42_BIN_DIR = $(MLX42_DIR)build/
 
 # Library libft binary
-LIBFT_BIN = $(LIBFT_DIR)bin/libft.a
+LIBFT_BIN = $(LIBFT_BIN_DIR)libft.a
 
 # Library libft include dir
 LIBFT_INC = $(LIBFT_DIR)include/
 
 # Library MLX42 binary
-MLX42_BIN = $(MLX42_DIR)build/libmlx42.a
+MLX42_BIN = $(MLX42_BIN_DIR)libmlx42.a
 
 # Library MLX42 include dir
 MLX42_INC = $(MLX42_DIR)include/MLX42/
@@ -202,7 +204,7 @@ all: $(BIN_DIR)$(NAME)
 $(NAME): $(BIN_DIR)$(NAME)
 
 # Rule to link the program
-$(BIN_DIR)$(NAME): $(OBJECTS) $(LIBFT_BIN) 
+$(BIN_DIR)$(NAME): $(OBJECTS) $(LIBFT_BIN) $(MLX42_BIN)
 	@echo ----------------------------------------------------------------------
 	@echo
 	@echo "          --- Linking the program to $(BIN_DIR)$(NAME) ---"
@@ -217,8 +219,7 @@ bonus: $(BIN_DIR)$(BONUS_NAME)
 
 # Rule to link the bonus
 $(BIN_DIR)$(BONUS_NAME): $(BONUS_OBJECTS) $(LIBFT_BIN) 
-	@echo ----------------------------------------------------------------------
-	@echo
+
 	@echo "          --- Linking the program to $(BIN_DIR)$(BONUS_NAME) ---"
 	mkdir -p $(@D)
 	cc $(CC_FLAGS) $(BONUS_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BIN_DIR)$(BONUS_NAME) -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
@@ -303,6 +304,11 @@ else
 	make --directory=$(LIBFT_DIR) DEBUG=yes
 endif
 
+# Library MLX42 compilation
+$(MLX42_BIN):
+	cmake -S $(MLX42_DIR) -B $(MLX42_BIN_DIR)
+	cmake --build $(MLX42_BIN_DIR) -j4
+
 clean:
 	@echo ----------------------------------------------------------------------
 	@echo
@@ -323,10 +329,12 @@ fclean:clean
 	@echo "                          --- Fcleaning ---"
 	@echo
 	rm -rf $(BIN_DIR)
+	make fclean --directory=$(LIBFT_DIR)
+	rm -rf $(MLX42_BIN_DIR)
+	@echo
 	@echo
 	@echo ----------------------------------------------------------------------
 
-#	make fclean --directory=$(LIBFT_DIR)									CREO QUE ES LO JUSTO
 # Rebuild rule: deletes objects files and all outputs, then compiles again
 re: fclean all
 

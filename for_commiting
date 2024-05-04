@@ -1,4 +1,9 @@
 TODO:
++ El Makefile debe ser arreglado por completo:
+	+ Separar el código en mandatory, bonus, shared.
+	+ Sincerar lo del DEBUG.
+	+ Etc.
++ Integrar MLX42 de CODAM como un submodulo y compilar con el Makefile.
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
 + Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
 y la altura del cilindro en función de las dimensiones del mapa para que quede
@@ -25,10 +30,6 @@ que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
 plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
 por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
 corresponda.
-+ El Makefile debe ser arreglado por completo:
-	+ Que compile la biblioteca gráfica.
-	+ Sincerar lo del DEBUG.
-	+ Etc.
 
 DONE:
 + fdf_setup_world(fdf) y demás (excepto image) deberian referirse a object, no
