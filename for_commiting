@@ -1,7 +1,11 @@
 TODO:
++ Instrucciones de uso en la imagen o en otra imagen.
+	+ Tal vez también canalizar los mensajes de cónsola por esta vía.
+
 + El Makefile debe ser arreglado por completo:
 	+ Separar el código en mandatory, bonus, shared.
 	+ Sincerar lo del DEBUG.
+		+ "La opción “-fsanitize=address” es INCOMPATIBLE con valgrind".
 	+ Etc.
 + Integrar MLX42 de CODAM como un submodulo y compilar con el Makefile.
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
