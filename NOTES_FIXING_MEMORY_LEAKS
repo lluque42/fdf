@@ -1,0 +1,40 @@
+Hay varias funciones de "delete" que puede que deba usar:
+	mlx_delete_image
+
+El mlx_init() parece estar allocando memoria, devuelve un puntero a mlx_t
+que en definitiva es un apuntador a este struct:
+	typedef struct mlx
+	{
+		void*       window;
+		void*       context;
+		int32_t     width;
+		int32_t     height;
+		double      delta_time;
+	}   mlx_t;	
+
+Luego está el mlx_terminate() que recibe un puntero a mlx_t, por
+lo que parece que debería hacerse cargo de lo allocado por mlx_init().
+
+
+Toma 1: cargar mapa válido, salir inmediatamente con escape.
+==142574== ERROR SUMMARY: 34 errors from 34 contexts (suppressed: 0 from 0)
+
+De estos, 24 vienen de fdf_plane_analysis() llamando a fdf_create_plane().
+
+Empezaré con este muy repetido y aislado:
+...
+==142331==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==142331==    by 0x10AA1D: ft_mx_create (ft_mx_create.c:23)
+==142331==    by 0x10B918: ft_vx_xproduct (ft_vx_xproduct.c:21)
+==142331==    by 0x10D7B4: fdf_create_plane (fdf_create_plane.c:30)
+==142331==    by 0x10C34D: fdf_plane_analysis (fdf_set_edge_visibility.c:41)
+==142331==    by 0x10C6FA: fdf_set_edge_visibility (fdf_set_edge_visibility.c:155)
+...
+
+(1) fdf_create_plane no destruía una matriz temporal y el resto de matrices las liberaba
+en vez de destruirlas.
+ya con esto se redujo de 34 a 15 errores.
+
+Toma 2: resuelto (1) cargar mapa válido, salir inmediatamente con escape.
+==148731== ERROR SUMMARY: 15 errors from 15 contexts (suppressed: 0 from 0)
+
