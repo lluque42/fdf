@@ -5,75 +5,164 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/24 14:23:32 by lluque            #+#    #+#              #
-#    Updated: 2024/04/25 11:46:09 by lluque           ###   ########.fr        #
+#    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
+#    Updated: 2024/07/15 15:21:49 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+################################################################################
+#
 # Directories for source code, tester and headers (permanent), and for
 # object files and binary output (volatile).
-# (relative to repository root directory)
+# (all directories are relative to repository's root directory)
 #
-SRC_DIR = ./src/
-INC_DIR = ./include/
-TEST_DIR = ./test/
-BIN_DIR = ./bin/
+# Common directories
+BASE_BIN_DIR = ./bin/
 OBJ_DIR = ./obj/
+
+# Project's mandatory version directories
+SRC_DIR = ./src/mandatory/
+INC_DIR = ./include/mandatory/
+BIN_DIR = $(BASE_BIN_DIR)mandatory/
+
+# Project's bonus version directories
+BONUS_SRC_DIR = ./src/bonus/
+BONUS_INC_DIR = ./include/bonus/
+BONUS_BIN_DIR = $(BASE_BIN_DIR)bonus/
+
+# Project's optional tester directories
+TEST_DIR = ./test/
+TEST_INC_DIR = ./test/
+TEST_BIN_DIR = $(BASE_BIN_DIR)tester/
+
+# Directories for external libraries to be built using their own building tools
 LIBFT_DIR = ./lib/libft/
-MLX42_DIR = ./lib/MLX42/
 LIBFT_BIN_DIR = $(LIBFT_DIR)bin/
-MLX42_BIN_DIR = $(MLX42_DIR)build/
-
-# Library libft binary
-LIBFT_BIN = $(LIBFT_BIN_DIR)libft.a
-
-# Library libft include dir
 LIBFT_INC = $(LIBFT_DIR)include/
 
-# Library MLX42 binary
-MLX42_BIN = $(MLX42_BIN_DIR)libmlx42.a
-
-# Library MLX42 include dir
+MLX42_DIR = ./lib/MLX42/
+MLX42_BIN_DIR = $(MLX42_DIR)build/
 MLX42_INC = $(MLX42_DIR)include/MLX42/
 
-# Resulting binary (to be placed in BIN_DIR)
+################################################################################
+#
+# Binary names, including other pre-compiled external libraries passed as
+# flags when linking
+#
+# Resulting binary name for mandatory program version (to be placed in BIN_DIR)
 NAME = fdf
 
-# Resulting bonus output name (to be placed in BIN_DIR)
-BONUS_NAME = fdf_bonus
+# Resulting binary name for bonus program version(to be placed in BONUS_BIN_DIR)
+BONUS_NAME = $(NAME)
 
 # Resulting tester name (to be placed in BIN_DIR)
 TESTER_NAME = tester
 
-# Default value of DEBUG (if passed from command line DEBUG=yes overrides it)
-DEBUG = no
+# Library libft binary
+LIBFT_BIN = $(LIBFT_BIN_DIR)libft.a
 
-# Optional debugging flags
-#DEB_FLAGS = -g -fsanitize=address -D DEBUG=1							################################################# el -fsanitize=address es incompatible con valgrind
-DEB_FLAGS = -g -D DEBUG=1
+# Library MLX42 binary
+MLX42_BIN = $(MLX42_BIN_DIR)libmlx42.a
 
-# Compiler flags, conditional to DEBUG value
-ifeq ($(DEBUG), no)
-	CC_FLAGS = -Wall -Werror -Wextra
-else
-	CC_FLAGS = -Wall -Werror -Wextra $(DEB_FLAGS)
-endif
-
-# Additional external library flags										################################################## Es lo mejor?
+# Additional external (already-compiled) libraries for linking to the
+# project's binaries (mandatory, bonus and tester).
+# 
 # GLFW: API for OpenGL needed by MLX42
-# libdl: Dynamic loader (linking) library
+# libdl: Dynamic loader (linking) library needed by MLX42
+# pthread: POSIX thread library needed by MLX42
 # libm: math library
-# pthread: POSIX thread library
 EXT_LIBS = -ldl -lglfw -pthread -lm
 
-# List of header file names that, if modified, should force recompiling
-INCLUDES = $(INC_DIR)main_utils.h \
-		   $(INC_DIR)tesselator.h \
-		   $(INC_DIR)drawing.h \
-		   $(INC_DIR)window.h \
+################################################################################
+#
+# Variables for adding debug capabilities, only used when compiling object for:
+# 		Project's mandatory version
+# 		Project's bonus version
+# 		Project's tester
+#		Library libft (only applies if using a version that supports this)
+#
+# Definition, for clarity, of DEBUG variable. Its value is supposed to be
+# asigned when a DEBUG=xxx is passed to make from the command line
+# (e.g. "$ make DEBUG=g bonus")
+DEBUG =
+
+# Definition, for clarity, of the argument that will be passed to libft's make
+# when building it. Its purpose is to propagate the same DEBUG=xxx value passed
+# to make from the command line when building this project.
+# Its definite value will be set in later conditional statements and will
+# depends exclusively on $(DEBUG). It will remain empty if no DEBUG=xxx is
+# passed to make when compiling this project.
+LIBFT_MAKE_DEBUG_ARGS =
+
+# Definition, for clarity, of the variable that holds the actual debug flags
+# to be used when compiling this project's object files.
+# Its definite value will be set in later conditional statements and will
+# depends exclusively on $(DEBUG). It will remain empty if no DEBUG=xxx is
+# passed to make when compiling this project.
+DEB_FLAGS =
+
+# Setting of both DEB_FLAGS and LIBFT_MAKE_DEBUG_ARGS values as correspond to
+# the value of $(DEBUG) (no value by default; or the external value if passed
+# to make as "$ make DEBUG=xxx...". If received an unforeseen value for DEBUG,
+# the variables remain empty, thus having no effect.
+#
+# Options to consider in the future:
+# 	-fsanitize=undefined -fsanitize=address -fsanitize=leak
+ifeq ($(DEBUG), g)
+	DEB_FLAGS += -g
+	LIBFT_MAKE_DEBUG_ARGS += DEBUG=$(DEBUG)
+else ifeq ($(DEBUG), addsan)
+	DEB_FLAGS += -g -fsanitize=address
+	LIBFT_MAKE_DEBUG_ARGS += DEBUG=$(DEBUG)
+endif
+
+# Definition, for clarity, of MAKE_DEBUG_LVL intended to provide a building-time
+# mechanism to pass data which will affect the built program's behavior. It is
+# intended to be used to pass an integer value which can be used by the source
+# code to report more, less or no debug messages during the program's runtime.
+#
+# From the source code's perspective, a building using "make MAKE_DEBUG_LVL=5"
+# is the same as having a "#define MAKE_DEBUG_LVL 5" in a global scope. It is
+# up to the programmer to use it or not.
+#
+# If a value is passed to make, the DEB_FLAGS and LIBFT_MAKE_DEBUG_ARGS will
+# be modified accordingly both to have an effect on this project and the
+# libft building.
+MAKE_DEBUG_LVL =
+
+# Condition to modify DEB_FLAGS and LIBFT_MAKE_DEBUG_ARGS if a value for
+# MAKE_DEBUG_LVL is passed to make from the command line when building
+# this project.
+ifdef MAKE_DEBUG_LVL
+	DEB_FLAGS += -D MAKE_DEBUG_LVL=$(MAKE_DEBUG_LVL)
+	LIBFT_MAKE_DEBUG_ARGS += MAKE_DEBUG_LVL=$(MAKE_DEBUG_LVL)
+endif
+
+################################################################################
+#
+# Choice for compiler and standard flags to be used for mandatory, bonus and
+# tester binaries.
+# NOTE: DEB_FLAGS is empty if no debugging arguments are passed to make
+#
+# Compiler to use
+CC = cc
+
+# Compiler flags
+CC_FLAGS = -Wall -Werror -Wextra
+
+################################################################################
+#
+# The source and header files for mandatory, bonus and tester
+#
+# List of mandatory version header file names
+# NOTE: Only to be used to force recompiling if modified
+INCLUDES = $(INC_DIR)drawing.h \
 		   $(INC_DIR)fdf_features.h \
 		   $(INC_DIR)fdf.h \
-		   $(INC_DIR)lin_alg.h
+		   $(INC_DIR)lin_alg.h\
+		   $(INC_DIR)main_utils.h \
+		   $(INC_DIR)tesselator.h \
+		   $(INC_DIR)window.h
 
 # List of source code file names with path relative to SRC_DIR
 SOURCES = fdf_main.c \
@@ -144,21 +233,38 @@ SOURCES = fdf_main.c \
 		  features/fdf_toggle_autofit.c \
 		  features/fdf_toggle_tesselation.c
 
-# List of BONUS source code file names with path relative to SRC_DIR
-BONUS_SOURCES = ch_main.c
+# List of bonus version header file names
+# NOTE: Only to be used to force recompiling if modified
+BONUS_INCLUDES = $(BONUS_INC_DIR)placeholder_bonus.h
 
-# Auto generated list of object file names from SOURCES
-# (here the path is relative to repository's root)
-#
-OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
+# List of BONUS source code file names with path relative to BONUS_SRC_DIR
+BONUS_SOURCES = placeholder_bonus.c
 
-# Auto generated list of BONUS object file names from BONUS_SOURCES
-# (here the path is relative to repository's root)
-#
-BONUS_OBJECTS = $(BONUS_SOURCES:%.c=$(OBJ_DIR)%.o)
+# List of tester header file names
+# NOTE: Only to be used to force recompiling if modified
+TESTER_INCLUDES = $(TESTER_INC_DIR)placeholder_tester.h
 
 # List of tester source code file names with path relative to TEST_DIR
-TEST_SRC = tester.c
+TESTER_SOURCES = tester.c
+
+################################################################################
+#
+# Object files names for mandatory, bonus and tester
+#
+# Auto generated list of object file names from respective source directory by:
+# replacing the file extension .c for .o; and adding the $(OBJ_DIR) to the
+# resulting list of file names (thus maintaining the directory structure of the
+# code files.
+# (here the path is relative to repository's root)
+#
+# For mandatory version objects
+OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
+
+# For bonus version objects
+BONUS_OBJECTS = $(BONUS_SOURCES:%.c=$(OBJ_DIR)%.o)
+
+# For tester version objects
+TESTER_OBJECTS = $(TESTER_SOURCES:%.c=$(OBJ_DIR)%.o)
 
 ################################################################################
 ############### VARIABLES FOR DOXYGEN DOCUMENTATION GENERATION #################
@@ -173,6 +279,9 @@ DOX_PROJECT_NAME = Fdf
 # Project brief description (one line)
 DOX_PROJECT_BRIEF = Fdf project for Campus 42
 
+# Content for documentation main page (detailed description there)
+DOX_MAIN_PAGE = ./README.md
+
 # Version of the documentation (date for now)
 DOX_PROJECT_NUMBER = $(shell date +%Y-%m-%d)
 
@@ -181,9 +290,6 @@ DOX_PROJECT_NUMBER = $(shell date +%Y-%m-%d)
 #
 DOX_INPUT = $(INC_DIR) $(DOX_MAIN_PAGE)
 DOX_RECURSIVE = YES
-
-# Content for documentation main page
-DOX_MAIN_PAGE = ./README.md
 
 # Optimization for languages
 DOX_OPTIMIZE_OUTPUT_FOR_C = YES
@@ -197,37 +303,245 @@ DOX_GENERATE_MAN = NO
 ################ VARIABLES FOR DOXYGEN DOCUMENTATION GENERATION ################
 ################################################################################
 
+################## VARIABLES FOR ANSI ESCAPE CODES FOR COLORS ##################
+################################################################################
+
+# BASIC COLOR CODES
+RED = \033[0;31m
+GREEN = \033[0;32m
+CYAN = \033[0;36m
+PURPLE = \033[0;35m
+
+# BOLD COLOR CODES
+BRED = \033[1;31m
+BGREEN = \033[1;32m
+BCYAN = \033[1;36m
+BPURPLE = \033[1;35m
+
+# No Color (resets previously set color)
+NC=\033[0m
+
+################## VARIABLES FOR ANSI ESCAPE CODES FOR COLORS ##################
+################################################################################
+
+################################################################################
+############################# FINALLY THE ######################################
+################################ RULES #########################################
+################################################################################
+
 # Default rule
 all: $(BIN_DIR)$(NAME)
 
+############################# For mandatory version ############################
+
 # Rule for NAME as phony
+# (i.e. to allow 'make my_project' instead of 'make [some_path]my_project')
 $(NAME): $(BIN_DIR)$(NAME)
+
+# Rule (pattern rule) to individually (no relink) compile objects.
+# See comments at the end of Makefile for details on the syntax.
+$(OBJECTS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES)
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "              --- ${PURPLE}Compiling objects to ${BPURPLE}$(OBJ_DIR)*.o${NC} ---"
+	mkdir -p $(@D)
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) -c $< -o $@ -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
+	@echo
+	@echo ----------------------------------------------------------------------
 
 # Rule to link the program
 $(BIN_DIR)$(NAME): $(OBJECTS) $(LIBFT_BIN) $(MLX42_BIN)
 	@echo ----------------------------------------------------------------------
 	@echo
-	@echo "          --- Linking the program to $(BIN_DIR)$(NAME) ---"
+	@echo "          --- ${PURPLE}Linking the program to ${BPURPLE}$(BIN_DIR)$(NAME)${NC} ---"
 	mkdir -p $(@D)
-	cc $(CC_FLAGS) $(OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BIN_DIR)$(NAME) -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
- 
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) $(OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BIN_DIR)$(NAME) -I$(INC_DIR) -I$(LIBFT_INC)
 	@echo
 	@echo ----------------------------------------------------------------------
 
+############################### For bonus version ##############################
 # Rule for bonus as phony
-bonus: $(BIN_DIR)$(BONUS_NAME)
+bonus: $(BONUS_BIN_DIR)$(BONUS_NAME)
+
+# Rule (pattern rule) to individually (no relink) compile BONUS objects
+$(BONUS_OBJECTS): $(OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(BONUS_INCLUDES)
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "              --- ${PURPLE}Compiling bonus objects to ${BPURPLE}$(OBJ_DIR)*.o${NC} ---"
+	mkdir -p $(@D)
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) -c $< -o $@ -I$(BONUS_INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
+	@echo
+	@echo ----------------------------------------------------------------------
 
 # Rule to link the bonus
-$(BIN_DIR)$(BONUS_NAME): $(BONUS_OBJECTS) $(LIBFT_BIN) 
-
-	@echo "          --- Linking the program to $(BIN_DIR)$(BONUS_NAME) ---"
+$(BONUS_BIN_DIR)$(BONUS_NAME): $(BONUS_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN)
+	@echo "          --- ${PURPLE}Linking the bonus program to ${BPURPLE}$(BIN_DIR)$(BONUS_NAME)${NC} ---"
 	mkdir -p $(@D)
-	cc $(CC_FLAGS) $(BONUS_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BIN_DIR)$(BONUS_NAME) -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) $(BONUS_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BONUS_BIN_DIR)$(BONUS_NAME) -I$(BONUS_INC_DIR) -I$(LIBFT_INC)
 	@echo
 	@echo ----------------------------------------------------------------------
 
-################################################################################
-################## START OF PATTERN RULE TO COMPILE OBJECTS ####################
+############################### For test program ###############################
+# Rule for tester as phony
+tester: $(BASE_BIN_DIR)$(TESTER_NAME)
+
+# Rule (pattern rule) to individually (no relink) compile TESTER objects
+$(TESTER_OBJECTS): $(OBJ_DIR)%.o: $(TEST_DIR)%.c $(INCLUDES)
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "              --- ${PURPLE}Compiling tester objects to ${BPURPLE}$(OBJ_DIR)*.o${NC} ---"
+	mkdir -p $(@D)
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) -c $< -o $@ -I$(TESTER_INCLUDES_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Rule to link the test program binary.
+$(BASE_BIN_DIR)$(TESTER_NAME): $(TESTER_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN)
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "          --- ${PURPLE}Linking the tester program to ${BPURPLE}$(BIN_DIR)$(TESTER_NAME)${NC} ---"
+	mkdir -p $(@D)
+	$(CC) $(CC_FLAGS) $(DEB_FLAGS) $(TESTER_OBJECTS) $(LIBFT_BIN) $(MLX42_BIN) $(EXT_LIBS) -o $(BASE_BIN_DIR)$(TESTER_NAME) -I$(INC_DIR) -I$(LIBFT_INC)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+########################### For external libraries  ############################
+# Library libft compilation
+$(LIBFT_BIN):
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "              --- ${PURPLE}Compiling libft library to ${BPURPLE}$(LIBFT_BIN)${NC} ---"
+	make --directory=$(LIBFT_DIR) $(LIBFT_MAKE_DEBUG_ARGS)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Library MLX42 compilation
+$(MLX42_BIN):
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "              --- ${PURPLE}Compiling MLX42 library to ${BPURPLE}$(MLX42_BIN)${NC} ---"
+	cmake -S $(MLX42_DIR) -B $(MLX42_BIN_DIR)
+	cmake --build $(MLX42_BIN_DIR) -j4
+	@echo
+	@echo ----------------------------------------------------------------------
+
+################### For standard remaining mandatory rules #####################
+# Cleaning rule: deletes object files and directory.
+# Possible additions to the recipe:
+# 	rm -rf $(BONUS_OBJ_DIR)
+# 	make clean --directory=$(SOME_LIBRARY_PATH)
+#
+clean:
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "                          --- ${PURPLE}Cleaning (at $(NAME))${NC} ---"
+	@echo
+	rm -rf $(OBJ_DIR)
+	make clean --directory=$(LIBFT_DIR)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Full cleaning rule: deletes objects files, all binary outputs, and directories
+# Possible additions to the recipe:
+# 	make fclean --directory=$(SOME_ANOTHER_LIBRARY_PATH)
+#
+# TODO TODO TODO ver si cmake de MLX42 tiene un clean o fclean
+fclean:clean
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "                          --- ${PURPLE}Fcleaning (at $(NAME))${NC} ---"
+	@echo
+	rm -rf $(BASE_BIN_DIR)
+	rm -rf $(MLX42_BIN_DIR)
+	make fclean --directory=$(LIBFT_DIR)
+	@echo
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Rebuild rule: deletes objects files and all outputs, then compiles again
+re: fclean all
+
+######################### For my own make help rule ############################
+# Help rule: because I use to forget everything
+help:
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "                          --- ${PURPLE}Ayuda${NC} ---"
+	@echo
+	@echo "    usar '${BGREEN}make${NC}', '${GREEN}make ${BGREEN}all${NC}' o '${GREEN}make ${BGREEN}$(BIN_DIR)$(NAME)${NC}' para compilar el proyecto base como: ${CYAN}$(BIN_DIR)$(NAME)${NC}"
+	@echo "    usar '${GREEN}make ${BGREEN}bonus${NC}' para compilar el proyecto en version bonus (en caso de estar disponible) como ${CYAN}$(BIN_DIR)$(BONUS_NAME)${NC}"
+	@echo "    usar '${GREEN}make ${BGREEN}tester${NC}' para compilar el programa de pruebas (en caso de estar disponible) como ${CYAN}$(BIN_DIR)$(TESTER_NAME)${NC}"
+	@echo "    usar '${GREEN}make ${BGREEN}clean${NC}' para borrar los archivos .o y su directorio ${CYAN}$(OBJ_DIR)${NC}"
+	@echo "    usar '${GREEN}make ${BGREEN}fclean${NC}' para hacer '${CYAN}clean${NC}' y ademas borrar todos los binarios y su directorio ${CYAN}$(BIN_DIR)${NC}"
+	@echo "    usar '${GREEN}make ${BGREEN}re${NC}' para hacer '${CYAN}fclean${NC}' y luego '${CYAN}all${NC}'"
+	@echo "    usar '${GREEN}make ... ${BGREEN}DEBUG=...${NC}' para hacer todas las compilaciones con estos flags adicionales:"
+	@echo "        ${CYAN}DEBUG=${BCYAN}g${NC}      (e.g. para debugging con lldb)    ---> ${CYAN}-g${NC}"
+	@echo "        ${CYAN}DEBUG=${BCYAN}addsan${NC} (i.e. para reportar memory leaks) ---> ${CYAN}-g -fsanitize=address${NC}"
+	@echo "        (cualquier otro valor es ignorado)"
+	@echo "    usar '${GREEN}make ... ${BGREEN}MAKE_DEBUG_LVL=...${NC}' para compilar el código con un ${CYAN}#define MAKE_DEBUG_LVL ...${NC}"
+	@echo "        Se recomienda pasar un valor entero que sería usado en el código como MAKE_DEBUG_LVL"
+	@echo "        para imprimir diferentes niveles de mensajes de debugging."
+	@echo "    usar '${GREEN}make ${BGREEN}help${NC}' para mostrar esta ayuda"
+	@echo
+	@echo ----------------------------------------------------------------------
+
+################## For my own documentation generation rules  ##################
+# Rule to create and customize Doxygen configuration file which will define
+# how to generate the project's documentation from comments in the code when
+# using 'make doc'.
+$(DOXYFILE):
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "      --- ${PURPLE}Generating default Doxygen configuration file: ${BPURPLE}./$(DOXYFILE)${NC} ---"
+	@echo
+	doxygen -g $(DOXYFILE)
+	@echo
+	@echo "        --- ${PURPLE}Customizing Doxygen configuration file: ${BPURPLE}./$(DOXYFILE)${NC} ---"
+	@echo
+	sed -i '/^PROJECT_NAME.*=/s/^.*$$/PROJECT_NAME = "$(DOX_PROJECT_NAME)"/' $(DOXYFILE)
+	sed -i '/^PROJECT_NUMBER.*=/s/^.*$$/PROJECT_NUMBER = $(DOX_PROJECT_NUMBER)/' $(DOXYFILE)
+	sed -i '/^PROJECT_BRIEF.*=/s/^.*$$/PROJECT_BRIEF = "$(DOX_PROJECT_BRIEF)"/' $(DOXYFILE)
+	sed -i '\|^OUTPUT_DIR.*=|s|^.*$$|OUTPUT_DIRECTORY = $(DOC_DIR)|' $(DOXYFILE)
+	sed -i '\|^INPUT .*=|s|^.*$$|INPUT = $(DOX_INPUT)|' $(DOXYFILE)
+	sed -i '/^RECURSIVE.*=/s/^.*$$/RECURSIVE = $(DOX_RECURSIVE)/' $(DOXYFILE)
+	sed -i '/^OPTIMIZE_OUTPUT_FOR_C.*=/s/^.*$$/OPTIMIZE_OUTPUT_FOR_C = $(DOX_OPTIMIZE_OUTPUT_FOR_C)/' $(DOXYFILE)
+	sed -i '\|^USE_MDFILE_AS_MAINPAGE.*=|s|^.*$$|USE_MDFILE_AS_MAINPAGE = $(DOX_MAIN_PAGE)|' $(DOXYFILE)
+	sed -i '/^GENERATE_HTML .*=/s/^.*$$/GENERATE_HTML = $(DOX_GENERATE_HTML)/' $(DOXYFILE)
+	sed -i '/^GENERATE_LATEX.*=/s/^.*$$/GENERATE_LATEX = $(DOX_GENERATE_LATEX)/' $(DOXYFILE)
+	sed -i '/^GENERATE_RTF.*=/s/^.*$$/GENERATE_RTF = $(DOX_GENERATE_RTF)/' $(DOXYFILE)
+	sed -i '/^GENERATE_MAN.*=/s/^.*$$/GENERATE_MAN = $(DOX_GENERATE_MAN)/' $(DOXYFILE)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Rule to generate the project's documentation from commented code.
+doc: $(DOXYFILE)
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "      --- ${PURPLE}Generating project documentation in ${BPURPLE}$(DOC_DIR)${NC} ---"
+	@echo
+	doxygen $(DOXYFILE)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Rule to delete the project's documentation and Doxygen's configuration file.            NEWWWWWW -f para rm doxyfile
+docclean:
+	@echo ----------------------------------------------------------------------
+	@echo
+	@echo "      --- ${PURPLE}Cleaning documentation directory and Doxyfile${NC} ---"
+	@echo
+	rm -rf $(DOC_DIR)
+	rm -f $(DOXYFILE)
+	@echo
+	@echo ----------------------------------------------------------------------
+
+# Phonies: this list of words are never to be interpreted as files but
+# only as rule names. 
+# NOTE: Keywords test, bonus and the program's name are set as phony to ease
+# make's use while keeping the resulting binaries in bin/. Simply put: this
+# allows the user to execute "make my_project" instead of "make bin/my_project.
+.PHONY: all clean fclean re tester help bonus $(NAME) doc docclean
+
+############################### REMEMBER #######################################
 # Pattern rule to individually compile each object:
 #
 # 	targets: target-pattern: requisite-pattern extra-req1 extra-req2...
@@ -274,143 +588,3 @@ $(BIN_DIR)$(BONUS_NAME): $(BONUS_OBJECTS) $(LIBFT_BIN)
 #
 # Notice the headers as extra pre-requisites to force a recompiling if
 # modified.
-#
-$(OBJECTS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES)
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "              --- Compiling objects to $(OBJ_DIR)*.o ---"
-	mkdir -p $(@D)
-	cc $(CC_FLAGS) -c $< -o $@ -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
-	@echo
-	@echo ----------------------------------------------------------------------
-################### END OF PATTERN RULE TO COMPILE OBJECTS #####################
-################################################################################
-
-# Pattern rule to individually compile each BONUS object:
-$(BONUS_OBJECTS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES)
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "              --- Compiling objects to $(OBJ_DIR)*.o ---"
-	mkdir -p $(@D)
-	cc $(CC_FLAGS) -c $< -o $@ -I$(INC_DIR) -I$(LIBFT_INC) -I$(MLX42_INC)
-	@echo
-	@echo ----------------------------------------------------------------------
-
-# Library libft compilation
-$(LIBFT_BIN):
-ifeq ($(DEBUG), no)
-	make --directory=$(LIBFT_DIR)
-else
-	make --directory=$(LIBFT_DIR) DEBUG=yes
-endif
-
-# Library MLX42 compilation
-$(MLX42_BIN):
-	cmake -S $(MLX42_DIR) -B $(MLX42_BIN_DIR)
-	cmake --build $(MLX42_BIN_DIR) -j4
-
-clean:
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "                          --- Cleaning ---"
-	@echo
-	rm -rf $(OBJ_DIR)
-	make clean --directory=$(LIBFT_DIR)
-	@echo
-	@echo ----------------------------------------------------------------------
-
-# Full cleaning rule: deletes objects files, all binary outputs, and directories
-# Possible additions to the recipe:
-# 	make fclean --directory=$(SOME_ANOTHER_LIBRARY_PATH)
-#
-fclean:clean
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "                          --- Fcleaning ---"
-	@echo
-	rm -rf $(BIN_DIR)
-	make fclean --directory=$(LIBFT_DIR)
-	rm -rf $(MLX42_BIN_DIR)
-	@echo
-	@echo
-	@echo ----------------------------------------------------------------------
-
-# Rebuild rule: deletes objects files and all outputs, then compiles again
-re: fclean all
-
-$(DOXYFILE):
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "      --- Generating default Doxyfile configuration file ---"
-	@echo
-	doxygen -g $(DOXYFILE)
-	@echo
-	@echo "        --- Customizing Doxyfile configuration file ---"
-	@echo
-	sed -i '/^PROJECT_NAME.*=/s/^.*$$/PROJECT_NAME = "$(DOX_PROJECT_NAME)"/' $(DOXYFILE)
-	sed -i '/^PROJECT_NUMBER.*=/s/^.*$$/PROJECT_NUMBER = $(DOX_PROJECT_NUMBER)/' $(DOXYFILE)
-	sed -i '/^PROJECT_BRIEF.*=/s/^.*$$/PROJECT_BRIEF = "$(DOX_PROJECT_BRIEF)"/' $(DOXYFILE)
-	sed -i '\|^OUTPUT_DIR.*=|s|^.*$$|OUTPUT_DIRECTORY = $(DOC_DIR)|' $(DOXYFILE)
-	sed -i '\|^INPUT .*=|s|^.*$$|INPUT = $(DOX_INPUT)|' $(DOXYFILE)
-	sed -i '/^RECURSIVE.*=/s/^.*$$/RECURSIVE = $(DOX_RECURSIVE)/' $(DOXYFILE)
-	sed -i '/^OPTIMIZE_OUTPUT_FOR_C.*=/s/^.*$$/OPTIMIZE_OUTPUT_FOR_C = $(DOX_OPTIMIZE_OUTPUT_FOR_C)/' $(DOXYFILE)
-	sed -i '\|^USE_MDFILE_AS_MAINPAGE.*=|s|^.*$$|USE_MDFILE_AS_MAINPAGE = $(DOX_MAIN_PAGE)|' $(DOXYFILE)
-	sed -i '/^GENERATE_HTML .*=/s/^.*$$/GENERATE_HTML = $(DOX_GENERATE_HTML)/' $(DOXYFILE)
-	sed -i '/^GENERATE_LATEX.*=/s/^.*$$/GENERATE_LATEX = $(DOX_GENERATE_LATEX)/' $(DOXYFILE)
-	sed -i '/^GENERATE_RTF.*=/s/^.*$$/GENERATE_RTF = $(DOX_GENERATE_RTF)/' $(DOXYFILE)
-	sed -i '/^GENERATE_MAN.*=/s/^.*$$/GENERATE_MAN = $(DOX_GENERATE_MAN)/' $(DOXYFILE)
-	@echo
-	@echo ----------------------------------------------------------------------
-
-doc: $(DOXYFILE)
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "      --- Generating project documentation ($(DOC_DIR)) ---"
-	@echo
-	doxygen $(DOXYFILE)
-	@echo
-	@echo ----------------------------------------------------------------------
-
-docclean:
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "      --- Cleaning documentation directory and Doxyfile ---"
-	@echo
-	rm -rf $(DOC_DIR)
-	rm $(DOXYFILE)
-	@echo
-	@echo ----------------------------------------------------------------------
-
-tester: $(BIN_DIR)$(TESTER_NAME)
-
-$(BIN_DIR)$(TESTER_NAME): $(TEST_DIR)$(TEST_SRC) $(BIN_DIR)$(NAME)
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "        --- Compiling tester to $(BIN_DIR)$(TESTER_NAME) ---"
-	@echo
-	cc $(CC_FLAGS) $(TEST_DIR)$(TEST_SRC) $(BIN_DIR)$(NAME) -o $(BIN_DIR)$(TESTER_NAME) -I$(INC_DIR) -I$(TEST_DIR) 
-	@echo
-	@echo ----------------------------------------------------------------------
-
-# Help rule: because I use to forget everything
-help:
-	@echo ----------------------------------------------------------------------
-	@echo
-	@echo "                          --- Ayuda ---"
-	@echo
-	@echo "    usar 'make', 'make all' o 'make $(BIN_DIR)$(NAME)' para compilar el proyecto base como: $(BIN_DIR)$(NAME)"
-	@echo "    usar 'make bonus' para compilar el bonus (en caso de estar disponible) como $(BIN_DIR)$(BONUS_NAME)"
-	@echo "    usar 'make tester' para compilar el programa de pruebas (en caso de estar disponible) como $(BIN_DIR)$(TESTER_NAME)"
-	@echo "    usar 'make clean' para borrar los archivos .o y su directorio $(OBJ_DIR)"
-	@echo "    usar 'make fclean para hacer 'clean' y ademas borrar todos los binarios y su directorio $(BIN_DIR)"
-	@echo "    usar 'make re' para hacer 'fclean' y luego 'all'"
-	@echo "    usar 'make ... DEBUG=yes' para hacer todas las compilaciones con estos flags adicionales:"
-	@echo "          $(DEB_FLAGS)"
-	@echo "    usar 'make help' para mostrar esta ayuda"
-	@echo
-	@echo ----------------------------------------------------------------------
-
-# Phonies: this list of words are never to be interpreted as files but
-# only as rule names
-#
-.PHONY: all clean fclean re tester help bonus $(NAME) doc docclean
