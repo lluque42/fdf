@@ -38,3 +38,105 @@ ya con esto se redujo de 34 a 15 errores.
 Toma 2: resuelto (1) cargar mapa válido, salir inmediatamente con escape.
 ==148731== ERROR SUMMARY: 15 errors from 15 contexts (suppressed: 0 from 0)
 
+Reduciendo el output de valgrind, los registros interesantes (definitely lost e
+indirectly lost) son:
+==181316== 743,936 bytes in 13 blocks are indirectly lost in loss record 92 of 94
+==181316==    at 0x484A993: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181316==    by 0x10AA45: ft_mx_create (ft_mx_create.c:26)
+==181316==    by 0x10BBED: fdf_get_vertex_mx (fdf_get_vertex_mx.c:25)
+==181316==    by 0x10CE76: fdf_tesselate_map (fdf_tesselate_map.c:45)
+==181316==    by 0x10F9BF: fdf_render (fdf_render.c:140)
+==181316==    by 0x10FBC0: fdf_generichook (fdf_generichook.c:25)
+==181316==    by 0x115D98: mlx_loop (in /home/lluque/011_fdf/repo_github/bin/mandatory/fdf)
+==181316==    by 0x10FDA8: fdf_start_gui (fdf_start_gui.c:40)
+==181316==    by 0x10A8B5: main (fdf_main.c:36)
+==181316== 
+==181316== 744,248 (312 direct, 743,936 indirect) bytes in 13 blocks are definitely lost in loss record 93 of 94
+==181316==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181316==    by 0x10AA1D: ft_mx_create (ft_mx_create.c:23)
+==181316==    by 0x10BBED: fdf_get_vertex_mx (fdf_get_vertex_mx.c:25)
+==181316==    by 0x10CE76: fdf_tesselate_map (fdf_tesselate_map.c:45)
+==181316==    by 0x10F9BF: fdf_render (fdf_render.c:140)
+==181316==    by 0x10FBC0: fdf_generichook (fdf_generichook.c:25)
+==181316==    by 0x115D98: mlx_loop (in /home/lluque/011_fdf/repo_github/bin/mandatory/fdf)
+==181316==    by 0x10FDA8: fdf_start_gui (fdf_start_gui.c:40)
+==181316==    by 0x10A8B5: main (fdf_main.c:36)
+==181316== 
+==181316== 2,200,648 bytes in 55,005 blocks are definitely lost in loss record 94 of 94
+==181316==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181316==    by 0x110D3A: ft_calloc (ft_calloc.c:22)
+==181316==    by 0x10D1B5: fdf_create_object (fdf_create_object.c:64)
+==181316==    by 0x110405: fdf_create_fdf (fdf_create_fdf.c:26)
+==181316==    by 0x10A863: main (fdf_main.c:32)
+==181316== 
+==181316== LEAK SUMMARY:
+==181316==    definitely lost: 2,200,960 bytes in 55,018 blocks
+==181316==    indirectly lost: 743,936 bytes in 13 blocks
+==181316==      possibly lost: 0 bytes in 0 blocks
+==181316==    still reachable: 310,971 bytes in 3,042 blocks
+==181316==         suppressed: 0 bytes in 0 blocks
+==181316== 
+==181316== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+
+Luego de liberar ft_mx_destroy(object->model_mx) en los sucesivos renderizados
+a nivel de fdf_tesselate_map():
+
+==181595== 1,536 bytes in 12 blocks are indirectly lost in loss record 69 of 94
+==181595==    at 0x484A993: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181595==    by 0x10AA45: ft_mx_create (ft_mx_create.c:26)
+==181595==    by 0x10B2F2: ft_mx_mult (ft_mx_mult.c:52)
+==181595==    by 0x10CCFE: fdf_create_rot_mx (fdf_create_rotmx.c:98)
+==181595==    by 0x10F543: fdf_setup_world (fdf_render.c:32)
+==181595==    by 0x10F9F8: fdf_render (fdf_render.c:144)
+==181595==    by 0x10FBD0: fdf_generichook (fdf_generichook.c:25)
+==181595==    by 0x115DA8: mlx_loop (in /home/lluque/011_fdf/repo_github/bin/mandatory/fdf)
+==181595==    by 0x10FDB8: fdf_start_gui (fdf_start_gui.c:40)
+==181595==    by 0x10A8B5: main (fdf_main.c:36)
+...
+==181595== 1,824 (288 direct, 1,536 indirect) bytes in 12 blocks are definitely lost in loss record 72 of 94
+==181595==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181595==    by 0x10AA1D: ft_mx_create (ft_mx_create.c:23)
+==181595==    by 0x10B2F2: ft_mx_mult (ft_mx_mult.c:52)
+==181595==    by 0x10CCFE: fdf_create_rot_mx (fdf_create_rotmx.c:98)
+==181595==    by 0x10F543: fdf_setup_world (fdf_render.c:32)
+==181595==    by 0x10F9F8: fdf_render (fdf_render.c:144)
+==181595==    by 0x10FBD0: fdf_generichook (fdf_generichook.c:25)
+==181595==    by 0x115DA8: mlx_loop (in /home/lluque/011_fdf/repo_github/bin/mandatory/fdf)
+==181595==    by 0x10FDB8: fdf_start_gui (fdf_start_gui.c:40)
+==181595==    by 0x10A8B5: main (fdf_main.c:36)
+...
+==181595== 2,200,648 bytes in 55,005 blocks are definitely lost in loss record 94 of 94
+==181595==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==181595==    by 0x110D4A: ft_calloc (ft_calloc.c:22)
+==181595==    by 0x10D1C5: fdf_create_object (fdf_create_object.c:64)
+==181595==    by 0x110415: fdf_create_fdf (fdf_create_fdf.c:26)
+==181595==    by 0x10A863: main (fdf_main.c:32)
+==181595==
+==181595== LEAK SUMMARY:
+==181595==    definitely lost: 2,200,936 bytes in 55,017 blocks
+==181595==    indirectly lost: 1,536 bytes in 12 blocks
+==181595==      possibly lost: 0 bytes in 0 blocks
+==181595==    still reachable: 310,971 bytes in 3,042 blocks
+==181595==         suppressed: 0 bytes in 0 blocks
+==181595==
+==181595== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+
+Encontré matrices auxiliares sin liberar en fdf_setup_world(), fdf_setup_camera(),
+fdf_setup_screen() y que no se liberaba tampoco la matriz del nivel antes de generar la nueva.
+Luego de estos arreglos:
+==186035== 2,200,648 bytes in 55,005 blocks are definitely lost in loss record 92 of 92
+==186035==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==186035==    by 0x110E1C: ft_calloc (ft_calloc.c:22)
+==186035==    by 0x10D1C5: fdf_create_object (fdf_create_object.c:64)
+==186035==    by 0x1104E7: fdf_create_fdf (fdf_create_fdf.c:26)
+==186035==    by 0x10A863: main (fdf_main.c:32)
+==186035==
+==186035== LEAK SUMMARY:
+==186035==    definitely lost: 2,200,648 bytes in 55,005 blocks
+==186035==    indirectly lost: 0 bytes in 0 blocks
+==186035==      possibly lost: 0 bytes in 0 blocks
+==186035==    still reachable: 310,971 bytes in 3,042 blocks
+==186035==         suppressed: 0 bytes in 0 blocks
+==186035==
+==186035== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+

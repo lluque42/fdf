@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/03 23:44:35 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/16 23:52:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	fdf_tesselate_map(t_fdf_object *object)
 		if (!fdf_get_edge(object->map_mx, object))
 			return (0);
 	}
+	ft_mx_destroy(object->model_mx);									//// added jul16
 	if (object->tesselation_type == PLANE_TESSELATION)
 		object->model_mx = fdf_get_vertex_mx(object->map_mx);
 	if (object->tesselation_type == SPHERICAL_TESSELATION)
