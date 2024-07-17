@@ -1,10 +1,10 @@
-<map id="include/fdf_features.h" name="include/fdf_features.h">
-<area shape="rect" id="node1" title=" " alt="" coords="111,5,275,32"/>
-<area shape="rect" id="node2" href="$fdf_8h.html" title=" " alt="" coords="167,80,218,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="115,229,193,256"/>
-<area shape="rect" id="node5" href="$tesselator_8h.html" title=" " alt="" coords="258,155,357,181"/>
-<area shape="rect" id="node8" href="$window_8h.html" title=" " alt="" coords="151,155,234,181"/>
-<area shape="rect" id="node6" href="$lin__alg_8h.html" title=" " alt="" coords="269,229,346,256"/>
-<area shape="rect" id="node7" title=" " alt="" coords="278,304,337,331"/>
+<map id="include/mandatory/fdf_features.h" name="include/mandatory/fdf_features.h">
+<area shape="rect" id="node1" title=" " alt="" coords="109,5,276,47"/>
+<area shape="rect" id="node2" href="$fdf_8h.html" title=" " alt="" coords="167,95,218,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,169,76,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="115,244,193,271"/>
+<area shape="rect" id="node5" href="$tesselator_8h.html" title=" " alt="" coords="258,169,357,196"/>
+<area shape="rect" id="node8" href="$window_8h.html" title=" " alt="" coords="151,169,234,196"/>
+<area shape="rect" id="node6" href="$lin__alg_8h.html" title=" " alt="" coords="269,244,346,271"/>
+<area shape="rect" id="node7" title=" " alt="" coords="278,319,337,345"/>
 </map>

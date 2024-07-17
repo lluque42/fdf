@@ -53,5 +53,20 @@ Wireframe model of landscape represantation in isometric projection
         └── ...  
 
 ## Compilation instructions
-
 Use ‘make help’ for instructions.
+
+## Program's internal working
+The rendering process has these levels, let's call them transformations
+(which are processed in this order):  
+    * [file to map        Not an actual part of the rendering process]  (ft_mx_load_file())
+    * map to 3D model     Planar, spherical or cylindrical projection   (fdf_tesselate_map())  
+    * 3D model to world  
+    * world to camera  
+    * camera to screen  
+  
+    Not every rendering needs to go through all of these transformations,
+    but just need to start at one of them and perform the rest. The level from
+    which to start has to do with the requested actions:  
+    * [Should the map change, it has to start with file-to-map level]
+    * Should the projection type change, it has to start with map-to-model level.
+    * TODO

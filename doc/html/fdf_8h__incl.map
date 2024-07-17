@@ -1,5 +1,5 @@
-<map id="include/fdf.h" name="include/fdf.h">
-<area shape="rect" id="node1" title=" " alt="" coords="141,5,244,32"/>
+<map id="include/mandatory/fdf.h" name="include/mandatory/fdf.h">
+<area shape="rect" id="node1" title=" " alt="" coords="104,5,281,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,76,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="115,155,193,181"/>
 <area shape="rect" id="node4" href="$tesselator_8h.html" title=" " alt="" coords="258,80,357,107"/>

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/08 12:38:01 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:47:05 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,16 @@ static t_ft_mx	*create_matrix(char *filename, char separator)
 
 static void	free_splitted_from(char **str_arr, int from)
 {
-	while (str_arr[from] != NULL)
+	int	i;
+
+	i = from;
+	while (str_arr[i] != NULL)
 	{
-		free(str_arr[from]);
-		from++;
+		free(str_arr[i]);
+		i++;
 	}
+	if (from == 0)
+		free(str_arr);
 }
 
 static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
@@ -101,6 +106,10 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 	return (free(col_str_arr), 1);
 }
 
+// Here as prototype to not modify any header because this function is nothing
+// more than a future addition to libft
+void	fdf_empty_gnl_mem(int fd);
+
 t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 {
 	t_ft_mx			*matrix;
@@ -121,8 +130,9 @@ t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 		if (line == NULL)
 			return (ft_mx_destroy(matrix), close(fd), NULL);
 		if (!parse_line(line, separator, row, matrix))
-			return (free(line), ft_mx_destroy(matrix), close(fd), NULL);
+			return (free(line), fdf_empty_gnl_mem(fd),
+				ft_mx_destroy(matrix), close(fd), NULL);
 		free(line);
 	}
-	return (close(fd), matrix);
+	return (fdf_empty_gnl_mem(fd), close(fd), matrix);
 }

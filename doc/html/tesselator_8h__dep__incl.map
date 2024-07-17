@@ -1,7 +1,7 @@
-<map id="include/tesselator.h" name="include/tesselator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="261,5,410,32"/>
-<area shape="rect" id="node2" href="$fdf_8h.html" title=" " alt="" coords="284,80,387,107"/>
-<area shape="rect" id="node3" href="$drawing_8h.html" title=" " alt="" coords="5,155,143,181"/>
-<area shape="rect" id="node4" href="$fdf__features_8h.html" title=" " alt="" coords="167,155,331,181"/>
-<area shape="rect" id="node5" href="$window_8h.html" title=" " alt="" coords="355,155,489,181"/>
+<map id="include/mandatory/tesselator.h" name="include/mandatory/tesselator.h">
+<area shape="rect" id="node1" title=" " alt="" coords="318,5,542,32"/>
+<area shape="rect" id="node2" href="$fdf_8h.html" title=" " alt="" coords="341,80,519,107"/>
+<area shape="rect" id="node3" href="$drawing_8h.html" title=" " alt="" coords="5,162,217,189"/>
+<area shape="rect" id="node4" href="$fdf__features_8h.html" title=" " alt="" coords="241,155,408,196"/>
+<area shape="rect" id="node5" href="$window_8h.html" title=" " alt="" coords="432,162,641,189"/>
 </map>

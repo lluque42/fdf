@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Fdf: include/window.h File Reference</title>
+<title>Fdf: include/mandatory/window.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-05-04</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-17</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_9cbd8eaf842e588162c48965c3d6fc73.html">mandatory</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,9 +80,9 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for window.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="window_8h__incl.png" border="0" usemap="#ainclude_2window_8h" alt=""/></div>
-<map name="ainclude_2window_8h" id="ainclude_2window_8h">
-<area shape="rect" title=" " alt="" coords="67,5,201,32"/>
+<div class="center"><img src="window_8h__incl.png" border="0" usemap="#ainclude_2mandatory_2window_8h" alt=""/></div>
+<map name="ainclude_2mandatory_2window_8h" id="ainclude_2mandatory_2window_8h">
+<area shape="rect" title=" " alt="" coords="29,5,239,32"/>
 <area shape="rect" title=" " alt="" coords="5,155,84,181"/>
 <area shape="rect" href="fdf_8h.html" title=" " alt="" coords="109,80,159,107"/>
 <area shape="rect" title=" " alt="" coords="108,155,179,181"/>
@@ -94,12 +94,12 @@ Include dependency graph for window.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="window_8h__dep__incl.png" border="0" usemap="#ainclude_2window_8hdep" alt=""/></div>
-<map name="ainclude_2window_8hdep" id="ainclude_2window_8hdep">
-<area shape="rect" title=" " alt="" coords="93,5,228,32"/>
-<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="109,80,212,107"/>
-<area shape="rect" href="drawing_8h.html" title=" " alt="" coords="5,155,143,181"/>
-<area shape="rect" href="fdf__features_8h.html" title=" " alt="" coords="167,155,331,181"/>
+<div class="center"><img src="window_8h__dep__incl.png" border="0" usemap="#ainclude_2mandatory_2window_8hdep" alt=""/></div>
+<map name="ainclude_2mandatory_2window_8hdep" id="ainclude_2mandatory_2window_8hdep">
+<area shape="rect" title=" " alt="" coords="113,5,323,32"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="129,80,307,107"/>
+<area shape="rect" href="drawing_8h.html" title=" " alt="" coords="5,162,217,189"/>
+<area shape="rect" href="fdf__features_8h.html" title=" " alt="" coords="241,155,408,196"/>
 </map>
 </div>
 </div>
@@ -472,7 +472,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p><b>fdf_start_gui</b> &ndash; TODO. </p>
-<p >TODO.</p>
+<p >This is the main function of the program. Called by main after a successful parsing of the map and initialization of the program's central data structure (t_fdf fdf). It is responsible for every initialization of the GUI's elements (window, image) and the registration of the event hooks. It calls the mlx_loop() function which starts everything else, most importantly, the first rendering via the generic hook <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a> on the first loop. Finally, once out of the loop (after mlx_close_window() is called somewhere else TODO) this function calls the mlx_terminate() function, freeing the MLX42's resources and returns to main() where extra cleaning is done before terminating the program.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">fdf</td><td>- The fdf structure.</td></tr>

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 00:34:41 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:55:30 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	fdf_setup_world(t_fdf_object *obj)
 	if (transf_mx == NULL)
 		return (ft_mx_destroy(rot_mx), ft_mx_destroy(sca_mx),
 			ft_mx_destroy(tra_mx), 0);
-	ft_mx_destroy(obj->world_mx);											//nuevo jul16
+	ft_mx_destroy(obj->world_mx);
 	obj->world_mx = ft_mx_mult(transf_mx, obj->model_mx);
 	return (ft_mx_destroy(rot_mx), ft_mx_destroy(sca_mx), ft_mx_destroy(tra_mx),
-			ft_mx_destroy(transf_mx), 1); 									//nuevo jul16, antes return (1);
+		ft_mx_destroy(transf_mx), 1);
 }
 
 // This function requires the world space to be already loaded in fdf.
@@ -80,10 +80,10 @@ static int	fdf_setup_camera(t_fdf_object *obj)
 	if (transf_mx == NULL)
 		return (ft_mx_destroy(rot_mx), ft_mx_destroy(sca_mx),
 			ft_mx_destroy(tra_mx), 0);
-	ft_mx_destroy(obj->camera_mx);											//nuevo jul16
+	ft_mx_destroy(obj->camera_mx);
 	obj->camera_mx = ft_mx_mult(transf_mx, obj->world_mx);
 	return (ft_mx_destroy(rot_mx), ft_mx_destroy(sca_mx), ft_mx_destroy(tra_mx),
-			ft_mx_destroy(transf_mx), 1); 									//nuevo jul16, antes return (1);
+		ft_mx_destroy(transf_mx), 1);
 }
 
 // This function requires the camera space to be already loaded in fdf.
@@ -118,10 +118,10 @@ static int	fdf_setup_screen(uint32_t img_w,
 	if (transf_mx == NULL)
 		return (ft_mx_destroy(pro_mx), ft_mx_destroy(sca_mx),
 			ft_mx_destroy(tra_mx), 0);
-	ft_mx_destroy(obj->screen_mx);											//nuevo jul16
+	ft_mx_destroy(obj->screen_mx);
 	obj->screen_mx = ft_mx_mult(transf_mx, obj->camera_mx);
 	return (ft_mx_destroy(pro_mx), ft_mx_destroy(sca_mx), ft_mx_destroy(tra_mx),
-			ft_mx_destroy(transf_mx), 1); 									//nuevo jul16, antes return (1);
+		ft_mx_destroy(transf_mx), 1);
 }
 
 // This function requires the view screen space (i.e. the image) to be already

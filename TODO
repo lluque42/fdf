@@ -25,6 +25,7 @@ the subject does not specify anything else.
 		• The horizontal position corresponds to its axis.
 		• The vertical position corresponds to its ordinate.
 
++ Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft		
 
 + Instrucciones de uso en la imagen o en otra imagen.

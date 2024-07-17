@@ -1,6 +1,6 @@
-<map id="include/fdf.h" name="include/fdf.h">
-<area shape="rect" id="node1" title=" " alt="" coords="284,5,387,32"/>
-<area shape="rect" id="node2" href="$drawing_8h.html" title=" " alt="" coords="5,80,143,107"/>
-<area shape="rect" id="node3" href="$fdf__features_8h.html" title=" " alt="" coords="167,80,331,107"/>
-<area shape="rect" id="node4" href="$window_8h.html" title=" " alt="" coords="355,80,489,107"/>
+<map id="include/mandatory/fdf.h" name="include/mandatory/fdf.h">
+<area shape="rect" id="node1" title=" " alt="" coords="341,5,519,32"/>
+<area shape="rect" id="node2" href="$drawing_8h.html" title=" " alt="" coords="5,87,217,114"/>
+<area shape="rect" id="node3" href="$fdf__features_8h.html" title=" " alt="" coords="241,80,408,121"/>
+<area shape="rect" id="node4" href="$window_8h.html" title=" " alt="" coords="432,87,641,114"/>
 </map>

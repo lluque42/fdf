@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 23:22:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/16 23:11:29 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,16 @@ void			fdf_generichook(void *fdf);
 /**
  * @brief <b>fdf_start_gui</b> -- TODO.
  *
- * @details TODO.
+ * @details This is the main function of the program. Called by main after a
+ * successful parsing of the map and initialization of the program's central
+ * data structure (t_fdf fdf). It is responsible for every initialization of
+ * the GUI's elements (window, image) and the registration of the event hooks.
+ * It calls the mlx_loop() function which starts everything else, most
+ * importantly, the first rendering via the generic hook fdf_generichook() on
+ * the first loop. Finally, once out of the loop (after mlx_close_window() is
+ * called somewhere else TODO) this function calls the mlx_terminate() function,
+ * freeing the MLX42's resources and returns to main() where extra cleaning
+ * is done before terminating the program.
  *
  * @param [in, out] fdf - The fdf structure.
  *

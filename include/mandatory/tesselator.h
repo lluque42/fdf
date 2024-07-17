@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 13:16:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/16 23:44:12 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,7 +404,24 @@ void			fdf_destroy_object(t_fdf_object *object);
 /**
  * @brief <b>fdf_tesselate_map</b> -- TODO.
  *
- * @details TODO.
+ * @details This function is the first level of processing when rendering (and
+ * (every re-rendering that request to dive into this level, that is, when
+ * changing the current projection: planar, spherical, cylindrical).  
+ * This function's duty is to call the right function to transform the map's
+ * matrix into the vertex matrix that constitutes the 3D model. From the same
+ * map matrix, the vertex matrix (the model) will be different  according to the
+ * requested projection type. Every type of model (planar, spherical and
+ * cylindrical) consists of a vertex matrix representing points as XYZW values
+ * in a cartesian 3D space. A planar projection will result in a 3D model
+ * pretty analogous to the map matrix. The spherical and cylindrical models
+ * are the result of transforming the map's values (XYZ) to a sphere or cylinder
+ * with a radius that is modulated by the Z (height value) of the map.  
+ * When first called, this function obtains a planar model vertex matrix;
+ * obtains the planar min max values for each component of the vertexes;
+ * and obtains the edge array, which is only made once and is independent from
+ * the projection type. This edge array consists of the information of which
+ * vertexes are connected to each other (that is, which lines, between vertexes
+ * will be eventually drawn.
  *
  * @param [in] object - TODO.
  *

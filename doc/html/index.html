@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-05-04</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-17</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -116,7 +116,27 @@ Directory tree</h1>
     └── ...  
 </pre> <h1><a class="anchor" id="autotoc_md3"></a>
 Compilation instructions</h1>
-<p >Use ‘make help’ for instructions. </p>
+<p >Use ‘make help’ for instructions.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Program's internal working</h1>
+<p >The rendering process has these levels, let's call them transformations (which are processed in this order): <br  />
+</p><ul>
+<li>[file to map Not an actual part of the rendering process] (<a class="el" href="lin__alg_8h.html#a0cf1f7fa69872bb971893af97d901caa" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>)</li>
+<li>map to 3D model Planar, spherical or cylindrical projection (<a class="el" href="tesselator_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>) <br  />
+</li>
+<li>3D model to world <br  />
+</li>
+<li>world to camera <br  />
+</li>
+<li>camera to screen <br  />
+</li>
+</ul>
+<p >Not every rendering needs to go through all of these transformations, but just need to start at one of them and perform the rest. The level from which to start has to do with the requested actions: <br  />
+</p><ul>
+<li>[Should the map change, it has to start with file-to-map level]</li>
+<li>Should the projection type change, it has to start with map-to-model level.</li>
+<li>TODO </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
