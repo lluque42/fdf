@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 13:52:14 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/17 10:22:41 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ int	fdf_drw_edges(mlx_image_t *image, t_fdf_object *object)
 		if (line == NULL)
 			return (0);
 		fdf_draw_line(image, line);
+		free(line);															/// new jul17
 	}
-	free(line);
 	return (1);
 }
 /*

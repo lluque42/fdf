@@ -140,3 +140,28 @@ Luego de estos arreglos:
 ==186035==
 ==186035== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
+fdf_destroy_object() no liberaba al propio object.......
+
+***********************************************************************
+==187385== 2,200,160 bytes in 55,004 blocks are definitely lost in loss record 82 of 82
+==187385==    at 0x4845828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==187385==    by 0x110E28: ft_calloc (ft_calloc.c:22)
+==187385==    by 0x10E778: fdf_create_line (fdf_drw_edges.c:53)
+==187385==    by 0x10EE83: fdf_drw_edges (fdf_drw_edges.c:135)
+==187385==    by 0x10FA71: fdf_setup_image (fdf_render.c:137)
+==187385==    by 0x10FB80: fdf_render (fdf_render.c:162)
+==187385==    by 0x10FCAE: fdf_generichook (fdf_generichook.c:25)
+==187385==    by 0x115E88: mlx_loop (in /home/lluque/011_fdf/repo_github/bin/mandatory/fdf)
+==187385==    by 0x10FE96: fdf_start_gui (fdf_start_gui.c:40)
+==187385==    by 0x10A8B5: main (fdf_main.c:36)
+==187385==
+==187385== LEAK SUMMARY:
+==187385==    definitely lost: 2,200,160 bytes in 55,004 blocks
+==187385==    indirectly lost: 0 bytes in 0 blocks
+==187385==      possibly lost: 0 bytes in 0 blocks
+==187385==    still reachable: 310,971 bytes in 3,042 blocks
+==187385==         suppressed: 0 bytes in 0 blocks
+==187385==
+==187385== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+fdf_drw_edges() the freeing of line was incorrectly made outside the loop.
