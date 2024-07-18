@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 13:18:40 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 03:49:40 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
  * @remark Implementation notes:
  * TODO.
 */
-int	fdf_args_valid(int argc, char **argv);
+int		fdf_args_valid(int argc, char **argv);
 
 /**
  * @brief <b>fdf_filename_valid</b> -- TODO.
@@ -58,6 +58,15 @@ int	fdf_args_valid(int argc, char **argv);
  * @remark Implementation notes:
  * TODO.
 */
-int	fdf_filename_valid(const char *filename);
+int		fdf_filename_valid(const char *filename);
+
+/**
+ * @brief <b>fdf_print_instructions</b> -- TODO.
+ *
+ * @details TODO.
+ *
+ * @warning Uses ft_printf().
+*/
+void	fdf_print_instructions(void);
 
 #endif

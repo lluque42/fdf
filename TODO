@@ -1,18 +1,18 @@
 TODO:
 
-+ Sin autoscale, el zoom out tiene un tope demasiado exagerado
-+ Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft
-	+ Se permite usar perror, strerror y exit
++ Soportar al menos el parseo de mapas con colores
++ Probar más mapas corruptos
++ Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
 + Hacer posible el feature de dibujar o no las diagonales y terminar de ver
 si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
 que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
 plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
 por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
 corresponda.
-
 + Instrucciones de uso en la imagen o en otra imagen.
 	+ Tal vez también canalizar los mensajes de cónsola por esta vía.
 
++ Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
 + Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
 y la altura del cilindro en función de las dimensiones del mapa para que quede
@@ -32,6 +32,9 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Quitar u homologar los mensajes informativos
++ Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft
+	+ Se permite usar perror, strerror y exit
 + Importante!!!! No sé si lo cumplo, verificar:
 	• The horizontal position corresponds to its axis (X).
 	• The vertical position corresponds to its ordinate (Y).

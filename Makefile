@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/17 21:39:43 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/18 03:50:17 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,6 +169,7 @@ SOURCES = fdf_main.c \
 		  fdf_empty_gnl_mem.c \
 		  main_utils/fdf_filename_valid.c \
 		  main_utils/fdf_args_valid.c \
+		  main_utils/fdf_print_instructions.c \
 		  lin_alg/ft_mx_create.c \
 		  lin_alg/ft_mx_destroy.c \
 		  lin_alg/ft_mx_print.c \
