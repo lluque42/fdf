@@ -1,7 +1,5 @@
 TODO:
 
-+ Los returns de render hacen exit????
-+ Probar más mapas corruptos, incluyendo el tema de colores.
 + Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
 
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
@@ -24,6 +22,24 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Problemas cargando data/100-6.fdf
+	+ debugueando, sale de parse_line() por get_number_of_cols(line, separator) != matrix->n analizando la primera línea
+
+		(lldb) expression matrix->n
+		(int) $0 = 101 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+		lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf | head -n 1
+		-4 -3 5 5 0 -4 0 -5 5 -2 5 1 -5 1 5 0 -2 4 -2 0 0 -2 2 -3 1 -1 -4 -3 5 -1 0 2 3 0 -2 0 0 0 -1 3 -2 0 -5 4 -2 3 -5 3 -3 5 0 1 0 3 2 0 -2 3 0 1 -3 0 2 0 -5 -2 2 -3 4 0 5 0 2 -3 0 0 5 2 4 0 1 2 -4 0 5 -3 1 -4 -4 -4 0 3 -1 3 0 -4 1 0 4 -5
+		lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf | head -n 1 | wc -w
+		100		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+		DETECTADO EL PROBLEMA:
+			lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf -e | head -n 1
+		-4 -3 5 5 0 -4 0 -5 5 -2 5 1 -5 1 5 0 -2 4 -2 0 0 -2 2 -3 1 -1 -4 -3 5 -1 0 2 3 0 -2 0 0 0 -1 3 -2 0 -5 4 -2 3 -5 3 -3 5 0 1 0 3 2 0 -2 3 0 1 -3 0 2 0 -5 -2 2 -3 4 0 5 0 2 -3 0 0 5 2 4 0 1 2 -4 0 5 -3 1 -4 -4 -4 0 3 -1 3 0 -4 1 0 4 -5 $
+			Hay un espacio entre el último valor y el salto de línea. Los 101 se detectan sin quitar el salto de línea y los 100 quitándolo
+		Corregido usando ft_strtrim() y mejorando el parseo.
++ Probar más mapas corruptos, incluyendo el tema de colores.
++ Los returns de render hacen exit, sí un exit controlado
 + Hacer posible el feature de dibujar o no las diagonales y terminar de ver
 si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
 que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado

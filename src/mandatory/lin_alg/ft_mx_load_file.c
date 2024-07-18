@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 04:48:55 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:46:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int	get_number_of_cols(char *line, char separator)
 	char	**str_arr;
 	char	**temp;
 	int		noc;
+	char	*trimmed_line;
 
+	trimmed_line = ft_strtrim(line, " \n\t");
+	line = trimmed_line;
 	str_arr = ft_split(line, separator);
 	if (str_arr == NULL)
 		return (0);
@@ -37,6 +40,7 @@ static int	get_number_of_cols(char *line, char separator)
 		temp++;
 	}
 	free(str_arr);
+	free(trimmed_line);
 	return (noc);
 }
 
@@ -85,17 +89,16 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 {
 	int		col;
 	char	**col_str_arr;
-	int		len;
 	char	*color_comma_pos;
+	char	*trimmed_line;
 
-	len = ft_strlen(line);
-	if (line[len -1] == '\n')
-		line[len -1] = '\0';
+	trimmed_line = ft_strtrim(line, " \n\t");
+	line = trimmed_line;
 	col_str_arr = ft_split(line, separator);
 	if (col_str_arr == NULL)
 		return (0);
 	if (get_number_of_cols(line, separator) != matrix->n)
-		return (free_splitted_from(col_str_arr, 0), 0);
+		return (free(trimmed_line), free_splitted_from(col_str_arr, 0), 0);
 	col = -1;
 	while (++col < matrix->n)
 	{
@@ -103,11 +106,10 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 		if (color_comma_pos != NULL)
 			*color_comma_pos = '\0';
 		if (!ft_aisi(col_str_arr[col]))
-			return (free_splitted_from(col_str_arr, col), 0);
+			return (free(trimmed_line), free_splitted_from(col_str_arr, 0), 0);
 		matrix->d[row * matrix->n + col] = (double)ft_atoi(col_str_arr[col]);
-		free(col_str_arr[col]);
 	}
-	return (free(col_str_arr), 1);
+	return (free(trimmed_line), free_splitted_from(col_str_arr, 0), 1);
 }
 
 // Here as prototype to not modify any header because this function is nothing
