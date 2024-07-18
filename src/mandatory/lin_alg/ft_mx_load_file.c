@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 16:47:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 04:48:55 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 	int		col;
 	char	**col_str_arr;
 	int		len;
+	char	*color_comma_pos;
 
 	len = ft_strlen(line);
 	if (line[len -1] == '\n')
@@ -98,6 +99,9 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 	col = -1;
 	while (++col < matrix->n)
 	{
+		color_comma_pos = ft_strchr(col_str_arr[col], ',');
+		if (color_comma_pos != NULL)
+			*color_comma_pos = '\0';
 		if (!ft_aisi(col_str_arr[col]))
 			return (free_splitted_from(col_str_arr, col), 0);
 		matrix->d[row * matrix->n + col] = (double)ft_atoi(col_str_arr[col]);
@@ -136,3 +140,30 @@ t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 	}
 	return (fdf_empty_gnl_mem(fd), close(fd), matrix);
 }
+/*
+ * Before compatibility with maps with color info
+static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
+{
+	int		col;
+	char	**col_str_arr;
+	int		len;
+
+	len = ft_strlen(line);
+	if (line[len -1] == '\n')
+		line[len -1] = '\0';
+	col_str_arr = ft_split(line, separator);
+	if (col_str_arr == NULL)
+		return (0);
+	if (get_number_of_cols(line, separator) != matrix->n)
+		return (free_splitted_from(col_str_arr, 0), 0);
+	col = -1;
+	while (++col < matrix->n)
+	{
+		if (!ft_aisi(col_str_arr[col]))
+			return (free_splitted_from(col_str_arr, col), 0);
+		matrix->d[row * matrix->n + col] = (double)ft_atoi(col_str_arr[col]);
+		free(col_str_arr[col]);
+	}
+	return (free(col_str_arr), 1);
+}
+*/
