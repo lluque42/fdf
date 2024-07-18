@@ -1,4 +1,48 @@
 TODO:
+
++ Sin autoscale, el zoom out tiene un tope demasiado exagerado
++ Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft
+	+ Se permite usar perror, strerror y exit
++ Hacer posible el feature de dibujar o no las diagonales y terminar de ver
+si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
+que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
+plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
+por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
+corresponda.
+
++ Instrucciones de uso en la imagen o en otra imagen.
+	+ Tal vez también canalizar los mensajes de cónsola por esta vía.
+
++ El enum de render request debería estar en drawing.h y NO en fdf.h.
++ Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
+y la altura del cilindro en función de las dimensiones del mapa para que quede
+bonito.
+	+ Poner como miembros de object los arreglos de min y max para todos los espacios.
+	+ Ejecutar edges una sola vez en tesselate_map.
+	+ Llamar a la funcion de minmax sobre el mapa para poder dimensionar radio de esfera y radio y altura de cilindro.
+	+ Tal vez almacenar en object las tres versiones de matrices de vertexes
+	para no tener que recalcularla cada vez que togglee el tipo de tesselado.
++ Creo que deberia hacer una revision completa de los headers para detectar
+todos los abusos de fdf.
++ DEBO CAMBIAR EL NOMBRE DE MIS HEADERS, YA HUBO COLISION CON FEATURES.H
++ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería, corregir.
++ Actualizar la documentacion!!!!!!!!!!!!!!!!!!!!!
++ Ver si cabe fdf_point_is_in_plane() en fdf_set_edge_visibility.c y ponerlo ahí
+como estática.
++ Cambiar window por GUI??? wlayout por gui???
+
+DONE:
++ Importante!!!! No sé si lo cumplo, verificar:
+	• The horizontal position corresponds to its axis (X).
+	• The vertical position corresponds to its ordinate (Y).
+		Si y no, pero no importa, ver mis comentarios en fdf_main.c
++ El Makefile debe ser arreglado por completo:
+	+ Separar el código en mandatory, bonus, shared.
+	+ Sincerar lo del DEBUG.
+		+ "La opción “-fsanitize=address” es INCOMPATIBLE con valgrind".
+	+ Etc.
++ Integrar MLX42 de CODAM como un submodulo y compilar con el Makefile.
++ POR DIOS liberar antes de cada renderizado las matrices de vertices y demás!!!!!!!!
 + Del subject:
 	+ Norminette.
 	+ Memory leaks.
@@ -21,52 +65,10 @@ the subject does not specify anything else.
 	• All functions of the MiniLibX
 	• ft_printf and any equivalent
 	YOU coded
-	+ Importante!!!! No sé si lo cumplo, verificar:
-		• The horizontal position corresponds to its axis.
-		• The vertical position corresponds to its ordinate.
-
-+ Sin autoscale, el zoom out tiene un tope demasiado exagerado
-+ Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft		
-
-+ Instrucciones de uso en la imagen o en otra imagen.
-	+ Tal vez también canalizar los mensajes de cónsola por esta vía.
-
-+ El Makefile debe ser arreglado por completo:
-	+ Separar el código en mandatory, bonus, shared.
-	+ Sincerar lo del DEBUG.
-		+ "La opción “-fsanitize=address” es INCOMPATIBLE con valgrind".
-	+ Etc.
-+ Integrar MLX42 de CODAM como un submodulo y compilar con el Makefile.
-+ El enum de render request debería estar en drawing.h y NO en fdf.h.
-+ Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
-y la altura del cilindro en función de las dimensiones del mapa para que quede
-bonito.
-	+ Poner como miembros de object los arreglos de min y max para todos los espacios.
-	+ Ejecutar edges una sola vez en tesselate_map.
-	+ Llamar a la funcion de minmax sobre el mapa para poder dimensionar radio de esfera y radio y altura de cilindro.
-	+ Tal vez almacenar en object las tres versiones de matrices de vertexes
-	para no tener que recalcularla cada vez que togglee el tipo de tesselado.
-+ Actualizar la documentacion!!!!!!!!!!!!!!!!!!!!!
-+ Ver si cabe fdf_point_is_in_plane() en fdf_set_edge_visibility.c y ponerlo ahí
-como estática.
-+ POR DIOS liberar antes de cada renderizado las matrices de vertices y demás!!!!!!!!
-+ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería, corregir.
-+ Detectado nuevo problema con edge que debería estar escondido.
-Ver video en movil.
-+ Creo que deberia hacer una revision completa de los headers para detectar
-todos los abusos de fdf.
-+ DEBO CAMBIAR EL NOMBRE DE MIS HEADERS, YA HUBO COLISION CON FEATURES.H
-+ Cambiar window por GUI??? wlayout por gui???
-+ Hacer posible el feature de dibujar o no las diagonales y terminar de ver
-si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
-que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
-plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
-por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
-corresponda.
-
-DONE:
 + fdf_setup_world(fdf) y demás (excepto image) deberian referirse a object, no
 a fdf.
++ Detectado nuevo problema con edge que debería estar escondido.
+Ver video en movil.
 + Sacar cosas de fdf:
 	+ Por un lado GUI.
 	+ Por otro lado objetos.

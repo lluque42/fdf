@@ -6,39 +6,42 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 23:47:23 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 03:07:23 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 02:38:14 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lin_alg.h"
 
-// The formula for the element i,j in matrix result from multiplying the
-// matrixes: m1 (size m x n) and m2 (size n x p) is:
-//
-// 		result_ij = sum_of_every_kth: m1_ik * m2_kj
-// 			where:
-// 				i from 1 to m
-// 				j from 1 to p
-// 				k from 1 to n
-//
-//			thus:
-//				m = m1->m;
-//				n = m1->n; or the equivalent n = m2->m
-//				p = m2->n;
-//static double	calculate_rij(double *m1_row, t_ft_mx *m2, int r_i, int r_j)
-/*
-double	calculate_rij(t_ft_mx *m1, t_ft_mx *m2, int i, int j)
+t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2)
 {
-	double	rij;
-	int		k;
+	t_ft_mx	*vx1;
+	t_ft_mx	*vx2;
+	t_ft_mx	*result;
+	int		i;
+	int		j;
 
-	rij = 0;
-	k = -1;
-	while (++k < m1->n)
-		rij += m1->d[i * m1->n + k] * m2->d[k * m1->n + j];
-	return (rij);
+	result = ft_mx_create(m1->m, m2->n);
+	if (result == NULL || m1->n != m2->m)
+		return (ft_mx_destroy(result), NULL);
+	i = -1;
+	while (++i < m1->m)
+	{
+		j = -1;
+		vx1 = ft_mx_get_row(m1, i);
+		while (++j < m2->n)
+		{
+			vx2 = ft_mx_get_col(m2, j);
+			if (!ft_vx_dproduct(vx1, vx2, result->d + (i * (m2->n) + j)))
+				return (ft_mx_destroy(result), ft_mx_destroy(vx1),
+					ft_mx_destroy(vx2), NULL);
+			ft_mx_destroy(vx2);
+		}
+		ft_mx_destroy(vx1);
+	}
+	return (result);
 }
-*/
+/*
+ * OLD BUGGY but more efficient
 t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2)
 {
 	t_ft_mx	*r;
@@ -66,3 +69,4 @@ t_ft_mx	*ft_mx_mult(t_ft_mx *m1, t_ft_mx *m2)
 	}
 	return (r);
 }
+*/

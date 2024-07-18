@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 23:46:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 02:41:36 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,24 @@
 #include "drawing.h"
 #include "tesselator.h"
 
+// Row flipping the map with "ft_mx_flipr(map_mx);" is what would truly 
+// accomplishes the subject's indications:
+// • The horizontal position corresponds to its axis (X).
+// • The vertical position corresponds to its ordinate (Y).
+// • The value corresponds to its altitude (Z).
+//
+// But the rendering differs too much from the subject's example image
+// when using a right-handed convention for drawing XYZ axis.
+//
+// On the other hand (pun intended), the provided sample program renders the
+// image as my version without the row flipping. However, both differ from
+// the subject's example image.
+//
+// Given the "Should render a landscape similar to:" I'll make a deliberate
+// compromise and provide my favorite "similar" renderization.
+// 		BTW: The image depicted in the subject is not a wireframe since
+// 		it has the hidden edges not showing. So the "similar" argument should
+// 		go a long way.
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;

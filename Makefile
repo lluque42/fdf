@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/17 16:37:43 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/17 21:39:43 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -191,6 +191,7 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_vx_xproduct.c \
 		  lin_alg/ft_vx_create.c \
 		  lin_alg/ft_vx_substract.c \
+		  lin_alg/ft_vx_dproduct.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_get_edge.c \
 		  tesselator/fdf_set_edge_visibility.c \

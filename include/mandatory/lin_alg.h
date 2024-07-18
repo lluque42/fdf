@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 16:36:40 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 02:32:15 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -523,5 +523,33 @@ t_ft_mx	*ft_vx_xproduct(t_ft_mx *b, t_ft_mx *c);
  * TODO.
 */
 t_ft_mx	*ft_vx_substract(t_ft_mx *b, t_ft_mx *c);
+
+/**
+ * @brief <b>ft_vx_dproduct</b> -- Calculates the dot product of two vectors.
+ *
+ * @details Takes two vectors as any combination of row/col vectors in the
+ * t_ft_mx matrix (the only requisite is that both must have the same number
+ * of elements) and calculates the dot product returning a scalar.
+ *
+ * @param [in] a - A column/row vector matrix.
+ *
+ * @param [in] b - A column/row vector matrix.
+ *
+ * @param [out] result - A pointer to a double where the result value will
+ * be output. If the function returns 0 the value of *result is invalid.
+ *
+ * @return Non-zero value if the arguments are consistent with the operation,
+ * zero otherwise.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * This function exploits the linear storage of values inside a matrix, making
+ * irrelevant if we're dealing with row-vectors or col-vectors. Once checked
+ * that both matrixes are vectors (1xn, mx1, doesn't matter), and of the same
+ * size (the other non 1 size is the same); and since every element is linearly
+ * storaged inside the matrix's ->d[] array, the addressing is very simple.
+*/
+int		ft_vx_dproduct(t_ft_mx *a, t_ft_mx *b, double *result);
 
 #endif
