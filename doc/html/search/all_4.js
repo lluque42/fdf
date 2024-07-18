@@ -7,5 +7,7 @@ var searchData=
   ['deg_5fstep_4',['DEG_STEP',['../fdf__features_8h.html#ad8cc22b2d1b02a1383c79eace8a57ff2',1,'fdf_features.h']]],
   ['diag_5fend_5',['diag_end',['../structs__fdf__nv.html#ab888492b7e708df18b7aba8d878d0996',1,'s_fdf_nv']]],
   ['diag_5fstart_6',['diag_start',['../structs__fdf__nv.html#ab0f3f17b96fcf7da67cbcb3e7d7913cd',1,'s_fdf_nv']]],
-  ['drawing_2eh_7',['drawing.h',['../drawing_8h.html',1,'']]]
+  ['drawing_2eh_7',['drawing.h',['../drawing_8h.html',1,'']]],
+  ['drw_5fhidden_5fedges_8',['drw_hidden_edges',['../structs__fdf.html#a3ae4a63ebbdd8b7bc9f60f1f4d038436',1,'s_fdf']]],
+  ['drw_5fvalid_5fdiag_5fedges_9',['drw_valid_diag_edges',['../structs__fdf.html#abdca2513cf39603a0cf56b0c93f64cf3',1,'s_fdf']]]
 ];

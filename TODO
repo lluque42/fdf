@@ -1,6 +1,6 @@
 TODO:
 
-+ Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
++ Implementar color???
 
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
@@ -22,6 +22,9 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
+	+ ver comentarios en fdf_exit_program() y fdf_start_gui().
+		Creo que sí son irresolubles (más allá de que no son realmente fugas en sentido estricto).
 + Problemas cargando data/100-6.fdf
 	+ debugueando, sale de parse_line() por get_number_of_cols(line, separator) != matrix->n analizando la primera línea
 

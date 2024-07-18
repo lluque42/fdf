@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 04:18:49 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 16:43:27 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 #include "lin_alg.h"
 #include "fdf.h"
 
+// The MLX loop is broken when fdf_exit_program() calls mlx_close_window()
+// either on ESCAPE or X button. Then the control is back to fdf_start_gui().
+//
+// fdf_exit_program() just deletes the image (seemed unnecesary) and closes
+// the window by calling mlx_close_window().
+//
+// A free(fdf->wlayout->window) after mlx_terminate() throws
+// errors (double free).
 int	fdf_start_gui(t_fdf *fdf)
 {
 	fdf->wlayout->window = mlx_init(fdf->wlayout->window_w, 

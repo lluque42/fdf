@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 13:00:15 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 16:48:05 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef enum e_tesselation_type
  * The index of the ending vertex stored in a vertex matrix.
  * @var s_fdf_edge::is_hidden
  * A non-zero value to signal that this edge must not be drawn.
+ * @var s_fdf_edge::is_valid_diag
+ * A non-zero value to signal that this edge is a valid diagonal.
 */
 typedef struct s_fdf_edge
 {
