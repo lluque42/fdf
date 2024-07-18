@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 10:06:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:14:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ static void	edge2right_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // The main goal is to calculate neighbor_v based on i and j.
 // Visibility is set ONLY if this diagonal edge does not lie on the plane
 // defined by this vertex and its (involved) neighbors.
+//
+// Always flagged as hidden to allow drawing or not this non-orthogonal edge.
+// Do not confuse visibility (it makes sense to be considered for drawing) wiht
+// hidden (don't draw if visible because we don't want non-orthogonal edges
+// depicted on the drawing)
 static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 {
 	int	this_v;
@@ -86,11 +91,12 @@ static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	if (!fdf_set_edge_visibility(object->edges,
+	if (!fdf_set_diag_edge_validity(object->edges,
 			object,
 			right_neighbor_v,
 			down_neighbor_v))
 		return (0);
+	object->edge[object->edges].is_hidden = 1;
 	object->edges++;
 	return (1);
 }
@@ -102,6 +108,11 @@ static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // The main goal is to calculate neighbor_v based on i and j.
 // Visibility is set ONLY if this diagonal edge does not lie on the plane
 // defined by this vertex and its (involved) neighbors.
+//
+// Always flagged as hidden to allow drawing or not this non-orthogonal edge.
+// Do not confuse visibility (it makes sense to be considered for drawing) wiht
+// hidden (don't draw if visible because we don't want non-orthogonal edges
+// depicted on the drawing)
 static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 {
 	int	this_v;
@@ -119,11 +130,12 @@ static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
-	if (!fdf_set_edge_visibility(object->edges,
+	if (!fdf_set_diag_edge_validity(object->edges,
 			object,
 			left_neighbor_v,
 			down_neighbor_v))
 		return (0);
+	object->edge[object->edges].is_hidden = 1;
 	object->edges++;
 	return (1);
 }
@@ -155,7 +167,7 @@ int	fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object)
 	object->edges = 0;
 	edges = (map_mx->m - 1) * (map_mx->n - 1) * 4 + (map_mx->m - 1)
 		+ (map_mx->n - 1);
-	object->edge = malloc(sizeof (t_fdf_edge) * edges);
+	object->edge = ft_calloc(edges, sizeof (t_fdf_edge));
 	if (object->edge == NULL)
 		return (0);
 	j = -1;

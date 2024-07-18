@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 16:55:30 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:15:52 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,15 @@ static int	fdf_setup_screen(uint32_t img_w,
 // This function only manipulates the collection of pixels stored in the image,
 // which is required if some event affects the color of the pixels.
 // To put it briefly: Here the pixels are drawn on the image.
-static int	fdf_setup_image(mlx_image_t *image, t_fdf_object *object)
+static int	fdf_setup_image(mlx_image_t *image,
+		t_fdf_object *object,
+		int drw_hidden_edges,
+		int drw_valid_diag_edges)
 {
 	ft_memset(image->pixels,
 		0,
 		image->width * image->height * sizeof (int32_t));
-	if (!fdf_drw_edges(image, object))
+	if (!fdf_drw_edges(image, object, drw_hidden_edges, drw_valid_diag_edges))
 		return (0);
 	return (1);
 }
@@ -159,7 +162,8 @@ int	fdf_render(t_fdf *fdf)
 				fdf->autofit))
 			return (0);
 	if (fdf->render_request <= FROM_IMAGE)
-		if (!fdf_setup_image(fdf->wlayout->image, fdf->object))
+		if (!fdf_setup_image(fdf->wlayout->image, fdf->object,
+				fdf->drw_hidden_edges, fdf->drw_valid_diag_edges))
 			return (0);
 	fdf->render_request = NO_RENDER;
 	return (1);

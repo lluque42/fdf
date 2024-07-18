@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 03:49:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:07:02 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef enum e_render_request
  * When 1: Every renderization will draw an auto-scaled and centered drawing; 
  * user's zoom (scale) and translation request will be ignored while set;
  * but user's rotations will still be available.
+ * @var s_fdf::drw_hidden_edges
+ * Instruct to draw all hidden edges
+ * @var s_fdf::drw_valid_diag_edges
+ * Instruct to draw hidden valid diagonal edges
 */
 typedef struct s_fdf
 {
@@ -86,6 +90,8 @@ typedef struct s_fdf
 	t_fdf_wlayout		*wlayout;
 	int					autofit;
 	t_render_request	render_request;
+	int					drw_hidden_edges;
+	int					drw_valid_diag_edges;
 }				t_fdf;
 /**
  * @typedef t_fdf

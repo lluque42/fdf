@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 03:29:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 04:00:53 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:09:24 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	fdf_print_instructions(void)
 	ft_printf("\t* Press I, K, J, L, U, O keys to rotate along each axis.\n");
 	ft_printf("\t* Press the T key to cycle through ");
 	ft_printf("planar/spherical/cylindrical projections.\n");
+	ft_printf("\t* Press D key to show/hide valid diagonal edges\n");
+	ft_printf("\t* Press H key to show/hide all hidden edges\n");
 	ft_printf("\t* Press TAB key to turn on/off the ");
 	ft_printf("autofit and center feature.\n");
 	ft_printf("\t* With autofit disabled:\n");

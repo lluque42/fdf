@@ -1,13 +1,8 @@
 TODO:
 
++ Los returns de render hacen exit????
 + Probar más mapas corruptos, incluyendo el tema de colores.
 + Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
-+ Hacer posible el feature de dibujar o no las diagonales y terminar de ver
-si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
-que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
-plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
-por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
-corresponda.
 
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
@@ -29,6 +24,12 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Hacer posible el feature de dibujar o no las diagonales y terminar de ver
+si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
+que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
+plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
+por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
+corresponda.
 + Soportar al menos el parseo de mapas con colores
 + Instrucciones de uso en la imagen o en otra imagen.
 	+ Tal vez también canalizar los mensajes de cónsola por esta vía.

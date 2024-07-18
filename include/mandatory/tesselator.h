@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/16 23:44:12 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:00:15 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_fdf_edge
 {
 	int	start;
 	int	end;
+	int	is_valid_diag;
 	int	is_hidden;
 }				t_fdf_edge;
 /**
@@ -830,7 +831,7 @@ int				fdf_getz_3drect_fromx(double *z, t_fdf_3drect *rect, double x);
 int				fdf_getz_3drect_fromy(double *z, t_fdf_3drect *rect, double y);
 
 /**
- * @brief <b>fdf_set_edge_visibility</b> -- TODO.
+ * @brief <b>fdf_set_diag_edge_validity</b> -- TODO.
  *
  * @details TODO comments inside the function's definition file TODO.
  *
@@ -852,7 +853,7 @@ int				fdf_getz_3drect_fromy(double *z, t_fdf_3drect *rect, double y);
  * @remark Implementation notes:  
  * TODO.
 */
-int				fdf_set_edge_visibility(int this_edge,
+int				fdf_set_diag_edge_validity(int this_edge,
 					t_fdf_object *obj,
 					int ort_v1,
 					int ort_v2);

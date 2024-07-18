@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_set_edge_visibility.c                          :+:      :+:    :+:   */
+/*   fdf_set_diag_edge_validity.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 16:24:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:12:52 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@
 //     so a rect analysis is needed to have a definite verdict: KEEP TESTING
 //     outside this function, this edge remains visible (not hidden) unless
 //     proven otherwise.
-static int	fdf_plane_analysis(t_fdf_nv *nv, int *is_hidden)
+static int	fdf_plane_analysis(t_fdf_nv *nv, int *is_valid_diag)
 {
 	t_fdf_plane	*plane;
 
-	*is_hidden = 0;
+	*is_valid_diag = 1;
 	plane = fdf_create_plane(nv->ort1, nv->ort2, nv->diag_start);
 	if (plane == NULL)
 		return (ERROR_TESTING_VISIBILITY);
 	if (fdf_point_is_in_plane(nv->diag_end, plane)
 		|| nv->diag_start->d[2] == nv->diag_end->d[2])
 	{
-		*is_hidden = 1;
+		*is_valid_diag = 0;
 		return (free(plane), DONE_TESTING_VISIBILITY);
 	}
 	free(plane);
@@ -74,7 +74,7 @@ static int	fdf_plane_analysis(t_fdf_nv *nv, int *is_hidden)
 // On the other hand, the comparison of altitudes excludes equality because
 // that would equire both diagonals to be on the same plane, which was
 // already discarded outside of this function.
-static int	fdf_rect_analysis(t_fdf_nv *nv, int *is_hidden)
+static int	fdf_rect_analysis(t_fdf_nv *nv, int *is_valid_diag)
 {
 	t_fdf_3drect	*this;
 	t_fdf_3drect	*other;
@@ -91,7 +91,7 @@ static int	fdf_rect_analysis(t_fdf_nv *nv, int *is_hidden)
 	fdf_getz_3drect_fromx(&z_this, this, mid_x);
 	fdf_getz_3drect_fromx(&z_other, other, mid_x);
 	if (z_this < z_other)
-		*is_hidden = 1;
+		*is_valid_diag = 0;
 	return (free(this), free(other), DONE_TESTING_VISIBILITY);
 }
 
@@ -138,7 +138,9 @@ static int	fdf_rect_analysis(t_fdf_nv *nv, int *is_hidden)
 // Since this will...
 //
 //OBSOLETE
-int	fdf_set_edge_visibility(int this_edge,
+//
+//Returns 0 on error. The validity is set directly in the edge struct.
+int	fdf_set_diag_edge_validity(int this_edge,
 				t_fdf_object *obj,
 				int ort_v1,
 				int ort_v2)
@@ -152,12 +154,12 @@ int	fdf_set_edge_visibility(int this_edge,
 			ft_mx_get_col(obj->model_mx, ort_v2));
 	if (nv == NULL)
 		return (0);
-	verdict = fdf_plane_analysis(nv, &obj->edge[this_edge].is_hidden);
+	verdict = fdf_plane_analysis(nv, &obj->edge[this_edge].is_valid_diag);
 	if (verdict == ERROR_TESTING_VISIBILITY)
 		return (fdf_destroy_nv(nv), 0);
 	if (verdict == DONE_TESTING_VISIBILITY)
 		return (fdf_destroy_nv(nv), 1);
-	verdict = fdf_rect_analysis(nv, &obj->edge[this_edge].is_hidden);
+	verdict = fdf_rect_analysis(nv, &obj->edge[this_edge].is_valid_diag);
 	if (verdict == ERROR_TESTING_VISIBILITY)
 		return (fdf_destroy_nv(nv), 0);
 	return (fdf_destroy_nv(nv), 1);

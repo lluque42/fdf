@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:06:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 10:01:32 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:07:27 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h, t_ft_mx *map_mx)
 		return (fdf_destroy_fdf(fdf), free(fdf->wlayout), NULL);
 	fdf->render_request = FROM_MODEL;
 	fdf->autofit = 1;
+	fdf->drw_hidden_edges = 0;
+	fdf->drw_valid_diag_edges = 0;
 	return (fdf);
 }

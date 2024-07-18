@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/18 03:50:17 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/18 13:13:35 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,7 +195,7 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_vx_dproduct.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_get_edge.c \
-		  tesselator/fdf_set_edge_visibility.c \
+		  tesselator/fdf_set_diag_edge_validity.c \
 		  tesselator/fdf_create_rotmx.c \
 		  tesselator/fdf_tesselate_map.c \
 		  tesselator/fdf_create_object.c \
@@ -234,7 +234,10 @@ SOURCES = fdf_main.c \
 		  features/fdf_translate_step.c \
 		  features/fdf_scale_step.c \
 		  features/fdf_toggle_autofit.c \
-		  features/fdf_toggle_tesselation.c
+		  features/fdf_toggle_tesselation.c \
+		  features/fdf_toggle_drw_hidden.c \
+		  features/fdf_toggle_drw_diags.c
+
 
 # List of bonus version header file names
 # NOTE: Only to be used to force recompiling if modified

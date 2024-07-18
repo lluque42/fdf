@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 16:53:36 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:13:59 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,23 @@ static void	fdf_draw_line(mlx_image_t *image, t_fdf_line *line)
 	}
 }
 
-int	fdf_drw_edges(mlx_image_t *image, t_fdf_object *object)
+int	fdf_drw_edges(mlx_image_t *image,
+		t_fdf_object *object,
+		int drw_hidden_edges,
+		int drw_valid_diag_edges)
 {
 	int			e;
 	t_fdf_line	*line;
 	t_ft_mx		*s_mx;
+	int			skip;
 
 	s_mx = object->screen_mx;
 	e = -1;
 	while (++e < object->edges)
 	{
-		if (object->edge[e].is_hidden)
+		skip = object->edge[e].is_hidden & !drw_hidden_edges;
+		skip = skip & !(object->edge[e].is_valid_diag & drw_valid_diag_edges);
+		if (skip)
 			continue ;
 		line = fdf_create_line(s_mx->d[object->edge[e].start],
 				s_mx->d[object->screen_mx->n + object->edge[e].start],

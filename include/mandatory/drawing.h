@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 23:40:17 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 13:18:28 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,22 @@ typedef struct s_fdf_line
  *
  * @param [in] object - The 3D object whose edges will be drawn.
  *
+ * @param [in] drw_hidden_edges - Tells the function to draw hidden flagged
+ * edges or not.
+ * 
+ * @param [in] drw_valid_diag_edges - Tells the function to draw valid diagonals
+ * flagged edges or not.
+ * 
+ * @warning TODO.
  * @warning TODO.
  *
  * @remark Implementation notes:
  * TODO.
 */
-int		fdf_drw_edges(mlx_image_t *image, t_fdf_object *object);
+int		fdf_drw_edges(mlx_image_t *image,
+			t_fdf_object *object,
+			int drw_hidden_edges,
+			int drw_valid_diag_edges);
 
 /**
  * @brief <b>fdf_get_autofit_transf_par</b> -- TODO.

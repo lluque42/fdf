@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/04 21:59:46 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/18 14:15:31 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,5 +179,33 @@ void	fdf_window_resize(t_fdf *fdf, int32_t width, int32_t height);
  * TODO.
 */
 void	fdf_toggle_tesselation(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_toggle_drw_diags</b> -- Show/hide valid diagonal hidden edges
+ *
+ * @details Show/hide valid diagonal hidden edges.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_toggle_drw_diags(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_toggle_drw_hidden</b> -- Show/hide all hidden edges
+ *
+ * @details Show/hide allhidden edges.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_toggle_drw_hidden(t_fdf *fdf);
 
 #endif
