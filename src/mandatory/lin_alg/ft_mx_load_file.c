@@ -6,13 +6,14 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 11:44:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 12:43:43 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdint.h>														// for uint32_t
 #include "libft.h"
 #include "lin_alg.h"
 
@@ -90,17 +91,41 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 	{
 		color_comma_pos = ft_strchr(col_str_arr[col], ',');
 		if (color_comma_pos != NULL)
-			*color_comma_pos = '\0';
+		{
+
+
+
+			int	is_error;
+			int	color;
+
+			is_error = 0;
+			ft_printf("Color info appears to be: '%s'\n", color_comma_pos);
+			// checking basic prefix validity
+			if (ft_strncmp(color_comma_pos, ",0x", 3) != 0)
+				//ft_printf("Color info MALFORMED!!!\n");
+				is_error = 1;
+			//uint32_t	color;
+			color = ft_atoi_b(color_comma_pos + 3, 16);
+			if (color == -1)
+				is_error = 1;
+			if (!is_error)
+				ft_printf("Color value: '%d'\n", (uint32_t)color);
+			else
+				ft_printf("Color info is malformed!!!!\n");
+
+
+
+
+
+			*color_comma_pos = '\0'; //REMOVE AFTER
+		
+		}
 		if (!ft_aisi(col_str_arr[col]))
 			return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 0);
 		matrix->d[row * matrix->n + col] = (double)ft_atoi(col_str_arr[col]);
 	}
 	return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 1);
 }
-
-// Here as prototype to not modify any header because this function is nothing
-// more than a future addition to libft
-//void	fdf_empty_gnl_mem(int fd);
 
 t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 {

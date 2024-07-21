@@ -1,8 +1,7 @@
 TODO:
 
 + Implementar color???
-	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
-	vertex en mapas con información de color.
+	+ Crear tanto matrix de alturas como ahora otra matrix de color.
 	+ Incluir un miembro en el tipo vertex que almacene la información de su
 	color en el formato en el que MLX42 lo requeriría.
 	+ Lograr dibujar con color los vertexes (un pixel).
@@ -29,6 +28,9 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Implementar color???
+	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
+	vertex en mapas con información de color.
 + Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
 	+ ver comentarios en fdf_exit_program() y fdf_start_gui().
 		Creo que sí son irresolubles (más allá de que no son realmente fugas en sentido estricto).
