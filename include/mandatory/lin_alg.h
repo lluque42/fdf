@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 13:46:07 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 14:51:31 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@
  * source altitude map file.
  */
 # define VAL_SEPARATOR_FILE 32
+
+/**
+ * @def Z
+ * Mnemonic to refer to the Z values matrix in the array of pointers to matrices
+ * that represent both Z values and color values for each vertex.
+ */
+#define Z 0
+
+/**
+ * @def C
+ * Mnemonic to refer to the color values matrix in the array of pointers to
+ * matrices that represent both Z values and color values for each vertex.
+ */
+#define C 1
 
 /**
  * @struct s_ft_mx
@@ -285,7 +299,8 @@ void	ft_mx_print(t_ft_mx *matrix, char separator);
  *
  * @param [in] separator - The character to be printed between column values.
  *
- * @return The matrix.
+ * @return A pointer to an array of two pointers to matrix that represent both
+ * Z values and color values for the vertices of the map.
  * NULL if error.
  *
  * @warning TODO.
@@ -293,7 +308,7 @@ void	ft_mx_print(t_ft_mx *matrix, char separator);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx	*ft_mx_load_file(char *filename, char separator);
+t_ft_mx	**ft_mx_load_file(char *filename, char separator);
 
 /**
  * @brief <b>ft_mx_dup</b> -- TODO.

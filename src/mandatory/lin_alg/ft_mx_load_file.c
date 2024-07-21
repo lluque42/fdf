@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 14:30:34 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 15:02:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "libft.h"
 #include "lin_alg.h"
 
-#define Z 0
-#define C 1
 
 
 
@@ -154,39 +152,42 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx **mx)
 
 // Array of pointers to matrix, where index Z (0) refers to the matrix with
 // the Z values and index C (1) to the matric with the color values.
-t_ft_mx	*ft_mx_load_file(char *filename, char separator)
+t_ft_mx	**ft_mx_load_file(char *filename, char separator)
 {
-	t_ft_mx			*map_mx[2];
+	t_ft_mx			**map_mx;
 	int				row;
 	char			*line;
 	int				fd;
 
+	map_mx = malloc(2 * sizeof (t_ft_mx *));
+	if (map_mx == NULL)
+		return (0);
 	map_mx[Z] = create_matrix(filename, separator, 0);
 	map_mx[C] = create_matrix(filename, separator, 255);
 	if (map_mx[Z] == NULL || map_mx[C] == NULL)
-		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), NULL);
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+				free(map_mx), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), NULL);
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+				free(map_mx), NULL);
 	row = -1;
 	while (++row < map_mx[Z]->m)											// This assumes both are of the same size. CHECK if any error could falsify this
 	{
 		line = ft_gnl(fd);
 		if (line == NULL)
 			return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
-					close(fd), NULL);
+					free(map_mx), close(fd), NULL);
 	//		return (ft_mx_destroy(matrix), close(fd), NULL);
 		
-		// FOR NOW, only pass Z values matrix to check that everything is OK
 		if (!parse_line(line, separator, row, map_mx))
 	//		return (free(line), ft_free_gnl(fd),
 	//			ft_mx_destroy(matrix), close(fd), NULL);
-			return (free(line), ft_free_gnl(fd), ft_mx_destroy(map_mx[Z]),
-					ft_mx_destroy(map_mx[C]), close(fd), NULL);
+			return (free(line), ft_free_gnl(fd),
+					ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+					free(map_mx), close(fd), NULL);
 		free(line);
 	}
 	ft_mx_print(map_mx[C], ' ');
-	//FOR NOW only return the Z values map matrix, for compatibility with the
-	//caller.
-	return (ft_free_gnl(fd), close(fd), map_mx[Z]);
+	return (ft_free_gnl(fd), close(fd), map_mx);
 }

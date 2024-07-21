@@ -7,6 +7,10 @@ TODO:
 	+ Lograr dibujar con color los vertexes (un pixel).
 	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
 	del color del vertex de inicio y se vaya "acercando" al vertex final.
++ Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
+perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
+original y la nueva ponerla en otro lado.
+
 
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.

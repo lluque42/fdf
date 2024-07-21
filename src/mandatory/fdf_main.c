@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 03:40:39 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 14:59:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
-	t_ft_mx	*map_mx;
+	t_ft_mx	**map_mx;
 
 	if (!fdf_args_valid(argc, argv))
 		return (EXIT_FAILURE);
@@ -51,17 +51,18 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("fdf: error while loading the file", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	fdf = fdf_create_fdf(DEF_DRW_WIDTH, DEF_DRW_HEIGHT, map_mx);
+	// FOR NOW only [Z]
+	fdf = fdf_create_fdf(DEF_DRW_WIDTH, DEF_DRW_HEIGHT, map_mx[Z]);
 	if (fdf == NULL)
 	{
 		ft_putendl_fd("fdf: error creating fdf", STDERR_FILENO);
-		return (ft_mx_destroy(map_mx), EXIT_FAILURE);
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), free(map_mx), EXIT_FAILURE);
 	}
 	fdf_print_instructions();
 	if (!fdf_start_gui(fdf))
 	{
 		ft_putendl_fd("fdf: error while starting the GUI", STDERR_FILENO);
-		return (fdf_destroy_fdf(fdf), EXIT_FAILURE);
+		return (fdf_destroy_fdf(fdf), ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), free(map_mx), EXIT_FAILURE);
 	}
 	return (fdf_destroy_fdf(fdf), EXIT_SUCCESS);
 }
