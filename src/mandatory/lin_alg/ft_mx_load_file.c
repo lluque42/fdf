@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 12:43:43 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 13:47:14 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static int	get_number_of_cols(char *line, char separator)
 	return (noc);
 }
 
-static t_ft_mx	*create_matrix(char *filename, char separator)
+static t_ft_mx	*create_matrix(char *filename,
+					char separator,
+					double initial_value)
 {
 	char			*row;
 	t_ft_mx_size	size;
@@ -69,6 +71,9 @@ static t_ft_mx	*create_matrix(char *filename, char separator)
 	matrix = ft_mx_create(size.m, size.n);
 	if (matrix == NULL)
 		return (close(fd), NULL);
+	if (initial_value != 0)
+//		ft_memset(matrix->d, initial_value, size.m * size.n * sizeof (double));
+		ft_mx_fill(matrix, initial_value);
 	return (close(fd), matrix);
 }
 
@@ -94,6 +99,7 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 		{
 
 
+			/*
 
 			int	is_error;
 			int	color;
@@ -102,9 +108,8 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 			ft_printf("Color info appears to be: '%s'\n", color_comma_pos);
 			// checking basic prefix validity
 			if (ft_strncmp(color_comma_pos, ",0x", 3) != 0)
-				//ft_printf("Color info MALFORMED!!!\n");
+				ft_printf("Color info MALFORMED!!!\n");
 				is_error = 1;
-			//uint32_t	color;
 			color = ft_atoi_b(color_comma_pos + 3, 16);
 			if (color == -1)
 				is_error = 1;
@@ -112,7 +117,7 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 				ft_printf("Color value: '%d'\n", (uint32_t)color);
 			else
 				ft_printf("Color info is malformed!!!!\n");
-
+			*/
 
 
 
@@ -127,29 +132,46 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
 	return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 1);
 }
 
+
+
+#define Z 0
+#define C 1
+
+// Array of pointers to matrix, where index Z (0) refers to the matrix with
+// the Z values and index C (1) to the matric with the color values.
 t_ft_mx	*ft_mx_load_file(char *filename, char separator)
 {
-	t_ft_mx			*matrix;
+	t_ft_mx			*map_mx[2];
 	int				row;
 	char			*line;
 	int				fd;
 
-	matrix = create_matrix(filename, separator);
-	if (matrix == NULL)
-		return (NULL);
+	map_mx[Z] = create_matrix(filename, separator, 0);
+	map_mx[C] = create_matrix(filename, separator, 255);
+	ft_mx_print(map_mx[C], ' ');
+	if (map_mx[Z] == NULL || map_mx[C] == NULL)
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_mx_destroy(matrix), NULL);
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), NULL);
 	row = -1;
-	while (++row < matrix->m)
+	while (++row < map_mx[Z]->m)											// This assumes both are of the same size. CHECK if any error could falsify this
 	{
 		line = ft_gnl(fd);
 		if (line == NULL)
-			return (ft_mx_destroy(matrix), close(fd), NULL);
-		if (!parse_line(line, separator, row, matrix))
-			return (free(line), ft_free_gnl(fd),
-				ft_mx_destroy(matrix), close(fd), NULL);
+			return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+					close(fd), NULL);
+	//		return (ft_mx_destroy(matrix), close(fd), NULL);
+		
+		// FOR NOW, only pass Z values matrix to check that everything is OK
+		if (!parse_line(line, separator, row, map_mx[Z]))
+	//		return (free(line), ft_free_gnl(fd),
+	//			ft_mx_destroy(matrix), close(fd), NULL);
+			return (free(line), ft_free_gnl(fd), ft_mx_destroy(map_mx[Z]),
+					ft_mx_destroy(map_mx[C]), close(fd), NULL);
 		free(line);
 	}
-	return (ft_free_gnl(fd), close(fd), matrix);
+	//FOR NOW only return the Z values map matrix, for compatibility with the
+	//caller.
+	return (ft_free_gnl(fd), close(fd), map_mx[Z]);
 }

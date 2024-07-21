@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 02:32:15 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 13:46:07 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -551,5 +551,17 @@ t_ft_mx	*ft_vx_substract(t_ft_mx *b, t_ft_mx *c);
  * storaged inside the matrix's ->d[] array, the addressing is very simple.
 */
 int		ft_vx_dproduct(t_ft_mx *a, t_ft_mx *b, double *result);
+
+/**
+ * @brief <b>ft_mx_fill</b> -- Sets every element in the matrix to a value.
+ *
+ * @details Sets every element in the matrix to a value.
+ *
+ * @param [in] matrix - The matrix pointer to modify.
+ *
+ * @param [in] element_value - The new value to apply to every element
+ * in the matrix.
+*/
+void	ft_mx_fill(t_ft_mx *matrix, double element_value);
 
 #endif
