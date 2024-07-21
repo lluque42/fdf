@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/17 16:53:09 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 15:37:32 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	fdf_tesselate_map(t_fdf_object *object)
 		fdf_get_vertex_min_max(object->model_mx,
 			object->map_min,
 			object->map_max);
-		if (!fdf_get_edge(object->map_mx, object))
+		if (!fdf_get_edge(object->map_mx[Z], object))
 			return (0);
 	}
 	ft_mx_destroy(object->model_mx);

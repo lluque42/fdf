@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 14:59:16 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 15:22:35 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("fdf: error while loading the file", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	// FOR NOW only [Z]
-	fdf = fdf_create_fdf(DEF_DRW_WIDTH, DEF_DRW_HEIGHT, map_mx[Z]);
+	fdf = fdf_create_fdf(DEF_DRW_WIDTH, DEF_DRW_HEIGHT, map_mx);
 	if (fdf == NULL)
 	{
 		ft_putendl_fd("fdf: error creating fdf", STDERR_FILENO);

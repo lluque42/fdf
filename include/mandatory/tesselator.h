@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 16:48:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 15:44:00 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,8 +263,9 @@ typedef struct s_fdf_triangle
  * transformations to go from one space to the next such as rotations,
  * translations, scaling, and 2D projection.
  * @var s_fdf_object::map_mx
- * The matrix with the raw data (altitude values at each row, column coordinate)
- * from which the tesselation is done.
+ * A pointer to an array of two matrices with the raw data (altitude values
+ * at each row, column coordinate; and color values) from which the tesselation
+ * is done.
  * @var s_fdf_object::tesselation_type
  * The tesselation type that shoul be used to interpret the altitud data when
  * creating the 3D object (plane, spherical, cylindrical, etc.).
@@ -338,7 +339,7 @@ typedef struct s_fdf_triangle
 */
 typedef struct s_fdf_object
 {
-	t_ft_mx				*map_mx;
+	t_ft_mx				**map_mx;
 	double				map_min[3];
 	double				map_max[3];
 	t_tesselation_type	tesselation_type;
@@ -377,10 +378,11 @@ typedef struct s_fdf_object
  * @details TODO.
  *
  * @param [in] map_mx
- * The matrix with the raw data (altitude values at each row, column coordinate)
- * from which the tesselation is done.
+ * A pointer to an array of two matrices with the raw data (altitude values
+ * at each row, column coordinate; and color values) from which the tesselation
+ * is done.
  * 
- * @return TODO.
+ * @return The object with planar tesselation.
  * NULL if error.
  *
  * @warning TODO.
@@ -388,7 +390,7 @@ typedef struct s_fdf_object
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf_object	*fdf_create_object(t_ft_mx *map_mx);
+t_fdf_object	*fdf_create_object(t_ft_mx **map_mx);
 
 /**
  * @brief <b>fdf_destroy_object</b> -- TODO.
@@ -861,17 +863,19 @@ int				fdf_set_diag_edge_validity(int this_edge,
 					int ort_v2);
 
 /**
- * @brief <b>fdf_get_vertex_mx</b> -- Converts an altitude map matrix to a
- * planar vertex matrix.
+ * @brief <b>fdf_get_vertex_mx</b> -- Converts an altitude map matrix and
+ * color map matrix to a planar vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * maintains the planar correspondence of the source map matrix to the surface
  * it refers to.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] map_mx - The array of two pointers to matrices with altitude and
+ * color data.
  *
  * @return The vertex matrix if OK.
  * NULL if error.
@@ -889,20 +893,22 @@ int				fdf_set_diag_edge_validity(int this_edge,
  * increasing the row (i.e. increasing the vertex's 'y' coordinate).
  * TODO.
 */
-t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
+t_ft_mx			*fdf_get_vertex_mx(t_ft_mx **map_mx);
 
 /**
- * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix to a
- * spherical vertex matrix.
+ * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix and
+ * color map matrix to a spherical vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a spherical representation.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] map_mx - The array of two pointers to matrices with altitude and
+ * color data.
  *
  * @param [in] r - The sphere base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -915,20 +921,22 @@ t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
+t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx **map_mx, double r);
 
 /**
- * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix to a
- * cylindrical vertex matrix.
+ * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix and
+ * color map matrix to a cylindrical vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a cylindrical representation.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] map_mx - The array of two pointers to matrices with altitude and
+ * color data.
  *
  * @param [in] r - The cylinder base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -943,7 +951,7 @@ t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *map_mx, double r, double h);
+t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx **map_mx, double r, double h);
 
 /**
  * @brief <b>fdf_create_nv</b> -- Creates a neighboring vertexes struct.
