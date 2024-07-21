@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/18 13:13:35 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/21 11:45:33 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,7 +166,6 @@ INCLUDES = $(INC_DIR)drawing.h \
 
 # List of source code file names with path relative to SRC_DIR
 SOURCES = fdf_main.c \
-		  fdf_empty_gnl_mem.c \
 		  main_utils/fdf_filename_valid.c \
 		  main_utils/fdf_args_valid.c \
 		  main_utils/fdf_print_instructions.c \
