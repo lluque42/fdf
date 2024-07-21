@@ -1,6 +1,13 @@
 TODO:
 
 + Implementar color???
+	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
+	vertex en mapas con información de color.
+	+ Incluir un miembro en el tipo vertex que almacene la información de su
+	color en el formato en el que MLX42 lo requeriría.
+	+ Lograr dibujar con color los vertexes (un pixel).
+	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
+	del color del vertex de inicio y se vaya "acercando" al vertex final.
 
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
