@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 14:13:59 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:19:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ int	fdf_drw_edges(mlx_image_t *image,
 			return (0);
 		fdf_draw_line(image, line);
 		free(line);
+
+		
+		ft_printf("Edge %d start color = %d; end color = %d\n", e, object->edge[e].start_color, object->edge[e].end_color);
+
+
 	}
 	return (1);
 }

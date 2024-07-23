@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 12:32:44 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:21:32 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ static void	edge2down_neig(int i, int j, t_fdf_object *object)
 	neighbor_v = i * n + j + 1;
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
+	
+
+
+	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	
+
+
 	object->edge[object->edges].is_hidden = 0;
 	object->edges++;
 }
@@ -58,6 +66,14 @@ static void	edge2right_neig(int i, int j, t_fdf_object *object)
 	neighbor_v = (i + 1) * n + j;
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
+	
+
+
+	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	
+
+
 	object->edge[object->edges].is_hidden = 0;
 	object->edges++;
 }
@@ -91,6 +107,14 @@ static int	edge2dr_neig(int i, int j, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
+	
+
+
+	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	
+
+
 	if (!fdf_set_diag_edge_validity(object->edges,
 			object,
 			right_neighbor_v,
@@ -130,6 +154,14 @@ static int	edge2dl_neig(int i, int j, t_fdf_object *object)
 	down_neighbor_v = i * n + (j + 1);
 	object->edge[object->edges].start = this_v;
 	object->edge[object->edges].end = neighbor_v;
+	
+
+
+	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	
+
+
 	if (!fdf_set_diag_edge_validity(object->edges,
 			object,
 			left_neighbor_v,

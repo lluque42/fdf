@@ -1,25 +1,3 @@
-New Commit
-
-
-Modifications on fdf_get_vertex... functions were reversed (I didn't
-remember correctly that there was no vertex type, but a vertex
-col-vector forming a vertex matrix that must stay as it is for the
-matricial computations) and can not have color information.
-
-fdf_get_edge() function, its only caller (fdf_tesselate_map), and fdf_get_edge()
-auxiliary functions were modified (long due, by the way) to not to take the
-map_mx matrix (now map_mx[Z]) because it can be referenced from fdf_get_edge()
-second argument, namely, the freaking object. Now this is needed to retrieve
-color information in object more easily in the fdf_get_edge() auxiliary
-functions (given the number of function argument restrictions of 42 norm).
-
-The fdf_destroy_object() function was fixed because it was not freeing the array
-but only its two elements (map_mx[Z] and map_mx[C]).
-
-
-
-
-
 TODO:
 
 + Implementar color???

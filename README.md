@@ -236,13 +236,13 @@ with FFFFFF for each sample.
 This is the stage where: (1) the samples obtained from loading the .fdf file
 (2D position at XY plane + altitude) are used to create actual 3D XYZ points
 in space, this is dependent upon the type of projection: planar, spherical,
-or cylindrical; (2) the color information of the samples are used to create
-an array of uint32_t to storage the color values of each vertex; (3) for each
-of the samples (spatial-info-wise) a relationship is stablished with its
-neighboring samples in the matrix, this relationship is represented in an
-edge array and is the base for eventually drawing lines that connect each
-vertex only to its orthogonal neighbor vertices (or, in bonus version, also to
-its non-orthogonal neighbors that makes spatial sense; or to every neighbor).
+or cylindrical; (2) for each of the samples (spatial-info-wise) a relationship
+is stablished with its neighboring samples in the matrix, this relationship
+is represented in an edge array and is the base for eventually drawing lines
+that connect each vertex only to its orthogonal neighbor vertices (or, in bonus
+version, also to its non-orthogonal neighbors that makes spatial sense;
+or to every neighbor). Each edge also contains the numeric value for the color
+of the start and end vertex.
 
 In (1) one of this three functions: fdf_get_vertex_mx(),
 fdf_get_vertex_mx_sph(), or fdf_get_vertex_mx_cyl() is used to create a matrix
@@ -250,27 +250,31 @@ in which each column ?????? is a XYZW 3D point in space (a vertex). This matrix
 will become the model_mx member of the object, which is the object member
 of fdf.
 
-In (2) the ????? function creates the array of uint32_t holding the color
-values. This is performed only once, when the model_mx member of the object
-is NULL, since it will be the same for any tesselation projection type.
-
-In (3) the fdf_get_edge() creates an array of edges, the later being a struct
-type that has two key members: start and end. Each represent the index in the
-vertex matrix of the starting vertex of the edge and the end vertex of the
-edge. Clearly, each edge (if not hidden) will become a line in the image.
-This is performed only once, when the model_mx member of the object
-is NULL, since it will be the same for any tesselation projection type.             <<<<<<<<<<<< Aquí es un buen sitio para poner start_color y end_color 
+In (2) the fdf_get_edge() creates an array of edges, an edge is  a struct
+type that has four key members: start and end, and start_color and end_color.
+The start and end members represent the index in the vertex matrix of the
+starting vertex of the edge and the end vertex of the edge.  
+The start_color and end_color members contain the uint32_t value of the color
+of the start and end vertex. Clearly, each edge (if not hidden) will become a
+line on the image.
+*The call to fdf_get_edge() is performed only once, when the model_mx member of
+the object is NULL, since the edge information (what point connects to another
+point and what colors should be used) will be the same for any tesselation
+projection type.*
  
-Both the vertex matrix column ????? index (1), the color array index (2), and
-the start/end members in the edges array indices (3) refer to the information
-of the same 3D vertex.
+Both the vertex matrix column index (1) and the start/end members in the edges
+array indices (3) refer to the information of the same 3D vertex.
 
-The following transformation consist of succesively multiplying the previous
-vertex matrix (that represents the same points but in a particular space:
-he 3D object now placed in the world; the 3D object in the world but now from
-the point of view from the camera; or the 2D projection of the later to the
-screen) by different transformation matrices to generate a new vertex matrix of
-the new space.
+The next stages of the rendering process after tesselating the map consists of
+several succesive transformations from the vertex matrix for a stage to obtain
+the vertex matrix of the next stage. This vertex matrices are called spaces.
+These transformations to "get" the object to one space to the next, consist of
+succesively multiplying the previous vertex matrix (that represents the same
+points but in a particular space: the 3D object now placed in the world;
+the 3D object in the world but now from the point of view from the camera;
+or the 2D projection of the later to the screen) by different transformation
+matrices (to rotate, translate, scale, project) to generate the new vertex
+matrix for the next space.
 
 #### 3D model space to world space transformation
 TODO
