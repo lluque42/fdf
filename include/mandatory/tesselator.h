@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 15:44:00 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 12:37:02 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #ifndef TESSELATOR_H
 # define TESSELATOR_H
+# include <stdint.h>
 # include "lin_alg.h"
 
 /**
@@ -62,6 +63,10 @@ typedef enum e_tesselation_type
  * The index of the starting vertex stored in a vertex matrix.
  * @var s_fdf_edge::end
  * The index of the ending vertex stored in a vertex matrix.
+ * @var s_fdf_edge::start_color
+ * The index of the starting vertex color stored in the map color matrix.
+ * @var s_fdf_edge::end_color
+ * The index of the end vertex color stored in the map color matrix.
  * @var s_fdf_edge::is_hidden
  * A non-zero value to signal that this edge must not be drawn.
  * @var s_fdf_edge::is_valid_diag
@@ -69,10 +74,12 @@ typedef enum e_tesselation_type
 */
 typedef struct s_fdf_edge
 {
-	int	start;
-	int	end;
-	int	is_valid_diag;
-	int	is_hidden;
+	int			start;
+	int			end;
+	uint32_t	start_color;
+	uint32_t	end_color;
+	int			is_valid_diag;
+	int			is_hidden;
 }				t_fdf_edge;
 /**
  * @typedef t_fdf_edge
@@ -445,8 +452,6 @@ int				fdf_tesselate_map(t_fdf_object *object);
  *
  * @details TODO.
  *
- * @param [in] map_mx - TODO.
- *
  * @param [in] object - The pointer to the 3D object.
  *
  * @return Non-zero value if correct.
@@ -474,7 +479,7 @@ int				fdf_tesselate_map(t_fdf_object *object);
  *      + Every element in last row only forms 1 edge to right neighbor, except
  *      for the last element in this last row which forms NO new edge.
 */
-int				fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object);
+int				fdf_get_edge(t_fdf_object *object);
 
 /**
  * @brief <b>fdf_create_rot_mx</b> -- TODO.
@@ -874,8 +879,7 @@ int				fdf_set_diag_edge_validity(int this_edge,
  * maintains the planar correspondence of the source map matrix to the surface
  * it refers to.
  *
- * @param [in] map_mx - The array of two pointers to matrices with altitude and
- * color data.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @return The vertex matrix if OK.
  * NULL if error.
@@ -893,7 +897,7 @@ int				fdf_set_diag_edge_validity(int this_edge,
  * increasing the row (i.e. increasing the vertex's 'y' coordinate).
  * TODO.
 */
-t_ft_mx			*fdf_get_vertex_mx(t_ft_mx **map_mx);
+t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *z_mx);
 
 /**
  * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix and
@@ -907,8 +911,7 @@ t_ft_mx			*fdf_get_vertex_mx(t_ft_mx **map_mx);
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a spherical representation.
  *
- * @param [in] map_mx - The array of two pointers to matrices with altitude and
- * color data.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @param [in] r - The sphere base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -921,7 +924,7 @@ t_ft_mx			*fdf_get_vertex_mx(t_ft_mx **map_mx);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx **map_mx, double r);
+t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *z_mx, double r);
 
 /**
  * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix and
@@ -935,8 +938,7 @@ t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx **map_mx, double r);
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a cylindrical representation.
  *
- * @param [in] map_mx - The array of two pointers to matrices with altitude and
- * color data.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @param [in] r - The cylinder base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -951,7 +953,7 @@ t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx **map_mx, double r);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx **map_mx, double r, double h);
+t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *z_mx, double r, double h);
 
 /**
  * @brief <b>fdf_create_nv</b> -- Creates a neighboring vertexes struct.

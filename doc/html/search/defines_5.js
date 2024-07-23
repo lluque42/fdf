@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['val_5fseparator_5ffile_0',['VAL_SEPARATOR_FILE',['../lin__alg_8h.html#a575f53f4cfc618d43ecdff6679ea1605',1,'lin_alg.h']]]
+  ['tra_5fstep_0',['TRA_STEP',['../fdf__features_8h.html#a8a394096876150c03de43b8fb3c85fd9',1,'fdf_features.h']]]
 ];

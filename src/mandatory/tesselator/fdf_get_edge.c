@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 14:14:28 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 12:32:44 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 // The main goal is to calculate neighbor_v based on i and j.
 // Visibility is always set to garantee at least the rendering of
 // ortogonal (to x and y axis) lines.
-static void	edge2down_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
+static void	edge2down_neig(int i, int j, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
 	int	n;
 
-	if (j + 1 >= map_mx->n)
+	if (j + 1 >= object->map_mx[Z]->n)
 		return ;
-	n = map_mx->n;
+	n = object->map_mx[Z]->n;
 	this_v = i * n + j;
 	neighbor_v = i * n + j + 1;
 	object->edge[object->edges].start = this_v;
@@ -45,15 +45,15 @@ static void	edge2down_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // The main goal is to calculate neighbor_v based on i and j.
 // Visibility is always set to garantee at least the rendering of
 // ortogonal (to x and y axis) lines.
-static void	edge2right_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
+static void	edge2right_neig(int i, int j, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
 	int	n;
 
-	if (i + 1 >= map_mx->m)
+	if (i + 1 >= object->map_mx[Z]->m)
 		return ;
-	n = map_mx->n;
+	n = object->map_mx[Z]->n;
 	this_v = i * n + j;
 	neighbor_v = (i + 1) * n + j;
 	object->edge[object->edges].start = this_v;
@@ -74,7 +74,7 @@ static void	edge2right_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // Do not confuse visibility (it makes sense to be considered for drawing) wiht
 // hidden (don't draw if visible because we don't want non-orthogonal edges
 // depicted on the drawing)
-static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
+static int	edge2dr_neig(int i, int j, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
@@ -82,9 +82,9 @@ static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	int	down_neighbor_v;
 	int	n;
 
-	if (j + 1 >= map_mx->n || i + 1 >= map_mx->m)
+	if (j + 1 >= object->map_mx[Z]->n || i + 1 >= object->map_mx[Z]->m)
 		return (1);
-	n = map_mx->n;
+	n = object->map_mx[Z]->n;
 	this_v = i * n + j;
 	neighbor_v = (i + 1) * n + j + 1;
 	right_neighbor_v = (i + 1) * n + j;
@@ -113,7 +113,7 @@ static int	edge2dr_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 // Do not confuse visibility (it makes sense to be considered for drawing) wiht
 // hidden (don't draw if visible because we don't want non-orthogonal edges
 // depicted on the drawing)
-static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
+static int	edge2dl_neig(int i, int j, t_fdf_object *object)
 {
 	int	this_v;
 	int	neighbor_v;
@@ -121,9 +121,9 @@ static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	int	down_neighbor_v;
 	int	n;
 
-	if (j + 1 >= map_mx->n || i - 1 < 0)
+	if (j + 1 >= object->map_mx[Z]->n || i - 1 < 0)
 		return (1);
-	n = map_mx->n;
+	n = object->map_mx[Z]->n;
 	this_v = i * n + j;
 	neighbor_v = (i - 1) * n + j + 1;
 	left_neighbor_v = (i - 1) * n + j;
@@ -140,9 +140,11 @@ static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 	return (1);
 }
 
+// TODO OBSOLETE
 // This goes through each element of map_mx, which is a vertex.
-// For each element it tries to add 3 edges to neighbors elements: right, 
-// down, and diagonal down-right. The later is set as hidden.
+// For each element it tries to add 4 edges to neighbors elements: right, 
+// down, and diagonal down-right, and diagonal down-left.
+// The later is set as hidden TODO. 
 //
 // The iteration depends on the order in which fdf_get_vertex_mx() walks through
 // map_mx while adding the vertexes in vertex_mx: rows (i.e. 'i') increases
@@ -158,29 +160,29 @@ static int	edge2dl_neig(int i, int j, t_ft_mx *map_mx, t_fdf_object *object)
 //		except for the last element of the last row which forms NO new edge.
 //		+ Every element in last row only forms 1 edge to right neighbor, except
 //		for the last element in this last row which forms NO new edge.
-int	fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object)
+int	fdf_get_edge(t_fdf_object *object)
 {
 	int	i;
 	int	j;
 	int	edges;
 
 	object->edges = 0;
-	edges = (map_mx->m - 1) * (map_mx->n - 1) * 4 + (map_mx->m - 1)
-		+ (map_mx->n - 1);
+	edges = (object->map_mx[Z]->m - 1) * (object->map_mx[Z]->n - 1) * 4 + (object->map_mx[Z]->m - 1)
+		+ (object->map_mx[Z]->n - 1);
 	object->edge = ft_calloc(edges, sizeof (t_fdf_edge));
 	if (object->edge == NULL)
 		return (0);
 	j = -1;
-	while (++j < map_mx->n)
+	while (++j < object->map_mx[Z]->n)
 	{
 		i = -1;
-		while (++i < map_mx->m)
+		while (++i < object->map_mx[Z]->m)
 		{
-			edge2right_neig(i, j, map_mx, object);
-			edge2down_neig(i, j, map_mx, object);
-			if (!edge2dr_neig(i, j, map_mx, object))
+			edge2right_neig(i, j, object);
+			edge2down_neig(i, j, object);
+			if (!edge2dr_neig(i, j, object))
 				return (0);
-			if (!edge2dl_neig(i, j, map_mx, object))
+			if (!edge2dl_neig(i, j, object))
 				return (0);
 		}
 	}

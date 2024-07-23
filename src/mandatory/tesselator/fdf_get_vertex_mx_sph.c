@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 15:52:27 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 23:39:20 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,29 @@ static double	fdf_get_sph_y(int j, int i, t_ft_mx *map_mx, double base_radius)
 	return (y);
 }
 
-t_ft_mx	*fdf_get_vertex_mx_sph(t_ft_mx **map_mx, double r)
+t_ft_mx	*fdf_get_vertex_mx_sph(t_ft_mx *z_mx, double r)
 {
 	t_ft_mx	*v_mx;
 	int		i;
 	int		j;
 	int		v;
 
-	v_mx = ft_mx_create(4, map_mx[Z]->m * map_mx[Z]->n);
+	v_mx = ft_mx_create(4, z_mx->m * z_mx->n);
 	if (v_mx == NULL)
 		return (NULL);
 	v = -1;
 	i = 0;
 	j = 0;
-	while (++v < map_mx[Z]->m * map_mx[Z]->n)
+	while (++v < z_mx->m * z_mx->n)
 	{
-		v_mx->d[v] = fdf_get_sph_x(j, i, map_mx[Z], r);
-		v_mx->d[map_mx[Z]->m * map_mx[Z]->n + v] = fdf_get_sph_y(j, i, map_mx[Z], r);
-		v_mx->d[2 * map_mx[Z]->m * map_mx[Z]->n + v] = fdf_get_sph_z(j, i, map_mx[Z], r);
-		v_mx->d[3 * map_mx[Z]->m * map_mx[Z]->n + v] = 1;
-		if (++j == map_mx[Z]->n)
+		v_mx->d[v] = fdf_get_sph_x(j, i, z_mx, r);
+		v_mx->d[z_mx->m * z_mx->n + v] = fdf_get_sph_y(j, i, z_mx, r);
+		v_mx->d[2 * z_mx->m * z_mx->n + v] = fdf_get_sph_z(j, i, z_mx, r);
+		v_mx->d[3 * z_mx->m * z_mx->n + v] = 1;
+		if (++j == z_mx->n)
 		{
 			j = 0;
-			if (++i == map_mx[Z]->m)
+			if (++i == z_mx->m)
 				i = 0;
 		}
 	}

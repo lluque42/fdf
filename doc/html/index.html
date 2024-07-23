@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-18</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-23</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -70,7 +70,7 @@ $(function() {
 <p >Message to other 42 students: DO NOT COPY, get inspired!</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Introduction</h1>
-<p >Wireframe model of landscape represantation in isometric projection</p>
+<p >Wireframe model of landscape representation in isometric projection</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Directory tree</h1>
 <pre class="fragment">./  
@@ -118,25 +118,208 @@ Directory tree</h1>
 Compilation instructions</h1>
 <p >Use ‘make help’ for instructions.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
-Program's internal working</h1>
-<p >The rendering process has these levels, let's call them transformations (which are processed in this order): <br  />
-</p><ul>
-<li>[file to map Not an actual part of the rendering process] (<a class="el" href="lin__alg_8h.html#a0cf1f7fa69872bb971893af97d901caa" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>)</li>
-<li>map to 3D model Planar, spherical or cylindrical projection (<a class="el" href="tesselator_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>) <br  />
+Program's data model</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Conventions adopted</h2>
+<ul>
+<li>When rendering, the right-handed convention for drawing XYZ axis will be used, which implies: <br  />
+ <div class="fragment"><div class="line">   +Z  </div>
+<div class="line">    |</div>
+<div class="line">    |  </div>
+<div class="line">   / \  </div>
+<div class="line">  /   \  </div>
+<div class="line">+X     +Y  </div>
+</div><!-- fragment --></li>
+<li>Matrices nomenclature, i, j for m x n matrix, where:<ul>
+<li>i is ???</li>
+<li>j is ???</li>
+<li>m is ???</li>
+<li>n is ???</li>
+</ul>
 </li>
-<li>3D model to world <br  />
+<li>Linear representation of a matrix follows lexicographic... TODO</li>
+<li>From subject (HOWEVER read fdf_main.c comments): <br  />
+<ul>
+<li>The horizontal position corresponds to its axis (X).</li>
+<li>The vertical position corresponds to its ordinate (Y).</li>
+</ul>
 </li>
-<li>world to camera <br  />
+<li>TODO Por tanto, las coordenadas de las esquinas en el plano XY son: B: (0,0) <br  />
+ A: (xX,0) <br  />
+ D: (0,yY) <br  />
+ C: (xX, yX) <br  />
 </li>
-<li>camera to screen <br  />
+<li>TODO Por tanto al leer del archivo: <div class="fragment"><div class="line">TODO</div>
+<div class="line">            &lt;&lt;&lt; X  </div>
+<div class="line">(xX,0) c0     cC (0,0)  </div>
+<div class="line">    r0  A .... B   Y  </div>
+<div class="line">        .      .   v  </div>
+<div class="line">        .      .   v  </div>
+<div class="line">    rR  C .... D   v  </div>
+<div class="line">(xX,yY)          (0,yY)  </div>
+</div><!-- fragment --></li>
+<li>The GUI image own coordinate system TODO</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Data structures</h2>
+<ul>
+<li>Array of two matrices resulting from loading the .fdf map file. The first matrix contains altitude values (Z axis) while the second matrix contains color values (255 if map has no color info). The column and row in each matrix represents the X, Y coordinates. It was decided to adopt the following conventions:<ul>
+<li>The first value at the first line of the file corresponds to the element 0,0. That is, position (i, j) in a m x n matrix, where m is the number of rows and n the number of columns. This i, j pair matches spatial coordinates as X = ??? Y = ???. <br  />
+</li>
+<li>The last value at the first line of the file corresponds to the element ???. That is, same ??? position, hence same ??? coordinate, but ??? position and ??? coordinate. <br  />
+</li>
+<li>When rendering, it will be used the right-handed convention for drawing XYZ axis, which implies: <br  />
+<ul>
+<li>Cordinate system origin (x, y) (0, 0) is represented by the ??? matrix element. <br  />
+</li>
+<li>As row position increases from 0 to ???, ??? coordinate increases in the positive direction. <br  />
+</li>
+<li>As column position increases from 0 to ???, ??? coordinate increases in the positive direction. <br  />
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Program's internal working</h1>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Core functions callings</h2>
+<ul>
+<li>main() function does the following:<ul>
+<li>Checks validity of arguments.</li>
+<li>Creates the fdf data structure which serves as an entry point to every other data.</li>
+<li>Loads the .fdf file data into an array of two matrices (one for height or Z values and the other one for color values) by calling <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>.</li>
+<li>Calls <a class="el" href="window_8h.html#aafea7a88379582e1a5f8902133a619a5" title="fdf_start_gui – TODO.">fdf_start_gui()</a> which does the following:<ul>
+<li><a class="el" href="window_8h.html#aafea7a88379582e1a5f8902133a619a5" title="fdf_start_gui – TODO.">fdf_start_gui()</a> registers the hooks:<ul>
+<li>mlx_resize_hook() -&gt; <a class="el" href="window_8h.html#ad387c47ba3be5c01a21d7a5b8ab501be" title="fdf_resizehook – TODO.">fdf_resizehook()</a>.</li>
+<li>mlx_key_hook() -&gt; <a class="el" href="window_8h.html#a213a8c91866bd9eca03a0a69e9c848b8" title="fdf_keyhook – TODO.">fdf_keyhook()</a>.</li>
+<li>mlx_close_hook() -&gt; <a class="el" href="window_8h.html#a6f2d9dae393f97b927c04ee9d91c1666" title="fdf_closehook – TODO.">fdf_closehook()</a>.</li>
+<li>mlx_loop_hook() -&gt; <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a>.</li>
+</ul>
+</li>
+<li>Creates the GUI: window, image, places the image on the window.</li>
+<li>Then waits in the mlx_loop(). At this point (and until after the window is closed or the ESCAPE key is pressed), only the hooks functions are called to act as a result of the GUI events.<ul>
+<li>When MLX loop breaks, <a class="el" href="window_8h.html#aafea7a88379582e1a5f8902133a619a5" title="fdf_start_gui – TODO.">fdf_start_gui()</a> finishes the MLX clean up by calling mlx_terminate(). The MLX clean up process starts in the <a class="el" href="window_8h.html#a6f2d9dae393f97b927c04ee9d91c1666" title="fdf_closehook – TODO.">fdf_closehook()</a> when it calls the <a class="el" href="fdf__features_8h.html#a768ca29c70716780625ec8c5adb6c3a2" title="fdf_exit_program – TODO.">fdf_exit_program()</a> which calls the MLX functions mlx_delete_image() and mlx_close_window(). <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p ><em>[...... while <a class="el" href="window_8h.html#aafea7a88379582e1a5f8902133a619a5" title="fdf_start_gui – TODO.">fdf_start_gui()</a> is blocked in the MLX loop ......]</em></p><ul>
+<li>Asinchronously, <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a> is called on every MLX loop. This function does the following:<ul>
+<li>Checks if the keys to translate/rotate/scale are pressed down. If any, this function updates the required transformation data through fdf structure object member and sets a t_render_request level at the fdf structure if a render is required as a result of the keys events.<ul>
+<li><em>NOTE: Other hooks such as <a class="el" href="window_8h.html#ad387c47ba3be5c01a21d7a5b8ab501be" title="fdf_resizehook – TODO.">fdf_resizehook()</a> and <a class="el" href="window_8h.html#a213a8c91866bd9eca03a0a69e9c848b8" title="fdf_keyhook – TODO.">fdf_keyhook()</a> also can independently change transformation data and set a render request level.</em></li>
+</ul>
+</li>
+<li>Calls <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> every loop. <em>NOTE: <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a> is the only caller of <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a>.</em> This function is the last one that is called with fdf as an argument, from now on, every function is called passing the fdf member object. <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> function does the following:<ul>
+<li>Checks the fdf t_render_request member fdf-&gt;render_request.</li>
+<li>According to the render request level, <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> successively calls the following function BUT starting with the one that correspond to the request level. In this way, only those stages of the rendering process that need to be recalculated as per the request level are performed. The functions that perform each stage of the rendering process are (in the logical order of precedence) the following:<ul>
+<li><a class="el" href="tesselator_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a> when render_request &lt;= FROM_MODEL.<ul>
+<li>Read "Rendering process" section for details.</li>
+</ul>
+</li>
+<li>fdf_setup_world() when render_request &lt;= FROM_WORLD.<ul>
+<li>Read "Rendering process" section for details.</li>
+</ul>
+</li>
+<li>fdf_setup_camera() when render_request &lt;= FROM_CAMERA.<ul>
+<li>Read "Rendering process" section for details.</li>
+</ul>
+</li>
+<li>fdf_setup_screen() when render_request &lt;= FROM_SCREEN.<ul>
+<li>Read "Rendering process" section for details.</li>
+</ul>
+</li>
+<li>fdf_setup_image() when render_request &lt;= FROM_IMAGE.<ul>
+<li>Read "Rendering process" section for details.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Finally, <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> resets the render request level to NO_RENDER and returns to <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a>. <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p >The next section details what the rendering process functions (<a class="el" href="tesselator_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>, fdf_setup_world(), fdf_setup_camera(), fdf_setup_screen(), and fdf_setup_image()) do at each stage of the rendering process.</p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Rendering process</h2>
+<p >The rendering process entry point is the <a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> function, called from the GUI loop hook <a class="el" href="window_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a>.</p>
+<p >The rendering process has several stages, let's call them transformations, which must be processed in this order, starting at the first stage that needs to be re-calculated. The selection of the first stage is determined by the render request level of fdf struct for each loop.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Transformation   </th><th class="markdownTableHeadNone">Details   </th><th class="markdownTableHeadNone">Render level request   </th><th class="markdownTableHeadNone">Associated function    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><em>file to array of altitude and color matrices that represents the map info</em>   </td><td class="markdownTableBodyNone"><em>Not an actual part of the rendering process</em>   </td><td class="markdownTableBodyNone"><em>doesn't apply</em>   </td><td class="markdownTableBodyNone"><a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Map to 3D model   </td><td class="markdownTableBodyNone">Either planar, spherical or cylindrical projection   </td><td class="markdownTableBodyNone">&lt;= FROM_MODEL   </td><td class="markdownTableBodyNone"><a class="el" href="tesselator_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">3D model to world   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_WORLD   </td><td class="markdownTableBodyNone">fdf_setup_world()    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">World to camera   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_CAMERA   </td><td class="markdownTableBodyNone">fdf_setup_camera()    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Camera to screen   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_SCREEN   </td><td class="markdownTableBodyNone">fdf_setup_screen()    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Screen to image   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_IMAGE   </td><td class="markdownTableBodyNone">fdf_setup_image()    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Nothing to perform   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">== NO_RENDER   </td><td class="markdownTableBodyNone">return   </td></tr>
+</table>
 <p >Not every rendering needs to go through all of these transformations, but just need to start at one of them and perform the rest. The level from which to start has to do with the requested actions: <br  />
 </p><ul>
-<li>[Should the map change, it has to start with file-to-map level]</li>
+<li><em>[Should the map change, it has to start with file-to-map level]</em></li>
 <li>Should the projection type change, it has to start with map-to-model level.</li>
-<li>TODO </li>
+<li>TODO</li>
 </ul>
+<h3><a class="anchor" id="autotoc_md10"></a>
+Loading the .fdf file</h3>
+<p >This is the process in which the .fdf file is parsed to create an array of two matrices. Both matrices are of the same size, that is, rows and columns positions representing the actual spatial 2D (XY plane) position of each sample.</p>
+<p >Each sample will be then transformed into a 3D vertex in the tesselation stage.</p>
+<p >There are two matrices because we need to storage two values for each point: the altitude value (the Z component) and the color value. <br  />
+ The function <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> performs this stage, taking as argument the filename for the .fdf map and the expected character separating the sample information from the next sample information. The <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> function returns the array of the two matrices which will end up as the map_mx member of the object struct that is the object member of the fdf struct.</p>
+<p >A .fdf file may or may not have sample color information. The color information is expected as a ',0xhhhhhh' string inmediately following each altitude value. If no color information is found, <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> initializes the color matrix with FFFFFF for each sample. <br  />
+</p>
+<h3><a class="anchor" id="autotoc_md11"></a>
+Tesselation: samples map to 3D model (where samples become vertices)</h3>
+<p >This is the stage where: (1) the samples obtained from loading the .fdf file (2D position at XY plane + altitude) are used to create actual 3D XYZ points in space, this is dependent upon the type of projection: planar, spherical, or cylindrical; (2) the color information of the samples are used to create an array of uint32_t to storage the color values of each vertex; (3) for each of the samples (spatial-info-wise) a relationship is stablished with its neighboring samples in the matrix, this relationship is represented in an edge array and is the base for eventually drawing lines that connect each vertex only to its orthogonal neighbor vertices (or, in bonus version, also to its non-orthogonal neighbors that makes spatial sense; or to every neighbor).</p>
+<p >In (1) one of this three functions: <a class="el" href="tesselator_8h.html#acbb6fba0e702d7154719db63c561c1a9" title="fdf_get_vertex_mx – Converts an altitude map matrix and color map matrix to a planar vertex matrix.">fdf_get_vertex_mx()</a>, <a class="el" href="tesselator_8h.html#a26e7cbf4b07d1bda7f5148ba6ba07da8" title="fdf_get_vertex_mx_sph – Converts an altitude map matrix and color map matrix to a spherical vertex ma...">fdf_get_vertex_mx_sph()</a>, or <a class="el" href="tesselator_8h.html#a69ef7e4b513e400f2d8d9c5671bddd33" title="fdf_get_vertex_mx_cyl – Converts an altitude map matrix and color map matrix to a cylindrical vertex ...">fdf_get_vertex_mx_cyl()</a> is used to create a matrix in which each column ?????? is a XYZW 3D point in space (a vertex). This matrix will become the model_mx member of the object, which is the object member of fdf.</p>
+<p >In (2) the ????? function creates the array of uint32_t holding the color values. This is performed only once, when the model_mx member of the object is NULL, since it will be the same for any tesselation projection type.</p>
+<p >In (3) the <a class="el" href="tesselator_8h.html#abd20646d0590ef38621345e51a8a152f" title="fdf_get_edge – TODO.">fdf_get_edge()</a> creates an array of edges, the later being a struct type that has two key members: start and end. Each represent the index in the vertex matrix of the starting vertex of the edge and the end vertex of the edge. Clearly, each edge (if not hidden) will become a line in the image. This is performed only once, when the model_mx member of the object is NULL, since it will be the same for any tesselation projection type. &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; Aquí es un buen sitio para poner start_color y end_color</p>
+<p >Both the vertex matrix column ????? index (1), the color array index (2), and the start/end members in the edges array indices (3) refer to the information of the same 3D vertex.</p>
+<p >The following transformation consist of succesively multiplying the previous vertex matrix (that represents the same points but in a particular space: he 3D object now placed in the world; the 3D object in the world but now from the point of view from the camera; or the 2D projection of the later to the screen) by different transformation matrices to generate a new vertex matrix of the new space.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+3D model space to world space transformation</h3>
+<p >TODO</p>
+<h3><a class="anchor" id="autotoc_md13"></a>
+World space transformation to camera space transformation</h3>
+<p >TODO</p>
+<h3><a class="anchor" id="autotoc_md14"></a>
+Camera space to screen space transformation</h3>
+<p >TODO</p>
+<h3><a class="anchor" id="autotoc_md15"></a>
+Screen space to image space transformation</h3>
+<p >In this stage, the vertex matrix representing the screen space is used to, finally, draw all the lines (edges) on the image. This job is ultimately perform by the <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> function.</p>
+<p >The <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> function takes the object and the image element of the GUI and uses its auxiliary functions to draw each edge as a line onto the image.</p>
+<h4><a class="anchor" id="autotoc_md16"></a>
+Inner working of fdf_drw_edges() function</h4>
+<p >This function loops through the edges array skipping the edges flagged as hidden and for each non-skipped edge:</p><ul>
+<li>A line struct is created using fdf_create_line() function with the arguments: X value of the edge starting vertex; Y value of the edge starting vertex; X value of the edge end vertex; Y value of the edge end vertex.</li>
+<li>TODO fdf_set_line_color_info() TODO !!!!!!!!!!!!!!</li>
+<li>Finally, the <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> calls the fdf_draw_line() which actually draws the line.</li>
+</ul>
+<p >The <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> auxiliary functions inner workings are detailed in the following sections.</p>
+<p ><em>NOTE: Bonus version edge skipping process in <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> is more or less strict depending on the user's selection to draw or not valid non-orthogonal edges or every non-orthogonal edges).</em></p>
+<h5>Inner working of fdf_create_line() function</h5>
+<p >TODO</p>
+<h5>Inner working of fdf_set_line_color_info() function</h5>
+<p >TODO</p>
+<h5>Inner working of fdf_draw_line() function</h5>
+<p >TODO </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

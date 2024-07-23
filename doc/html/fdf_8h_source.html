@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-18</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-23</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -78,7 +78,7 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">/*   By: lluque &lt;lluque@student.42malaga.com&gt;       +#+  +:+       +#+        */</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">/*                                                +#+#+#+#+#+   +#+           */</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">/*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">/*   Updated: 2024/07/18 13:07:02 by lluque           ###   ########.fr       */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">/*   Updated: 2024/07/21 15:28:02 by lluque           ###   ########.fr       */</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*                                                                            */</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/* ************************************************************************** */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
@@ -113,16 +113,15 @@ $(function() {
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structs__fdf.html#a3ae4a63ebbdd8b7bc9f60f1f4d038436">   93</a></span>    <span class="keywordtype">int</span>                 <a class="code hl_variable" href="structs__fdf.html#a3ae4a63ebbdd8b7bc9f60f1f4d038436">drw_hidden_edges</a>;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structs__fdf.html#abdca2513cf39603a0cf56b0c93f64cf3">   94</a></span>    <span class="keywordtype">int</span>                 <a class="code hl_variable" href="structs__fdf.html#abdca2513cf39603a0cf56b0c93f64cf3">drw_valid_diag_edges</a>;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}               <a class="code hl_typedef" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a>;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="fdf_8h.html#a25b7efb7093bff0b13fa13da5e5e4e49">  123</a></span><a class="code hl_struct" href="structs__fdf.html">t_fdf</a>           *<a class="code hl_function" href="fdf_8h.html#a25b7efb7093bff0b13fa13da5e5e4e49">fdf_create_fdf</a>(int32_t drawing_w,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    int32_t drawing_h,</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    <a class="code hl_struct" href="structs__ft__mx.html">t_ft_mx</a> *map_mx);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="fdf_8h.html#a33ff5e1fe29c095bd0aefdeec042113e">  139</a></span><span class="keywordtype">void</span>            <a class="code hl_function" href="fdf_8h.html#a33ff5e1fe29c095bd0aefdeec042113e">fdf_destroy_fdf</a>(<a class="code hl_struct" href="structs__fdf.html">t_fdf</a> *fdf);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="fdf_8h.html#af5315a509a6023d7b573f8128d23d3a3">  124</a></span><a class="code hl_struct" href="structs__fdf.html">t_fdf</a>           *<a class="code hl_function" href="fdf_8h.html#af5315a509a6023d7b573f8128d23d3a3">fdf_create_fdf</a>(int32_t drawing_w,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    int32_t drawing_h,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    <a class="code hl_struct" href="structs__ft__mx.html">t_ft_mx</a> **map_mx);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="fdf_8h.html#a33ff5e1fe29c095bd0aefdeec042113e">  140</a></span><span class="keywordtype">void</span>            <a class="code hl_function" href="fdf_8h.html#a33ff5e1fe29c095bd0aefdeec042113e">fdf_destroy_fdf</a>(<a class="code hl_struct" href="structs__fdf.html">t_fdf</a> *fdf);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adrawing_8h_html_af20e29cd8b5905bd623ecfcb120c5f94"><div class="ttname"><a href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a></div><div class="ttdeci">struct s_fdf t_fdf</div><div class="ttdef"><b>Definition:</b> drawing.h:28</div></div>
 <div class="ttc" id="afdf_8h_html_a229ef262245cd75537e0ffdb87353e72"><div class="ttname"><a href="fdf_8h.html#a229ef262245cd75537e0ffdb87353e72">t_render_request</a></div><div class="ttdeci">enum e_render_request t_render_request</div></div>
-<div class="ttc" id="afdf_8h_html_a25b7efb7093bff0b13fa13da5e5e4e49"><div class="ttname"><a href="fdf_8h.html#a25b7efb7093bff0b13fa13da5e5e4e49">fdf_create_fdf</a></div><div class="ttdeci">t_fdf * fdf_create_fdf(int32_t drawing_w, int32_t drawing_h, t_ft_mx *map_mx)</div><div class="ttdoc">fdf_create_fdf – TODO.</div></div>
 <div class="ttc" id="afdf_8h_html_a33ff5e1fe29c095bd0aefdeec042113e"><div class="ttname"><a href="fdf_8h.html#a33ff5e1fe29c095bd0aefdeec042113e">fdf_destroy_fdf</a></div><div class="ttdeci">void fdf_destroy_fdf(t_fdf *fdf)</div><div class="ttdoc">fdf_destroy_fdf – TODO.</div></div>
 <div class="ttc" id="afdf_8h_html_a9d6d031b0828a841d3d9d9117270f500"><div class="ttname"><a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500">e_render_request</a></div><div class="ttdeci">e_render_request</div><div class="ttdoc">Base for typedef t_render_request.</div><div class="ttdef"><b>Definition:</b> fdf.h:54</div></div>
 <div class="ttc" id="afdf_8h_html_a9d6d031b0828a841d3d9d9117270f500a0468f613ab6afdbe52632f35ef54e5d0"><div class="ttname"><a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a0468f613ab6afdbe52632f35ef54e5d0">FROM_MODEL</a></div><div class="ttdeci">@ FROM_MODEL</div><div class="ttdef"><b>Definition:</b> fdf.h:55</div></div>
@@ -131,7 +130,8 @@ $(function() {
 <div class="ttc" id="afdf_8h_html_a9d6d031b0828a841d3d9d9117270f500a4e7ab77bc3130e72a88d8de7fc7127e0"><div class="ttname"><a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a4e7ab77bc3130e72a88d8de7fc7127e0">FROM_SCREEN</a></div><div class="ttdeci">@ FROM_SCREEN</div><div class="ttdef"><b>Definition:</b> fdf.h:58</div></div>
 <div class="ttc" id="afdf_8h_html_a9d6d031b0828a841d3d9d9117270f500a92ddbc8bce4695d9febb4e9fd82a5114"><div class="ttname"><a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a92ddbc8bce4695d9febb4e9fd82a5114">FROM_IMAGE</a></div><div class="ttdeci">@ FROM_IMAGE</div><div class="ttdef"><b>Definition:</b> fdf.h:59</div></div>
 <div class="ttc" id="afdf_8h_html_a9d6d031b0828a841d3d9d9117270f500aa3fb6b8d26e8622fe4e4deaef7f30507"><div class="ttname"><a href="fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500aa3fb6b8d26e8622fe4e4deaef7f30507">FROM_CAMERA</a></div><div class="ttdeci">@ FROM_CAMERA</div><div class="ttdef"><b>Definition:</b> fdf.h:57</div></div>
-<div class="ttc" id="astructs__fdf__object_html"><div class="ttname"><a href="structs__fdf__object.html">s_fdf_object</a></div><div class="ttdoc">Base for typedef t_fdf_object.</div><div class="ttdef"><b>Definition:</b> tesselator.h:340</div></div>
+<div class="ttc" id="afdf_8h_html_af5315a509a6023d7b573f8128d23d3a3"><div class="ttname"><a href="fdf_8h.html#af5315a509a6023d7b573f8128d23d3a3">fdf_create_fdf</a></div><div class="ttdeci">t_fdf * fdf_create_fdf(int32_t drawing_w, int32_t drawing_h, t_ft_mx **map_mx)</div><div class="ttdoc">fdf_create_fdf – TODO.</div></div>
+<div class="ttc" id="astructs__fdf__object_html"><div class="ttname"><a href="structs__fdf__object.html">s_fdf_object</a></div><div class="ttdoc">Base for typedef t_fdf_object.</div><div class="ttdef"><b>Definition:</b> tesselator.h:348</div></div>
 <div class="ttc" id="astructs__fdf__wlayout_html"><div class="ttname"><a href="structs__fdf__wlayout.html">s_fdf_wlayout</a></div><div class="ttdoc">Base for typedef t_fdf_wlayout. TODO.</div><div class="ttdef"><b>Definition:</b> window.h:75</div></div>
 <div class="ttc" id="astructs__fdf_html"><div class="ttname"><a href="structs__fdf.html">s_fdf</a></div><div class="ttdoc">Base for typedef t_fdf. TODO.</div><div class="ttdef"><b>Definition:</b> fdf.h:88</div></div>
 <div class="ttc" id="astructs__fdf_html_a3ae4a63ebbdd8b7bc9f60f1f4d038436"><div class="ttname"><a href="structs__fdf.html#a3ae4a63ebbdd8b7bc9f60f1f4d038436">s_fdf::drw_hidden_edges</a></div><div class="ttdeci">int drw_hidden_edges</div><div class="ttdef"><b>Definition:</b> fdf.h:93</div></div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="ttc" id="astructs__fdf_html_aa3e83df82eae15bb167df68f1cde331d"><div class="ttname"><a href="structs__fdf.html#aa3e83df82eae15bb167df68f1cde331d">s_fdf::render_request</a></div><div class="ttdeci">t_render_request render_request</div><div class="ttdef"><b>Definition:</b> fdf.h:92</div></div>
 <div class="ttc" id="astructs__fdf_html_abdca2513cf39603a0cf56b0c93f64cf3"><div class="ttname"><a href="structs__fdf.html#abdca2513cf39603a0cf56b0c93f64cf3">s_fdf::drw_valid_diag_edges</a></div><div class="ttdeci">int drw_valid_diag_edges</div><div class="ttdef"><b>Definition:</b> fdf.h:94</div></div>
 <div class="ttc" id="astructs__fdf_html_ae5ada4788e9ab0c0fa41c118c30e7ccf"><div class="ttname"><a href="structs__fdf.html#ae5ada4788e9ab0c0fa41c118c30e7ccf">s_fdf::object</a></div><div class="ttdeci">t_fdf_object * object</div><div class="ttdef"><b>Definition:</b> fdf.h:89</div></div>
-<div class="ttc" id="astructs__ft__mx_html"><div class="ttname"><a href="structs__ft__mx.html">s_ft_mx</a></div><div class="ttdoc">Base for typedef t_ft_mx.</div><div class="ttdef"><b>Definition:</b> lin_alg.h:72</div></div>
+<div class="ttc" id="astructs__ft__mx_html"><div class="ttname"><a href="structs__ft__mx.html">s_ft_mx</a></div><div class="ttdoc">Base for typedef t_ft_mx.</div><div class="ttdef"><b>Definition:</b> lin_alg.h:86</div></div>
 <div class="ttc" id="atesselator_8h_html"><div class="ttname"><a href="tesselator_8h.html">tesselator.h</a></div></div>
 <div class="ttc" id="awindow_8h_html"><div class="ttname"><a href="window_8h.html">window.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

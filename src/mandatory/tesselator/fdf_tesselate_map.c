@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 15:37:32 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 12:32:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ int	fdf_tesselate_map(t_fdf_object *object)
 {
 	if (object->model_mx == NULL)
 	{
-		object->model_mx = fdf_get_vertex_mx(object->map_mx);
+		object->model_mx = fdf_get_vertex_mx(object->map_mx[Z]);  // Why not NULL check?
 		fdf_get_vertex_min_max(object->model_mx,
 			object->map_min,
 			object->map_max);
-		if (!fdf_get_edge(object->map_mx[Z], object))
+		if (!fdf_get_edge(object))
 			return (0);
 	}
 	ft_mx_destroy(object->model_mx);
 	if (object->tesselation_type == PLANE_TESSELATION)
-		object->model_mx = fdf_get_vertex_mx(object->map_mx);
+		object->model_mx = fdf_get_vertex_mx(object->map_mx[Z]);
 	if (object->tesselation_type == SPHERICAL_TESSELATION)
-		object->model_mx = fdf_get_vertex_mx_sph(object->map_mx,
+		object->model_mx = fdf_get_vertex_mx_sph(object->map_mx[Z],
 				fdf_get_radius(object));
 	if (object->tesselation_type == CYLINDRICAL_TESSELATION)
-		object->model_mx = fdf_get_vertex_mx_cyl(object->map_mx,
+		object->model_mx = fdf_get_vertex_mx_cyl(object->map_mx[Z],
 				fdf_get_radius(object),
 				fdf_get_cyl_height(object));
 	if (object->model_mx == NULL)

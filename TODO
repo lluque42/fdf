@@ -1,3 +1,25 @@
+New Commit
+
+
+Modifications on fdf_get_vertex... functions were reversed (I didn't
+remember correctly that there was no vertex type, but a vertex
+col-vector forming a vertex matrix that must stay as it is for the
+matricial computations) and can not have color information.
+
+fdf_get_edge() function, its only caller (fdf_tesselate_map), and fdf_get_edge()
+auxiliary functions were modified (long due, by the way) to not to take the
+map_mx matrix (now map_mx[Z]) because it can be referenced from fdf_get_edge()
+second argument, namely, the freaking object. Now this is needed to retrieve
+color information in object more easily in the fdf_get_edge() auxiliary
+functions (given the number of function argument restrictions of 42 norm).
+
+The fdf_destroy_object() function was fixed because it was not freeing the array
+but only its two elements (map_mx[Z] and map_mx[C]).
+
+
+
+
+
 TODO:
 
 + Implementar color???
@@ -10,7 +32,7 @@ TODO:
 perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
 original y la nueva ponerla en otro lado.
 
-
++ Creo más apropiado que get_edge se llame SET_edgeS_array()
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
 + Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
@@ -24,13 +46,14 @@ bonito.
 + Creo que deberia hacer una revision completa de los headers para detectar
 todos los abusos de fdf.
 + DEBO CAMBIAR EL NOMBRE DE MIS HEADERS, YA HUBO COLISION CON FEATURES.H
-+ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería, corregir.
 + Actualizar la documentacion!!!!!!!!!!!!!!!!!!!!!
 + Ver si cabe fdf_point_is_in_plane() en fdf_set_edge_visibility.c y ponerlo ahí
 como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería y en sus
+funciones auxiliares también. Solo hace falta pasar object, corregir.
 + Implementar color???
 	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
 	vertex en mapas con información de color.
