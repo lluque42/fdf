@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/21 13:45:20 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/23 22:51:09 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -216,6 +216,8 @@ SOURCES = fdf_main.c \
 		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_get_vertex_min_max.c \
 		  drawing/fdf_render.c \
+		  drawing/fdf_get_color.c \
+		  drawing/fdf_calc_pixel_color.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
 		  window/fdf_generichook.c \
@@ -236,7 +238,8 @@ SOURCES = fdf_main.c \
 		  features/fdf_toggle_autofit.c \
 		  features/fdf_toggle_tesselation.c \
 		  features/fdf_toggle_drw_hidden.c \
-		  features/fdf_toggle_drw_diags.c
+		  features/fdf_toggle_drw_diags.c \
+		  features/fdf_toggle_color.c
 
 
 # List of bonus version header file names

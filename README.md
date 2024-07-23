@@ -97,6 +97,8 @@ TODO
 ```
 * The GUI image own coordinate system TODO
 
+* RGBA color model, 8 bits per channel.
+
 ### Data structures
     * Array of two matrices resulting from loading the .fdf map file. The first
     matrix contains altitude values (Z axis) while the second matrix contains

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 14:15:31 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:50:41 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,20 @@ void	fdf_toggle_drw_diags(t_fdf *fdf);
  * TODO.
 */
 void	fdf_toggle_drw_hidden(t_fdf *fdf);
+
+/**
+ * @brief <b>fdf_toggle_color</b> -- Adds color to the image
+ *
+ * @details Adds color to the image if the source .fdf file came with color
+ * information.
+ *
+ * @param [in, out] fdf - The fdf structure.
+ *
+ * @warning TODO.
+ *
+ * @remark Implementation notes:
+ * TODO.
+*/
+void	fdf_toggle_color(t_fdf *fdf);
 
 #endif

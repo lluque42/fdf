@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 15:02:16 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 23:10:40 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,14 @@ static int	parse_line(char *line, char separator, int row, t_ft_mx **mx)
 				return (free(trimmed_line),
 						ft_free_strarr_from(col_str_arr, 0), 0);
 				//is_error = 1;
+
+
+			color = color << 8;
+			color = color | 255;
+
+
+
+
 			mx[C]->d[row * mx[C]->n + col] = color;
 
 
@@ -159,18 +167,15 @@ t_ft_mx	**ft_mx_load_file(char *filename, char separator)
 	char			*line;
 	int				fd;
 
-	map_mx = malloc(2 * sizeof (t_ft_mx *));
+	map_mx = ft_calloc(2, sizeof (t_ft_mx *));
 	if (map_mx == NULL)
 		return (0);
 	map_mx[Z] = create_matrix(filename, separator, 0);
-	map_mx[C] = create_matrix(filename, separator, 255);
-	if (map_mx[Z] == NULL || map_mx[C] == NULL)
-		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
-				free(map_mx), NULL);
+	if (map_mx[Z] == NULL)
+		return (free(map_mx), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
-				free(map_mx), NULL);
+		return (ft_mx_destroy(map_mx[Z]), free(map_mx), NULL);
 	row = -1;
 	while (++row < map_mx[Z]->m)											// This assumes both are of the same size. CHECK if any error could falsify this
 	{
@@ -179,7 +184,13 @@ t_ft_mx	**ft_mx_load_file(char *filename, char separator)
 			return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
 					free(map_mx), close(fd), NULL);
 	//		return (ft_mx_destroy(matrix), close(fd), NULL);
-		
+		if (ft_strchr(line, ',') != NULL && map_mx[C] == NULL)
+		{
+			map_mx[C] = create_matrix(filename, separator, 0xFFFFFFFF);
+			if (map_mx[C] == NULL)
+				return (free(line), ft_mx_destroy(map_mx[Z]), free(map_mx),
+						close(fd), NULL);
+		}
 		if (!parse_line(line, separator, row, map_mx))
 	//		return (free(line), ft_free_gnl(fd),
 	//			ft_mx_destroy(matrix), close(fd), NULL);
@@ -188,6 +199,8 @@ t_ft_mx	**ft_mx_load_file(char *filename, char separator)
 					free(map_mx), close(fd), NULL);
 		free(line);
 	}
-	ft_mx_print(map_mx[C], ' ');
+	ft_printf("\nMap '%s' loaded:\n", filename);
+	ft_printf("\tMap loaded is a %d x %d matrix (m x n or rows, columns).\n",
+			map_mx[Z]->m, map_mx[Z]->n);
 	return (ft_free_gnl(fd), close(fd), map_mx);
 }

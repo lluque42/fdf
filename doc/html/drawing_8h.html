@@ -69,6 +69,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">drawing.h File Reference</div></div>
@@ -103,6 +104,21 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base for typedef <b>t_ft_mx_line</b>.  <a href="structs__fdf__line.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:acf6b915e51469ea82fcaf91848eaa58c"><td class="memItemLeft" align="right" valign="top"><a id="acf6b915e51469ea82fcaf91848eaa58c" name="acf6b915e51469ea82fcaf91848eaa58c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RGBA_RED</b>&#160;&#160;&#160;0xFF000000</td></tr>
+<tr class="separator:acf6b915e51469ea82fcaf91848eaa58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef533ef2e3c1bf7372074b268891dac4"><td class="memItemLeft" align="right" valign="top"><a id="aef533ef2e3c1bf7372074b268891dac4" name="aef533ef2e3c1bf7372074b268891dac4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RGBA_GREEN</b>&#160;&#160;&#160;0x00FF0000</td></tr>
+<tr class="separator:aef533ef2e3c1bf7372074b268891dac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad35e565b8439d0009e7f874ed1604da"><td class="memItemLeft" align="right" valign="top"><a id="aad35e565b8439d0009e7f874ed1604da" name="aad35e565b8439d0009e7f874ed1604da"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RGBA_BLUE</b>&#160;&#160;&#160;0x0000FF00</td></tr>
+<tr class="separator:aad35e565b8439d0009e7f874ed1604da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afebe90e6777c00d1922c071a7f098894"><td class="memItemLeft" align="right" valign="top"><a id="afebe90e6777c00d1922c071a7f098894" name="afebe90e6777c00d1922c071a7f098894"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RGBA_ALPHA</b>&#160;&#160;&#160;0x000000FF</td></tr>
+<tr class="separator:afebe90e6777c00d1922c071a7f098894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:af20e29cd8b5905bd623ecfcb120c5f94"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structs__fdf.html">s_fdf</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a></td></tr>
@@ -121,6 +137,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ae4d3890bd1636469ac309d3900d92ad3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3">fdf_render</a> (<a class="el" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a> *fdf)</td></tr>
 <tr class="memdesc:ae4d3890bd1636469ac309d3900d92ad3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_render</b> &ndash; TODO.  <a href="drawing_8h.html#ae4d3890bd1636469ac309d3900d92ad3">More...</a><br /></td></tr>
 <tr class="separator:ae4d3890bd1636469ac309d3900d92ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38f397c0a255922623ece8bc7dfa5781"><td class="memItemLeft" align="right" valign="top"><a id="a38f397c0a255922623ece8bc7dfa5781" name="a38f397c0a255922623ece8bc7dfa5781"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>fdf_get_color_comp</b> (uint32_t color, int rgba_color_mask)</td></tr>
+<tr class="separator:a38f397c0a255922623ece8bc7dfa5781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0508d4775bfc037de4bd955dccd972f"><td class="memItemLeft" align="right" valign="top"><a id="ad0508d4775bfc037de4bd955dccd972f" name="ad0508d4775bfc037de4bd955dccd972f"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>fdf_get_color_rgba</b> (unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)</td></tr>
+<tr class="separator:ad0508d4775bfc037de4bd955dccd972f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac946f03491641be1bc00be1b2e55521f"><td class="memItemLeft" align="right" valign="top"><a id="ac946f03491641be1bc00be1b2e55521f" name="ac946f03491641be1bc00be1b2e55521f"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>fdf_calc_line_pixel_color</b> (<a class="el" href="drawing_8h.html#af399263851b9eceb66465ceb1b6e1783">t_fdf_line</a> *line, double i)</td></tr>
+<tr class="separator:ac946f03491641be1bc00be1b2e55521f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >TODO Header file for linearly-storaged matrixes (row-major order) operations. </p>

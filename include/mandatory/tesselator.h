@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 12:37:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:53:00 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,7 @@ typedef struct s_fdf_triangle
 typedef struct s_fdf_object
 {
 	t_ft_mx				**map_mx;
+	int					force_monochromatic;
 	double				map_min[3];
 	double				map_max[3];
 	t_tesselation_type	tesselation_type;

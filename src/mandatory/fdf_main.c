@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 15:22:35 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 23:07:32 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("fdf: error creating fdf", STDERR_FILENO);
 		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]), free(map_mx), EXIT_FAILURE);
 	}
-	fdf_print_instructions();
 	if (!fdf_start_gui(fdf))
 	{
 		ft_putendl_fd("fdf: error while starting the GUI", STDERR_FILENO);

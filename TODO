@@ -1,11 +1,18 @@
+New commit
+
+Now the line struct type has start and end color info.
+Now when parsing the color info, the alpha channel is added as FF.
+Now the default color if the map lacks color info is the full
+RGBA value of 0xFFFFFFFF (opaque white).
+An i_length member was added to line struct type to allow the fading
+of colors.
+The files fdf_get_color.c and fdf_calc_pixel_color.c were added with
+color related functions.
+A mechanism to force monochromatic rendering was added.
+
+
 TODO:
 
-+ Implementar color???
-	+ Incluir un miembro en el tipo vertex que almacene la información de su
-	color en el formato en el que MLX42 lo requeriría.
-	+ Lograr dibujar con color los vertexes (un pixel).
-	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
-	del color del vertex de inicio y se vaya "acercando" al vertex final.
 + Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
 perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
 original y la nueva ponerla en otro lado.
@@ -30,6 +37,13 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Implementar color???
+	+++ Puede diferir de lo implementado.
+	+ Incluir un miembro en el tipo vertex que almacene la información de su
+	color en el formato en el que MLX42 lo requeriría.
+	+ Lograr dibujar con color los vertexes (un pixel).
+	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
+	del color del vertex de inicio y se vaya "acercando" al vertex final.
 + En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería y en sus
 funciones auxiliares también. Solo hace falta pasar object, corregir.
 + Implementar color???

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 13:18:28 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 21:20:27 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # include "MLX42.h"
 # include "lin_alg.h"
 # include "fdf.h"
+
+
+
+# define RGBA_RED 0xFF000000
+# define RGBA_GREEN 0x00FF0000
+# define RGBA_BLUE 0x0000FF00
+# define RGBA_ALPHA 0x000000FF
+
+
 
 // Forward declaration, something like a prototype for typedef.
 // Needed because both fdf.h and drawing.h have structs typedefs with member
@@ -42,6 +51,10 @@ typedef struct s_fdf	t_fdf;
  * @var s_fdf_line::last_i
  * The maximum i coordinate value from where the drawing of the line
  * should stop.
+ * @var s_fdf_line::start_color
+ * The index of the starting vertex color stored in the map color matrix.
+ * @var s_fdf_line::end_color
+ * The index of the end vertex color stored in the map color matrix.
  * @var s_fdf_line::i_is_x
  * If 1 the line is a y = f(x) function and must be drawn iterating X
  * from first_i to last_i.  
@@ -54,6 +67,19 @@ typedef struct s_fdf_line
 	double		b;
 	double		first_i;
 	double		last_i;
+	double		i_length;
+
+	// The initial i to calculate the color 
+	double		i_base;
+	double		red_m;
+	double		green_m;
+	double		blue_m;
+	double		alpha_m;
+
+
+
+	uint32_t	start_color;
+	uint32_t    end_color;
 	int			i_is_x;
 }				t_fdf_line;
 /**
@@ -125,5 +151,23 @@ void	fdf_get_autofit_transf_par(uint32_t img_w,
  * TODO.
 */
 int		fdf_render(t_fdf *fdf);
+
+
+
+
+
+
+unsigned char	fdf_get_color_comp(uint32_t color, int rgba_color_mask);
+
+uint32_t	fdf_get_color_rgba(unsigned char red,
+				unsigned char green,
+				unsigned char blue,
+				unsigned char alpha);
+
+uint32_t	fdf_calc_line_pixel_color(t_fdf_line *line, double i);
+
+
+
+
 
 #endif

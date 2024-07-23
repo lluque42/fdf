@@ -6,13 +6,14 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 12:32:01 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 23:09:03 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
 #include "tesselator.h"
+#include "main_utils.h"
 
 double	fdf_get_radius(t_fdf_object *object)
 {
@@ -48,6 +49,7 @@ int	fdf_tesselate_map(t_fdf_object *object)
 			object->map_max);
 		if (!fdf_get_edge(object))
 			return (0);
+		fdf_print_instructions();
 	}
 	ft_mx_destroy(object->model_mx);
 	if (object->tesselation_type == PLANE_TESSELATION)

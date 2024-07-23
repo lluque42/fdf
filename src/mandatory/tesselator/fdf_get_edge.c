@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 13:21:32 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 23:12:51 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ static void	edge2down_neig(int i, int j, t_fdf_object *object)
 	object->edge[object->edges].end = neighbor_v;
 	
 
-
-	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
-	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
-	
+	if (object->map_mx[C] != NULL)
+	{
+		object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+		object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	}
 
 
 	object->edge[object->edges].is_hidden = 0;
@@ -69,9 +70,11 @@ static void	edge2right_neig(int i, int j, t_fdf_object *object)
 	
 
 
-	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
-	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
-	
+	if (object->map_mx[C] != NULL)
+	{
+		object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+		object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	}
 
 
 	object->edge[object->edges].is_hidden = 0;
@@ -110,9 +113,11 @@ static int	edge2dr_neig(int i, int j, t_fdf_object *object)
 	
 
 
-	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
-	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
-	
+	if (object->map_mx[C] != NULL)
+	{
+		object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+		object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	}
 
 
 	if (!fdf_set_diag_edge_validity(object->edges,
@@ -156,10 +161,11 @@ static int	edge2dl_neig(int i, int j, t_fdf_object *object)
 	object->edge[object->edges].end = neighbor_v;
 	
 
-
-	object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
-	object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
-	
+	if (object->map_mx[C] != NULL)
+	{
+		object->edge[object->edges].start_color = object->map_mx[C]->d[this_v];
+		object->edge[object->edges].end_color = object->map_mx[C]->d[neighbor_v];
+	}
 
 
 	if (!fdf_set_diag_edge_validity(object->edges,
@@ -218,6 +224,8 @@ int	fdf_get_edge(t_fdf_object *object)
 				return (0);
 		}
 	}
+	ft_printf("\tWireframe has a total of %d vertices and %d edges.\n",
+		   object->map_mx[Z]->m * object->map_mx[Z]->n, edges);
 	return (1);
 }
 /*
