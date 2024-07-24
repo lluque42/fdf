@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/23 22:51:09 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/24 02:02:30 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,6 +193,8 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_vx_substract.c \
 		  lin_alg/ft_vx_dproduct.c \
 		  lin_alg/ft_mx_fill.c \
+		  lin_alg/fdf_parse_map_line.c \
+		  lin_alg/fdf_get_col_num_map_line.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_get_edge.c \
 		  tesselator/fdf_set_diag_edge_validity.c \
@@ -218,6 +220,7 @@ SOURCES = fdf_main.c \
 		  drawing/fdf_render.c \
 		  drawing/fdf_get_color.c \
 		  drawing/fdf_calc_pixel_color.c \
+		  drawing/fdf_create_line.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
 		  window/fdf_generichook.c \

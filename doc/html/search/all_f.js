@@ -1,19 +1,10 @@
 var searchData=
 [
-  ['s_5ffdf_0',['s_fdf',['../structs__fdf.html',1,'']]],
-  ['s_5ffdf_5f3drect_1',['s_fdf_3drect',['../structs__fdf__3drect.html',1,'']]],
-  ['s_5ffdf_5fedge_2',['s_fdf_edge',['../structs__fdf__edge.html',1,'']]],
-  ['s_5ffdf_5fline_3',['s_fdf_line',['../structs__fdf__line.html',1,'']]],
-  ['s_5ffdf_5fnv_4',['s_fdf_nv',['../structs__fdf__nv.html',1,'']]],
-  ['s_5ffdf_5fobject_5',['s_fdf_object',['../structs__fdf__object.html',1,'']]],
-  ['s_5ffdf_5fplane_6',['s_fdf_plane',['../structs__fdf__plane.html',1,'']]],
-  ['s_5ffdf_5ftriangle_7',['s_fdf_triangle',['../structs__fdf__triangle.html',1,'']]],
-  ['s_5ffdf_5fwlayout_8',['s_fdf_wlayout',['../structs__fdf__wlayout.html',1,'']]],
-  ['s_5fft_5fmx_9',['s_ft_mx',['../structs__ft__mx.html',1,'']]],
-  ['s_5fft_5fmx_5fsize_10',['s_ft_mx_size',['../structs__ft__mx__size.html',1,'']]],
-  ['sca_5fstep_11',['SCA_STEP',['../fdf__features_8h.html#a18a845dc22ed6bd1c1e18f138db3f613',1,'fdf_features.h']]],
-  ['screen_5fmx_12',['screen_mx',['../structs__fdf__object.html#a1ccb6839fe81bb5b1dcdda2ccf884051',1,'s_fdf_object']]],
-  ['spherical_5ftesselation_13',['SPHERICAL_TESSELATION',['../tesselator_8h.html#a35dd9ea512bda830c7abbe9a8582cba6ab38056c07f064d8ff9b97f0b43fef513',1,'tesselator.h']]],
-  ['start_14',['start',['../structs__fdf__edge.html#a6e887e334609f4308343c47e16568191',1,'s_fdf_edge']]],
-  ['start_5fcolor_15',['start_color',['../structs__fdf__line.html#adf7f437c488c6686165addd1aeedf398',1,'s_fdf_line::start_color()'],['../structs__fdf__edge.html#ac0eb3c4b548e0eb5fd3078a733762406',1,'s_fdf_edge::start_color()']]]
+  ['radius_5frate_0',['RADIUS_RATE',['../tesselator_8h.html#a26ef95a8eff7e68f9f4cc37f458c9326',1,'tesselator.h']]],
+  ['red_5fm_1',['red_m',['../structs__fdf__line.html#a2c62ca4ab29144cdaea3dafad0904d1b',1,'s_fdf_line']]],
+  ['render_5frequest_2',['render_request',['../structs__fdf.html#aa3e83df82eae15bb167df68f1cde331d',1,'s_fdf']]],
+  ['rgba_5falpha_3',['RGBA_ALPHA',['../drawing_8h.html#afebe90e6777c00d1922c071a7f098894',1,'drawing.h']]],
+  ['rgba_5fblue_4',['RGBA_BLUE',['../drawing_8h.html#aad35e565b8439d0009e7f874ed1604da',1,'drawing.h']]],
+  ['rgba_5fgreen_5',['RGBA_GREEN',['../drawing_8h.html#aef533ef2e3c1bf7372074b268891dac4',1,'drawing.h']]],
+  ['rgba_5fred_6',['RGBA_RED',['../drawing_8h.html#acf6b915e51469ea82fcaf91848eaa58c',1,'drawing.h']]]
 ];

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 22:53:00 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/24 00:08:34 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,53 +263,76 @@ typedef struct s_fdf_triangle
 
 /**
  * @struct s_fdf_object
+ *
  * @brief Base for typedef <b>t_fdf_object</b>.
+ * 
  * @details This type is used to store a 3D object. That is: its vertex matrix
  * for each of the spaces (model, world, camera, and screen); its edges; and
  * its triangles. This type also contains the auxiliary parameters for vertex
  * transformations to go from one space to the next such as rotations,
  * translations, scaling, and 2D projection.
+ * 
  * @var s_fdf_object::map_mx
  * A pointer to an array of two matrices with the raw data (altitude values
  * at each row, column coordinate; and color values) from which the tesselation
  * is done.
+ * 
+ * @var s_fdf_object::force_monochromatic
+ * A flag to indicate that if color information is available it should not
+ * be used.
+ *
  * @var s_fdf_object::tesselation_type
  * The tesselation type that shoul be used to interpret the altitud data when
  * creating the 3D object (plane, spherical, cylindrical, etc.).
+ * 
  * @var s_fdf_object::model_mx
  * The vertex matrix at model space.
+ * 
  * @var s_fdf_object::world_mx
  * The vertex matrix at world sapce.
+ * 
  * @var s_fdf_object::camera_mx
  * The vertex matrix at camera space.
+ * 
  * @var s_fdf_object::screen_mx
  * The vertex matrix at screen space.
+ * 
  * @var s_fdf_object::edge
  * Array of edges.
+ * 
  * @var s_fdf_object::edges
  * Number of edges in object->edge array.
+ * 
  * @var s_fdf_object::triangle
  * Array of triangles.
+ * 
  * @var s_fdf_object::triangles
  * Number of edges in object->edge array.
+ * 
  * @var s_fdf_object::m2w_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from model to world space.
+ * 
  * @var s_fdf_object::m2w_tra_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * translation transformation from model to world space.
+ * 
  * @var s_fdf_object::m2w_sca_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * scale transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_tra_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * translation transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_sca_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * scale transformation from model world to camera space.
+ * 
  * @var s_fdf_object::c2s_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from camera to screen space.

@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 23:09:03 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/24 00:13:56 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	fdf_tesselate_map(t_fdf_object *object)
 {
 	if (object->model_mx == NULL)
 	{
-		object->model_mx = fdf_get_vertex_mx(object->map_mx[Z]);  // Why not NULL check?
+		object->model_mx = fdf_get_vertex_mx(object->map_mx[Z]);
+		if (object->model_mx == NULL)
+			return (0);
 		fdf_get_vertex_min_max(object->model_mx,
 			object->map_min,
 			object->map_max);
@@ -62,10 +64,7 @@ int	fdf_tesselate_map(t_fdf_object *object)
 				fdf_get_radius(object),
 				fdf_get_cyl_height(object));
 	if (object->model_mx == NULL)
-	{
-		ft_printf("There was a problem while getting vertex_mx\n");
 		return (0);
-	}
 	return (1);
 }
 /*

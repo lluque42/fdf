@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-23</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-24</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -309,13 +309,13 @@ Screen space to image space transformation</h3>
 <h4><a class="anchor" id="autotoc_md16"></a>
 Inner working of fdf_drw_edges() function</h4>
 <p >This function loops through the edges array skipping the edges flagged as hidden and for each non-skipped edge:</p><ul>
-<li>A line struct is created using fdf_create_line() function with the arguments: X value of the edge starting vertex; Y value of the edge starting vertex; X value of the edge end vertex; Y value of the edge end vertex.</li>
+<li>A line struct is created using <a class="el" href="drawing_8h.html#aa79c0a4455df834d963b4949106a75b8" title="fdf_create_line – Creates a 2D line from an edge of an object.">fdf_create_line()</a> function with the arguments: X value of the edge starting vertex; Y value of the edge starting vertex; X value of the edge end vertex; Y value of the edge end vertex.</li>
 <li>TODO fdf_set_line_color_info() TODO !!!!!!!!!!!!!!</li>
 <li>Finally, the <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> calls the fdf_draw_line() which actually draws the line.</li>
 </ul>
 <p >The <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> auxiliary functions inner workings are detailed in the following sections.</p>
 <p ><em>NOTE: Bonus version edge skipping process in <a class="el" href="drawing_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> is more or less strict depending on the user's selection to draw or not valid non-orthogonal edges or every non-orthogonal edges).</em></p>
-<h5>Inner working of fdf_create_line() function</h5>
+<h5>Inner working of <a class="el" href="drawing_8h.html#aa79c0a4455df834d963b4949106a75b8" title="fdf_create_line – Creates a 2D line from an edge of an object.">fdf_create_line()</a> function</h5>
 <p >TODO</p>
 <h5>Inner working of fdf_set_line_color_info() function</h5>
 <p >TODO</p>

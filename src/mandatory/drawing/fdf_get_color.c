@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 19:05:34 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 19:11:04 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/24 00:09:12 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ unsigned char	fdf_get_color_comp(uint32_t color, int rgba_color_mask)
 	}
 	color_component = (color & rgba_color_mask) >> right_shift;
 	return (color_component);
-}	
+}
 
 uint32_t	fdf_get_color_rgba(unsigned char red,
 				unsigned char green,

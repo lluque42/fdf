@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['object_0',['object',['../structs__fdf.html#ae5ada4788e9ab0c0fa41c118c30e7ccf',1,'s_fdf']]],
-  ['ort1_1',['ort1',['../structs__fdf__nv.html#a6cd51f260293802fa5cfbcffd0d08c35',1,'s_fdf_nv']]],
-  ['ort2_2',['ort2',['../structs__fdf__nv.html#aebf9a6ae9c7ec0407a5d1da7df272bcb',1,'s_fdf_nv']]]
+  ['n_0',['n',['../structs__ft__mx.html#ac52c63ac99696ac40ca6e446c1fac1f9',1,'s_ft_mx::n()'],['../structs__ft__mx__size.html#a1b7bede3d1b58720b3951c3e93898705',1,'s_ft_mx_size::n()']]],
+  ['no_5frender_1',['NO_RENDER',['../fdf_8h.html#a9d6d031b0828a841d3d9d9117270f500a3c172df4fc66f9d9c42dc43fcfad28fb',1,'fdf.h']]]
 ];

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-23</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-24</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -200,6 +200,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a8e1cd4939a41bde2908ffe19a5379124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#a8e1cd4939a41bde2908ffe19a5379124">ft_mx_fill</a> (<a class="el" href="lin__alg_8h.html#aec338d582b890c6160182b83296d747a">t_ft_mx</a> *matrix, double element_value)</td></tr>
 <tr class="memdesc:a8e1cd4939a41bde2908ffe19a5379124"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>ft_mx_fill</b> &ndash; Sets every element in the matrix to a value.  <a href="lin__alg_8h.html#a8e1cd4939a41bde2908ffe19a5379124">More...</a><br /></td></tr>
 <tr class="separator:a8e1cd4939a41bde2908ffe19a5379124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05591b344219f6662baa1f58991a304d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#a05591b344219f6662baa1f58991a304d">fdf_parse_map_line</a> (char *line, char separator, int row, <a class="el" href="lin__alg_8h.html#aec338d582b890c6160182b83296d747a">t_ft_mx</a> **mx)</td></tr>
+<tr class="memdesc:a05591b344219f6662baa1f58991a304d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_parse_map_line</b> &ndash; Parses a map line.  <a href="lin__alg_8h.html#a05591b344219f6662baa1f58991a304d">More...</a><br /></td></tr>
+<tr class="separator:a05591b344219f6662baa1f58991a304d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc115bbe1fab17c4c7902121d043d2a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8h.html#abc115bbe1fab17c4c7902121d043d2a8">fdf_get_col_num_map_line</a> (char *line, char separator)</td></tr>
+<tr class="memdesc:abc115bbe1fab17c4c7902121d043d2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_get_col_num_map_line</b> &ndash; Obtains the number of columns separated by separator in a map line.  <a href="lin__alg_8h.html#abc115bbe1fab17c4c7902121d043d2a8">More...</a><br /></td></tr>
+<tr class="separator:abc115bbe1fab17c4c7902121d043d2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for linearly-storaged matrixes (row-major order) operations. Syntaxis will follow mathematics standard: </p><pre class="fragment">i: row index, starts at 0 (NOT 1)
@@ -296,6 +302,98 @@ Intuitive C-style matrix    Linear storage (row-major order)
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="abc115bbe1fab17c4c7902121d043d2a8" name="abc115bbe1fab17c4c7902121d043d2a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc115bbe1fab17c4c7902121d043d2a8">&#9670;&nbsp;</a></span>fdf_get_col_num_map_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdf_get_col_num_map_line </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>separator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_get_col_num_map_line</b> &ndash; Obtains the number of columns separated by separator in a map line. </p>
+<p >Obtains the number of columns separated by separator in a map line. This function is an auxiliary function of <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">line</td><td>- The line to parse.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">separator</td><td>- The expected sample separator, tipically a ' '.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value if OK. Zero on error. </dd></dl>
+
+</div>
+</div>
+<a id="a05591b344219f6662baa1f58991a304d" name="a05591b344219f6662baa1f58991a304d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05591b344219f6662baa1f58991a304d">&#9670;&nbsp;</a></span>fdf_parse_map_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdf_parse_map_line </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>separator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lin__alg_8h.html#aec338d582b890c6160182b83296d747a">t_ft_mx</a> **&#160;</td>
+          <td class="paramname"><em>mx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_parse_map_line</b> &ndash; Parses a map line. </p>
+<p >Parses a map line. This function is an auxiliary function of <a class="el" href="lin__alg_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">line</td><td>- The line to parse.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">separator</td><td>- The expected sample separator, tipically a ' '.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>- The row of the matrix corresponding to the line.</td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">mx</td><td>- The array of matrices for Z values and color info.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value if the parsing went well. Zero otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a668cdafd89491eb6d4c4805937038b3e" name="a668cdafd89491eb6d4c4805937038b3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a668cdafd89491eb6d4c4805937038b3e">&#9670;&nbsp;</a></span>ft_mx_create()</h2>
 
