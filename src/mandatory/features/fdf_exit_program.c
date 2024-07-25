@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:24:21 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 16:41:43 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:56:37 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_features.h"
+#include "fdf.h"
 
 // Both key hook for ESCAPE and window close hook call this function.
 // After calling mlx_close_window() closes the window and breaks the

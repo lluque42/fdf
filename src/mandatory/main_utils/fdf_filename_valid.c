@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:03:11 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/01 23:05:10 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:58:52 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "main_utils.h"
+#include "fdf.h"
 
 int	fdf_filename_valid(const char *filename)
 {

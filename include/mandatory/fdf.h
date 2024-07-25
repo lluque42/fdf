@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 22:52:19 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 19:18:39 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 # include "MLX42.h"
 # include "tesselator.h"
 # include "window.h"
+# include "drawing.h"
+# include "fdf_features.h"
+# include "lin_alg.h"
+# include "main_utils.h"
+
 //# include "drawing.h"
 
 // Forward declaration, something like a prototype for typedef.

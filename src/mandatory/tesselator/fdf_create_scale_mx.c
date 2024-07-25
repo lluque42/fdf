@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 14:58:04 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/06 00:00:49 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:01:49 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lin_alg.h"
+#include "fdf.h"
 
 t_ft_mx	*fdf_create_scale_mx(double x, double y, double z)
 {

@@ -72,7 +72,7 @@ $(function() {
 <p>Base for typedef <b>t_ft_mx_3drect</b>.  
  <a href="structs__fdf__3drect.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="tesselator_8h_source.html">tesselator.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="tesselator__bonus_8h_source.html">tesselator_bonus.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
@@ -112,7 +112,7 @@ Data Fields</h2></td></tr>
  If the rect is perpendicular to X axis (i.e. parallel to YZ), that is tx = 0 (tx = rect-&gt;x2 - rect-&gt;x1), it is impossible to obtain the Z value from an X value. This is because for a given X value there is no unique (actually infinite) Z values that checks the rect equation. If possible (tx != 0), then if it is perpendicular to Z axis (i.e. parallel to XY), that is tz = 0 (tz = rect-&gt;z2 - rect-&gt;z1), the solution is already in rect-&gt;parallel_to_xy_at_z and is independent from the value of passed x. <br  />
  In the rest of cases the z value is calculated from: <br  />
  z = ((x - x1) / tx ) * tz) + z1 <br  />
- The <a class="el" href="tesselator_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824" title="fdf_create_3drect – Creates 3D rect equation parameter struct from two 3D points.">fdf_create_3drect()</a> function calculates the auxiliary members of this struct: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y. </p>
+ The <a class="el" href="tesselator__bonus_8h.html#a1a3f6cbe5f770040ff43f3e19b6d3824" title="fdf_create_3drect – Creates 3D rect equation parameter struct from two 3D points.">fdf_create_3drect()</a> function calculates the auxiliary members of this struct: parallel_to_xy, parallel_to_xy_at_z, parallel_to_yz, parallel_to_yz_at_x, parallel_to_xz, and parallel_to_xz_at_y. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a3512370a720c042a4c4da948922ecab0" name="a3512370a720c042a4c4da948922ecab0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3512370a720c042a4c4da948922ecab0">&#9670;&nbsp;</a></span>parallel_to_xy</h2>
@@ -295,7 +295,7 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/mandatory/<a class="el" href="tesselator_8h_source.html">tesselator.h</a></li>
+<li>include/bonus/<a class="el" href="tesselator__bonus_8h_source.html">tesselator_bonus.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

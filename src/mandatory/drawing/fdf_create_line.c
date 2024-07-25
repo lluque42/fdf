@@ -6,12 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 01:08:53 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 01:36:28 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:07 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "drawing.h"
+#include "fdf.h"
 
 static void	fdf_swap_doubles(double *a, double *b)
 {

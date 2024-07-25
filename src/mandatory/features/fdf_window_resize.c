@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 15:24:29 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 12:54:25 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:54:55 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "drawing.h"
+#include "fdf.h"
 
 static void	fdf_recalc_wlayout(t_fdf *fdf, int32_t win_w, int32_t win_h)
 {

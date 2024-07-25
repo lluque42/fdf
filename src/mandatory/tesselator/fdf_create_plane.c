@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:48:56 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/16 15:00:01 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:02:06 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "tesselator.h"
+#include "fdf.h"
 
 t_fdf_plane	*fdf_create_plane(t_ft_mx *a, t_ft_mx *b, t_ft_mx *c)
 {

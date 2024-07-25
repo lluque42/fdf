@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:04:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/05 16:30:00 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:04:43 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "window.h"
+#include "fdf.h"
 
 // Apparently mlx_terminate() frees wlayout->window and wlayout->image
 // eliminating the need of dealing with them here.

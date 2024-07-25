@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 08:08:03 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/13 15:00:45 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:59:58 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tesselator.h"
+#include "fdf.h"
 
 void	fdf_print_edges(t_ft_mx *map_mx, t_fdf_object *object, t_ft_mx *v_mx)
 {

@@ -6,13 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:48:55 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 00:51:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:01:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
-#include "tesselator.h"
+#include "fdf.h"
 
 // Add edge from current vertex to its down neighbor.
 // Variable this_v represents the index (in vertex_mx) of the current vertex

@@ -6,13 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:49:29 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 03:46:24 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:59:01 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
-#include "main_utils.h"
+#include "fdf.h"
 
 int	fdf_args_valid(int argc, char **argv)
 {

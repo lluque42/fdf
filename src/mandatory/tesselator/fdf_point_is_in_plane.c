@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:12:26 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/21 12:36:40 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:00:06 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tesselator.h"
+#include "fdf.h"
 
 int	fdf_point_is_in_plane(t_ft_mx *v, t_fdf_plane *plane)
 {

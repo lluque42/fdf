@@ -6,14 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/25 16:46:31 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:59:38 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
-#include "tesselator.h"
-#include "main_utils.h"
+#include "fdf.h"
 
 double	fdf_get_radius(t_fdf_object *object)
 {

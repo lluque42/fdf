@@ -6,14 +6,10 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 13:15:52 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:57 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "window.h"
-#include "tesselator.h"
-#include "drawing.h"
-#include "lin_alg.h"
 #include "fdf.h"
 
 // This function requires the model space to be already loaded in fdf.

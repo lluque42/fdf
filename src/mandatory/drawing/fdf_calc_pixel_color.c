@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 19:16:19 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 00:15:49 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:40:53 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include "drawing.h"
+#include "fdf.h"
 
 static uint32_t	fdf_calc_red(t_fdf_line *line, double i)
 {

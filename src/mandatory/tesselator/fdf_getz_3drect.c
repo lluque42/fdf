@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:06:41 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 15:31:20 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:00:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tesselator.h"
+#include "fdf.h"
 
 int	fdf_getz_3drect_fromx(double *z, t_fdf_3drect *rect, double x)
 {

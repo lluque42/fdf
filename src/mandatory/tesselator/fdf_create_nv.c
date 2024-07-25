@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:37:06 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 12:23:58 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:02:34 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "tesselator.h"
+#include "fdf.h"
 
 t_fdf_nv	*fdf_create_nv(t_ft_mx *diag_start,
 		t_ft_mx *diag_end,

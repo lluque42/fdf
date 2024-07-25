@@ -6,13 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:47:12 by lluque            #+#    #+#             */
-/*   Updated: 2024/04/03 14:46:04 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:29 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <limits.h>
-#include "drawing.h"
+#include "fdf.h"
 
 static void	fdf_get_screen_autoscale(double *img_wh,
 		t_fdf_object *object)

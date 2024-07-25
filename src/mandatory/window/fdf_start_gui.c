@@ -6,15 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:22:10 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 16:43:27 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:03:41 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "window.h"
-#include "tesselator.h"
-#include "drawing.h"
-#include "lin_alg.h"
 #include "fdf.h"
 
 // The MLX loop is broken when fdf_exit_program() calls mlx_close_window()

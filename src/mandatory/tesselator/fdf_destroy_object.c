@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:11:42 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 12:34:20 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:01:13 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "tesselator.h"
+#include "fdf.h"
 
 void	fdf_destroy_object(t_fdf_object *object)
 {

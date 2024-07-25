@@ -6,12 +6,12 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:31:32 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 01:17:30 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:17 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "drawing.h"
+#include "fdf.h"
 
 /**
  * To draw a line I want to iterate x (from ??? to ???) and set the resulting

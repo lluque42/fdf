@@ -6,15 +6,14 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 23:39:20 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:00:35 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
 #include "libft.h"
-#include "lin_alg.h"
-#include "tesselator.h"
+#include "fdf.h"
 
 // Base radius is the 0 altitude radius DO NOT confuse with the local variable
 // 'r' in this function with the 'r' passed in fdf_get_sph_y() to this function.

@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/24 02:02:30 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/25 19:15:54 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -228,29 +228,101 @@ SOURCES = fdf_main.c \
 		  window/fdf_resizehook.c \
 		  window/fdf_create_wlayout.c \
 		  window/fdf_destroy_wlayout.c \
-		  window/fdf_rotation_keys_down.c \
-		  window/fdf_translation_keys_down.c \
-		  window/fdf_zoom_keys_down.c \
 		  fdf/fdf_create_fdf.c \
 		  fdf/fdf_destroy_fdf.c \
 		  features/fdf_exit_program.c \
-		  features/fdf_window_resize.c \
-		  features/fdf_rotate_step.c \
-		  features/fdf_translate_step.c \
-		  features/fdf_scale_step.c \
-		  features/fdf_toggle_autofit.c \
-		  features/fdf_toggle_tesselation.c \
-		  features/fdf_toggle_drw_hidden.c \
-		  features/fdf_toggle_drw_diags.c \
-		  features/fdf_toggle_color.c
-
+		  features/fdf_window_resize.c
 
 # List of bonus version header file names
 # NOTE: Only to be used to force recompiling if modified
-BONUS_INCLUDES = $(BONUS_INC_DIR)placeholder_bonus.h
+BONUS_INCLUDES = $(BONUS_INC_DIR)drawing_bonus.h \
+		   $(BONUS_INC_DIR)fdf_features_bonus.h \
+		   $(BONUS_INC_DIR)fdf_bonus.h \
+		   $(BONUS_INC_DIR)lin_alg_bonus.h\
+		   $(BONUS_INC_DIR)main_utils_bonus.h \
+		   $(BONUS_INC_DIR)tesselator_bonus.h \
+		   $(BONUS_INC_DIR)window_bonus.h
 
 # List of BONUS source code file names with path relative to BONUS_SRC_DIR
-BONUS_SOURCES = placeholder_bonus.c
+BONUS_SOURCES = fdf_main_bonus.c \
+		  main_utils/fdf_filename_valid_bonus.c \
+		  main_utils/fdf_args_valid_bonus.c \
+		  main_utils/fdf_print_instructions_bonus.c \
+		  lin_alg/ft_mx_create_bonus.c \
+		  lin_alg/ft_mx_destroy_bonus.c \
+		  lin_alg/ft_mx_print_bonus.c \
+		  lin_alg/ft_mx_set_element_bonus.c \
+		  lin_alg/ft_mx_get_element_bonus.c \
+		  lin_alg/ft_mx_load_file_bonus.c \
+		  lin_alg/ft_mx_set_row_bonus.c \
+		  lin_alg/ft_mx_dup_bonus.c \
+		  lin_alg/ft_mx_smult_bonus.c \
+		  lin_alg/ft_mx_get_row_bonus.c \
+		  lin_alg/ft_mx_mult_bonus.c \
+		  lin_alg/ft_mx_mult3_bonus.c \
+		  lin_alg/ft_mx_get_col_bonus.c \
+		  lin_alg/ft_mx_create_id_bonus.c \
+		  lin_alg/ft_mx_create_bid_bonus.c \
+		  lin_alg/ft_mx_transpose_bonus.c \
+		  lin_alg/ft_mx_flipr_bonus.c \
+		  lin_alg/ft_mx_flipc_bonus.c \
+		  lin_alg/ft_mx_set_col_bonus.c \
+		  lin_alg/ft_vx_xproduct_bonus.c \
+		  lin_alg/ft_vx_create_bonus.c \
+		  lin_alg/ft_vx_substract_bonus.c \
+		  lin_alg/ft_vx_dproduct_bonus.c \
+		  lin_alg/ft_mx_fill_bonus.c \
+		  lin_alg/fdf_parse_map_line_bonus.c \
+		  lin_alg/fdf_get_col_num_map_line_bonus.c \
+		  tesselator/fdf_get_vertex_mx_bonus.c \
+		  tesselator/fdf_get_edge_bonus.c \
+		  tesselator/fdf_set_diag_edge_validity_bonus.c \
+		  tesselator/fdf_create_rotmx_bonus.c \
+		  tesselator/fdf_tesselate_map_bonus.c \
+		  tesselator/fdf_create_object_bonus.c \
+		  tesselator/fdf_destroy_object_bonus.c \
+		  tesselator/fdf_create_ortoproj_mx_bonus.c \
+		  tesselator/fdf_create_transl_mx_bonus.c \
+		  tesselator/fdf_create_scale_mx_bonus.c \
+		  tesselator/fdf_print_edges_bonus.c \
+		  tesselator/fdf_create_plane_bonus.c \
+		  tesselator/fdf_point_is_in_plane_bonus.c \
+		  tesselator/fdf_create_3drect_bonus.c \
+		  tesselator/fdf_getz_3drect_bonus.c \
+		  tesselator/fdf_get_vertex_mx_sph_bonus.c \
+		  tesselator/fdf_get_vertex_mx_cyl_bonus.c \
+		  tesselator/fdf_create_nv_bonus.c \
+		  tesselator/fdf_destroy_nv_bonus.c \
+		  drawing/fdf_drw_edges_bonus.c \
+		  drawing/fdf_get_autofit_transf_par_bonus.c \
+		  drawing/fdf_get_vertex_min_max_bonus.c \
+		  drawing/fdf_render_bonus.c \
+		  drawing/fdf_get_color_bonus.c \
+		  drawing/fdf_calc_pixel_color_bonus.c \
+		  drawing/fdf_create_line_bonus.c \
+		  window/fdf_keyhook_bonus.c \
+		  window/fdf_closehook_bonus.c \
+		  window/fdf_generichook_bonus.c \
+		  window/fdf_start_gui_bonus.c \
+		  window/fdf_resizehook_bonus.c \
+		  window/fdf_create_wlayout_bonus.c \
+		  window/fdf_destroy_wlayout_bonus.c \
+		  window/fdf_rotation_keys_down_bonus.c \
+		  window/fdf_translation_keys_down_bonus.c \
+		  window/fdf_zoom_keys_down_bonus.c \
+		  fdf/fdf_create_fdf_bonus.c \
+		  fdf/fdf_destroy_fdf_bonus.c \
+		  features/fdf_exit_program_bonus.c \
+		  features/fdf_window_resize_bonus.c \
+		  features/fdf_rotate_step_bonus.c \
+		  features/fdf_translate_step_bonus.c \
+		  features/fdf_scale_step_bonus.c \
+		  features/fdf_toggle_autofit_bonus.c \
+		  features/fdf_toggle_tesselation_bonus.c \
+		  features/fdf_toggle_drw_hidden_bonus.c \
+		  features/fdf_toggle_drw_diags_bonus.c \
+		  features/fdf_toggle_color_bonus.c
+
 
 # List of tester header file names
 # NOTE: Only to be used to force recompiling if modified
@@ -300,7 +372,7 @@ DOX_PROJECT_NUMBER = $(shell date +%Y-%m-%d)
 # Location with files to extract documentation from (.h)
 # Look for more files in subdirectories
 #
-DOX_INPUT = $(INC_DIR) $(DOX_MAIN_PAGE)
+DOX_INPUT = $(BONUS_INC_DIR) $(DOX_MAIN_PAGE)
 DOX_RECURSIVE = YES
 
 # Optimization for languages

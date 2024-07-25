@@ -6,19 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:47:16 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/25 16:46:52 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 19:05:51 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "fdf.h"
-#include "window.h"
-#include "libft.h"
-#include "lin_alg.h"
-#include "main_utils.h"
-#include "drawing.h"
-#include "tesselator.h"
 
 int	main(int argc, char **argv)
 {

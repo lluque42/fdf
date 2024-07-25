@@ -6,11 +6,11 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:07:59 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/23 22:54:06 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:02:26 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tesselator.h"
+#include "fdf.h"
 
 static void	init_m2w_settings(t_fdf_object *object)
 {

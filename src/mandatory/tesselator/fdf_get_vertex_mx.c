@@ -6,14 +6,13 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 23:35:50 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:00:52 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "lin_alg.h"
-#include "tesselator.h"
+#include "fdf.h"
 
 t_ft_mx	*fdf_get_vertex_mx(t_ft_mx *z_mx)
 {
