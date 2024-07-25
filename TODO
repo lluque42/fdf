@@ -13,6 +13,9 @@ A mechanism to force monochromatic rendering was added.
 
 TODO:
 
++ Los mapas only_a_comma_and_nl.fdf only_a_comma.fdf renderizan algo!!!!
+	+ Por ft_atoi() que retorna 0. Me parece OK, lo importante es no crashear.
+
 + Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
 perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
 original y la nueva ponerla en otro lado.
