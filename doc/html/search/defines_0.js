@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['def_5fdrw_5fheight_0',['DEF_DRW_HEIGHT',['../window_8h.html#a7338d652c47c2920cc53c6b1ca455403',1,'window.h']]],
-  ['def_5fdrw_5fwidth_1',['DEF_DRW_WIDTH',['../window_8h.html#a0bf6daac2d266c1bb24f7fc07fbd480b',1,'window.h']]],
-  ['def_5fwlayout_5fratio_2',['DEF_WLAYOUT_RATIO',['../window_8h.html#ae9e9416a9d00a5e1f342a931a45df03e',1,'window.h']]],
-  ['deg_5fstep_3',['DEG_STEP',['../fdf__features_8h.html#ad8cc22b2d1b02a1383c79eace8a57ff2',1,'fdf_features.h']]]
+  ['c_0',['C',['../lin__alg_8h.html#ac4cf4b2ab929bd23951a8676eeac086b',1,'lin_alg.h']]]
 ];

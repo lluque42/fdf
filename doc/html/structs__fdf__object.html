@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-18</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-25</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -87,8 +87,10 @@ Collaboration diagram for s_fdf_object:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a6d9abf4e13d94f491580cd601f2361e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lin__alg_8h.html#aec338d582b890c6160182b83296d747a">t_ft_mx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__object.html#a6d9abf4e13d94f491580cd601f2361e9">map_mx</a></td></tr>
+<tr class="memitem:a6d9abf4e13d94f491580cd601f2361e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lin__alg_8h.html#aec338d582b890c6160182b83296d747a">t_ft_mx</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__object.html#a6d9abf4e13d94f491580cd601f2361e9">map_mx</a></td></tr>
 <tr class="separator:a6d9abf4e13d94f491580cd601f2361e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98214f78c5b0598fac6c9004350b339"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__object.html#ae98214f78c5b0598fac6c9004350b339">force_monochromatic</a></td></tr>
+<tr class="separator:ae98214f78c5b0598fac6c9004350b339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0168a538163e569d94dc5862716b8e4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__object.html#ae0168a538163e569d94dc5862716b8e4">map_min</a> [3]</td></tr>
 <tr class="separator:ae0168a538163e569d94dc5862716b8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7b1e11d1e73b9a144250f9aa1f862b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__fdf__object.html#ad7b1e11d1e73b9a144250f9aa1f862b5">map_max</a> [3]</td></tr>
@@ -266,6 +268,21 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="ae98214f78c5b0598fac6c9004350b339" name="ae98214f78c5b0598fac6c9004350b339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae98214f78c5b0598fac6c9004350b339">&#9670;&nbsp;</a></span>force_monochromatic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_fdf_object::force_monochromatic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >A flag to indicate that if color information is available it should not be used. </p>
+
+</div>
+</div>
 <a id="a7f31835a9f70e6e5fe36f6ff7b685692" name="a7f31835a9f70e6e5fe36f6ff7b685692"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f31835a9f70e6e5fe36f6ff7b685692">&#9670;&nbsp;</a></span>m2w_rot_par</h2>
 
@@ -382,7 +399,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >The matrix with the raw data (altitude values at each row, column coordinate) from which the tesselation is done. </p>
+<p >A pointer to an array of two matrices with the raw data (altitude values at each row, column coordinate; and color values) from which the tesselation is done. </p>
 
 </div>
 </div>

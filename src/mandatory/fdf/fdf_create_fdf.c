@@ -6,14 +6,14 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:06:09 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 13:07:27 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:55:46 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fdf.h"
 
-t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h, t_ft_mx *map_mx)
+t_fdf	*fdf_create_fdf(int32_t drawing_w, int32_t drawing_h, t_ft_mx **map_mx)
 {
 	t_fdf	*fdf;
 

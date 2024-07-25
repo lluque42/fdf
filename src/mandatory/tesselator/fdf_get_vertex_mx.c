@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:44:48 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/27 10:07:19 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/21 23:35:50 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 #include "lin_alg.h"
 #include "tesselator.h"
 
-t_ft_mx	*fdf_get_vertex_mx(t_ft_mx *map_mx)
+t_ft_mx	*fdf_get_vertex_mx(t_ft_mx *z_mx)
 {
 	t_ft_mx	*v_mx;
 	int		i;
 	int		j;
 	int		v;
 
-	v_mx = ft_mx_create(4, map_mx->m * map_mx->n);
+	v_mx = ft_mx_create(4, z_mx->m * z_mx->n);
 	if (v_mx == NULL)
 		return (NULL);
 	v = -1;
 	i = 0;
 	j = 0;
-	while (++v < map_mx->m * map_mx->n)
+	while (++v < z_mx->m * z_mx->n)
 	{
 		v_mx->d[v] = j;
-		v_mx->d[map_mx->m * map_mx->n + v] = i;
-		v_mx->d[2 * map_mx->m * map_mx->n + v] = map_mx->d[i * map_mx->n + j];
-		v_mx->d[3 * map_mx->m * map_mx->n + v] = 1;
-		if (++j == map_mx->n)
+		v_mx->d[z_mx->m * z_mx->n + v] = i;
+		v_mx->d[2 * z_mx->m * z_mx->n + v] = z_mx->d[i * z_mx->n + j];
+		v_mx->d[3 * z_mx->m * z_mx->n + v] = 1;
+		if (++j == z_mx->n)
 		{
 			j = 0;
-			if (++i == map_mx->m)
+			if (++i == z_mx->m)
 				i = 0;
 		}
 	}

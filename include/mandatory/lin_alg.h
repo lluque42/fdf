@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 02:32:15 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/24 02:55:31 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@
  * source altitude map file.
  */
 # define VAL_SEPARATOR_FILE 32
+
+/**
+ * @def Z
+ * Mnemonic to refer to the Z values matrix in the array of pointers to matrices
+ * that represent both Z values and color values for each vertex.
+ */
+# define Z 0
+
+/**
+ * @def C
+ * Mnemonic to refer to the color values matrix in the array of pointers to
+ * matrices that represent both Z values and color values for each vertex.
+ */
+# define C 1
 
 /**
  * @struct s_ft_mx
@@ -285,7 +299,8 @@ void	ft_mx_print(t_ft_mx *matrix, char separator);
  *
  * @param [in] separator - The character to be printed between column values.
  *
- * @return The matrix.
+ * @return A pointer to an array of two pointers to matrix that represent both
+ * Z values and color values for the vertices of the map.
  * NULL if error.
  *
  * @warning TODO.
@@ -293,7 +308,7 @@ void	ft_mx_print(t_ft_mx *matrix, char separator);
  * @remark Implementation notes:
  * TODO.
 */
-t_ft_mx	*ft_mx_load_file(char *filename, char separator);
+t_ft_mx	**ft_mx_load_file(char *filename, char separator);
 
 /**
  * @brief <b>ft_mx_dup</b> -- TODO.
@@ -551,5 +566,50 @@ t_ft_mx	*ft_vx_substract(t_ft_mx *b, t_ft_mx *c);
  * storaged inside the matrix's ->d[] array, the addressing is very simple.
 */
 int		ft_vx_dproduct(t_ft_mx *a, t_ft_mx *b, double *result);
+
+/**
+ * @brief <b>ft_mx_fill</b> -- Sets every element in the matrix to a value.
+ *
+ * @details Sets every element in the matrix to a value.
+ *
+ * @param [in] matrix - The matrix pointer to modify.
+ *
+ * @param [in] element_value - The new value to apply to every element
+ * in the matrix.
+*/
+void	ft_mx_fill(t_ft_mx *matrix, double element_value);
+
+/**
+ * @brief <b>fdf_parse_map_line</b> -- Parses a map line.
+ *
+ * @details Parses a map line. This function is an auxiliary function of
+ * ft_mx_load_file().
+ *
+ * @param [in] line - The line to parse.
+ *
+ * @param [in] separator - The expected sample separator, tipically a ' '.
+ *
+ * @param [in] row - The row of the matrix corresponding to the line.
+ *
+ * @param [in,out] mx - The array of matrices for Z values and color info.
+ *
+ * @return Non-zero value if the parsing went well. Zero otherwise.
+*/
+int		fdf_parse_map_line(char *line, char separator, int row, t_ft_mx **mx);
+
+/**
+ * @brief <b>fdf_get_col_num_map_line</b> -- Obtains the number of columns
+ * separated by separator in a map line.
+ *
+ * @details Obtains the number of columns separated by separator in a map line.
+ * This function is an auxiliary function of ft_mx_load_file().
+ *
+ * @param [in] line - The line to parse.
+ *
+ * @param [in] separator - The expected sample separator, tipically a ' '.
+ *
+ * @return Non-zero value if OK. Zero on error.
+*/
+int		fdf_get_col_num_map_line(char *line, char separator);
 
 #endif

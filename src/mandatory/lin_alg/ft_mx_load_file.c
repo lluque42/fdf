@@ -6,45 +6,20 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:00:31 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/21 11:44:48 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 12:30:16 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "libft.h"
 #include "lin_alg.h"
 
-// Takes a line with words separated by a DELIMITER, creates a NULL terminated
-// array with said substrings and returns the number of substrings or 0 if
-// error.
-static int	get_number_of_cols(char *line, char separator)
-{
-	char	**str_arr;
-	char	**temp;
-	int		noc;
-	char	*trimmed_line;
-
-	trimmed_line = ft_strtrim(line, " \n\t");
-	line = trimmed_line;
-	str_arr = ft_split(line, separator);
-	if (str_arr == NULL)
-		return (0);
-	noc = 0;
-	temp = str_arr;
-	while (*temp != NULL)
-	{
-		noc++;
-		free(*temp);
-		temp++;
-	}
-	free(str_arr);
-	free(trimmed_line);
-	return (noc);
-}
-
-static t_ft_mx	*create_matrix(char *filename, char separator)
+static t_ft_mx	*create_matrix(char *filename,
+					char separator,
+					double initial_value)
 {
 	char			*row;
 	t_ft_mx_size	size;
@@ -61,70 +36,66 @@ static t_ft_mx	*create_matrix(char *filename, char separator)
 		if (row == NULL)
 			break ;
 		if (size.m == 0)
-			size.n = get_number_of_cols(row, separator);
+			size.n = fdf_get_col_num_map_line(row, separator);
 		size.m++;
 		free(row);
 	}
 	matrix = ft_mx_create(size.m, size.n);
 	if (matrix == NULL)
 		return (close(fd), NULL);
+	if (initial_value != 0)
+		ft_mx_fill(matrix, initial_value);
 	return (close(fd), matrix);
 }
 
-static int	parse_line(char *line, char separator, int row, t_ft_mx *matrix)
+static int	process_lines(t_ft_mx **map_mx, int fd, char *filename, int row)
 {
-	int		col;
-	char	**col_str_arr;
-	char	*color_comma_pos;
-	char	*trimmed_line;
+	char	*line;
 
-	trimmed_line = ft_strtrim(line, " \n\t");
-	line = trimmed_line;
-	col_str_arr = ft_split(line, separator);
-	if (col_str_arr == NULL)
-		return (0);
-	if (get_number_of_cols(line, separator) != matrix->n)
-		return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 0);
-	col = -1;
-	while (++col < matrix->n)
+	line = ft_gnl(fd);
+	if (line == NULL)
+		return (ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+			free(map_mx), close(fd), 0);
+	if (ft_strchr(line, ',') != NULL && map_mx[C] == NULL)
 	{
-		color_comma_pos = ft_strchr(col_str_arr[col], ',');
-		if (color_comma_pos != NULL)
-			*color_comma_pos = '\0';
-		if (!ft_aisi(col_str_arr[col]))
-			return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 0);
-		matrix->d[row * matrix->n + col] = (double)ft_atoi(col_str_arr[col]);
+		map_mx[C] = create_matrix(filename, ' ', 0xFFFFFFFF);
+		if (map_mx[C] == NULL)
+			return (free(line), ft_mx_destroy(map_mx[Z]), free(map_mx),
+				close(fd), 0);
 	}
-	return (free(trimmed_line), ft_free_strarr_from(col_str_arr, 0), 1);
+	if (!fdf_parse_map_line(line, ' ', row, map_mx))
+		return (free(line), ft_free_gnl(fd),
+			ft_mx_destroy(map_mx[Z]), ft_mx_destroy(map_mx[C]),
+			free(map_mx), close(fd), 0);
+	return (free(line), 1);
 }
 
-// Here as prototype to not modify any header because this function is nothing
-// more than a future addition to libft
-//void	fdf_empty_gnl_mem(int fd);
-
-t_ft_mx	*ft_mx_load_file(char *filename, char separator)
+// Array of pointers to matrix, where index Z (0) refers to the matrix with
+// the Z values and index C (1) to the matric with the color values.
+t_ft_mx	**ft_mx_load_file(char *filename, char separator)
 {
-	t_ft_mx			*matrix;
-	int				row;
-	char			*line;
-	int				fd;
+	t_ft_mx	**map_mx;
+	int		row;
+	int		fd;
+	int		parsing_ok;
 
-	matrix = create_matrix(filename, separator);
-	if (matrix == NULL)
-		return (NULL);
+	parsing_ok = 1;
+	separator = ' ';
+	map_mx = ft_calloc(2, sizeof (t_ft_mx *));
+	if (map_mx == NULL)
+		return (0);
+	map_mx[Z] = create_matrix(filename, separator, 0);
+	if (map_mx[Z] == NULL)
+		return (free(map_mx), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (ft_mx_destroy(matrix), NULL);
+		return (ft_mx_destroy(map_mx[Z]), free(map_mx), NULL);
 	row = -1;
-	while (++row < matrix->m)
-	{
-		line = ft_gnl(fd);
-		if (line == NULL)
-			return (ft_mx_destroy(matrix), close(fd), NULL);
-		if (!parse_line(line, separator, row, matrix))
-			return (free(line), ft_free_gnl(fd),
-				ft_mx_destroy(matrix), close(fd), NULL);
-		free(line);
-	}
-	return (ft_free_gnl(fd), close(fd), matrix);
+	while (parsing_ok && ++row < map_mx[Z]->m)
+		parsing_ok = process_lines(map_mx, fd, filename, row);
+	if (!parsing_ok)
+		return (NULL);
+	ft_printf("\nMap '%s':\n\tRetrieved a %d x %d matrix.\n", filename,
+		map_mx[Z]->m, map_mx[Z]->n);
+	return (close(fd), ft_free_gnl(fd), map_mx);
 }

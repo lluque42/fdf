@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 16:48:05 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/24 00:08:34 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #ifndef TESSELATOR_H
 # define TESSELATOR_H
+# include <stdint.h>
 # include "lin_alg.h"
 
 /**
@@ -62,6 +63,10 @@ typedef enum e_tesselation_type
  * The index of the starting vertex stored in a vertex matrix.
  * @var s_fdf_edge::end
  * The index of the ending vertex stored in a vertex matrix.
+ * @var s_fdf_edge::start_color
+ * The index of the starting vertex color stored in the map color matrix.
+ * @var s_fdf_edge::end_color
+ * The index of the end vertex color stored in the map color matrix.
  * @var s_fdf_edge::is_hidden
  * A non-zero value to signal that this edge must not be drawn.
  * @var s_fdf_edge::is_valid_diag
@@ -69,10 +74,12 @@ typedef enum e_tesselation_type
 */
 typedef struct s_fdf_edge
 {
-	int	start;
-	int	end;
-	int	is_valid_diag;
-	int	is_hidden;
+	int			start;
+	int			end;
+	uint32_t	start_color;
+	uint32_t	end_color;
+	int			is_valid_diag;
+	int			is_hidden;
 }				t_fdf_edge;
 /**
  * @typedef t_fdf_edge
@@ -256,52 +263,76 @@ typedef struct s_fdf_triangle
 
 /**
  * @struct s_fdf_object
+ *
  * @brief Base for typedef <b>t_fdf_object</b>.
+ * 
  * @details This type is used to store a 3D object. That is: its vertex matrix
  * for each of the spaces (model, world, camera, and screen); its edges; and
  * its triangles. This type also contains the auxiliary parameters for vertex
  * transformations to go from one space to the next such as rotations,
  * translations, scaling, and 2D projection.
+ * 
  * @var s_fdf_object::map_mx
- * The matrix with the raw data (altitude values at each row, column coordinate)
- * from which the tesselation is done.
+ * A pointer to an array of two matrices with the raw data (altitude values
+ * at each row, column coordinate; and color values) from which the tesselation
+ * is done.
+ * 
+ * @var s_fdf_object::force_monochromatic
+ * A flag to indicate that if color information is available it should not
+ * be used.
+ *
  * @var s_fdf_object::tesselation_type
  * The tesselation type that shoul be used to interpret the altitud data when
  * creating the 3D object (plane, spherical, cylindrical, etc.).
+ * 
  * @var s_fdf_object::model_mx
  * The vertex matrix at model space.
+ * 
  * @var s_fdf_object::world_mx
  * The vertex matrix at world sapce.
+ * 
  * @var s_fdf_object::camera_mx
  * The vertex matrix at camera space.
+ * 
  * @var s_fdf_object::screen_mx
  * The vertex matrix at screen space.
+ * 
  * @var s_fdf_object::edge
  * Array of edges.
+ * 
  * @var s_fdf_object::edges
  * Number of edges in object->edge array.
+ * 
  * @var s_fdf_object::triangle
  * Array of triangles.
+ * 
  * @var s_fdf_object::triangles
  * Number of edges in object->edge array.
+ * 
  * @var s_fdf_object::m2w_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from model to world space.
+ * 
  * @var s_fdf_object::m2w_tra_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * translation transformation from model to world space.
+ * 
  * @var s_fdf_object::m2w_sca_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * scale transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_tra_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * translation transformation from world to camera space.
+ * 
  * @var s_fdf_object::w2c_sca_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * scale transformation from model world to camera space.
+ * 
  * @var s_fdf_object::c2s_rot_par
  * A double array for X, Y, and Z (indexes 0, 1 and 2 respectively)
  * rotation transformation from camera to screen space.
@@ -338,7 +369,8 @@ typedef struct s_fdf_triangle
 */
 typedef struct s_fdf_object
 {
-	t_ft_mx				*map_mx;
+	t_ft_mx				**map_mx;
+	int					force_monochromatic;
 	double				map_min[3];
 	double				map_max[3];
 	t_tesselation_type	tesselation_type;
@@ -377,10 +409,11 @@ typedef struct s_fdf_object
  * @details TODO.
  *
  * @param [in] map_mx
- * The matrix with the raw data (altitude values at each row, column coordinate)
- * from which the tesselation is done.
+ * A pointer to an array of two matrices with the raw data (altitude values
+ * at each row, column coordinate; and color values) from which the tesselation
+ * is done.
  * 
- * @return TODO.
+ * @return The object with planar tesselation.
  * NULL if error.
  *
  * @warning TODO.
@@ -388,7 +421,7 @@ typedef struct s_fdf_object
  * @remark Implementation notes:
  * TODO.
 */
-t_fdf_object	*fdf_create_object(t_ft_mx *map_mx);
+t_fdf_object	*fdf_create_object(t_ft_mx **map_mx);
 
 /**
  * @brief <b>fdf_destroy_object</b> -- TODO.
@@ -443,8 +476,6 @@ int				fdf_tesselate_map(t_fdf_object *object);
  *
  * @details TODO.
  *
- * @param [in] map_mx - TODO.
- *
  * @param [in] object - The pointer to the 3D object.
  *
  * @return Non-zero value if correct.
@@ -472,7 +503,7 @@ int				fdf_tesselate_map(t_fdf_object *object);
  *      + Every element in last row only forms 1 edge to right neighbor, except
  *      for the last element in this last row which forms NO new edge.
 */
-int				fdf_get_edge(t_ft_mx *map_mx, t_fdf_object *object);
+int				fdf_get_edge(t_fdf_object *object);
 
 /**
  * @brief <b>fdf_create_rot_mx</b> -- TODO.
@@ -861,17 +892,18 @@ int				fdf_set_diag_edge_validity(int this_edge,
 					int ort_v2);
 
 /**
- * @brief <b>fdf_get_vertex_mx</b> -- Converts an altitude map matrix to a
- * planar vertex matrix.
+ * @brief <b>fdf_get_vertex_mx</b> -- Converts an altitude map matrix and
+ * color map matrix to a planar vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * maintains the planar correspondence of the source map matrix to the surface
  * it refers to.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @return The vertex matrix if OK.
  * NULL if error.
@@ -889,20 +921,21 @@ int				fdf_set_diag_edge_validity(int this_edge,
  * increasing the row (i.e. increasing the vertex's 'y' coordinate).
  * TODO.
 */
-t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
+t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *z_mx);
 
 /**
- * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix to a
- * spherical vertex matrix.
+ * @brief <b>fdf_get_vertex_mx_sph</b> -- Converts an altitude map matrix and
+ * color map matrix to a spherical vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a spherical representation.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @param [in] r - The sphere base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -915,20 +948,21 @@ t_ft_mx			*fdf_get_vertex_mx(t_ft_mx *map_mx);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
+t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *z_mx, double r);
 
 /**
- * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix to a
- * cylindrical vertex matrix.
+ * @brief <b>fdf_get_vertex_mx_cyl</b> -- Converts an altitude map matrix and
+ * color map matrix to a cylindrical vertex matrix.
  *
- * @details Takes a matrix that represents altitude samples at equidistant
+ * @details This function takes an array of two pointer to matrices that
+ * represent the values for both altitude and color of samples at an equidistant
  * normalized X (colum number) and Y (row number) coordinates and returns
  * another matrix in which every column represents a col-vector with the values
  * corresponding to a xyzw vertex (row 0 to 3, respectively). This conversion
  * turns the planar correspondence of the source map matrix to the surface
  * it refers to into a cylindrical representation.
  *
- * @param [in] map_mx - The altitude map matrix.
+ * @param [in] z_mx - The altitude map matrix.
  *
  * @param [in] r - The cylinder base radius that will be modulated by the
  * altitude values from the map matrix.
@@ -943,7 +977,7 @@ t_ft_mx			*fdf_get_vertex_mx_sph(t_ft_mx *map_mx, double r);
  * @remark Implementation notes:
  * TODO.
  */
-t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *map_mx, double r, double h);
+t_ft_mx			*fdf_get_vertex_mx_cyl(t_ft_mx *z_mx, double r, double h);
 
 /**
  * @brief <b>fdf_create_nv</b> -- Creates a neighboring vertexes struct.

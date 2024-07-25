@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/21 11:45:33 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/24 02:02:30 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -192,6 +192,9 @@ SOURCES = fdf_main.c \
 		  lin_alg/ft_vx_create.c \
 		  lin_alg/ft_vx_substract.c \
 		  lin_alg/ft_vx_dproduct.c \
+		  lin_alg/ft_mx_fill.c \
+		  lin_alg/fdf_parse_map_line.c \
+		  lin_alg/fdf_get_col_num_map_line.c \
 		  tesselator/fdf_get_vertex_mx.c \
 		  tesselator/fdf_get_edge.c \
 		  tesselator/fdf_set_diag_edge_validity.c \
@@ -215,6 +218,9 @@ SOURCES = fdf_main.c \
 		  drawing/fdf_get_autofit_transf_par.c \
 		  drawing/fdf_get_vertex_min_max.c \
 		  drawing/fdf_render.c \
+		  drawing/fdf_get_color.c \
+		  drawing/fdf_calc_pixel_color.c \
+		  drawing/fdf_create_line.c \
 		  window/fdf_keyhook.c \
 		  window/fdf_closehook.c \
 		  window/fdf_generichook.c \
@@ -235,7 +241,8 @@ SOURCES = fdf_main.c \
 		  features/fdf_toggle_autofit.c \
 		  features/fdf_toggle_tesselation.c \
 		  features/fdf_toggle_drw_hidden.c \
-		  features/fdf_toggle_drw_diags.c
+		  features/fdf_toggle_drw_diags.c \
+		  features/fdf_toggle_color.c
 
 
 # List of bonus version header file names

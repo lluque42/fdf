@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-18</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-25</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -79,14 +79,14 @@ Include dependency graph for fdf_features.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="fdf__features_8h__incl.png" border="0" usemap="#ainclude_2mandatory_2fdf__features_8h" alt=""/></div>
 <map name="ainclude_2mandatory_2fdf__features_8h" id="ainclude_2mandatory_2fdf__features_8h">
-<area shape="rect" title=" " alt="" coords="109,5,276,47"/>
-<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="167,95,218,121"/>
-<area shape="rect" title=" " alt="" coords="5,169,76,196"/>
-<area shape="rect" title=" " alt="" coords="115,244,193,271"/>
-<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="258,169,357,196"/>
-<area shape="rect" href="window_8h.html" title=" " alt="" coords="151,169,234,196"/>
-<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="269,244,346,271"/>
-<area shape="rect" title=" " alt="" coords="278,319,337,345"/>
+<area shape="rect" title=" " alt="" coords="131,5,297,47"/>
+<area shape="rect" href="fdf_8h.html" title=" " alt="" coords="189,95,239,121"/>
+<area shape="rect" title=" " alt="" coords="5,244,76,271"/>
+<area shape="rect" title=" " alt="" coords="228,244,307,271"/>
+<area shape="rect" href="tesselator_8h.html" title=" " alt="" coords="78,169,177,196"/>
+<area shape="rect" href="window_8h.html" title=" " alt="" coords="251,169,334,196"/>
+<area shape="rect" href="lin__alg_8h.html" title=" " alt="" coords="101,244,178,271"/>
+<area shape="rect" title=" " alt="" coords="110,319,169,345"/>
 </map>
 </div>
 </div>
@@ -130,6 +130,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac682de33877f7d762a6fed8bce3cff6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fdf__features_8h.html#ac682de33877f7d762a6fed8bce3cff6a">fdf_toggle_drw_hidden</a> (<a class="el" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a> *fdf)</td></tr>
 <tr class="memdesc:ac682de33877f7d762a6fed8bce3cff6a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_toggle_drw_hidden</b> &ndash; Show/hide all hidden edges  <a href="fdf__features_8h.html#ac682de33877f7d762a6fed8bce3cff6a">More...</a><br /></td></tr>
 <tr class="separator:ac682de33877f7d762a6fed8bce3cff6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c05e7e218db94ebfcefc954453244e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fdf__features_8h.html#a42c05e7e218db94ebfcefc954453244e">fdf_toggle_color</a> (<a class="el" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a> *fdf)</td></tr>
+<tr class="memdesc:a42c05e7e218db94ebfcefc954453244e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>fdf_toggle_color</b> &ndash; Adds color to the image  <a href="fdf__features_8h.html#a42c05e7e218db94ebfcefc954453244e">More...</a><br /></td></tr>
+<tr class="separator:a42c05e7e218db94ebfcefc954453244e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Header file for functions to respond to GUI events that are supposed to offer a feature to the user (rotate, translate, zoom, ...).</p>
@@ -337,6 +340,35 @@ Functions</h2></td></tr>
 
 <p><b>fdf_toggle_autofit</b> &ndash; TODO. </p>
 <p >TODO.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">fdf</td><td>- The fdf structure.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>TODO.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
+
+</div>
+</div>
+<a id="a42c05e7e218db94ebfcefc954453244e" name="a42c05e7e218db94ebfcefc954453244e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42c05e7e218db94ebfcefc954453244e">&#9670;&nbsp;</a></span>fdf_toggle_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fdf_toggle_color </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="drawing_8h.html#af20e29cd8b5905bd623ecfcb120c5f94">t_fdf</a> *&#160;</td>
+          <td class="paramname"><em>fdf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>fdf_toggle_color</b> &ndash; Adds color to the image </p>
+<p >Adds color to the image if the source .fdf file came with color information.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">fdf</td><td>- The fdf structure.</td></tr>

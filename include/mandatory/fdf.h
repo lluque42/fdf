@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/18 13:07:02 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:52:19 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ typedef struct s_fdf
  * @param [in] drawing_h - Height in pixels of the actual drawing inside the
  * image.
  *
- * @param [in] map_mx - The map to create the 3D object from.
- * image.
+ * @param [in] map_mx - The array of pointer to matrix that represent both
+ * Z value and color value for each vertices used to create the 3D object from.
+ * image. This is passed to fdf_create_object().
  *
  * @return TODO..
  * NULL if error.
@@ -122,7 +123,7 @@ typedef struct s_fdf
 */
 t_fdf			*fdf_create_fdf(int32_t drawing_w,
 					int32_t drawing_h,
-					t_ft_mx *map_mx);
+					t_ft_mx **map_mx);
 
 /**
  * @brief <b>fdf_destroy_fdf</b> -- TODO.

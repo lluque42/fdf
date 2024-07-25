@@ -1,7 +1,26 @@
+New commit
+
+Now the line struct type has start and end color info.
+Now when parsing the color info, the alpha channel is added as FF.
+Now the default color if the map lacks color info is the full
+RGBA value of 0xFFFFFFFF (opaque white).
+An i_length member was added to line struct type to allow the fading
+of colors.
+The files fdf_get_color.c and fdf_calc_pixel_color.c were added with
+color related functions.
+A mechanism to force monochromatic rendering was added.
+
+
 TODO:
 
-+ Implementar color???
++ Los mapas only_a_comma_and_nl.fdf only_a_comma.fdf renderizan algo!!!!
+	+ Por ft_atoi() que retorna 0. Me parece OK, lo importante es no crashear.
 
++ Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
+perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
+original y la nueva ponerla en otro lado.
+
++ Creo más apropiado que get_edge se llame SET_edgeS_array()
 + Sin autoscale, el zoom out tiene un tope demasiado exagerado
 + El enum de render request debería estar en drawing.h y NO en fdf.h.
 + Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
@@ -15,13 +34,25 @@ bonito.
 + Creo que deberia hacer una revision completa de los headers para detectar
 todos los abusos de fdf.
 + DEBO CAMBIAR EL NOMBRE DE MIS HEADERS, YA HUBO COLISION CON FEATURES.H
-+ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería, corregir.
 + Actualizar la documentacion!!!!!!!!!!!!!!!!!!!!!
 + Ver si cabe fdf_point_is_in_plane() en fdf_set_edge_visibility.c y ponerlo ahí
 como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Implementar color???
+	+++ Puede diferir de lo implementado.
+	+ Incluir un miembro en el tipo vertex que almacene la información de su
+	color en el formato en el que MLX42 lo requeriría.
+	+ Lograr dibujar con color los vertexes (un pixel).
+	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
+	del color del vertex de inicio y se vaya "acercando" al vertex final.
++ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería y en sus
+funciones auxiliares también. Solo hace falta pasar object, corregir.
++ Implementar color???
+	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
+	vertex en mapas con información de color.
+	+ Crear tanto matrix de alturas como ahora otra matrix de color.
 + Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
 	+ ver comentarios en fdf_exit_program() y fdf_start_gui().
 		Creo que sí son irresolubles (más allá de que no son realmente fugas en sentido estricto).
