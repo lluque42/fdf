@@ -1,0 +1,700 @@
+New commit
+
+Explicit casting to double was added for the LONG max/min
+values when obtaining the max/min vertex values in
+src/mandatory/drawing/fdf_get_vertex_min_max.c.
+
+README.md was improved.
+
+
+
+TODO:
+
++ Major TODO para optimizar, leer README.md. Debí haber guardado los vertices
+como row-vectors en la vertex matrix. Esto sería un cambio muy trabajoso.
+
++ Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
+perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
+original y la nueva ponerla en otro lado.
+
++ Creo más apropiado que get_edge se llame SET_edgeS_array()
++ Sin autoscale, el zoom out tiene un tope demasiado exagerado
++ El enum de render request debería estar en drawing.h y NO en fdf.h.
++ Hacer defines y definir criterios para calcular el radio de la esfera/cilindro
+y la altura del cilindro en función de las dimensiones del mapa para que quede
+bonito.
+	+ Poner como miembros de object los arreglos de min y max para todos los espacios.
+	+ Ejecutar edges una sola vez en tesselate_map.
+	+ Llamar a la funcion de minmax sobre el mapa para poder dimensionar radio de esfera y radio y altura de cilindro.
+	+ Tal vez almacenar en object las tres versiones de matrices de vertexes
+	para no tener que recalcularla cada vez que togglee el tipo de tesselado.
++ Creo que deberia hacer una revision completa de los headers para detectar
+todos los abusos de fdf.
++ DEBO CAMBIAR EL NOMBRE DE MIS HEADERS, YA HUBO COLISION CON FEATURES.H
++ Actualizar la documentacion!!!!!!!!!!!!!!!!!!!!!
++ Ver si cabe fdf_point_is_in_plane() en fdf_set_edge_visibility.c y ponerlo ahí
+como estática.
++ Cambiar window por GUI??? wlayout por gui???
+
+DONE:
++ Los mapas only_a_comma_and_nl.fdf only_a_comma.fdf renderizan algo!!!!
+	+ Por ft_atoi() que retorna 0. Me parece OK, lo importante es no crashear.
+
++ Implementar color???
+	+++ Puede diferir de lo implementado.
+	+ Incluir un miembro en el tipo vertex que almacene la información de su
+	color en el formato en el que MLX42 lo requeriría.
+	+ Lograr dibujar con color los vertexes (un pixel).
+	+ Lograr dibujar cada edge de forma que el color de cada pixel se vaya "alejando"
+	del color del vertex de inicio y se vaya "acercando" al vertex final.
++ En fdf_get_edge(object->map_mx, object) estoy haciendo esta tontería y en sus
+funciones auxiliares también. Solo hace falta pasar object, corregir.
++ Implementar color???
+	+ Lograr imprimir como string el número hexadecimal correspondiente a cada
+	vertex en mapas con información de color.
+	+ Crear tanto matrix de alturas como ahora otra matrix de color.
++ Asegurarme que los leaks de mlx_init y mlx_terminate son irresolubles
+	+ ver comentarios en fdf_exit_program() y fdf_start_gui().
+		Creo que sí son irresolubles (más allá de que no son realmente fugas en sentido estricto).
++ Problemas cargando data/100-6.fdf
+	+ debugueando, sale de parse_line() por get_number_of_cols(line, separator) != matrix->n analizando la primera línea
+
+		(lldb) expression matrix->n
+		(int) $0 = 101 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+		lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf | head -n 1
+		-4 -3 5 5 0 -4 0 -5 5 -2 5 1 -5 1 5 0 -2 4 -2 0 0 -2 2 -3 1 -1 -4 -3 5 -1 0 2 3 0 -2 0 0 0 -1 3 -2 0 -5 4 -2 3 -5 3 -3 5 0 1 0 3 2 0 -2 3 0 1 -3 0 2 0 -5 -2 2 -3 4 0 5 0 2 -3 0 0 5 2 4 0 1 2 -4 0 5 -3 1 -4 -4 -4 0 3 -1 3 0 -4 1 0 4 -5
+		lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf | head -n 1 | wc -w
+		100		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+		DETECTADO EL PROBLEMA:
+			lluque@Z500-ubuntu:~/011_fdf/repo_github$ cat data/100-6.fdf -e | head -n 1
+		-4 -3 5 5 0 -4 0 -5 5 -2 5 1 -5 1 5 0 -2 4 -2 0 0 -2 2 -3 1 -1 -4 -3 5 -1 0 2 3 0 -2 0 0 0 -1 3 -2 0 -5 4 -2 3 -5 3 -3 5 0 1 0 3 2 0 -2 3 0 1 -3 0 2 0 -5 -2 2 -3 4 0 5 0 2 -3 0 0 5 2 4 0 1 2 -4 0 5 -3 1 -4 -4 -4 0 3 -1 3 0 -4 1 0 4 -5 $
+			Hay un espacio entre el último valor y el salto de línea. Los 101 se detectan sin quitar el salto de línea y los 100 quitándolo
+		Corregido usando ft_strtrim() y mejorando el parseo.
++ Probar más mapas corruptos, incluyendo el tema de colores.
++ Los returns de render hacen exit, sí un exit controlado
++ Hacer posible el feature de dibujar o no las diagonales y terminar de ver
+si tienen sentido en las teselaciones no planas. Creo que sí tiene sentido pero
+que no sale bien porque el análisis de planos hay que hacerlo sobre un teselado
+plano. Tal vez primero teselar en plano, calcular los edges y su visibilidad y
+por último liberar el tesselado plano y re-hacerlo en la versión no-plana que
+corresponda.
++ Soportar al menos el parseo de mapas con colores
++ Instrucciones de uso en la imagen o en otra imagen.
+	+ Tal vez también canalizar los mensajes de cónsola por esta vía.
++ Quitar u homologar los mensajes informativos
++ Todos los mensajes de error enviarlos a stderr con las nuevas funciones de libft
+	+ Se permite usar perror, strerror y exit
++ Importante!!!! No sé si lo cumplo, verificar:
+	• The horizontal position corresponds to its axis (X).
+	• The vertical position corresponds to its ordinate (Y).
+		Si y no, pero no importa, ver mis comentarios en fdf_main.c
++ El Makefile debe ser arreglado por completo:
+	+ Separar el código en mandatory, bonus, shared.
+	+ Sincerar lo del DEBUG.
+		+ "La opción “-fsanitize=address” es INCOMPATIBLE con valgrind".
+	+ Etc.
++ Integrar MLX42 de CODAM como un submodulo y compilar con el Makefile.
++ POR DIOS liberar antes de cada renderizado las matrices de vertices y demás!!!!!!!!
++ Del subject:
+	+ Norminette.
+	+ Memory leaks.
+	+ Compilador cc.
+	+ No relink.
+	+ Makefile must at least contain the rules $(NAME), all, clean, fclean and
+re.
+	+ a rule bonus to your Makefile
+	+ which will add all the various headers, librairies or functions that are forbidden on
+the main part of the project. Bonuses must be in a different file _bonus.{c/h} if
+the subject does not specify anything else.
+	+ Turn in files Makefile, *.h, *.c
+	+ Funciones externas permitidas:
+		+ open, close, read, write,
+	malloc, free, perror,
+	strerror, exit
+	• All functions of the math
+	library (-lm compiler option,
+	man man 3 math)
+	• All functions of the MiniLibX
+	• ft_printf and any equivalent
+	YOU coded
++ fdf_setup_world(fdf) y demás (excepto image) deberian referirse a object, no
+a fdf.
++ Detectado nuevo problema con edge que debería estar escondido.
+Ver video en movil.
++ Sacar cosas de fdf:
+	+ Por un lado GUI.
+	+ Por otro lado objetos.
++ Empezar a crear archivos en window/ para albergar funciones por eventos
+del GUI, de forma tal que se sacaría el código interesante de  los hooks
+en donde solo quedarían las llamadas a las primeras.
++ NOOO Now the fdf_resizehook() function just sets the fdf->render_needed and
+the (pensar mejor, ver si cambio el render_needed por el render level y 
+agrego un NO_RENDER) para que de esta forma cada evento pueda pedir su nivel
+necesario de renderizado y solo se renderice en el generic hook.
++ Tambien hay que tomar previsiones para un resize que deje a la imagen con
+width o height 0.
++ Arreglar lo de los píxeles que quedan sin pintar, tal vez problemas de
+casting o redondeo de double a int. Ahora, luego de quitar los margenes dentro
+de la propia imagen, aparece un pixel por ahi raro (esto último está listo).
++ Hay algo raro con el mapa 3x2.fdf que no lo hace bien. Si lo hace bien,
+estaba malinterpretando yo la matriz jeje, ilusión óptica.
++ IMPORTANTE: Con el mapa mars.fdf he vuelto a ver el desborde del eje x!!!!
++ Lo de NO esconder los edges diagonales SOLO por tener la misma altura que el 
+vecino conectado no es suficiente: una ladera, donde toda una fila cambia de altura,
+rompe este método.
++ Al hacer demasiado zoom out pasa algo raro. Cuando la escala se hace negativa
+
+
+I define a 3D object as:
+	vertexes
+	edges, connecting the vertexes
+	triangles, minimum surface unit, 3 edges or 3 vertexes form a triangle.
+I define a scene as a collection of 3D objects somehow placed in the world.
+The 'somehow' part is that when an object (e.g. a pyramid) is placed in the
+world, that supposes that the object is: scaled (a big or small pyramid);
+rotated (is it place on one of its faces, tilted, etc.); and translated (where
+in the world is this small, tilted, pyramid placed).
+When rendering a scene, every 3D object goes through several transformations
+at several levels. Let's first define the levels an object has:
+	model space --->>> The object in its 'pure' abstracted form 
+	(i.e. data that define the object). In platonic's terms: the essence.
+	world space --->>> The object in the world (i.e. the pure form after being
+	transformed (scaled, rotated, translated) to exists in the world).
+	camera space --->>> The object in the world but transformed again from the
+	point of view of the camera. The camera exists in the world, at a position,
+	at a distance, and with an angle of view. Well, the camera space of an
+	object is how it existed in the world but now referenced (transformed:
+	scaled, rotated, translated) to the camera.
+Notice that all this transformations to produce a particular space are
+transformations of the vertexes. How the vertexes connected to form the model
+(edges, triangles) remains unaffected.
+So I decided not to duplicate the edges and triangles but to define a new
+object with vertex_mx for each space but a single member for edges and
+triangles.
+
+
+
+
+
+
+
+MAJOR UPDATE! Almost definite version
+
+REFACTORIZATION of edge visibility functions:
+The function fdf_set_edge_visibility() used when tesselating
+to determine those diagonal edges to be hidden, was refactored
+into several auxiliary functions in fdf_set_edge_visibility.c.
+For this, a new struct type to store four neighboring vertixes
+and its create and destroy functions were added.
+
+NEW alternate get_vertex functions for spherical and
+cylindrical tesselating:
+src/tesselator/fdf_get_vertex_mx_cyl.c
+src/tesselator/fdf_get_vertex_mx_sph.c
+Also an enum type for the tesselation type was added.
+PENDING to change how the radius (sphere and cylinder) and
+height (for the cylinder) is calculated. At this moment both
+are hardcoded magic numbers.
+
+3D object type now includes its source map_mx and its desired
+tesselation type based on the corresponding enum type as new
+struct members. The map_mx was simply a local variable to
+fdf_main() function which has also changed.
+
+The addition of the new members to object's type,  forced to
+modify the fdf_create_object() to admit as argument
+the source map_mx in order to create the 3D object which is
+stored as one of the members of the t_fdf struct. Because of
+this, the creation of the t_object was moved from
+fdf_tesselate_map() to fdf_create_fdf(). That forced the
+modification of fdf_tesselate_map() not to receive as an
+argument the map_mx but the already created object that
+contains it (points to); and not to return an object but rather
+an int to signal errors. This will also ease the future
+renderization of multiple objects: fdf_create_fdf() could
+receive a list of maps and store a list of objects...
+Consistently, the map tesselation (the calling of the
+fdf_tesselate_map() function) was moved from fdf_main() to the
+fdf_render() function as its most fundamental render request
+level (the FROM_MODEL value of the tesselation enum type).
+ 
+Finally, all of This allowed the addition of a new GUI
+feature to toggle beetwen tesellation types as respond to
+user's demand (plane to spherical, spherical to cylindrical,
+and back to plane tesselation type).
+
+
+
+
+
+
+
+
+
+Added a fix to fdf_getz_3drect.c functions: the special
+cases had either incomplete conditions or wrong return
+values. Also the legibility was improved. This program
+doesn't required such detail level, that's is why this
+omission had not been detected.
+
+
+FIX New edge visibility problems
+
+Even after the new improvements, it was detected the need to
+address the need for another case for edge hiding.
+
+At this point, the criteria to set a diagonal (non-orthogonal)
+edge hidden is defined in fdf_get_edge.c (in edge2dl_neig()
+and edge2dr_neig() functions) is (using down-right edge as
+an example):
++ It belong to the plane defined by the start vertex; 
+its down neighbor, its right neighbor, and the end vertex
+(i.e. the down right neighbor)).
+
+This criteria is right but the way to check if the edge could
+belong to the plane was naive, because it was limited to check
+from the starting vertex if the opposite orthogonal pair had
+the same altitude and that the start and end vertex had
+different altitudes:
+
+But different altitude combinations also can define the same
+plane.
+
+The new found problem is that 
+
+This particular case is described as:
+- When two diagonal edges which are visible following the 
+new criteria (down-right edge visible if 
+		as per the new
+requirement of 
+
+
+
+
+
+
+Some cleaning.
+
+
+
+
+
+
+
+Added 3D rects related functions. Improved GUI.
+
+A new type for the definition of a 3D rect was added to the
+tesselator.h collection, as well as functions to create 3D rects
+from two points (vertexes column vector matrixes); and to obtain
+the Z value from an X or Y value. This is needed for definitively
+solving the visibility problem of non-orthogonal edges.
+
+fdf_is_in_plane() was renamed to fdf_point_is_in_plane() in prevision
+for a possible function to evaluate if a rect is in a plane.
+
+The usability of the guy was improved to ease the testing. The
+users key to interact with the drawing are now more intuitive and
+videogame-like.
+
+More testing .fdf files added in data/.
+
+Documentation was updated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FIX More funny pixels detected
+
+When testing with very complex maps, drawing of more out-of-bound pixels
+were detected. This was fixed adding round() to the abscissa when checking
+against the image boundary in fdf_line_abscissa_clipping(). Also ordinate
+clipping was added in fdf_draw_line() just before mlx_put_pixel().
+Note to myself: Definitively math.h's round() function does not work as
+I expected RTFM!.
+
+A debug function to warn and print detailed info when a pixel is detected
+out of image boundary was written and kept commented in fdf_drw_edges.c.
+
+
+
+
+FEATURE Added user translation capabilities
+
+The fdf_translate_step() function was un-dummy-fied.
+As a first approach, when the user changes transformation parameters
+(i.e. translation, rotation, scaling/zoom, with autofit disabled),
+no clipping of edges in relation to the screen size is performed at
+screen space level, but only at image level by not drawing line pixels
+when they fall outside the image boundaries. This is achieved in
+the re-written fdf_draw_line() auxiliary function to fdf_draw_edges(), 
+and the new auxiliary function fdf_line_abscissa_clipping().
+
+
+
+
+FIX missing pixels in high slope edges
+
+The t_fdf_line type was modifyed to allow the drawing of a line
+either as y = f(x) or x = g(y). The functions in fdf_drw_edges.c
+where modified to draw lines with slopes greater than 1
+as x = g(y), that is, iterating y values to obtain the correct x
+values. In this way the rounding effect when passing from vertexes
+double type values to integer type pixels do not cause missing
+pixels when the lines are more vertical (higher slopes).
+
+
+
+
+FIX resize and funny pixels
+
+The function to get minimum and maximum x and y values from the
+camera space vertex matrix was generalized to be able to obtain
+them from any vertex matrix. This was useful in troubleshooting
+a rounding error in the function to obtain the autofit scale and
+offset parameters that caused crashes when rendering points outside
+the image boundaries after the latest changes in code. This also
+caused some funny single pixels to be incorrectly drawn after
+overflowing the width or height of the image.
+
+At some point the re-rendering as response to a resize event stopped
+working. This happened after the fdf_render() was optimized not to
+destroy and re-create the mlx_image_t image every time it rendered.
+Now this process was added to fdf_resizehook() after checking that
+the new image size recalculation is equal or larger than 1x1 pixels.
+
+The mechanism to request a re-render was changed to a new fdf_t member
+which is first evaluated to see if current render request (from model to 
+no re-render) goes deeper than the new requirement, if not, the new
+requirement is set. The new member render_request by levels replaced
+the old true/false render_is_needed. The settings of
+render_request were moved to the features functions (from the key down
+events of rotation, translation and zoom). Now the fdf_render() function
+is only called from the generic hook function and the rendering
+is made according to the level set in fdf->render_request.
+
+The resize event now triggers a call to a new feature function
+(fdf_window_resize()) which takes care of the work in the same way
+the other feature functions do. The fdf_recalc_wlayout() function
+was moved as an auxiliary static function to the feature function 
+fdf_window_resize().
+
+Makefile was improved by not fcleaning libft and by updating the list
+of header files that should force a re-build.
+
+The documentation was updated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+In fdf_drw_edges.c every function was changed to take objects and image
+types as arguments instead of fdf type. The intention is to make them
+more re-usable. Also every auxiliary functions were made static.
+
+The image-to-drawing margin (and offset) was eliminated after confirming
+it is not needed to achieve nice results (drawing area is now the whole 
+mlx_image_t image. This also allowed to simplify and make more slim and
+reusable the fdf_get_autofit_transf_par() function which now takes as
+arguments just an image and object types. This affected wlayout recalc
+and create functions.
+
+Now the creation of the image is back to fdf_start_gui() and in fdf_render()
+the image is now refreshed by first setting each pixel to black (with
+ft_memset()) and then rendering. Before this, the image was unnecessarily
+destroyed and re-created before each rendering.
+
+
+
+
+
+
+
+
+
+Some partial commit description
+
+ft_mx_destroy now checks if pointer to destroy is NULL and does nothing.
+t_fdf_model is gone, as well as its create and destroy functions. Its
+functionality was assumed (extended and improved) by t_fdf_object type.
+
+The function int fdf_get_autofit_transf_matrixes(t_fdf *fdf) is now
+void    fdf_get_autofit_transf_par(t_fdf *fdf). Because it does not create
+transformation matrixes (these were changed to local ones in fdf_render()
+and removed in the transition from t_fdf_model to t_fdf_object type.
+
+
+
+
+Added a image level to t_fdf, functions edited
+
+
+Tengo que modificar el create_model para que cree from uno anterior (incluso desde el map_mx?)
+	ya que tengo que copiar los edge, edges, triangle, triangles... incluso como parametro puedo
+	pasar la transformacion... (en plan un modelo se crea transformando otro pre-existente)...
+
+
+Voy a asumir que el direccionamiento del miembro pixels de mlx_image_t es lineal tal y como 
+yo almaceno mis datos en las matrices linea1-linea2-linea3... Tiene sentido por ser
+lo más eficiente y porque el tipo de pixels es un puntero simple.
+
+El fdf_setup_image debería cambiarlo a la luz de lo q ahora sé sobre qué hace 
+la función mlx_delete_image()
+
+Mover image de wlayout hacia afuera
+	En realidad lo que me interesa en fdf es el buffer solo. Tiene sentido que
+	en wlayout quede la mlx_image_t aunque debería renombrarlo indicando que es
+	la imagen de MI dibujo. Pues luego podría poner otras imágenes (botones, 
+	mi logo, etc.)
+En algún momento deberé sincerar los tipos que alegremente he ido usando como int cuando son uint32_t
+
+NO HAY UN DESTROY IMAGE que de forma evidente libere memoria, hay un delete image que solo parece 
+
+mlx_image_t
+typedef struct mlx_image mlx_image_t
+An image with an individual buffer that can be rendered. Any value can be modified except the width/height and context.
+
+Parameters
+width	The width of the image.
+height	The height of the image.
+pixels	The literal pixel data.
+instances	An instance carrying the X, Y and Z location data.
+count	The element count of the instances array.
+enabled	If true the image is drawn onto the screen, else it's not.
+context	Abstracted OpenGL data.
+typedef struct mlx_image
+{
+    const uint32_t  width;
+    const uint32_t  height;
+    uint8_t*        pixels;
+    mlx_instance_t* instances;
+    size_t          count;
+    bool            enabled;
+    void*           context;
+}   mlx_image_t;
+
+
+mlx_instance_t
+typedef struct mlx_instance mlx_instance_t
+An image instance can be summarized as just a simple x, y & z coordinate.
+
+Coordinates start from the top left of the screen at 0,0 and increase towards the bottom right.
+
+NOTE: To change the z value, use mlx_set_instance_depth!
+
+Parameters
+x	The x location.
+y	The y location.
+z	The z depth, controls if the image is on the fore or background.
+enabled	If true, the instance is drawn, else it's not.
+typedef struct mlx_instance
+{
+    int32_t x;
+    int32_t y;
+    int32_t z;
+    bool    enabled;
+}   mlx_instance_t;
+
+
+ mlx_delete_image()
+void mlx_delete_image	(	mlx_t * 	mlx,
+mlx_image_t * 	image
+)
+Deleting an image will remove it from the render queue as well as any and all instances it might have. Additionally, just as extra measures sets all the data to NULL.
+
+If you simply wish to stop rendering an image without de-allocation set the 'enabled' boolean in the image struct.
+
+Parameters
+[in]	mlx	The MLX instance handle.
+[in]	image	The image to delete.
+
+
+
+
+
+
+
+
+Re-organization of files and re-naming of fnctns
+
+The former lin_alg.h functions for creating transformation
+matrixes were assigned (and renamed accordingly) to tesselator.h.
+Along this same line, the function fdf_get_rot_mx() was changed to
+fdf_create_rot_mx() and the former public fdf_create_rot*_mx()
+were made static inside tesselator/fdf_create_rot_mx.c.
+
+The definition of t_wlayout was moved out from fdf.h to window.h.
+Forward declarations of t_wlayout and t_fdf were needed in both
+header files to satisfy the compiler and the 42 freaking norm.
+
+Documentation was updated.
+
+
+
+LISTO!!!!
+En algún momento debería mover ft_mx_create_ortoproj_mx() a fdf_mx_create_ortoproj_mx()
+También ft_mx_create_scale_mx y ft_mx_create_transl_mx
+También todo lo relativo a wlayout de fdf.h a window.h
+Deberia cambiar el nombre a get_rot por create_rot
+
+
+
+
+
+
+Flip matrix function changed
+
+For convenience the ft_mx_flipr() function now changes the
+matrix passed as argument and returns void.
+Now ft_mx_load_file() function takes care of flipping the
+map matrix loaded from file instead of fdf_tesselate_map().
+
+git add src/lin_alg/ft_mx_flipr.c
+git add src/lin_alg/ft_mx_load_file.c
+git add src/tesselator/fdf_tesselate_map.c
+
+
+
+
+
+New component 'w' for vertexes
+
+ft_mx_flipr was changed not to return the resulting matrix but
+to overwrite the one passed as argument.
+Ahora se flipea en ft_mx_load_file en vez de en fdf_get_vertex_mx
+
+// added a forth 'w' component to each vertex (2024/03/04 01:02:12)
+fdf_get_vertex_mx(t_ft_mx *map_mx);
+fdf_create_rotmx_z and x and y
+ft_mx_create_ortoproj_mx()
+ft_mx_create_scale_mx
+ft_mx_create_transl_mx
+fdf_drw_vertexes
+ft_mx_transf_m3v.c
+ft_mx_transf_v3m.c
+
+
+
+
+GUI functions
+
+(fifth part (I know, I shouldn't do it this way :'))
+of a batch of commits that were posponed due to extensive
+experimenting and testing... just to be sure and keep things
+clean)
+
+Some very rough and dirty functions were added to manage
+the window and the events for the GUI
+
+
+Drawing functions
+
+(forth part of a batch of a series of commits that were posponed
+due to extensive experimenting and testing... just to be sure
+and keep things clean)
+
+Functions were added to allow the conversion of (just) the
+(vertexes of the) 3D model into a centered and scaled (to
+image size) 2D ortogonal projection, and the drawing of
+the corresponding pixels using MLX42 library.
+
+This functions will likely be refactored into a rasterization
+model...
+
+
+
+
+Tesselating functions!!! :)
+
+(third part of a batch of a series of commits that were posponed
+due to extensive experimenting and testing... just to be sure
+and keep things clean)
+
+Functions were added to allow the conversion of the height map
+into a 3D model consisting of a collection of XYZ points
+(vertexes), and the 3D rotation of said model.
+    
+
+Renaming of functions and files. More .fdf samples
+
+(second part of a batch of a series of commits that were posponed
+due to extensive experimenting and testing... just to be sure
+and keep things clean)
+
+
+
+
+
+
+
+
+Some work on lin_alg collection
+
+(first part of a batch of a series of commits that were posponed
+due to extensive experimenting and testing... just to be sure
+and keep things clean)
+
+New Functions:
+ft_mx_create_ortoproj()  to create a 3x3 matrix to project on XY plane
+ft_mx_set_col()          to set the values of a column in a matrix
+ft_mx_transf_m3v()       to transform a column-vector-matrix
+ft_mx_transf_v3m()       to transform a row-vector-matrix (WARNING: not tested nor used)
+
+Modifications to already committed functions:
+ft_mx_print() was changed to print doubles using stdio's printf (WARNING)
+ft_mx_mult() cleaned
+ft_mx_get_col() and ft_mx_dup() improved legibility
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fixed and added linear algebra collection
+
+The ft_mx_set_row() was fixed (memmove bytes parameter was incorrect).
+The following functions were added to lin_alg collection:
+
+ft_mx_create_bid() to create a backward identity matrix
+ft_mx_create_id()  to create an identity matrix
+ft_mx_dup()        to duplicate a matrix
+ft_mx_flipr()      to flip a matrix along row (y) axis
+ft_mx_get_col()    to obtain a col-matrix from a matrix
+ft_mx_get_row()    to obtain a row-matrix from a matrix
+ft_mx_mult()       to multiply two matrixes
+ft_mx_smult()      to multiply a matrix by a scalar
+ft_mx_transpose()  to transpose a matrix
+
+The (test)main() functions has grown with several tests for the
+lin_alg.h collection.
+
+The 'data' directory was added in the README.md dir tree
