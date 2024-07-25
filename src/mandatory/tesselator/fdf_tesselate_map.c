@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:05:33 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 00:13:56 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:46:31 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,4 @@ int	fdf_tesselate_map(t_fdf_object *object)
 		return (0);
 	return (1);
 }
-/*
-		printf("\t[fdf_tesselate_map] map_min[0]...%f\n", object->map_min[0]);
-		printf("\t[fdf_tesselate_map] map_min[1]...%f\n", object->map_min[1]);
-		printf("\t[fdf_tesselate_map] map_min[2]...%f\n", object->map_min[2]);
-		printf("\t[fdf_tesselate_map] map_max[0]...%f\n", object->map_max[0]);
-		printf("\t[fdf_tesselate_map] map_max[1]...%f\n", object->map_max[1]);
-		printf("\t[fdf_tesselate_map] map_max[2]...%f\n", object->map_max[2]);
-*/
+//		ft_mx_print(object->model_mx, ' ');

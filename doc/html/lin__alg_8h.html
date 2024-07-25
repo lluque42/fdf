@@ -222,7 +222,7 @@ Intuitive C-style matrix    Linear storage (row-major order)
 
      double **data;                   double *data;
 
-       data[i][j] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; data[i * m + j]
+       data[i][j] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; data[i * n + j]
 </pre><p> NOTE: Row-major order (aka lexicographic order) means that elements of the same ROW are stored in contiguous memory addresses. The alternative is column-major order (aka colexicographic order). </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ac4cf4b2ab929bd23951a8676eeac086b" name="ac4cf4b2ab929bd23951a8676eeac086b"></a>
@@ -947,7 +947,7 @@ Intuitive C-style matrix    Linear storage (row-major order)
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Uses stdio's printf for printing double type variables.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Uses stdio's printf for printing double type variables. NEVER USED IN THE ACTUAL PROGRAM, ONLY FOR DEBUGGING PURPOSES.</dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>Implementation notes: TODO. </dd></dl>
 
 </div>

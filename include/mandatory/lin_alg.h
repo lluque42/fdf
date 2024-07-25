@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:55:20 by lluque            #+#    #+#             */
-/*   Updated: 2024/07/24 02:55:31 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:14:43 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
  *
  *          double **data;                   double *data;
  *
- *            data[i][j] >>>>>>>>>>>>>>>>>> data[i * m + j]
+ *            data[i][j] >>>>>>>>>>>>>>>>>> data[i * n + j]
  *
  * NOTE: Row-major order (aka lexicographic order) means that elements of the
  * same ROW are stored in contiguous memory addresses.
@@ -280,7 +280,8 @@ t_ft_mx	*ft_mx_get_col(t_ft_mx *matrix, int j);
  *
  * @param [in] separator - The character to be printed between column values.
  *
- * @warning Uses stdio's printf for printing double type variables.
+ * @warning Uses stdio's printf for printing double type variables. NEVER USED
+ * IN THE ACTUAL PROGRAM, ONLY FOR DEBUGGING PURPOSES.
  *
  * @remark Implementation notes:
  * TODO.

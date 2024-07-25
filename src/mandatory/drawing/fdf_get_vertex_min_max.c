@@ -6,7 +6,7 @@
 /*   By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:47:12 by lluque            #+#    #+#             */
-/*   Updated: 2024/03/17 13:02:33 by lluque           ###   ########.fr       */
+/*   Updated: 2024/07/25 13:28:48 by lluque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 // included in the "allowed" header limits.h.
 static void	fdf_init_min_max(double *min, double *max)
 {
-	min[0] = LONG_MAX;
-	min[1] = LONG_MAX;
-	min[2] = LONG_MAX;
-	max[0] = LONG_MIN;
-	max[1] = LONG_MIN;
-	max[2] = LONG_MIN;
+	min[0] = (double)LONG_MAX;
+	min[1] = (double)LONG_MAX;
+	min[2] = (double)LONG_MAX;
+	max[0] = (double)LONG_MIN;
+	max[1] = (double)LONG_MIN;
+	max[2] = (double)LONG_MIN;
 }
 
 void	fdf_get_vertex_min_max(t_ft_mx *vertex_mx,

@@ -60,44 +60,130 @@ Use ‘make help’ for instructions.
 * When rendering, the right-handed convention for drawing XYZ axis will be
 used, which implies:  
 ```
-        +Z  
-         |
-         |  
-        / \  
-       /   \  
-     +X     +Y  
+                +Z
+                 |
+                 |
+                / \
+               /   \
+             +X     +Y
 ```
-* Matrices nomenclature, i, j for m x n matrix, where:
-    * i is ???
-    * j is ???
-    * m is ???
-    * n is ???
-* Linear representation of a matrix follows lexicographic... TODO
-
-* From subject (HOWEVER read fdf_main.c comments):  
-    * The horizontal position corresponds to its axis (X).
-    * The vertical position corresponds to its ordinate (Y).
-
-* TODO Por tanto, las coordenadas de las esquinas en el plano XY son:
-B: (0,0)  
-A: (xX,0)  
-D: (0,yY)  
-C: (xX, yX)  
-
-* TODO Por tanto al leer del archivo:
+* The correspondence of the map matrix to the image spatial-wise is as follows:
+    * Moving through a ROW is analogous to move along the X coordinate.
+        * The rightmost element in a row represents the altitude at X = 0.
+        * The leftmost element in a row represents the altitude at the greatest
+        positive value for axis X.
+            * *The horizontal position corresponds to its axis (X).*
+    * Moving through a COLUMN is analogous to move along the Y coordinate.
+        * The top-most element in a column represents the altitude at Y = 0.
+        * The bottom-most element in a column represents the altitude at the
+        greatest positive value for axis Y.
+            * *The vertical position corresponds to its ordinate (Y).*
+    * Briefly stated:
+        * The top-right element in the matrix corresponds to the altitude at
+        XY origin (0,0).
+        * The bottom-left element in the matrix corresponds to the altitude at
+        (Xmax, Ymax).
 ```
-TODO
-            <<< X  
-(xX,0) c0     cC (0,0)  
-    r0  A .... B   Y  
-        .      .   v  
-        .      .   v  
-    rR  C .... D   v  
-(xX,yY)          (0,yY)  
-```
-* The GUI image own coordinate system TODO
+                      <<< X  
+        (Xmax,0) c0     cC (0,0)  
+              r0  A .... B   Y  
+                  .      .   v  
+                  .      .   v  
+              rR  C .... D   v  
+      (Xmax,Ymax)          (0,Ymax)  
 
-* RGBA color model, 8 bits per channel.
+          B: (0,0)
+          A: (Xmax,0)
+          D: (0,Ymax)
+          C: (Xmax, Ymax)
+
+                +Z
+                 |
+                 |
+                 | B (top-right matrix element)
+                / \
+               /   \
+              /     \
+             +X     +Y
+```
+* Matrices nomenclature follows the mathematics standard:
+```
+    i: row index, starts at 0 (NOT 1)
+    j: col index, starts at 0 (NOT 1)
+    m: number of rows
+    n: number of cols
+    Aij: Element in row i col j. NOTICE that row index comes first...
+            A00 A02 A03
+            A10 A11 A12
+            A20 A21 A22
+```
+* When representing matrix-like data, the native C matrix\[i\]\[j\] approach
+(where matrix is of \*\*double type) is not used, because that implies an
+array of array of pointers to memory in the HEAP which could "physically" be
+anywhere (no contiguous blocks). A single array of \*double type was chosen
+instead to represent the elements of a matrix in a sequential fashion assuring
+all the data to be in the same memory block. This linear representation of a
+matrix consists of store in a unidimensional array all the elements of a matrix
+one after, that is, first all the elements of a row/col, followed by all the
+elements of the next row/col, etc. Choosing between row-by-row or col-by-col
+in this context is called row-major order (aka lexicographic order) or
+column-major order (aka colexicographic order) respectively.
+
+The convention used here is the row-major order (aka lexicographic order;
+aka row-by-row).
+
+The element addressing of an intuitive C-style matrix (array of arrays,
+e.g. \*\*double or double[][]) translates to this addressing:
+Given a m x n (rows x columns matrix, the element Aij is addressed in
+this way...
+```
+     Intuitive C-style matrix    Linear storage (row-major order)
+
+          double **data;                   double *data;
+
+            data[i][j] >>>>>>>>>>>>>>>>>> data[i * n + j]
+```
+For example, a 2 x 5 matrix as it appears in the .fdf file:
+
+As matrix format:
+```
+   10    11    12    13    14
+   15    16    17    18    19
+```
+As it is actually storaged in memory as a unidimensional array using the
+row-major order (aka lexicographic order; aka row-by-row):
+
+**10 11 12 13 14** 15 16 17 18 19
+* When representing a vertex matrix, that is, the result of interpreting the
+map matrix as XYZW points (*the W component is a prevision for the future*),
+each point data is storaged (**idiotically**) as a column vector (**a row vector
+makes more sense when my whole freaking point is to optimize the calculations
+this is a major TODO for the future**):
+
+As matrix format:
+```
+    0     1     2     3     4     0     1     2     3     4
+    0     0     0     0     0     1     1     1     1     1
+   10    11    12    13    14    15    16    17    18    19
+    1     1     1     1     1     1     1     1     1     1
+```
+As it is actually storaged in memory as a unidimensional array using the
+row-major order (aka lexicographic order; aka row-by-row):
+
+**0 1 2 3 4 0 1 2 3 4** 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1 1...
+
+* The MLX42 GUI image object has its own coordinate system where the XY origin
+is at the top-left corner.
+    * X values grow going to the left.
+    * Y values grow going downward.
+    * (The program deals with the coordinate system mismatch in some of the
+    several transformations when rendering).
+
+* Vertex color is supported for .fdf map files if an altitude value is
+followed by ",0xhhhhhh" where h are hexadecimal digits representing RGB values.
+This is transformed to the 8 bits per channel RGBA color model format supported
+by MLX42 library as 0xhhhhhhFF (channel alpha value does not come from
+the .fdf file and is always considered 0xFF).
 
 ### Data structures
     * Array of two matrices resulting from loading the .fdf map file. The first

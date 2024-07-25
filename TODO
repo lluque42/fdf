@@ -1,20 +1,17 @@
 New commit
 
-Now the line struct type has start and end color info.
-Now when parsing the color info, the alpha channel is added as FF.
-Now the default color if the map lacks color info is the full
-RGBA value of 0xFFFFFFFF (opaque white).
-An i_length member was added to line struct type to allow the fading
-of colors.
-The files fdf_get_color.c and fdf_calc_pixel_color.c were added with
-color related functions.
-A mechanism to force monochromatic rendering was added.
+Explicit casting to double was added for the LONG max/min
+values when obtaining the max/min vertex values in
+src/mandatory/drawing/fdf_get_vertex_min_max.c.
+
+README.md was improved.
+
 
 
 TODO:
 
-+ Los mapas only_a_comma_and_nl.fdf only_a_comma.fdf renderizan algo!!!!
-	+ Por ft_atoi() que retorna 0. Me parece OK, lo importante es no crashear.
++ Major TODO para optimizar, leer README.md. Debí haber guardado los vertices
+como row-vectors en la vertex matrix. Esto sería un cambio muy trabajoso.
 
 + Ahora ft_mx_load_file() me ha quedado demasiado específica como para seguir
 perteneciendo a la más genérica colección lin_alg.h. Debería recuperar la versión
@@ -40,6 +37,9 @@ como estática.
 + Cambiar window por GUI??? wlayout por gui???
 
 DONE:
++ Los mapas only_a_comma_and_nl.fdf only_a_comma.fdf renderizan algo!!!!
+	+ Por ft_atoi() que retorna 0. Me parece OK, lo importante es no crashear.
+
 + Implementar color???
 	+++ Puede diferir de lo implementado.
 	+ Incluir un miembro en el tipo vertex que almacene la información de su

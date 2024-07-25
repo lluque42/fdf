@@ -123,43 +123,96 @@ Program's data model</h1>
 Conventions adopted</h2>
 <ul>
 <li>When rendering, the right-handed convention for drawing XYZ axis will be used, which implies: <br  />
- <div class="fragment"><div class="line">   +Z  </div>
+ <div class="fragment"><div class="line">   +Z</div>
 <div class="line">    |</div>
-<div class="line">    |  </div>
-<div class="line">   / \  </div>
-<div class="line">  /   \  </div>
-<div class="line">+X     +Y  </div>
+<div class="line">    |</div>
+<div class="line">   / \</div>
+<div class="line">  /   \</div>
+<div class="line">+X     +Y</div>
 </div><!-- fragment --></li>
-<li>Matrices nomenclature, i, j for m x n matrix, where:<ul>
-<li>i is ???</li>
-<li>j is ???</li>
-<li>m is ???</li>
-<li>n is ???</li>
+<li>The correspondence of the map matrix to the image spatial-wise is as follows:<ul>
+<li>Moving through a ROW is analogous to move along the X coordinate.<ul>
+<li>The rightmost element in a row represents the altitude at X = 0.</li>
+<li>The leftmost element in a row represents the altitude at the greatest positive value for axis X.<ul>
+<li><em>The horizontal position corresponds to its axis (X).</em></li>
 </ul>
 </li>
-<li>Linear representation of a matrix follows lexicographic... TODO</li>
-<li>From subject (HOWEVER read fdf_main.c comments): <br  />
+</ul>
+</li>
+<li>Moving through a COLUMN is analogous to move along the Y coordinate.<ul>
+<li>The top-most element in a column represents the altitude at Y = 0.</li>
+<li>The bottom-most element in a column represents the altitude at the greatest positive value for axis Y.<ul>
+<li><em>The vertical position corresponds to its ordinate (Y).</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Briefly stated:<ul>
+<li>The top-right element in the matrix corresponds to the altitude at XY origin (0,0).</li>
+<li>The bottom-left element in the matrix corresponds to the altitude at (Xmax, Ymax). <div class="fragment"><div class="line">                &lt;&lt;&lt; X  </div>
+<div class="line">  (Xmax,0) c0     cC (0,0)  </div>
+<div class="line">        r0  A .... B   Y  </div>
+<div class="line">            .      .   v  </div>
+<div class="line">            .      .   v  </div>
+<div class="line">        rR  C .... D   v  </div>
+<div class="line">(Xmax,Ymax)          (0,Ymax)  </div>
+<div class="line"> </div>
+<div class="line">    B: (0,0)</div>
+<div class="line">    A: (Xmax,0)</div>
+<div class="line">    D: (0,Ymax)</div>
+<div class="line">    C: (Xmax, Ymax)</div>
+<div class="line"> </div>
+<div class="line">          +Z</div>
+<div class="line">           |</div>
+<div class="line">           |</div>
+<div class="line">           | B (top-right matrix element)</div>
+<div class="line">          / \</div>
+<div class="line">         /   \</div>
+<div class="line">        /     \</div>
+<div class="line">       +X     +Y</div>
+</div><!-- fragment --></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Matrices nomenclature follows the mathematics standard: <div class="fragment"><div class="line">i: row index, starts at 0 (NOT 1)</div>
+<div class="line">j: col index, starts at 0 (NOT 1)</div>
+<div class="line">m: number of rows</div>
+<div class="line">n: number of cols</div>
+<div class="line">Aij: Element in row i col j. NOTICE that row index comes first...</div>
+<div class="line">        A00 A02 A03</div>
+<div class="line">        A10 A11 A12</div>
+<div class="line">        A20 A21 A22</div>
+</div><!-- fragment --></li>
+<li>When representing matrix-like data, the native C matrix[i][j] approach (where matrix is of **double type) is not used, because that implies an array of array of pointers to memory in the HEAP which could "physically" be anywhere (no contiguous blocks). A single array of *double type was chosen instead to represent the elements of a matrix in a sequential fashion assuring all the data to be in the same memory block. This linear representation of a matrix consists of store in a unidimensional array all the elements of a matrix one after, that is, first all the elements of a row/col, followed by all the elements of the next row/col, etc. Choosing between row-by-row or col-by-col in this context is called row-major order (aka lexicographic order) or column-major order (aka colexicographic order) respectively.</li>
+</ul>
+<p >The convention used here is the row-major order (aka lexicographic order; aka row-by-row).</p>
+<p >The element addressing of an intuitive C-style matrix (array of arrays, e.g. **double or double[][]) translates to this addressing: Given a m x n (rows x columns matrix, the element Aij is addressed in this way... </p><div class="fragment"><div class="line">Intuitive C-style matrix    Linear storage (row-major order)</div>
+<div class="line"> </div>
+<div class="line">     double **data;                   double *data;</div>
+<div class="line"> </div>
+<div class="line">       data[i][j] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; data[i * n + j]</div>
+</div><!-- fragment --><p> For example, a 2 x 5 matrix as it appears in the .fdf file:</p>
+<p >As matrix format: </p><div class="fragment"><div class="line">10    11    12    13    14</div>
+<div class="line">15    16    17    18    19</div>
+</div><!-- fragment --><p> As it is actually storaged in memory as a unidimensional array using the row-major order (aka lexicographic order; aka row-by-row):</p>
+<p ><b>10 11 12 13 14</b> 15 16 17 18 19</p><ul>
+<li>When representing a vertex matrix, that is, the result of interpreting the map matrix as XYZW points (<em>the W component is a prevision for the future</em>), each point data is storaged (<b>idiotically</b>) as a column vector (<b>a row vector makes more sense when my whole freaking point is to optimize the calculations this is a major TODO for the future</b>):</li>
+</ul>
+<p >As matrix format: </p><div class="fragment"><div class="line"> 0     1     2     3     4     0     1     2     3     4</div>
+<div class="line"> 0     0     0     0     0     1     1     1     1     1</div>
+<div class="line">10    11    12    13    14    15    16    17    18    19</div>
+<div class="line"> 1     1     1     1     1     1     1     1     1     1</div>
+</div><!-- fragment --><p> As it is actually storaged in memory as a unidimensional array using the row-major order (aka lexicographic order; aka row-by-row):</p>
+<p ><b>0 1 2 3 4 0 1 2 3 4</b> 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1 1...</p>
 <ul>
-<li>The horizontal position corresponds to its axis (X).</li>
-<li>The vertical position corresponds to its ordinate (Y).</li>
+<li>The MLX42 GUI image object has its own coordinate system where the XY origin is at the top-left corner.<ul>
+<li>X values grow going to the left.</li>
+<li>Y values grow going downward.</li>
+<li>(The program deals with the coordinate system mismatch in some of the several transformations when rendering).</li>
 </ul>
 </li>
-<li>TODO Por tanto, las coordenadas de las esquinas en el plano XY son: B: (0,0) <br  />
- A: (xX,0) <br  />
- D: (0,yY) <br  />
- C: (xX, yX) <br  />
-</li>
-<li>TODO Por tanto al leer del archivo: <div class="fragment"><div class="line">TODO</div>
-<div class="line">            &lt;&lt;&lt; X  </div>
-<div class="line">(xX,0) c0     cC (0,0)  </div>
-<div class="line">    r0  A .... B   Y  </div>
-<div class="line">        .      .   v  </div>
-<div class="line">        .      .   v  </div>
-<div class="line">    rR  C .... D   v  </div>
-<div class="line">(xX,yY)          (0,yY)  </div>
-</div><!-- fragment --></li>
-<li>The GUI image own coordinate system TODO</li>
-<li>RGBA color model, 8 bits per channel.</li>
+<li>Vertex color is supported for .fdf map files if an altitude value is followed by ",0xhhhhhh" where h are hexadecimal digits representing RGB values. This is transformed to the 8 bits per channel RGBA color model format supported by MLX42 library as 0xhhhhhhFF (channel alpha value does not come from the .fdf file and is always considered 0xFF).</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Data structures</h2>
