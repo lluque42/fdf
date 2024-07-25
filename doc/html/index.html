@@ -74,7 +74,7 @@ Introduction</h1>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Directory tree</h1>
 <pre class="fragment">./  
-├── .gitignore              (to prevent undesired files to be stagged)  
+├── .gitignore              (to prevent undesired files to be stagged)
 ├── Doxyfile                (doxygen config file for doc generation)  
 ├── Makefile                (use 'make help' for instructions)  
 ├── README.md               (brief documentation)  
@@ -89,7 +89,7 @@ Directory tree</h1>
 ├── include/                (directory for public header files (.h))  
 │   ├── ...  
 │   └── ...  
-├── src/                    (directory for source code and private header files)  
+├── src/                    (dir for source code and private header files)  
 │   ├── ...  
 │   │   ├── ...                 
 │   │   └── ...  
@@ -102,7 +102,7 @@ Directory tree</h1>
 ├── bin/                    (directory for project's binaries and tester)  
 │   ├── ...  
 │   └── ...                 (may be structured in several directories)  
-├── obj/                    (directory for source code and private header files)  
+├── obj/                    (dir for source code and private header files)  
 │   ├── ...  
 │   │   ├── ...  
 │   │   └── ...  
@@ -110,7 +110,7 @@ Directory tree</h1>
 │       ├── ...  
 │       └── ...  
 ├── data/                   (directory for non-source files)  
-└── test/                   (test program src code, compiles to .bin/tester)  
+└── test/                   (test program src code, compiles to .bin/tester)
     ├── ...  
     ├── tester.c  
     └── ...  
@@ -164,11 +164,9 @@ Conventions adopted</h2>
 <div class="line"> </div>
 <div class="line">          +Z</div>
 <div class="line">           |</div>
-<div class="line">           |</div>
 <div class="line">           | B (top-right matrix element)</div>
 <div class="line">          / \</div>
 <div class="line">         /   \</div>
-<div class="line">        /     \</div>
 <div class="line">       +X     +Y</div>
 </div><!-- fragment --></li>
 </ul>
@@ -204,7 +202,7 @@ Conventions adopted</h2>
 <div class="line">10    11    12    13    14    15    16    17    18    19</div>
 <div class="line"> 1     1     1     1     1     1     1     1     1     1</div>
 </div><!-- fragment --><p> As it is actually storaged in memory as a unidimensional array using the row-major order (aka lexicographic order; aka row-by-row):</p>
-<p ><b>0 1 2 3 4 0 1 2 3 4</b> 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1 1...</p>
+<p ><b>0 1 2 3 4 0 1 2 3 4</b> 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1...</p>
 <ul>
 <li>The MLX42 GUI image object has its own coordinate system where the XY origin is at the top-left corner.<ul>
 <li>X values grow going to the left.</li>
@@ -217,23 +215,7 @@ Conventions adopted</h2>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Data structures</h2>
 <ul>
-<li>Array of two matrices resulting from loading the .fdf map file. The first matrix contains altitude values (Z axis) while the second matrix contains color values (255 if map has no color info). The column and row in each matrix represents the X, Y coordinates. It was decided to adopt the following conventions:<ul>
-<li>The first value at the first line of the file corresponds to the element 0,0. That is, position (i, j) in a m x n matrix, where m is the number of rows and n the number of columns. This i, j pair matches spatial coordinates as X = ??? Y = ???. <br  />
-</li>
-<li>The last value at the first line of the file corresponds to the element ???. That is, same ??? position, hence same ??? coordinate, but ??? position and ??? coordinate. <br  />
-</li>
-<li>When rendering, it will be used the right-handed convention for drawing XYZ axis, which implies: <br  />
-<ul>
-<li>Cordinate system origin (x, y) (0, 0) is represented by the ??? matrix element. <br  />
-</li>
-<li>As row position increases from 0 to ???, ??? coordinate increases in the positive direction. <br  />
-</li>
-<li>As column position increases from 0 to ???, ??? coordinate increases in the positive direction. <br  />
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>Array of two matrices resulting from loading the .fdf map file. The first matrix contains altitude values (Z axis) while the second matrix contains color values (255 if map has no color info). The column and row in each matrix represents the X, Y coordinates.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md7"></a>
 Program's internal working</h1>
@@ -306,23 +288,23 @@ Core functions callings</h2>
 Rendering process</h2>
 <p >The rendering process entry point is the <a class="el" href="drawing__bonus_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> function, called from the GUI loop hook <a class="el" href="window__bonus_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a>.</p>
 <p >The rendering process has several stages, let's call them transformations, which must be processed in this order, starting at the first stage that needs to be re-calculated. The selection of the first stage is determined by the render request level of fdf struct for each loop.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Transformation   </th><th class="markdownTableHeadNone">Details   </th><th class="markdownTableHeadNone">Render level request   </th><th class="markdownTableHeadNone">Associated function    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><em>file to array of altitude and color matrices that represents the map info</em>   </td><td class="markdownTableBodyNone"><em>Not an actual part of the rendering process</em>   </td><td class="markdownTableBodyNone"><em>doesn't apply</em>   </td><td class="markdownTableBodyNone"><a class="el" href="lin__alg__bonus_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>)    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Map to 3D model   </td><td class="markdownTableBodyNone">Either planar, spherical or cylindrical projection   </td><td class="markdownTableBodyNone">&lt;= FROM_MODEL   </td><td class="markdownTableBodyNone"><a class="el" href="tesselator__bonus_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">3D model to world   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_WORLD   </td><td class="markdownTableBodyNone">fdf_setup_world()    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">World to camera   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_CAMERA   </td><td class="markdownTableBodyNone">fdf_setup_camera()    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Camera to screen   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_SCREEN   </td><td class="markdownTableBodyNone">fdf_setup_screen()    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Screen to image   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">&lt;= FROM_IMAGE   </td><td class="markdownTableBodyNone">fdf_setup_image()    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Nothing to perform   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">== NO_RENDER   </td><td class="markdownTableBodyNone">return   </td></tr>
+<table class="doxtable">
+<tr>
+<th>Transformation </th><th>Details </th><th>Render level request </th><th>Associated function  </th></tr>
+<tr>
+<td><em>file to array of altitude and color matrices that represents the map info</em> </td><td><em>Not an actual part of the rendering process</em> </td><td><em>doesn't apply</em> </td><td><a class="el" href="lin__alg__bonus_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a>  </td></tr>
+<tr>
+<td>Map to 3D model </td><td>Either planar, spherical or cylindrical projection </td><td>&lt;= FROM_MODEL </td><td><a class="el" href="tesselator__bonus_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>  </td></tr>
+<tr>
+<td>3D model to world </td><td></td><td>&lt;= FROM_WORLD </td><td>fdf_setup_world()  </td></tr>
+<tr>
+<td>World to camera </td><td></td><td>&lt;= FROM_CAMERA </td><td>fdf_setup_camera()  </td></tr>
+<tr>
+<td>Camera to screen </td><td></td><td>&lt;= FROM_SCREEN </td><td>fdf_setup_screen()  </td></tr>
+<tr>
+<td>Screen to image </td><td></td><td>&lt;= FROM_IMAGE </td><td>fdf_setup_image()  </td></tr>
+<tr>
+<td>Nothing to perform </td><td></td><td>== NO_RENDER </td><td>return  </td></tr>
 </table>
 <p >Not every rendering needs to go through all of these transformations, but just need to start at one of them and perform the rest. The level from which to start has to do with the requested actions: <br  />
 </p><ul>

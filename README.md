@@ -11,7 +11,7 @@ Wireframe model of landscape representation in isometric projection
 ## Directory tree
 
     ./  
-    ├── .gitignore				(to prevent undesired files to be stagged)  
+    ├── .gitignore				(to prevent undesired files to be stagged)
     ├── Doxyfile				(doxygen config file for doc generation)  
     ├── Makefile				(use 'make help' for instructions)  
     ├── README.md				(brief documentation)  
@@ -26,7 +26,7 @@ Wireframe model of landscape representation in isometric projection
     ├── include/				(directory for public header files (.h))  
     │   ├── ...  
     │   └── ...  
-    ├── src/					(directory for source code and private header files)  
+    ├── src/					(dir for source code and private header files)  
     │   ├── ...  
     │   │   ├── ...  				
     │   │   └── ...  
@@ -39,7 +39,7 @@ Wireframe model of landscape representation in isometric projection
     ├── bin/					(directory for project's binaries and tester)  
     │   ├── ...  
     │   └── ...					(may be structured in several directories)  
-    ├── obj/					(directory for source code and private header files)  
+    ├── obj/					(dir for source code and private header files)  
     │   ├── ...  
     │   │   ├── ...  
     │   │   └── ...  
@@ -47,7 +47,7 @@ Wireframe model of landscape representation in isometric projection
     │       ├── ...  
     │       └── ...  
     ├── data/					(directory for non-source files)  
-    └── test/					(test program src code, compiles to .bin/tester)  
+    └── test/					(test program src code, compiles to .bin/tester)
         ├── ...  
         ├── tester.c  
         └── ...  
@@ -67,11 +67,12 @@ used, which implies:
                /   \
              +X     +Y
 ```
-* The correspondence of the map matrix to the image spatial-wise is as follows:
+* The correspondence of the map matrix to the image spatial-wise is as
+follows:
     * Moving through a ROW is analogous to move along the X coordinate.
         * The rightmost element in a row represents the altitude at X = 0.
-        * The leftmost element in a row represents the altitude at the greatest
-        positive value for axis X.
+        * The leftmost element in a row represents the altitude at the
+        greatest positive value for axis X.
             * *The horizontal position corresponds to its axis (X).*
     * Moving through a COLUMN is analogous to move along the Y coordinate.
         * The top-most element in a column represents the altitude at Y = 0.
@@ -99,11 +100,9 @@ used, which implies:
 
                 +Z
                  |
-                 |
                  | B (top-right matrix element)
                 / \
                /   \
-              /     \
              +X     +Y
 ```
 * Matrices nomenclature follows the mathematics standard:
@@ -123,11 +122,11 @@ array of array of pointers to memory in the HEAP which could "physically" be
 anywhere (no contiguous blocks). A single array of \*double type was chosen
 instead to represent the elements of a matrix in a sequential fashion assuring
 all the data to be in the same memory block. This linear representation of a
-matrix consists of store in a unidimensional array all the elements of a matrix
-one after, that is, first all the elements of a row/col, followed by all the
-elements of the next row/col, etc. Choosing between row-by-row or col-by-col
-in this context is called row-major order (aka lexicographic order) or
-column-major order (aka colexicographic order) respectively.
+matrix consists of store in a unidimensional array all the elements of a
+matrix one after, that is, first all the elements of a row/col, followed by
+all the elements of the next row/col, etc. Choosing between row-by-row or
+col-by-col in this context is called row-major order (aka lexicographic order)
+or column-major order (aka colexicographic order) respectively.
 
 The convention used here is the row-major order (aka lexicographic order;
 aka row-by-row).
@@ -156,9 +155,9 @@ row-major order (aka lexicographic order; aka row-by-row):
 **10 11 12 13 14** 15 16 17 18 19
 * When representing a vertex matrix, that is, the result of interpreting the
 map matrix as XYZW points (*the W component is a prevision for the future*),
-each point data is storaged (**idiotically**) as a column vector (**a row vector
-makes more sense when my whole freaking point is to optimize the calculations
-this is a major TODO for the future**):
+each point data is storaged (**idiotically**) as a column vector (**a row
+vector makes more sense when my whole freaking point is to optimize the
+calculations this is a major TODO for the future**):
 
 As matrix format:
 ```
@@ -170,7 +169,7 @@ As matrix format:
 As it is actually storaged in memory as a unidimensional array using the
 row-major order (aka lexicographic order; aka row-by-row):
 
-**0 1 2 3 4 0 1 2 3 4** 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1 1...
+**0 1 2 3 4 0 1 2 3 4** 0 0 0 0 0 1 1 1 1 1 10 11 12 13 14 15 16 17 18 19 1...
 
 * The MLX42 GUI image object has its own coordinate system where the XY origin
 is at the top-left corner.
@@ -180,33 +179,16 @@ is at the top-left corner.
     several transformations when rendering).
 
 * Vertex color is supported for .fdf map files if an altitude value is
-followed by ",0xhhhhhh" where h are hexadecimal digits representing RGB values.
-This is transformed to the 8 bits per channel RGBA color model format supported
-by MLX42 library as 0xhhhhhhFF (channel alpha value does not come from
-the .fdf file and is always considered 0xFF).
+followed by ",0xhhhhhh" where h are hexadecimal digits representing RGB
+values. This is transformed to the 8 bits per channel RGBA color model format
+supported by MLX42 library as 0xhhhhhhFF (channel alpha value does not come
+from the .fdf file and is always considered 0xFF).
 
 ### Data structures
-    * Array of two matrices resulting from loading the .fdf map file. The first
-    matrix contains altitude values (Z axis) while the second matrix contains
-    color values (255 if map has no color info). The column and row in each
-    matrix represents the X, Y coordinates. It was decided to adopt the
-    following conventions:
-        * The first value at the first line of the file corresponds to the
-        element 0,0. That is, position (i, j) in a m x n matrix, where m is
-        the number of rows and n the number of columns. This i, j pair matches
-        spatial coordinates as X = ??? Y = ???.  
-        * The last value at the first line of the file corresponds to the
-        element ???. That is, same ??? position, hence same ??? coordinate, but
-        ??? position and ??? coordinate.  
-        * When rendering, it will be used the right-handed convention for
-        drawing XYZ axis, which implies:  
-            * Cordinate system origin (x, y) (0, 0) is represented by the ???
-            matrix element.  
-            * As row position increases from 0 to ???, ??? coordinate increases
-            in the positive direction.  
-            * As column position  increases from 0 to ???, ??? coordinate
-            increases in the positive direction.  
-
+    * Array of two matrices resulting from loading the .fdf map file. The
+    first matrix contains altitude values (Z axis) while the second matrix
+    contains color values (255 if map has no color info). The column and row
+    in each matrix represents the X, Y coordinates.
 
 ## Program's internal working
 ### Core functions callings
@@ -214,8 +196,9 @@ the .fdf file and is always considered 0xFF).
     * Checks validity of arguments.
     * Creates the fdf data structure which serves as an entry point to every
     other data.
-    * Loads the .fdf file data into an array of two matrices (one for height or
-    Z values and the other one for color values) by calling ft_mx_load_file().
+    * Loads the .fdf file data into an array of two matrices (one for height
+    or Z values and the other one for color values) by calling
+    ft_mx_load_file().
     * Calls fdf_start_gui() which does the following:
         * fdf_start_gui() registers the hooks:
             * mlx_resize_hook() -> fdf_resizehook().
@@ -224,10 +207,10 @@ the .fdf file and is always considered 0xFF).
             * mlx_loop_hook() -> fdf_generichook().
         * Creates the GUI: window, image, places the image on the window.
         * Then waits in the mlx_loop(). At this point (and until after the 
-        window is closed or the ESCAPE key is pressed), only the hooks functions
-        are called to act as a result of the GUI events.
-            * When MLX loop breaks, fdf_start_gui() finishes the MLX clean up by
-            calling mlx_terminate(). The MLX clean up process starts in the
+        window is closed or the ESCAPE key is pressed), only the hooks
+        functions are called to act as a result of the GUI events.
+            * When MLX loop breaks, fdf_start_gui() finishes the MLX clean up
+            by calling mlx_terminate(). The MLX clean up process starts in the
             fdf_closehook() when it calls the fdf_exit_program() which calls
             the MLX functions mlx_delete_image() and mlx_close_window().  
       
@@ -236,23 +219,23 @@ the .fdf file and is always considered 0xFF).
 * Asinchronously, fdf_generichook() is called on every MLX loop. This function
 does the following:
     * Checks if the keys to translate/rotate/scale are pressed down. If any,
-    this function updates the required transformation data through fdf structure 
-    object member and sets a t_render_request level at the fdf structure if a
-    render is required as a result of the keys events.
-        * *NOTE: Other hooks such as fdf_resizehook() and fdf_keyhook() also can
-        independently change transformation data and set a render request
+    this function updates the required transformation data through fdf
+    structure object member and sets a t_render_request level at the fdf
+    structure if a render is required as a result of the keys events.
+        * *NOTE: Other hooks such as fdf_resizehook() and fdf_keyhook() also
+        can independently change transformation data and set a render request
         level.*
-    * Calls fdf_render() every loop. *NOTE: fdf_generichook() is the only caller
-    of fdf_render().* This function is the last one that is called with fdf as
-    an argument, from now on, every function is called passing the fdf member
-    object. fdf_render() function does the following:
+    * Calls fdf_render() every loop. *NOTE: fdf_generichook() is the only
+    caller of fdf_render().* This function is the last one that is called with
+    fdf as an argument, from now on, every function is called passing the fdf
+    member object. fdf_render() function does the following:
         * Checks the fdf t_render_request member fdf->render_request.
-        * According to the render request level, fdf_render() successively calls
-        the following function BUT starting with the one that correspond to the
-        request level. In this way, only those stages of the rendering process
-        that need to be recalculated as per the request level are performed.
-        The functions that perform each stage of the rendering process are (in
-        the logical order of precedence) the following:
+        * According to the render request level, fdf_render() successively
+        calls the following function BUT starting with the one that correspond
+        to the request level. In this way, only those stages of the rendering
+        process that need to be recalculated as per the request level are
+        performed. The functions that perform each stage of the rendering
+        process are (in the logical order of precedence) the following:
             * fdf_tesselate_map() when render_request <= FROM_MODEL.
                 * Read "Rendering process" section for details.
             * fdf_setup_world() when render_request <= FROM_WORLD.
@@ -267,28 +250,71 @@ does the following:
         and returns to fdf_generichook().  
   
 The next section details what the rendering process functions
-(fdf_tesselate_map(), fdf_setup_world(), fdf_setup_camera(), fdf_setup_screen(),
-and fdf_setup_image()) do at each stage of the rendering process.
+(fdf_tesselate_map(), fdf_setup_world(), fdf_setup_camera(),
+fdf_setup_screen(), and fdf_setup_image()) do at each stage of the rendering
+process.
 
 
 ### Rendering process
-The rendering process entry point is the fdf_render() function, called from the
-GUI loop hook fdf_generichook().
+The rendering process entry point is the fdf_render() function, called from
+the GUI loop hook fdf_generichook().
 
 The rendering process has several stages, let's call them transformations,
 which must be processed in this order, starting at the first stage that needs
 to be re-calculated. The selection of the first stage is determined by the
 render request level of fdf struct for each loop.
 
-|Transformation | Details | Render level request | Associated function|
-|---------------|---------|----------------------|--------------------|
-|*file to array of altitude and color matrices that represents the map info*|*Not an actual part of the rendering process*|*doesn't apply*|ft_mx_load_file())|
-|Map to 3D model|Either planar, spherical or cylindrical projection|<= FROM_MODEL|fdf_tesselate_map()|
-|3D model to world| |<= FROM_WORLD|fdf_setup_world()|
-|World to camera| |<= FROM_CAMERA|fdf_setup_camera()|
-|Camera to screen| |<= FROM_SCREEN|fdf_setup_screen()|
-|Screen to image| |<= FROM_IMAGE|fdf_setup_image()|
-|Nothing to perform| |== NO_RENDER|return|
+<table>
+  <tr>
+    <th>Transformation</th>
+    <th>Details</th>
+    <th>Render level request</th>
+    <th>Associated function</th>
+  </tr>
+  <tr>
+    <td>*file to array of altitude and color matrices that represents 
+    the map info*</td>
+    <td>*Not an actual part of the rendering process*</td>
+    <td>*doesn't apply*</td>
+    <td>ft_mx_load_file()</td>
+  </tr>
+  <tr>
+    <td>Map to 3D model</td>
+    <td>Either planar, spherical or cylindrical projection</td>
+    <td><= FROM_MODEL</td>
+    <td>fdf_tesselate_map()</td>
+  </tr>
+  <tr>
+    <td>3D model to world</td>
+    <td></td>
+    <td><= FROM_WORLD</td>
+    <td>fdf_setup_world()</td>
+  </tr>
+  <tr>
+    <td>World to camera</td>
+    <td></td>
+    <td><= FROM_CAMERA</td>
+    <td>fdf_setup_camera()</td>
+  </tr>
+  <tr>
+    <td>Camera to screen</td>
+    <td></td>
+    <td><= FROM_SCREEN</td>
+    <td>fdf_setup_screen()</td>
+  </tr>
+  <tr>
+    <td>Screen to image</td>
+    <td></td>
+    <td><= FROM_IMAGE</td>
+    <td>fdf_setup_image()</td>
+  </tr>
+  <tr>
+    <td>Nothing to perform</td>
+    <td></td>
+    <td>== NO_RENDER</td>
+    <td>return</td>
+  </tr>
+</table>
   
 Not every rendering needs to go through all of these transformations,
 but just need to start at one of them and perform the rest. The level from
@@ -315,10 +341,10 @@ information from the next sample information. The ft_mx_load_file() function
 returns the array of the two matrices which will end up as the map_mx member
 of the object struct that is the object member of the fdf struct.
 
-A .fdf file may or may not have sample color information. The color information
-is expected as a ',0xhhhhhh' string inmediately following each altitude value.
-If no color information is found, ft_mx_load_file() initializes the color matrix
-with FFFFFF for each sample.  
+A .fdf file may or may not have sample color information. The color
+information is expected as a ',0xhhhhhh' string inmediately following each
+altitude value. If no color information is found, ft_mx_load_file()
+initializes the color matrix with FFFFFF for each sample.  
 
 #### Tesselation: samples map to 3D model (where samples become vertices)
 This is the stage where: (1) the samples obtained from loading the .fdf file
@@ -327,16 +353,16 @@ in space, this is dependent upon the type of projection: planar, spherical,
 or cylindrical; (2) for each of the samples (spatial-info-wise) a relationship
 is stablished with its neighboring samples in the matrix, this relationship
 is represented in an edge array and is the base for eventually drawing lines
-that connect each vertex only to its orthogonal neighbor vertices (or, in bonus
-version, also to its non-orthogonal neighbors that makes spatial sense;
+that connect each vertex only to its orthogonal neighbor vertices (or, in
+bonus version, also to its non-orthogonal neighbors that makes spatial sense;
 or to every neighbor). Each edge also contains the numeric value for the color
 of the start and end vertex.
 
 In (1) one of this three functions: fdf_get_vertex_mx(),
 fdf_get_vertex_mx_sph(), or fdf_get_vertex_mx_cyl() is used to create a matrix
-in which each column ?????? is a XYZW 3D point in space (a vertex). This matrix
-will become the model_mx member of the object, which is the object member
-of fdf.
+in which each column ?????? is a XYZW 3D point in space (a vertex).
+This matrix will become the model_mx member of the object, which is the object
+member of fdf.
 
 In (2) the fdf_get_edge() creates an array of edges, an edge is  a struct
 type that has four key members: start and end, and start_color and end_color.
@@ -345,10 +371,10 @@ starting vertex of the edge and the end vertex of the edge.
 The start_color and end_color members contain the uint32_t value of the color
 of the start and end vertex. Clearly, each edge (if not hidden) will become a
 line on the image.
-*The call to fdf_get_edge() is performed only once, when the model_mx member of
-the object is NULL, since the edge information (what point connects to another
-point and what colors should be used) will be the same for any tesselation
-projection type.*
+*The call to fdf_get_edge() is performed only once, when the model_mx member
+of the object is NULL, since the edge information (what point connects to
+another point and what colors should be used) will be the same for any
+tesselation projection type.*
  
 Both the vertex matrix column index (1) and the start/end members in the edges
 array indices (3) refer to the information of the same 3D vertex.
@@ -375,16 +401,17 @@ TODO
 
 #### Screen space to image space transformation
 In this stage, the vertex matrix representing the screen space is used to,
-finally, draw all the lines (edges) on the image. This job is ultimately perform
-by the fdf_drw_edges() function.
+finally, draw all the lines (edges) on the image. This job is ultimately
+perform by the fdf_drw_edges() function.
 
 The fdf_drw_edges() function takes the object and the image element of the GUI
 and uses its auxiliary functions to draw each edge as a line onto the image.
 
 ##### Inner working of fdf_drw_edges() function
-This function loops through the edges array skipping the edges flagged as hidden
-and for each non-skipped edge:
-* A line struct is created using fdf_create_line() function with the arguments:
+This function loops through the edges array skipping the edges flagged as
+hidden and for each non-skipped edge:
+* A line struct is created using fdf_create_line() function with the
+arguments:
 X value of the edge starting vertex; Y value of the edge starting vertex;
 X value of the edge end vertex; Y value of the edge end vertex.
 * TODO fdf_set_line_color_info() TODO !!!!!!!!!!!!!!
@@ -406,7 +433,3 @@ TODO
 
 ###### Inner working of fdf_draw_line() function
 TODO
-
-
-
-

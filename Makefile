@@ -6,7 +6,7 @@
 #    By: lluque <lluque@student.42malaga.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 11:23:07 by lluque            #+#    #+#              #
-#    Updated: 2024/07/25 19:15:54 by lluque           ###   ########.fr        #
+#    Updated: 2024/07/25 21:13:15 by lluque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -353,6 +353,11 @@ TESTER_OBJECTS = $(TESTER_SOURCES:%.c=$(OBJ_DIR)%.o)
 ################################################################################
 ############### VARIABLES FOR DOXYGEN DOCUMENTATION GENERATION #################
 
+DOX_README_H = ./include/readme.h
+DOX_README_MD = ./README.md
+
+
+
 # Doxyfile name, to be generated and edited in repository root directory
 DOXYFILE = Doxyfile
 DOC_DIR = ./doc/
@@ -573,7 +578,29 @@ help:
 # Rule to create and customize Doxygen configuration file which will define
 # how to generate the project's documentation from comments in the code when
 # using 'make doc'.
-$(DOXYFILE):
+$(DOX_README_MD): $(DOX_README_H)
+	cp -f $(DOX_README_H) $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '1d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i '$$d' $(DOX_README_MD)
+	sed -i 's/^..//' $(DOX_README_MD)
+
+$(DOXYFILE): $(DOX_README_MD)
 	@echo ----------------------------------------------------------------------
 	@echo
 	@echo "      --- ${PURPLE}Generating default Doxygen configuration file: ${BPURPLE}./$(DOXYFILE)${NC} ---"
@@ -615,6 +642,7 @@ docclean:
 	@echo
 	rm -rf $(DOC_DIR)
 	rm -f $(DOXYFILE)
+	rm -f $(DOX_README_MD)
 	@echo
 	@echo ----------------------------------------------------------------------
 
