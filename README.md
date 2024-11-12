@@ -1,8 +1,62 @@
 # 42's fdf project
 
-Luis Luque - 2024
+Luis Luque (lluque@student.42malaga.com) - 2024
 
 Message to other 42 students: DO NOT COPY, get inspired!
+
+## Building and execution
+
+Clone the repository using the url in the desired directory:
+```
+~$ git clone github_url project_directory
+```
+
+Initialize the library submodule by running this in the project directory:
+```
+~/project_directory$ git submodule update --init --recursive
+```
+
+For help on building options execute in the project directory:
+```
+~/project_directory$ make help
+```
+
+For building the bonus version (recommended) run:
+```
+~/project_directory$ make bonus
+```
+
+The above will build the executable as ~/project_directory/bin/bonus/fdf.
+
+To run the bonus binary from the project directory loading a map included
+with the repo, run:
+
+```
+~/project_directory$ bin/bonus/fdf data/mars.fdf
+```
+
+Once the program GUI is up, the terminal shows the instruction for user's
+interaction such as rotate, translate, etc. Something like this:
+
+```
+
+* Press the ESCAPE key or clic the window's X button to exit.
+* Press the I, K, J, L, U, or O keys to rotate along each axis.
+* Press the T key to cycle through planar/spherical/cylindrical projections.
+* Press the D key to show/hide valid diagonal edges.
+* Press the H key to show/hide all hidden edges.
+* Press the C key to toggle rendering with color (if available) or
+  forcing monochromatic rendering.
+* Press the TAB key to turn on/off the autofit and center feature.
+	* With autofit disabled:
+		* Press W or S keys to change the scale/zoom.
+		* Use the arrow keys to translate (displace) the model:
+			* UP/DOWN to move the camera perspective along Z axis.
+			* LEFT/RIGHT to move the camera in each direction.
+			* LEFT/RIGHT simultanously with UP/DOWN to move the camera
+              perspective along X and Y axis.
+
+```
 
 ## Introduction
 

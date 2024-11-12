@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-07-25</span>
+   <div id="projectname">Fdf<span id="projectnumber">&#160;2024-11-12</span>
    </div>
    <div id="projectbrief">Fdf project for Campus 42</div>
   </td>
@@ -66,12 +66,37 @@ $(function() {
   <div class="headertitle"><div class="title">42's fdf project </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> Luis Luque - 2024</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> Luis Luque (<a href="#" onclick="location.href='mai'+'lto:'+'llu'+'qu'+'e@s'+'tu'+'den'+'t.'+'42m'+'al'+'aga'+'.c'+'om'; return false;">lluqu<span class="obfuscator">.nosp@m.</span>e@st<span class="obfuscator">.nosp@m.</span>udent<span class="obfuscator">.nosp@m.</span>.42m<span class="obfuscator">.nosp@m.</span>alaga<span class="obfuscator">.nosp@m.</span>.com</a>) - 2024</p>
 <p >Message to other 42 students: DO NOT COPY, get inspired!</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+Building and execution</h1>
+<p >Clone the repository using the url in the desired directory: </p><div class="fragment"><div class="line">~$ git clone github_url project_directory</div>
+</div><!-- fragment --><p >Initialize the library submodule by running this in the project directory: </p><div class="fragment"><div class="line">~/project_directory$ git submodule update --init --recursive</div>
+</div><!-- fragment --><p >For help on building options execute in the project directory: </p><div class="fragment"><div class="line">~/project_directory$ make help</div>
+</div><!-- fragment --><p >For building the bonus version (recommended) run: </p><div class="fragment"><div class="line">~/project_directory$ make bonus</div>
+</div><!-- fragment --><p >The above will build the executable as ~/project_directory/bin/bonus/fdf.</p>
+<p >To run the bonus binary from the project directory loading a map included with the repo, run:</p>
+<div class="fragment"><div class="line">~/project_directory$ bin/bonus/fdf data/mars.fdf</div>
+</div><!-- fragment --><p >Once the program GUI is up, the terminal shows the instruction for user's interaction such as rotate, translate, etc. Something like this:</p>
+<div class="fragment"><div class="line">* Press the ESCAPE key or clic the window&#39;s X button to exit.</div>
+<div class="line">* Press the I, K, J, L, U, or O keys to rotate along each axis.</div>
+<div class="line">* Press the T key to cycle through planar/spherical/cylindrical projections.</div>
+<div class="line">* Press the D key to show/hide valid diagonal edges.</div>
+<div class="line">* Press the H key to show/hide all hidden edges.</div>
+<div class="line">* Press the C key to toggle rendering with color (if available) or</div>
+<div class="line">  forcing monochromatic rendering.</div>
+<div class="line">* Press the TAB key to turn on/off the autofit and center feature.</div>
+<div class="line">    * With autofit disabled:</div>
+<div class="line">        * Press W or S keys to change the scale/zoom.</div>
+<div class="line">        * Use the arrow keys to translate (displace) the model:</div>
+<div class="line">            * UP/DOWN to move the camera perspective along Z axis.</div>
+<div class="line">            * LEFT/RIGHT to move the camera in each direction.</div>
+<div class="line">            * LEFT/RIGHT simultanously with UP/DOWN to move the camera</div>
+<div class="line">              perspective along X and Y axis.</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Introduction</h1>
 <p >Wireframe model of landscape representation in isometric projection</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Directory tree</h1>
 <pre class="fragment">./  
 ├── .gitignore              (to prevent undesired files to be stagged)
@@ -114,12 +139,12 @@ Directory tree</h1>
     ├── ...  
     ├── tester.c  
     └── ...  
-</pre> <h1><a class="anchor" id="autotoc_md3"></a>
+</pre> <h1><a class="anchor" id="autotoc_md4"></a>
 Compilation instructions</h1>
 <p >Use ‘make help’ for instructions.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Program's data model</h1>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Conventions adopted</h2>
 <ul>
 <li>When rendering, the right-handed convention for drawing XYZ axis will be used, which implies: <br  />
@@ -212,14 +237,14 @@ Conventions adopted</h2>
 </li>
 <li>Vertex color is supported for .fdf map files if an altitude value is followed by ",0xhhhhhh" where h are hexadecimal digits representing RGB values. This is transformed to the 8 bits per channel RGBA color model format supported by MLX42 library as 0xhhhhhhFF (channel alpha value does not come from the .fdf file and is always considered 0xFF).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Data structures</h2>
 <ul>
 <li>Array of two matrices resulting from loading the .fdf map file. The first matrix contains altitude values (Z axis) while the second matrix contains color values (255 if map has no color info). The column and row in each matrix represents the X, Y coordinates.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Program's internal working</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Core functions callings</h2>
 <ul>
 <li>main() function does the following:<ul>
@@ -284,7 +309,7 @@ Core functions callings</h2>
 </li>
 </ul>
 <p >The next section details what the rendering process functions (<a class="el" href="tesselator__bonus_8h.html#ac7949ee6e508cb7d7d25233d727a88ed" title="fdf_tesselate_map – TODO.">fdf_tesselate_map()</a>, fdf_setup_world(), fdf_setup_camera(), fdf_setup_screen(), and fdf_setup_image()) do at each stage of the rendering process.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Rendering process</h2>
 <p >The rendering process entry point is the <a class="el" href="drawing__bonus_8h.html#ae4d3890bd1636469ac309d3900d92ad3" title="fdf_render – TODO.">fdf_render()</a> function, called from the GUI loop hook <a class="el" href="window__bonus_8h.html#a19dd662cab8c18a3d4ebffe894708354" title="fdf_generichook – TODO.">fdf_generichook()</a>.</p>
 <p >The rendering process has several stages, let's call them transformations, which must be processed in this order, starting at the first stage that needs to be re-calculated. The selection of the first stage is determined by the render request level of fdf struct for each loop.</p>
@@ -312,7 +337,7 @@ Rendering process</h2>
 <li>Should the projection type change, it has to start with map-to-model level.</li>
 <li>TODO</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md11"></a>
 Loading the .fdf file</h3>
 <p >This is the process in which the .fdf file is parsed to create an array of two matrices. Both matrices are of the same size, that is, rows and columns positions representing the actual spatial 2D (XY plane) position of each sample.</p>
 <p >Each sample will be then transformed into a 3D vertex in the tesselation stage.</p>
@@ -320,7 +345,7 @@ Loading the .fdf file</h3>
  The function <a class="el" href="lin__alg__bonus_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> performs this stage, taking as argument the filename for the .fdf map and the expected character separating the sample information from the next sample information. The <a class="el" href="lin__alg__bonus_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> function returns the array of the two matrices which will end up as the map_mx member of the object struct that is the object member of the fdf struct.</p>
 <p >A .fdf file may or may not have sample color information. The color information is expected as a ',0xhhhhhh' string inmediately following each altitude value. If no color information is found, <a class="el" href="lin__alg__bonus_8h.html#a704fad2e4dbc239b4bf343a2265e52bc" title="ft_mx_load_file – TODO.">ft_mx_load_file()</a> initializes the color matrix with FFFFFF for each sample. <br  />
 </p>
-<h3><a class="anchor" id="autotoc_md11"></a>
+<h3><a class="anchor" id="autotoc_md12"></a>
 Tesselation: samples map to 3D model (where samples become vertices)</h3>
 <p >This is the stage where: (1) the samples obtained from loading the .fdf file (2D position at XY plane + altitude) are used to create actual 3D XYZ points in space, this is dependent upon the type of projection: planar, spherical, or cylindrical; (2) for each of the samples (spatial-info-wise) a relationship is stablished with its neighboring samples in the matrix, this relationship is represented in an edge array and is the base for eventually drawing lines that connect each vertex only to its orthogonal neighbor vertices (or, in bonus version, also to its non-orthogonal neighbors that makes spatial sense; or to every neighbor). Each edge also contains the numeric value for the color of the start and end vertex.</p>
 <p >In (1) one of this three functions: <a class="el" href="tesselator__bonus_8h.html#acbb6fba0e702d7154719db63c561c1a9" title="fdf_get_vertex_mx – Converts an altitude map matrix and color map matrix to a planar vertex matrix.">fdf_get_vertex_mx()</a>, <a class="el" href="tesselator__bonus_8h.html#a26e7cbf4b07d1bda7f5148ba6ba07da8" title="fdf_get_vertex_mx_sph – Converts an altitude map matrix and color map matrix to a spherical vertex ma...">fdf_get_vertex_mx_sph()</a>, or <a class="el" href="tesselator__bonus_8h.html#a69ef7e4b513e400f2d8d9c5671bddd33" title="fdf_get_vertex_mx_cyl – Converts an altitude map matrix and color map matrix to a cylindrical vertex ...">fdf_get_vertex_mx_cyl()</a> is used to create a matrix in which each column ?????? is a XYZW 3D point in space (a vertex). This matrix will become the model_mx member of the object, which is the object member of fdf.</p>
@@ -328,20 +353,20 @@ Tesselation: samples map to 3D model (where samples become vertices)</h3>
  The start_color and end_color members contain the uint32_t value of the color of the start and end vertex. Clearly, each edge (if not hidden) will become a line on the image. <em>The call to <a class="el" href="tesselator__bonus_8h.html#abd20646d0590ef38621345e51a8a152f" title="fdf_get_edge – TODO.">fdf_get_edge()</a> is performed only once, when the model_mx member of the object is NULL, since the edge information (what point connects to another point and what colors should be used) will be the same for any tesselation projection type.</em></p>
 <p >Both the vertex matrix column index (1) and the start/end members in the edges array indices (3) refer to the information of the same 3D vertex.</p>
 <p >The next stages of the rendering process after tesselating the map consists of several succesive transformations from the vertex matrix for a stage to obtain the vertex matrix of the next stage. This vertex matrices are called spaces. These transformations to "get" the object to one space to the next, consist of succesively multiplying the previous vertex matrix (that represents the same points but in a particular space: the 3D object now placed in the world; the 3D object in the world but now from the point of view from the camera; or the 2D projection of the later to the screen) by different transformation matrices (to rotate, translate, scale, project) to generate the new vertex matrix for the next space.</p>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md13"></a>
 3D model space to world space transformation</h3>
 <p >TODO</p>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 World space transformation to camera space transformation</h3>
 <p >TODO</p>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md15"></a>
 Camera space to screen space transformation</h3>
 <p >TODO</p>
-<h3><a class="anchor" id="autotoc_md15"></a>
+<h3><a class="anchor" id="autotoc_md16"></a>
 Screen space to image space transformation</h3>
 <p >In this stage, the vertex matrix representing the screen space is used to, finally, draw all the lines (edges) on the image. This job is ultimately perform by the <a class="el" href="drawing__bonus_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> function.</p>
 <p >The <a class="el" href="drawing__bonus_8h.html#acce69e27bd09a9740edf8d7743539f76" title="ft_draw_edges – TODO.">fdf_drw_edges()</a> function takes the object and the image element of the GUI and uses its auxiliary functions to draw each edge as a line onto the image.</p>
-<h4><a class="anchor" id="autotoc_md16"></a>
+<h4><a class="anchor" id="autotoc_md17"></a>
 Inner working of fdf_drw_edges() function</h4>
 <p >This function loops through the edges array skipping the edges flagged as hidden and for each non-skipped edge:</p><ul>
 <li>A line struct is created using <a class="el" href="drawing__bonus_8h.html#aa79c0a4455df834d963b4949106a75b8" title="fdf_create_line – Creates a 2D line from an edge of an object.">fdf_create_line()</a> function with the arguments: X value of the edge starting vertex; Y value of the edge starting vertex; X value of the edge end vertex; Y value of the edge end vertex.</li>
